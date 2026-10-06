@@ -23,12 +23,12 @@
     --sky: #dfe6ff;
     /* legacy names used across the product view */
     --bone: var(--cream);
-    --white: #ffffff;
+    --white: var(--cream); /* no pure white on the site */
     --graphite: var(--navy);
     --ink: var(--blue);
-    --ink-2: rgba(29, 37, 255, 0.9);
-    --ink-3: rgba(29, 37, 255, 0.85); /* 0.85 is the floor: 4.7:1 or better on cream, blush, lav-t and sky */
-    --line: rgba(29, 37, 255, 0.18);
+    --ink-2: var(--blue);
+    --ink-3: var(--blue); /* one blue: secondary text is smaller or lighter in weight, never paler */
+    --line: #d6d4f0; /* solid: 18% blue over cream */
     --beech: var(--lime);
     --display: "Boldonse", "Arial Black", Impact, sans-serif;
     --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
@@ -83,12 +83,12 @@
   .intro-logo svg { width: 100%; height: auto; display: block; }
   .intro-count { position: absolute; left: var(--g); bottom: var(--g); font-family: var(--display); font-size: clamp(28px, 4vw, 64px); line-height: 1; font-variant-numeric: tabular-nums; }
   .intro-word { position: absolute; right: var(--g); bottom: calc(var(--g) + 4px); }
-  .intro-line { position: absolute; left: var(--g); right: var(--g); bottom: calc(var(--g) + clamp(44px, 5.6vw, 88px)); height: 2px; background: rgba(234, 255, 0, 0.22); }
+  .intro-line { position: absolute; left: var(--g); right: var(--g); bottom: calc(var(--g) + clamp(44px, 5.6vw, 88px)); height: 2px; background: rgba(238, 254, 83, 0.22); }
   .intro-line span { display: block; height: 100%; width: 0; background: var(--lime); }
   html:not(.js) .intro { display: none; }
 
   /* ---------- nav ---------- */
-  .nav { position: fixed; top: 12px; left: 12px; right: 12px; z-index: 100; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 64px; padding: 0 22px; border-radius: 999px; color: var(--blue); background: rgba(255, 251, 236, 0); transition: background-color .5s var(--ease), color .5s var(--ease), box-shadow .5s var(--ease), top .5s var(--ease); font-size: 15px; font-weight: 600; }
+  .nav { position: fixed; top: 12px; left: 12px; right: 12px; z-index: 100; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 64px; padding: 0 22px; border-radius: 999px; color: var(--blue); background: rgba(254, 251, 237, 0); transition: background-color .5s var(--ease), color .5s var(--ease), box-shadow .5s var(--ease), top .5s var(--ease); font-size: 15px; font-weight: 600; }
   .nav.pill-on { background: rgba(254, 251, 237, .94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 30px rgba(11, 36, 65, .10); }
   .nav.on-film { color: var(--blush); }
   .nav .word { display: block; width: 112px; line-height: 0; }
@@ -118,9 +118,9 @@
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
   .hero-side { position: absolute; right: var(--g); bottom: clamp(28px, 6vh, 64px); display: grid; justify-items: end; gap: 12px; color: var(--cream); }
   .hero-time { display: flex; align-items: center; gap: 12px; font-variant-numeric: tabular-nums; }
-  .hero-bar { width: 120px; height: 2px; background: rgba(255, 251, 236, .3); position: relative; overflow: hidden; border-radius: 2px; }
+  .hero-bar { width: 120px; height: 2px; background: rgba(254, 251, 237, .3); position: relative; overflow: hidden; border-radius: 2px; }
   .hero-bar i { position: absolute; inset: 0; background: var(--lime); transform-origin: left; transform: scaleX(0); }
-  .hero-play { width: 48px; height: 48px; border-radius: 999px; border: 1.5px solid rgba(255, 251, 236, .7); display: grid; place-items: center; color: var(--cream); transition: background-color .4s var(--ease), color .4s var(--ease); }
+  .hero-play { width: 48px; height: 48px; border-radius: 999px; border: 1.5px solid rgba(254, 251, 237, .7); display: grid; place-items: center; color: var(--cream); transition: background-color .4s var(--ease), color .4s var(--ease); }
   .hero-play:hover { background: var(--cream); color: var(--blue); }
   .hero-play svg { width: 14px; height: 14px; }
   @media (max-width: 760px) { .hero-side { top: 84px; bottom: auto; } .hero-time { display: none; } .hero-copy { bottom: 28px; } .hero-h { font-size: clamp(28px, 8.4vw, 40px); } }
@@ -147,7 +147,7 @@
   .index-row .spec .p { font-size: clamp(16px, 1.4vw, 22px); font-weight: 600; }
   .index-row .spec .k { font-size: 13px; font-weight: 500; opacity: .8; }
   .dots { display: flex; gap: 6px; }
-  .dots i { width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(29, 37, 255, .35); }
+  .dots i { width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px rgba(31, 37, 245, .35); }
   .index-row .price { justify-self: end; text-align: right; display: grid; gap: 8px; font-weight: 600; }
   .index-row .go { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 16px; border-radius: 999px; background: var(--blue); color: var(--lime); font-size: 14px; opacity: 0; transform: translateY(6px); transition: opacity .4s var(--ease), transform .6s var(--ease); }
   .index-row .inline { display: none; }
@@ -174,7 +174,7 @@
   .trust { background: var(--blue); color: var(--cream); padding: clamp(90px, 11vw, 170px) var(--g) 0; overflow: hidden; }
   .trust h2 { color: var(--lime); text-align: center; max-width: 14em; margin: 0 auto clamp(48px, 6vw, 90px); }
   .tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-  .tile { background: rgba(255, 251, 236, .07); border: 1.5px solid rgba(255, 251, 236, .22); border-radius: var(--r); padding: 26px; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; gap: 30px; transition: background-color .5s var(--ease), color .5s var(--ease), border-color .5s var(--ease); }
+  .tile { background: rgba(254, 251, 237, .07); border: 1.5px solid rgba(254, 251, 237, .22); border-radius: var(--r); padding: 26px; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; gap: 30px; transition: background-color .5s var(--ease), color .5s var(--ease), border-color .5s var(--ease); }
   .tile:hover { background: var(--lime); color: var(--blue); border-color: var(--lime); }
   .tile .ic { width: 56px; height: 56px; border-radius: 50%; background: var(--lime); color: var(--blue); display: grid; place-items: center; font-family: var(--display); font-size: 18px; }
   .tile:hover .ic { background: var(--blue); color: var(--lime); }
@@ -212,7 +212,7 @@
   .room-cap { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; font-weight: 600; }
   .room-cap a { border-bottom: 2px solid currentColor; font-size: 14px; }
   .rooms-foot { display: flex; justify-content: space-between; align-items: center; padding-inline: var(--g); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
-  .rooms-prog { width: 30vw; height: 3px; background: rgba(29, 37, 255, .18); position: relative; border-radius: 3px; overflow: hidden; }
+  .rooms-prog { width: 30vw; height: 3px; background: rgba(31, 37, 245, .18); position: relative; border-radius: 3px; overflow: hidden; }
   .rooms-prog i { position: absolute; inset: 0; background: var(--blue); transform-origin: left; transform: scaleX(0); }
   @media (max-width: 760px) { .rooms-head { flex-direction: column; align-items: start; gap: 8px; } .rooms-head p { text-align: left; } .rooms-track { padding-left: var(--g); gap: 5vw; } .room.p { width: min(66vw, 44vh); } .room.l { width: 82vw; } .rooms-prog { width: 24vw; } .rooms-foot span:last-child { display: none; } .rooms-foot span:first-child { white-space: nowrap; } .rooms-prog { width: 30vw; } .room.lo, .room.hi { transform: none; } }
 
@@ -220,8 +220,8 @@
   .best { padding: clamp(90px, 10vw, 160px) var(--g); }
   .best-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: clamp(36px, 4vw, 60px); }
   .best-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-  .card { display: grid; gap: 14px; background: var(--white); border-radius: var(--r); padding: 14px 14px 18px; border: 1.5px solid rgba(29, 37, 255, .14); transition: box-shadow .6s var(--ease), border-color .6s var(--ease); }
-  .card:hover { box-shadow: 0 24px 50px rgba(29, 37, 255, .14); border-color: var(--blue); }
+  .card { display: grid; gap: 14px; background: var(--white); border-radius: var(--r); padding: 14px 14px 18px; border: 1.5px solid rgba(31, 37, 245, .14); transition: box-shadow .6s var(--ease), border-color .6s var(--ease); }
+  .card:hover { box-shadow: 0 24px 50px rgba(31, 37, 245, .14); border-color: var(--blue); }
   .card .ph { aspect-ratio: 1; border-radius: 14px; background: var(--cream); overflow: hidden; position: relative; }
   .card .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 3%; mix-blend-mode: multiply; transition: opacity .6s var(--ease), transform 1s var(--ease); }
   .card .ph img.sc { object-fit: cover; padding: 0; mix-blend-mode: normal; opacity: 0; }
@@ -299,7 +299,7 @@
   #pdp .stage-foot .tag { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 2.6vw, 44px); line-height: 1; max-width: 16ch; }
   #pdp .stage-foot .awards { display: grid; gap: 4px; text-align: right; color: var(--ink-2); }
 
-  #pdp .buy { position: relative; z-index: 3; align-self: center; background: rgba(250, 249, 246, 0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); padding: 28px; display: grid; gap: 22px; }
+  #pdp .buy { position: relative; z-index: 3; align-self: center; background: rgba(254, 251, 237, 0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); padding: 28px; display: grid; gap: 22px; }
   #pdp .buy h1 { font-size: clamp(40px, 3.6vw, 60px); letter-spacing: -0.05em; line-height: 0.95; }
   #pdp .buy .kind { color: var(--ink-3); }
   #pdp .price-row { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 16px; }
@@ -335,7 +335,7 @@
   #pdp .buybar { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 140%); z-index: 90; display: flex; align-items: center; gap: 18px; background: var(--graphite); color: var(--bone); border-radius: 999px; padding: 8px 8px 8px 24px; transition: transform .8s var(--ease); max-width: calc(100% - 32px); }
   #pdp .buybar.on { transform: translate(-50%, 0); }
   #pdp .buybar .n { font-size: 15px; white-space: nowrap; }
-  #pdp .buybar .f { color: rgba(241,239,234,.6); white-space: nowrap; }
+  #pdp .buybar .f { color: rgba(254, 251, 237,.6); white-space: nowrap; }
   #pdp .buybar button { height: 44px; padding: 0 20px; border-radius: 999px; background: var(--bone); color: var(--ink); font-size: 14px; font-weight: 400; white-space: nowrap; }
   @media (max-width: 560px) { #pdp .buybar .f { display: none; } }
   .toast { position: fixed; top: 76px; right: var(--g); z-index: 120; background: var(--graphite); color: var(--bone); padding: 14px 18px; display: flex; gap: 14px; align-items: center; transform: translateY(-20px); opacity: 0; transition: .6s var(--ease); pointer-events: none; }
@@ -381,13 +381,13 @@
   #pdp .g-left { display: flex; flex-direction: column; justify-content: space-between; }
   #pdp .g-left h2 { font-size: clamp(38px, 4.8vw, 86px); letter-spacing: -0.05em; line-height: 0.92; }
   #pdp .g-age { font-size: clamp(80px, 11vw, 200px); font-weight: 200; letter-spacing: -0.07em; line-height: 0.8; font-variant-numeric: tabular-nums; }
-  #pdp .g-age small { font-size: .16em; letter-spacing: 0; color: rgba(241,239,234,.5); margin-left: .4em; font-weight: 300; }
+  #pdp .g-age small { font-size: .16em; letter-spacing: 0; color: rgba(254, 251, 237,.5); margin-left: .4em; font-weight: 300; }
   #pdp .g-mode { font-family: var(--serif); font-style: italic; font-size: clamp(30px, 3vw, 52px); line-height: 1; margin-top: 10px; }
-  #pdp .g-note { color: rgba(241,239,234,.6); margin-top: 10px; }
+  #pdp .g-note { color: rgba(254, 251, 237,.6); margin-top: 10px; }
   #pdp .g-draw { position: relative; align-self: center; }
   #pdp .g-draw svg { width: 100%; height: auto; overflow: visible; }
-  #pdp .g-scale { display: flex; justify-content: space-between; margin-top: 28px; color: rgba(241,239,234,.5); position: relative; }
-  #pdp .g-scale::before { content: ""; position: absolute; left: 0; right: 0; top: -12px; height: 1px; background: rgba(241,239,234,.2); }
+  #pdp .g-scale { display: flex; justify-content: space-between; margin-top: 28px; color: rgba(254, 251, 237,.5); position: relative; }
+  #pdp .g-scale::before { content: ""; position: absolute; left: 0; right: 0; top: -12px; height: 1px; background: rgba(254, 251, 237,.2); }
   #pdp .g-scale i { position: absolute; left: 0; top: -13px; height: 3px; width: 0; background: var(--beech); }
   @media (max-width: 900px) { #pdp .stage { grid-template-columns: minmax(0, 1fr); } }
   @media (max-width: 900px) { #pdp .grows-pin { grid-template-columns: 1fr; grid-template-rows: auto 1fr; padding-top: 84px; } #pdp .g-left { gap: 16px; justify-content: flex-start; } #pdp .g-age { font-size: 72px; } }
@@ -430,7 +430,7 @@
   #pdp .pa-math { background: var(--graphite); color: var(--bone); padding: 28px; display: grid; gap: 18px; align-content: space-between; }
   #pdp .pa-math .big { font-size: clamp(40px, 4.2vw, 72px); letter-spacing: -0.06em; line-height: 0.9; font-weight: 200; font-variant-numeric: tabular-nums; }
   #pdp .pa-math dl { margin: 0; display: grid; gap: 8px; font-size: 14px; font-weight: 400; }
-  #pdp .pa-math dl div { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(241,239,234,.15); padding-bottom: 8px; }
+  #pdp .pa-math dl div { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(254, 251, 237,.15); padding-bottom: 8px; }
   #pdp .pa-math dd { margin: 0; font-variant-numeric: tabular-nums; }
   #pdp .pa-math button { height: 56px; border-radius: 999px; background: var(--bone); color: var(--ink); font-size: 15px; font-weight: 400; }
   @media (min-width: 900px) { #pdp .pa-grid { grid-template-columns: 1fr 1fr 0.9fr; } }
@@ -475,7 +475,7 @@
   /* ---------- curtain (page transition) ---------- */
   .curtain { position: fixed; inset: 0; z-index: 180; background: var(--graphite); color: var(--bone); pointer-events: none; clip-path: inset(100% 0% 0% 0%); display: grid; align-content: end; padding: var(--g); }
   .curtain.busy { pointer-events: auto; }
-  .c-meta { display: flex; justify-content: space-between; color: rgba(241, 239, 234, .55); margin-bottom: 18px; }
+  .c-meta { display: flex; justify-content: space-between; color: rgba(254, 251, 237, .55); margin-bottom: 18px; }
   .c-name { font-size: clamp(80px, 21vw, 380px); font-weight: 200; letter-spacing: -0.075em; line-height: 0.78; overflow: hidden; }
   .c-name span { display: inline-block; }
 
@@ -493,10 +493,10 @@
   #pdp .g-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 4%; opacity: 0; }
   #pdp .g-photo img:first-child { opacity: 1; }
   #pdp .g-steps { display: flex; gap: 6px; margin-top: 24px; }
-  #pdp .g-steps i { flex: 1; height: 2px; background: rgba(241, 239, 234, .18); position: relative; overflow: hidden; }
+  #pdp .g-steps i { flex: 1; height: 2px; background: rgba(254, 251, 237, .18); position: relative; overflow: hidden; }
   #pdp .g-steps i::after { content: ""; position: absolute; inset: 0; background: var(--beech); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
   #pdp .g-steps i.on::after { transform: none; }
-  #pdp .g-steps-l { display: flex; justify-content: space-between; margin-top: 10px; color: rgba(241, 239, 234, .5); }
+  #pdp .g-steps-l { display: flex; justify-content: space-between; margin-top: 10px; color: rgba(254, 251, 237, .5); }
 
   #pdp .gq small { display: block; margin-top: 14px; }
   #pdp .rv-row { display: grid; gap: var(--g); align-items: end; }
@@ -505,7 +505,7 @@
 
   /* next piece */
   #pdp .next { position: relative; display: block; background: var(--graphite); color: var(--bone); padding: clamp(80px, 10vw, 160px) var(--g) clamp(40px, 5vw, 72px); overflow: hidden; }
-  #pdp .next .mono { color: rgba(241, 239, 234, .55); display: flex; justify-content: space-between; }
+  #pdp .next .mono { color: rgba(254, 251, 237, .55); display: flex; justify-content: space-between; }
   #pdp .next-name { font-size: clamp(90px, 24vw, 420px); font-weight: 200; letter-spacing: -0.075em; line-height: 0.78; margin-top: 24px; transition: transform 1s var(--ease); display: inline-block; }
   #pdp .next-img { position: absolute; right: var(--g); top: 50%; width: min(46vw, 640px); aspect-ratio: 5 / 4; transform: translateY(-50%); background: var(--bone); opacity: .96; transition: transform 1s var(--ease); }
   #pdp .next-img img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
@@ -530,11 +530,11 @@
   #pdp .muted { color: var(--ink-3); }
 
   #pdp .stage { padding-top: 100px; }
-  #pdp .giant-name { font-family: var(--display); text-transform: uppercase; font-size: 17vw; letter-spacing: -0.06em; line-height: 1; color: rgba(29, 37, 255, 0.09); font-weight: 400; }
+  #pdp .giant-name { font-family: var(--display); text-transform: uppercase; font-size: 17vw; letter-spacing: -0.06em; line-height: 1; color: rgba(31, 37, 245, 0.09); font-weight: 400; }
   #pdp .stage-foot .tag { font-family: var(--display); text-transform: uppercase; font-style: normal; font-size: clamp(18px, 1.7vw, 30px); line-height: 1.32; letter-spacing: -0.04em; max-width: 18ch; }
   #pdp .up { font-family: var(--sans); font-weight: 500; text-transform: none; letter-spacing: -0.01em; }
   #pdp .stage-foot .awards { color: var(--blue); }
-  #pdp .buy { background: rgba(255, 255, 255, .82); border: 1.5px solid rgba(29, 37, 255, .16); border-radius: var(--r); }
+  #pdp .buy { background: rgba(255, 255, 255, .82); border: 1.5px solid rgba(31, 37, 245, .16); border-radius: var(--r); }
   #pdp .buy h1 { font-size: clamp(30px, 2.6vw, 46px); letter-spacing: -0.05em; line-height: 1.2; }
   #pdp .price { font-weight: 700; font-size: 28px; }
   #pdp .rating { color: var(--blue); }
@@ -552,31 +552,31 @@
   #pdp .explorer { background: var(--white); }
   #pdp .ex-view { border-radius: var(--r); }
   #pdp .hot { background: var(--blue); color: var(--lime); font: 700 12px var(--sans); }
-  #pdp .hot::before { border-color: rgba(29, 37, 255, .4); }
+  #pdp .hot::before { border-color: rgba(31, 37, 245, .4); }
   #pdp .ex-reset { background: var(--blue); color: var(--lime); }
   #pdp .ex-list { border-top: 2px solid var(--blue); }
   #pdp .ex-list li { border-bottom: 1.5px solid var(--line); }
   #pdp .ex-list .t { font-family: var(--display); text-transform: uppercase; font-size: clamp(16px, 1.3vw, 22px); letter-spacing: -0.04em; line-height: 1.3; }
   #pdp .ex-list .d { color: var(--blue); }
-  #pdp .ex-list li:not(.on) .t { color: rgba(29, 37, 255, .4); }
+  #pdp .ex-list li:not(.on) .t { color: rgba(31, 37, 245, .4); }
 
   #pdp .heights { background: var(--cream); }
   #pdp .h-tabs { border-top: 2px solid var(--blue); }
   #pdp .h-tabs button { border-bottom: 1.5px solid var(--line); }
   #pdp .h-tabs .t { font-family: var(--display); text-transform: uppercase; font-size: clamp(16px, 1.3vw, 22px); letter-spacing: -0.04em; }
-  #pdp .h-tabs button[aria-pressed="false"] .t { color: rgba(29, 37, 255, .4); }
-  #pdp .mat { fill: rgba(234, 255, 0, .75); }
+  #pdp .h-tabs button[aria-pressed="false"] .t { color: rgba(31, 37, 245, .4); }
+  #pdp .mat { fill: rgba(238, 254, 83, .75); }
 
   #pdp .grows { background: var(--navy); color: var(--cream); }
   #pdp .g-left h2 { color: var(--lime); font-size: clamp(26px, 3.2vw, 58px); line-height: 1.26; }
   #pdp .g-left h2 em { background: none; color: var(--lime); }
   #pdp .g-age { font-family: var(--display); font-size: clamp(56px, 7.6vw, 140px); letter-spacing: -0.06em; line-height: 1; color: var(--lime); }
-  #pdp .g-age small { font-family: var(--sans); font-weight: 600; color: rgba(255, 251, 236, .6); font-size: .14em; letter-spacing: .04em; }
+  #pdp .g-age small { font-family: var(--sans); font-weight: 600; color: rgba(254, 251, 237, .6); font-size: .14em; letter-spacing: .04em; }
   #pdp .g-mode { font-family: var(--display); font-style: normal; text-transform: uppercase; font-size: clamp(20px, 2vw, 34px); letter-spacing: -0.04em; line-height: 1.3; color: var(--cream); }
-  #pdp .g-note { color: rgba(255, 251, 236, .7); }
+  #pdp .g-note { color: rgba(254, 251, 237, .7); }
   #pdp .g-scale i, #pdp .g-steps i::after { background: var(--lime); }
   #pdp .g-photo { background: var(--white); border-radius: var(--r); }
-  #pdp .grows-pin .mono { color: rgba(255, 251, 236, .6) !important; }
+  #pdp .grows-pin .mono { color: rgba(254, 251, 237, .6) !important; }
   #pdp .grows-pin { padding-bottom: 40px; grid-template-rows: minmax(0, 1fr); }
   #pdp .g-left, #pdp .g-draw { min-height: 0; }
   #pdp .g-photo { max-height: calc(100vh - 210px); }
@@ -599,12 +599,12 @@
   #pdp .pa-math { background: var(--blue); color: var(--cream); border-radius: var(--r); }
   #pdp .pa-math .big { font-family: var(--display); font-weight: 400; color: var(--lime); font-size: clamp(34px, 3.4vw, 60px); letter-spacing: -0.05em; line-height: 1.1; }
   #pdp .pa-math button { background: var(--lime); color: var(--blue); font-weight: 700; }
-  #pdp .pa-math dl div { border-bottom: 1px solid rgba(255, 251, 236, .2); }
+  #pdp .pa-math dl div { border-bottom: 1px solid rgba(254, 251, 237, .2); }
 
   #pdp .reviews { background: var(--blush); border-top: 0; }
   #pdp .rv-score { font-family: var(--display); font-weight: 400; font-size: clamp(80px, 11vw, 200px); line-height: 1; letter-spacing: -0.06em; }
   #pdp .rv-list { border-top: 2px solid var(--blue); }
-  #pdp .rv-list blockquote { border-bottom: 1.5px solid rgba(29, 37, 255, .25); }
+  #pdp .rv-list blockquote { border-bottom: 1.5px solid rgba(31, 37, 245, .25); }
   #pdp .rv-list p, #pdp .rv-row p { font-weight: 600; letter-spacing: -0.02em; }
 
   #pdp .faq { background: var(--cream); padding-top: clamp(90px, 10vw, 160px); }
@@ -626,7 +626,7 @@
   #pdp .buybar { background: var(--blue); }
   @media (min-width: 900px) { #pdp .buybar { left: auto; right: var(--g); transform: translateY(160%); } #pdp .buybar.on { transform: none; } }
   #pdp .buybar .n { font-weight: 700; }
-  #pdp .buybar .f { color: rgba(255, 251, 236, .7); }
+  #pdp .buybar .f { color: rgba(254, 251, 237, .7); }
   #pdp .buybar button { background: var(--lime); color: var(--blue); font-weight: 700; }
 
   .toast { background: var(--blue); color: var(--cream); border-radius: 16px; }
@@ -634,7 +634,7 @@
 
   /* curtain */
   .curtain { background: var(--blue); color: var(--lime); }
-  .c-meta { color: rgba(255, 251, 236, .7); font-family: var(--sans); font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+  .c-meta { color: rgba(254, 251, 237, .7); font-family: var(--sans); font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
   .c-name { font-family: var(--display); text-transform: uppercase; font-size: clamp(56px, 15vw, 280px); font-weight: 400; letter-spacing: -0.06em; line-height: 1.36; white-space: nowrap; }
 
   /* =====================================================================
@@ -653,7 +653,7 @@
   .nav .burger[aria-expanded="true"] i:first-child { top: 21px; transform: rotate(45deg); }
   .nav .burger[aria-expanded="true"] i:last-child { top: 21px; transform: rotate(-45deg); }
   @media (max-width: 860px) { .nav .burger { display: block; } .nav .right { gap: 8px; } }
-  body.menu-open .nav { background: rgba(255, 251, 236, .96); color: var(--blue); box-shadow: none; }
+  body.menu-open .nav { background: rgba(254, 251, 237, .96); color: var(--blue); box-shadow: none; }
 
   /* ---------- mega menu (desktop) ---------- */
   .mega { position: fixed; top: 84px; left: 12px; right: 12px; z-index: 99; background: var(--cream); border-radius: 28px; box-shadow: 0 30px 80px rgba(11, 36, 65, .18); padding: 34px; display: grid; grid-template-columns: 1.1fr 1.1fr 1fr 1fr; gap: 28px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity .45s var(--ease), transform .6s var(--ease), visibility 0s .45s; }
@@ -675,7 +675,7 @@
   .mg-lists { display: grid; grid-template-columns: 2fr 1fr; gap: 36px; margin-top: 22px; padding-top: 22px; border-top: 1.5px solid var(--line); }
   .mega ul { list-style: none; margin: 0; padding: 0; display: grid; }
   .mega ul.mg-2 { grid-template-columns: 1fr 1fr; column-gap: 28px; }
-  .mega ul a { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; font-size: 15px; font-weight: 600; border-bottom: 1px solid rgba(29, 37, 255, .08); }
+  .mega ul a { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; font-size: 15px; font-weight: 600; border-bottom: 1px solid rgba(31, 37, 245, .08); }
   .mega ul a:hover span:first-child { text-decoration: underline; text-underline-offset: 4px; }
   .mega ul .p { font-weight: 500; opacity: .6; }
   .mega .promo { position: relative; border-radius: 22px; overflow: hidden; min-height: 100%; display: flex; align-items: flex-end; color: var(--cream); padding: 22px; isolation: isolate; }
@@ -692,7 +692,7 @@
   .mmenu { position: fixed; inset: 0; z-index: 98; background: var(--blue); color: var(--lime); padding: 96px var(--g) calc(28px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 28px; overflow-y: auto; clip-path: inset(0 0 100% 0); visibility: hidden; transition: clip-path .7s var(--ease), visibility 0s .7s; }
   .mmenu.on { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path .7s var(--ease); }
   .mmenu nav { display: grid; }
-  .mmenu nav a { font-family: var(--display); text-transform: uppercase; font-size: clamp(30px, 9vw, 54px); letter-spacing: -0.05em; line-height: 1.34; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1.5px solid rgba(234, 255, 0, .22); padding: 6px 0 4px; }
+  .mmenu nav a { font-family: var(--display); text-transform: uppercase; font-size: clamp(30px, 9vw, 54px); letter-spacing: -0.05em; line-height: 1.34; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1.5px solid rgba(238, 254, 83, .22); padding: 6px 0 4px; }
   .mmenu nav a small { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--cream); opacity: .7; }
   .mmenu .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .mmenu .chips a { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px 0 6px; border-radius: 999px; background: var(--cream); color: var(--blue); font-weight: 700; font-size: 14px; }
@@ -808,8 +808,8 @@
   #pdp .dfilter button span { opacity: .55; margin-left: 6px; }
   #pdp .dfilter button[aria-pressed="true"] { background: var(--blue); color: var(--lime); border-color: var(--blue); }
   #pdp .dgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-  #pdp .dcard { display: grid; gap: 12px; background: var(--white); border-radius: var(--r); padding: 12px 12px 18px; border: 1.5px solid rgba(29, 37, 255, .14); transition: box-shadow .6s var(--ease), border-color .6s var(--ease), opacity .5s var(--ease); }
-  #pdp .dcard:hover { box-shadow: 0 24px 50px rgba(29, 37, 255, .14); border-color: var(--blue); }
+  #pdp .dcard { display: grid; gap: 12px; background: var(--white); border-radius: var(--r); padding: 12px 12px 18px; border: 1.5px solid rgba(31, 37, 245, .14); transition: box-shadow .6s var(--ease), border-color .6s var(--ease), opacity .5s var(--ease); }
+  #pdp .dcard:hover { box-shadow: 0 24px 50px rgba(31, 37, 245, .14); border-color: var(--blue); }
   #pdp .dcard .ph { aspect-ratio: 5 / 4; border-radius: 14px; background: var(--cream); overflow: hidden; position: relative; }
   #pdp .dcard .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 4%; mix-blend-mode: multiply; transition: opacity .6s var(--ease), transform 1s var(--ease); }
   #pdp .dcard .ph img.sc { object-fit: cover; padding: 0; mix-blend-mode: normal; opacity: 0; }
@@ -822,7 +822,7 @@
   #pdp .dcard .k { padding: 0 6px; font-size: 14px; font-weight: 500; opacity: .78; min-height: 2.9em; }
   #pdp .dcard .meta { padding: 0 6px; display: flex; justify-content: space-between; align-items: center; }
   #pdp .dcard .dots { display: flex; gap: 5px; }
-  #pdp .dcard .dots i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(29, 37, 255, .28); }
+  #pdp .dcard .dots i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(31, 37, 245, .28); }
   #pdp .dcard.off { display: none; }
   @media (max-width: 1100px) { #pdp .dgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 800px) { #pdp .dgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } #pdp .dfilter { position: static; flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--g) * -1); padding-inline: var(--g); scrollbar-width: none; } #pdp .dfilter button { flex: none; } }
@@ -853,7 +853,7 @@
   #pdp .sets { background: var(--blush); }
   #pdp .sets-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
   #pdp .set { background: var(--cream); border-radius: var(--r); padding: 14px 14px 18px; display: grid; gap: 12px; border: 1.5px solid transparent; transition: border-color .5s var(--ease), box-shadow .6s var(--ease); }
-  #pdp .set:hover { border-color: var(--blue); box-shadow: 0 24px 50px rgba(29, 37, 255, .14); }
+  #pdp .set:hover { border-color: var(--blue); box-shadow: 0 24px 50px rgba(31, 37, 245, .14); }
   #pdp .set .ph { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 2%; padding: 10% 4% 6%; border-radius: 14px; background: var(--white); overflow: hidden; }
   #pdp .set .ph img { width: 100%; aspect-ratio: 5 / 4; object-fit: contain; mix-blend-mode: multiply; transform: scale(1.1); transform-origin: 50% 87%; }
   #pdp .set h3 { font-family: var(--display); text-transform: uppercase; font-size: 16px; letter-spacing: -0.04em; line-height: 1.35; font-weight: 400; }
@@ -890,7 +890,7 @@
   #pdp .droom figcaption { position: absolute; left: 14px; bottom: 14px; background: var(--cream); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 700; }
   @media (max-width: 760px) { #pdp .droom { grid-template-columns: 1fr; } #pdp .droom.one figure img { aspect-ratio: 4 / 3; } }
   #pdp .withc { display: grid; gap: 14px; }
-  #pdp .wset { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--g); align-items: center; background: var(--white); border-radius: 28px; padding: 16px; border: 1.5px solid rgba(29, 37, 255, .14); }
+  #pdp .wset { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--g); align-items: center; background: var(--white); border-radius: 28px; padding: 16px; border: 1.5px solid rgba(31, 37, 245, .14); }
   #pdp .wset .pics { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; background: var(--cream); border-radius: 20px; padding: clamp(14px, 2vw, 28px); }
   #pdp .wset .pics img { width: 100%; aspect-ratio: 5 / 4; object-fit: contain; mix-blend-mode: multiply; transition: transform 1s var(--ease); transform-origin: 50% 87%; }
   #pdp .wset .pics:hover img { transform: scale(1.03); }
@@ -967,7 +967,7 @@
   /* ---------- stage v2: the name reads in full, above the product ---------- */
   #pdp .product { display: flex; flex-direction: column; align-items: stretch; }
   #pdp .stage-left, #pdp .product, #pdp .stage > * { min-width: 0; }
-  #pdp .product .giant-name { position: relative; left: auto; top: auto; transform: none; z-index: 0; width: 100%; overflow: hidden; text-align: center; white-space: nowrap; line-height: 1.36; letter-spacing: -0.05em; color: rgba(29, 37, 255, .16); font-size: 12vw; opacity: 1; margin-top: 18px; }
+  #pdp .product .giant-name { position: relative; left: auto; top: auto; transform: none; z-index: 0; width: 100%; overflow: hidden; text-align: center; white-space: nowrap; line-height: 1.36; letter-spacing: -0.05em; color: rgba(31, 37, 245, .16); font-size: 12vw; opacity: 1; margin-top: 18px; }
   #pdp .product .giant-name span { display: inline-block; }
   #pdp .pimg { position: relative; flex: 1; min-height: 300px; margin-top: -1%; }
   #pdp .product .shield { display: none; }
@@ -979,11 +979,11 @@
      ===================================================================== */
   /* numbers */
   #pdp .nums { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--blue); color: var(--cream); }
-  #pdp .nums > div { padding: clamp(28px, 4vw, 60px) var(--g); display: grid; gap: 10px; border-right: 1.5px solid rgba(255, 251, 236, .16); }
+  #pdp .nums > div { padding: clamp(28px, 4vw, 60px) var(--g); display: grid; gap: 10px; border-right: 1.5px solid rgba(254, 251, 237, .16); }
   #pdp .nums > div:last-child { border-right: 0; }
   #pdp .nums b { font-family: var(--display); font-weight: 400; font-size: clamp(38px, 5vw, 90px); letter-spacing: -0.05em; line-height: 1.1; color: var(--lime); }
   #pdp .nums span { font-size: 15px; font-weight: 500; max-width: 22ch; }
-  @media (max-width: 760px) { #pdp .nums { grid-template-columns: 1fr 1fr; } #pdp .nums > div:nth-child(2) { border-right: 0; } #pdp .nums > div:nth-child(-n+2) { border-bottom: 1.5px solid rgba(255, 251, 236, .16); } }
+  @media (max-width: 760px) { #pdp .nums { grid-template-columns: 1fr 1fr; } #pdp .nums > div:nth-child(2) { border-right: 0; } #pdp .nums > div:nth-child(-n+2) { border-bottom: 1.5px solid rgba(254, 251, 237, .16); } }
 
   /* chapters */
   #pdp .chap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 5vw, 90px); align-items: center; }
@@ -1016,7 +1016,7 @@
   #pdp .sblock header { display: grid; gap: 10px; align-content: start; }
   #pdp .sblock h2 { font-size: clamp(26px, 2.8vw, 48px); line-height: 1.26; }
   #pdp .fts { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
-  #pdp .ft { background: var(--white); border-radius: 20px; padding: 20px; display: grid; gap: 8px; align-content: start; border: 1.5px solid rgba(29, 37, 255, .1); }
+  #pdp .ft { background: var(--white); border-radius: 20px; padding: 20px; display: grid; gap: 8px; align-content: start; border: 1.5px solid rgba(31, 37, 245, .1); }
   #pdp .ft b { font-family: var(--display); text-transform: uppercase; font-weight: 400; font-size: clamp(18px, 1.5vw, 24px); letter-spacing: -0.04em; line-height: 1.3; }
   #pdp .ft span { font-size: 15px; font-weight: 500; opacity: .85; }
   #pdp .reg { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: end; }
@@ -1061,10 +1061,10 @@
   #pdp .cmp tbody th { text-align: left; font-weight: 600; padding: 16px 12px 16px 0; width: 150px; vertical-align: top; opacity: .7; }
   #pdp .cmp td { padding: 16px 12px; border-top: 1.5px solid var(--line); vertical-align: top; font-size: 15px; font-weight: 500; line-height: 1.45; }
   #pdp .cmp tbody tr:first-child td { font-size: 18px; font-weight: 700; }
-  #pdp .cmp tbody tr:not(.acts):hover td { background: rgba(234, 255, 0, .35); }
+  #pdp .cmp tbody tr:not(.acts):hover td { background: rgba(238, 254, 83, .35); }
   #pdp .cmp tbody th { border-top: 1.5px solid var(--line); }
   #pdp .cmp .sws { display: inline-flex; gap: 4px; vertical-align: middle; margin-right: 6px; }
-  #pdp .cmp .sws i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(29, 37, 255, .28); }
+  #pdp .cmp .sws i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(31, 37, 245, .28); }
   #pdp .cmp.diff tr[data-same="true"] { display: none; }
   #pdp .cmp .acts td, #pdp .cmp .acts th { border-top: 1.5px solid var(--blue); padding-top: 20px; }
   #pdp .cmp-cta { margin: clamp(60px, 7vw, 110px) var(--g) clamp(90px, 10vw, 150px); background: var(--lime); border-radius: 28px; padding: clamp(30px, 5vw, 80px); display: grid; gap: 16px; justify-items: start; }
@@ -1073,8 +1073,8 @@
 
   /* kids */
   #pdp .kgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-  #pdp .kcard { display: grid; gap: 12px; align-content: start; background: var(--white); border-radius: var(--r); padding: 12px 12px 16px; border: 1.5px solid rgba(29, 37, 255, .14); transition: box-shadow .6s var(--ease), border-color .6s var(--ease); }
-  #pdp .kcard:hover { box-shadow: 0 24px 50px rgba(29, 37, 255, .14); border-color: var(--blue); }
+  #pdp .kcard { display: grid; gap: 12px; align-content: start; background: var(--white); border-radius: var(--r); padding: 12px 12px 16px; border: 1.5px solid rgba(31, 37, 245, .14); transition: box-shadow .6s var(--ease), border-color .6s var(--ease); }
+  #pdp .kcard:hover { box-shadow: 0 24px 50px rgba(31, 37, 245, .14); border-color: var(--blue); }
   #pdp .kcard .ph { aspect-ratio: 1; border-radius: 14px; background: var(--cream); overflow: hidden; position: relative; }
   #pdp .kcard .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 5%; mix-blend-mode: multiply; transition: opacity .6s var(--ease), transform 1s var(--ease); }
   #pdp .kcard .ph.cover img, #pdp .kcard .ph img.sc { object-fit: cover; padding: 0; mix-blend-mode: normal; }
@@ -1090,7 +1090,7 @@
   #pdp .kcard .facts { list-style: none; margin: 0; padding: 0 6px; display: grid; gap: 4px; font-size: 11px; opacity: .6; }
   #pdp .kcard .meta { display: flex; justify-content: space-between; align-items: center; padding: 6px 6px 0; }
   #pdp .kcard .dots { display: flex; gap: 5px; }
-  #pdp .kcard .dots i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(29, 37, 255, .28); }
+  #pdp .kcard .dots i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(31, 37, 245, .28); }
   @media (max-width: 1000px) { #pdp .kgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 480px) { #pdp .kgrid { grid-template-columns: minmax(0, 1fr); } }
   #pdp .kband { background: var(--sky); }
@@ -1099,7 +1099,7 @@
   .press { padding: clamp(60px, 7vw, 110px) var(--g); display: grid; grid-template-columns: 1fr 3fr; gap: var(--g); align-items: start; border-top: 1.5px solid var(--line); }
   .press > span { padding-top: 10px; }
   .press ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-  .press li { background: var(--white); border-radius: 22px; padding: 22px; display: grid; gap: 14px; align-content: space-between; min-height: 190px; border: 1.5px solid rgba(29, 37, 255, .12); }
+  .press li { background: var(--white); border-radius: 22px; padding: 22px; display: grid; gap: 14px; align-content: space-between; min-height: 190px; border: 1.5px solid rgba(31, 37, 245, .12); }
   .press li b { font-family: var(--display); text-transform: uppercase; font-weight: 400; font-size: clamp(19px, 1.7vw, 28px); letter-spacing: -0.045em; line-height: 1.28; }
   .press li span { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .6; }
   .press li.hi { background: var(--blue); color: var(--lime); border-color: var(--blue); }
@@ -1139,7 +1139,7 @@
   .nav .right { gap: 14px; }
   .nav .help { font-weight: 600; }
   .nav .srch { width: 40px; height: 40px; border-radius: 999px; display: grid; place-items: center; transition: background-color .35s var(--ease); }
-  .nav .srch:hover, .nav .srch[aria-expanded="true"] { background: rgba(29, 37, 255, .08); }
+  .nav .srch:hover, .nav .srch[aria-expanded="true"] { background: rgba(31, 37, 245, .08); }
   .nav .srch svg { width: 19px; height: 19px; }
   @media (max-width: 1080px) and (min-width: 861px) { .nav .links { gap: 18px; font-size: 12px; } .nav .links .nv-t { font-size: 12px; } .nav .help { display: none; } }
 
@@ -1180,7 +1180,7 @@
   .sx-in { display: flex; align-items: center; gap: 14px; border-bottom: 1.5px solid var(--blue); padding-bottom: 14px; }
   .sx-in svg { width: 24px; height: 24px; flex: none; }
   .sx-in input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; font-family: var(--display); text-transform: uppercase; font-size: clamp(22px, 2.6vw, 38px); letter-spacing: -0.04em; color: var(--blue); outline: none; padding: 6px 0; }
-  .sx-in input::placeholder { color: rgba(29, 37, 255, .3); }
+  .sx-in input::placeholder { color: rgba(31, 37, 245, .3); }
   .sx-in input::-webkit-search-cancel-button, .sx-in input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; display: none; }
   .sx-res { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px 18px; padding-top: 16px; }
   .sx-res a { display: flex; gap: 12px; align-items: center; padding: 6px; border-radius: 14px; transition: background-color .3s var(--ease); }
@@ -1205,7 +1205,7 @@
   .fitcard small { display: block; color: var(--lime); font-size: 11px; }
   .fitcard b { font-family: var(--display); text-transform: uppercase; font-weight: 400; font-size: 26px; letter-spacing: -0.045em; line-height: 1.4; color: var(--lime); }
   .acc-wrap { display: grid; }
-  .acc summary, .acc-row { list-style: none; cursor: pointer; font-family: var(--display); text-transform: uppercase; font-size: clamp(26px, 7.6vw, 44px); letter-spacing: -0.05em; line-height: 1.4; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1.5px solid rgba(234, 255, 0, .22); padding: 8px 0 4px; }
+  .acc summary, .acc-row { list-style: none; cursor: pointer; font-family: var(--display); text-transform: uppercase; font-size: clamp(26px, 7.6vw, 44px); letter-spacing: -0.05em; line-height: 1.4; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1.5px solid rgba(238, 254, 83, .22); padding: 8px 0 4px; }
   .acc summary::-webkit-details-marker { display: none; }
   .acc summary small, .acc-row small { font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--cream); opacity: .7; }
   .acc[open] summary { color: var(--cream); }
@@ -1217,12 +1217,12 @@
   .hs .ph.cover img { object-fit: cover; mix-blend-mode: normal; transform: none; }
   .hs b { font-size: 14px; font-weight: 700; font-family: var(--sans); }
   .acc-l { display: flex; flex-wrap: wrap; gap: 8px; }
-  .acc-l a { height: 38px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 999px; border: 1.5px solid rgba(234, 255, 0, .4); color: var(--lime); font-weight: 600; font-size: 14px; }
+  .acc-l a { height: 38px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 999px; border: 1.5px solid rgba(238, 254, 83, .4); color: var(--lime); font-weight: 600; font-size: 14px; }
   .acc-l.grid { display: grid; grid-template-columns: 1fr 1fr; }
 
   /* ---------- no white boxes on cream: products sit on the page, cards are drawn with a hairline ---------- */
   .ci .ph, .upi .ph { background: var(--cream); }
-  .mg-cribs a:hover, .sx-res a:hover { background: rgba(29, 37, 255, .05); }
+  .mg-cribs a:hover, .sx-res a:hover { background: rgba(31, 37, 245, .05); }
   .mega .mp-trust span { background: none !important; padding: 0 !important; }
   .mega .mp-trust { gap: 0; }
   .mega .mp-trust span + span::before { content: "·"; margin: 0 10px; opacity: .5; }
@@ -1230,7 +1230,7 @@
   .ci .ph { border: 1.5px solid var(--line); }
   .card, #pdp .dcard, #pdp .kcard, #pdp .wset, #pdp .ft, .press li, #pdp .withc a { background: transparent; }
   .card .ph, #pdp .dcard .ph, #pdp .kcard .ph, #pdp .wset .pics, #pdp .pa-card .ph, #pdp .pa-card .ph img.pk, .index-row .inline, .mg-cribs .ph, .mg-groups .ph, .sx-res .ph { background: var(--cream); }
-  .card, #pdp .dcard, #pdp .kcard { border-color: rgba(29, 37, 255, .16); }
+  .card, #pdp .dcard, #pdp .kcard { border-color: rgba(31, 37, 245, .16); }
   .card:hover, #pdp .dcard:hover, #pdp .kcard:hover { box-shadow: none; }
   .press li.hi { background: var(--blue); }
   #pdp .fit-card .pairw { background: transparent; border: 1.5px solid var(--line); }
@@ -1272,7 +1272,7 @@
   @media (max-width: 760px) { #pdp .next-name { max-width: none; font-size: clamp(44px, 13vw, 90px); } }
   /* buy bar: on desktop it rides under the nav instead of covering content at the bottom */
   @media (min-width: 900px) {
-    #pdp .buybar { top: 88px; bottom: auto; left: 50%; right: auto; transform: translate(-50%, -150%); opacity: 0; transition: transform .7s var(--ease), opacity .4s var(--ease); box-shadow: 0 14px 40px rgba(29, 37, 255, .22); }
+    #pdp .buybar { top: 88px; bottom: auto; left: 50%; right: auto; transform: translate(-50%, -150%); opacity: 0; transition: transform .7s var(--ease), opacity .4s var(--ease); box-shadow: 0 14px 40px rgba(31, 37, 245, .22); }
     #pdp .buybar.on { transform: translate(-50%, 0); opacity: 1; }
   }
 
@@ -1294,7 +1294,7 @@
   .hset-copy p { font-size: clamp(16px, 1.25vw, 19px); font-weight: 500; max-width: 38ch; line-height: 1.5; }
   .hset-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
   .hset-card { display: grid; gap: 18px; background: var(--cream); border-radius: var(--r); padding: 14px 14px 22px; transition: transform .8s var(--ease), box-shadow .8s var(--ease); }
-  .hset-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px rgba(29, 37, 255, .16); }
+  .hset-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px rgba(31, 37, 245, .16); }
   .hset-ph { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 2%; padding: 8% 4% 5%; border-radius: 14px; background: var(--cream); }
   .hset-ph img { width: 100%; aspect-ratio: 5 / 4; object-fit: contain; mix-blend-mode: multiply; transform: scale(1.08); transform-origin: 50% 87%; }
   .hset-ph .plus { position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: var(--lime); display: grid; place-items: center; font-size: 22px; font-weight: 600; }
@@ -1316,7 +1316,7 @@
 
   .rooms { height: 440vh; }
   .room.v { width: min(clamp(200px, 19vw, 340px), 30vh); }
-  .room.v .ph { aspect-ratio: 9 / 16; background: rgba(29, 37, 255, .08); }
+  .room.v .ph { aspect-ratio: 9 / 16; background: rgba(31, 37, 245, .08); }
   .room video { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.06); }
   @media (max-width: 760px) { .room.v { width: min(56vw, 38vh); } }
 
@@ -1341,9 +1341,9 @@
 
   .foot-cols { grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.7fr); }
   .foot-news p { opacity: .85; max-width: 32ch; margin-bottom: 14px; line-height: 1.5; }
-  .news { display: flex; gap: 6px; background: rgba(255, 251, 236, .1); border: 1.5px solid rgba(255, 251, 236, .3); border-radius: 999px; padding: 5px; max-width: 420px; }
+  .news { display: flex; gap: 6px; background: rgba(254, 251, 237, .1); border: 1.5px solid rgba(254, 251, 237, .3); border-radius: 999px; padding: 5px; max-width: 420px; }
   .news input { flex: 1; min-width: 0; background: none; border: 0; color: var(--cream); font: inherit; padding: 0 14px; outline: none; }
-  .news input::placeholder { color: rgba(255, 251, 236, .6); }
+  .news input::placeholder { color: rgba(254, 251, 237, .6); }
   .news button { flex: none; height: 42px; padding: 0 20px; border-radius: 999px; background: var(--lime); color: var(--blue); font-weight: 700; font-size: 14px; }
   .foot-news .social { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 18px; }
   .foot-news .social a { display: inline; }
@@ -1362,7 +1362,7 @@
   #pdp .product { flex: 1; margin: 0; }
   #pdp .pimg { flex: 1; min-height: 360px; margin: 0; }
   #pdp .product .shot { inset: 2% 0 0; height: 98%; }
-  #pdp .buy { background: transparent; border: 1.5px solid rgba(29, 37, 255, .18); backdrop-filter: none; -webkit-backdrop-filter: none; gap: 24px; }
+  #pdp .buy { background: transparent; border: 1.5px solid rgba(31, 37, 245, .18); backdrop-filter: none; -webkit-backdrop-filter: none; gap: 24px; }
   #pdp .buy-head { display: grid; gap: 10px; justify-items: start; }
   #pdp .buy-head h1 { margin: 0; }
   #pdp .buy-head .tagline, #pdp .buy-head .tagline .up { font-family: var(--sans); text-transform: none; font-style: normal; font-weight: 500; font-size: 16px; line-height: 1.5; letter-spacing: -0.005em; color: var(--blue); opacity: .8; max-width: 32ch; }
@@ -1399,7 +1399,7 @@
   .cat .tag { background: var(--cream); color: var(--blue); }
   .follow { background: var(--cream); transform: scale(.85); }
   .follow img { mix-blend-mode: normal; padding: 4%; }
-  .follow { background: var(--white); border: 2px solid var(--blue); box-shadow: 0 24px 50px rgba(29, 37, 255, .16); }
+  .follow { background: var(--white); border: 2px solid var(--blue); box-shadow: 0 24px 50px rgba(31, 37, 245, .16); }
   .follow { width: clamp(360px, 30vw, 540px); aspect-ratio: 5 / 4; }
   .follow img { padding: 2% 4% 0; }
 
@@ -1522,7 +1522,7 @@
   .qa-more { border-bottom: 0; }
   /* nav: Help and Cart as line icons, same weight and colour as search */
   .nav .help.ico, .nav .cart.ico { width: 40px; height: 40px; padding: 0; border-radius: 999px; display: grid; place-items: center; background: transparent; color: inherit; position: relative; transition: background-color .35s var(--ease); }
-  .nav .help.ico:hover, .nav .help.ico[aria-expanded="true"], .nav .cart.ico:hover { background: rgba(29, 37, 255, .08); }
+  .nav .help.ico:hover, .nav .help.ico[aria-expanded="true"], .nav .cart.ico:hover { background: rgba(31, 37, 245, .08); }
   .nav.on-film .help.ico:hover, .nav.on-film .cart.ico:hover { background: rgba(254, 251, 237, .14); }
   .nav .help.ico svg, .nav .cart.ico svg { width: 19px; height: 19px; }
   .nav .cart.ico b { position: absolute; top: 3px; right: 1px; min-width: 17px; height: 17px; padding: 0 4px; font-size: 10.5px; line-height: 1; background: var(--blue); color: var(--lime); }
@@ -1965,17 +1965,6 @@
   .hset-ph .co::after { content: ""; width: 0; height: 26px; margin-top: 6px; border-left: 2px dotted var(--blue); opacity: .6; }
   @media (max-width: 560px) { .hset-ph { padding-top: 104px; } .hset-ph .co { font-size: 12px; } .hset-ph .co::after { height: 18px; } }
   /* hero: the best seller, one tap away */
-  .hero-pick { position: absolute; right: var(--g); bottom: clamp(28px, 6vh, 64px); z-index: 3; display: grid; grid-template-columns: 112px minmax(0, 1fr) auto; gap: 14px; align-items: center; width: 340px; padding: 10px 18px 10px 10px; border-radius: 22px; background: var(--cream); color: var(--blue); box-shadow: 0 24px 60px rgba(16, 35, 63, .28); transition: transform .6s var(--ease); }
-  .hero-pick:hover { transform: translateY(-4px); }
-  .hero-pick .ph { width: 112px; height: 84px; border-radius: 14px; overflow: hidden; display: grid; place-items: center; }
-  .hero-pick img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; transform: scale(1.15); }
-  .hero-pick .t { display: grid; gap: 1px; min-width: 0; }
-  .hero-pick .aw { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; opacity: .75; line-height: 1.35; }
-  .hero-pick b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 24px; letter-spacing: -0.04em; line-height: 1.3; padding-top: .1em; }
-  .hero-pick .pr { font-size: 13.5px; font-weight: 600; }
-  .hero-pick .go { font-size: 20px; transition: transform .5s var(--ease); }
-  .hero-pick:hover .go { transform: translateX(5px); }
-  @media (max-width: 1100px) { .hero-pick { display: none; } }
   /* best-seller card v2 */
   .best-grid .card.v2 { position: relative; display: flex; flex-direction: column; gap: 0; }
   .best-grid .card.v2 .ck { margin-top: 0; }
@@ -2046,7 +2035,7 @@
     --d2: clamp(38px, 4.45vw, 64px);   /* section heads and the hero */
     --d3: clamp(26px, 2.5vw, 36px);    /* titles: product name in the buy box, tiles, marquee */
     --t-lead: clamp(18px, 1.55vw, 22px);
-    --t-body: clamp(16px, 1.2vw, 17px);
+    --t-body: 16px;
     --t-small: 14px;
     --t-mono: 12px;
   }
@@ -2137,7 +2126,7 @@
      ===================================================================== */
   :root { --s-sec: clamp(80px, 10vw, 144px); --s-head: clamp(28px, 3.9vw, 56px); }
   html body .cats { padding-top: var(--s-sec); padding-bottom: var(--s-head); }
-  html body .reassure { padding: 0 var(--g); }
+  html body .reassure { padding: 0 var(--g); margin-top: calc(-1 * clamp(14px, 1.8vw, 26px)); }
   html body .collection { padding-top: var(--s-sec); padding-bottom: 0; }
   html body .best, html body .hset, html body .stl, html body .rooms, html body .revs, html body .note, html body .qa { padding-top: var(--s-sec); padding-bottom: var(--s-sec); }
   html body .blog#journal { padding-top: var(--s-sec); padding-bottom: 0; }
@@ -2151,7 +2140,7 @@
   /* one ground per section: the homes carousel stays cream */
   html body .rooms { background: var(--cream) !important; }
   /* reassurance: a row on the page, not a box */
-  html body .rs-list { background: none; border-radius: 0; border-top: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); padding: clamp(20px, 2.4vw, 32px) 0; }
+  html body .rs-list { background: none; border-radius: 0; border-bottom: 1.5px solid var(--line); padding: clamp(20px, 2.4vw, 32px) 0; }
   html body .rs-list li { display: flex; align-items: center; justify-content: center; gap: 12px; text-align: left; }
   html body .rs-list li b { display: block; }
   html body .rs-list li span { display: block; margin-top: 2px; }
@@ -2218,6 +2207,136 @@
   /* spacing */
   html body #pdp .manifesto, html body #pdp .chap { padding-top: var(--s-sec); padding-bottom: var(--s-sec); }
   html body #pdp .cmp-cta { margin-top: var(--s-sec); margin-bottom: var(--s-sec); }
+
+  /* ---------- shop curtain (desktop) ---------- */
+  .nav .links .cur-t { text-transform: uppercase; letter-spacing: .06em; font-size: 13px; font-weight: 600; padding: 6px 0; display: inline-flex; gap: 6px; align-items: center; }
+  .nav .links .cur-t i { display: inline-block; width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .4s var(--ease); }
+  .nav .links .cur-t[aria-expanded="true"] i { transform: translateY(1px) rotate(-135deg); }
+  .cur-t .lb-c { display: none; }
+  .cur-t[aria-expanded="true"] .lb-o { display: none; }
+  .cur-t[aria-expanded="true"] .lb-c { display: inline; }
+  body.cur-open .nav, body.cur-open .nav.pill-on, body.cur-open .nav.on-film { background: transparent; color: var(--cream); box-shadow: none; }
+  .cur { position: fixed; inset: 0; z-index: 99; background: var(--navy); color: var(--cream); clip-path: inset(0 0 100% 0); transition: clip-path .8s var(--ease); overflow: hidden; }
+  .cur.on { clip-path: inset(0 0 0 0); }
+  .cur-in { height: 100%; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 64px); padding: 108px var(--g) 32px; }
+  .cur-l { display: flex; flex-direction: column; min-height: 0; }
+  .cur-list { display: grid; }
+  .cur-list a { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 8px 0; border-bottom: 1.5px solid rgba(238, 254, 83, .18); font-family: var(--display); text-transform: uppercase; font-size: min(var(--d2), 7.4vh); line-height: 1.35; letter-spacing: -0.045em; color: rgba(254, 251, 237, .42); transition: color .35s var(--ease); }
+  .cur-list a small { font-family: var(--sans); font-size: var(--t-mono); font-weight: 700; letter-spacing: .08em; color: var(--cream); }
+  .cur-list a.on, .cur-list a:focus-visible { color: var(--lime); }
+  .cur-list a.on small { color: var(--lime); }
+  .cur-need { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-top: 26px; }
+  .cur-need .mono { width: 100%; font-size: var(--t-mono); letter-spacing: .08em; color: var(--cream); }
+  .cur-need a { font-size: var(--t-body); font-weight: 700; color: var(--cream); transition: color .3s var(--ease); }
+  .cur-need a.on, .cur-need a:hover { color: var(--lime); }
+  .cur-low { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: auto; padding-top: 22px; border-top: 1.5px solid rgba(254, 251, 237, .16); }
+  .cur-low a { font-size: var(--t-small); font-weight: 700; color: var(--cream); }
+  .cur-low a:hover { color: var(--lime); }
+  .cur-r { display: grid; grid-template-rows: minmax(0, 1fr) auto auto; gap: 14px; min-height: 0; }
+  .cur-ph { position: relative; border-radius: 22px; overflow: hidden; min-height: 0; background: rgba(254, 251, 237, .06); }
+  .cur-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .6s var(--ease), transform 1.2s var(--ease); }
+  .cur-ph img.on { opacity: 1; transform: none; }
+  .cur-ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 55%, rgba(11, 20, 60, .55)); pointer-events: none; }
+  .cur-ph .cap { position: absolute; left: 20px; right: 20px; bottom: 16px; z-index: 1; display: grid; gap: 2px; }
+  .cur-ph .cap .mono { font-size: var(--t-mono); letter-spacing: .08em; color: var(--cream); }
+  .cur-ph .cap b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: var(--d3); letter-spacing: -0.04em; line-height: 1.4; color: var(--lime); }
+  .cur-strip { display: grid; gap: 10px; }
+  .cur-strip a { background: var(--cream); color: var(--blue); border-radius: 16px; padding: 8px 10px 10px; display: grid; gap: 0; min-width: 0; transition: transform .5s var(--ease); }
+  .cur-strip a:hover { transform: translateY(-3px); }
+  .cur-strip .ph { position: relative; height: clamp(56px, 9vh, 92px); overflow: hidden; border-radius: 10px; }
+  .cur-strip .ph img { position: absolute; inset: 0; width: 100%; height: 100%; transform: none; object-fit: contain; mix-blend-mode: multiply; }
+  .cur-strip .ph.cover img { object-fit: cover; mix-blend-mode: normal; }
+  .cur-strip b { font-size: var(--t-small); font-weight: 700; line-height: 1.35; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cur-strip small { font-size: var(--t-mono); font-weight: 600; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cur-strip .mg-note { display: none; }
+  .cur-more { display: flex; gap: 24px; }
+  .cur-more a { font-size: var(--t-small); font-weight: 700; color: var(--cream); }
+  .cur-more a i { font-style: normal; display: inline-block; transition: transform .4s var(--ease); }
+  .cur-more a:hover { color: var(--lime); } .cur-more a:hover i { transform: translateX(4px); }
+  .cur-in > * { opacity: 0; transform: translateY(18px); transition: opacity .4s var(--ease), transform .7s var(--ease); }
+  .cur.on .cur-in > * { opacity: 1; transform: none; transition-delay: .22s; }
+  .cur.on .cur-in > .cur-r { transition-delay: .32s; }
+  @media (max-width: 860px) { .cur { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .cur, .cur-in > *, .cur-ph img { transition-duration: .01ms !important; } }
+
+  /* ---------- help + search: the nav pill grows down into the panel ----------
+     One cream "skin" sits behind the nav and the panel and grows as a single rounded shape. */
+  .nav-skin { position: fixed; top: 12px; left: 12px; right: 12px; z-index: 98; height: var(--skin-h0, 64px); border-radius: 32px; background: var(--cream); pointer-events: none; opacity: 0; box-shadow: 0 34px 70px rgba(11, 36, 65, 0); transition: height .45s var(--ease), box-shadow .45s var(--ease), opacity .3s var(--ease) .12s; }
+  body.pane-open .nav-skin { opacity: 1; height: var(--skin-h, 64px); box-shadow: 0 34px 70px rgba(11, 36, 65, .2); transition: height .6s var(--ease), box-shadow .6s var(--ease), opacity .12s var(--ease); }
+  body.pane-open .nav, body.pane-open .nav.pill-on, body.pane-open .nav.on-film { background: transparent; color: var(--blue); box-shadow: none; transition: color .2s var(--ease); }
+  .mega, .search { top: 76px; background: transparent; box-shadow: none; border-radius: 0; opacity: 0; transform: none; clip-path: none; transition: opacity .15s var(--ease), visibility 0s .15s; }
+  .mega.on, .search.on { opacity: 1; transform: none; transition: opacity .35s var(--ease) .18s; }
+  .mega::before, .search::before { content: ""; position: absolute; top: 0; left: 30px; right: 30px; height: 1.5px; background: var(--line); }
+  @media (max-width: 860px) { .search { top: 68px; } .nav-skin { border-radius: 28px; } }
+
+  /* ---------- compare: clean table ---------- */
+  #pdp .cmp-tools { align-items: flex-end; }
+  #pdp .cmp-wrap { overflow: visible; padding: 0 var(--g); }
+  #pdp .cmp { table-layout: fixed; min-width: 0; }
+  #pdp .cmp col.c-k { width: 168px; }
+  #pdp .cmp thead .pics td { padding: 0 6px 0 0; border: 0; vertical-align: bottom; }
+  #pdp .cmp thead .pics td:last-child { padding-right: 0; }
+  #pdp .cmp thead .ph { display: block; aspect-ratio: 4 / 3; border-radius: 18px; overflow: hidden; }
+  #pdp .cmp thead .ph img { padding: 8%; }
+  #pdp .cmp thead .names th { position: sticky; top: 80px; z-index: 2; background: var(--cream); padding: 14px 12px 14px 0; vertical-align: bottom; text-align: left; border-bottom: 1.5px solid var(--blue); }
+  #pdp .cmp.stuck thead .names th::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 96px; background: var(--cream); }
+  #pdp .cmp thead .names th a { display: grid; gap: 2px; }
+  #pdp .cmp thead .names small { font-size: var(--t-small); font-weight: 500; color: var(--ink-3); }
+  #pdp .cmp tbody tr:first-child td, #pdp .cmp tbody tr:first-child th { border-top: 0; }
+  html body #pdp .cmp tbody tr:first-child td { font-size: var(--t-small); font-weight: 500; }
+  #pdp .cmp tbody th, #pdp .cmp td { padding: 14px 12px 14px 0; }
+  #pdp .cmp tbody tr:not(.acts):hover td, #pdp .cmp tbody tr:not(.acts):hover th { background: rgba(230, 224, 246, .55); }
+  @media (max-width: 1100px) {
+    #pdp .cmp-wrap { overflow-x: auto; }
+    #pdp .cmp { min-width: 940px; }
+    #pdp .cmp thead .names th { position: static; }
+    #pdp .cmp thead .names th::before { display: none; }
+    #pdp .cmp col.c-k { width: 120px; }
+  }
+
+  /* ---------- read card: a small article link with a photo ---------- */
+  .rdc { display: grid; grid-template-columns: 64px minmax(0, 1fr) 36px; align-items: center; gap: 14px; width: min(100%, 440px); padding: 8px 10px 8px 8px; border-radius: 20px; background: var(--lav-t, #e6e0f6); color: var(--blue); justify-self: start; transition: background .4s var(--ease); }
+  .rdc .im { width: 64px; height: 64px; border-radius: 14px; overflow: hidden; }
+  .rdc .im img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+  .rdc .tx { display: grid; gap: 2px; min-width: 0; }
+  .rdc .mono { font-size: var(--t-mono); letter-spacing: .08em; color: var(--ink-3); }
+  .rdc b { font-size: var(--t-small); font-weight: 700; line-height: 1.35; }
+  .rdc .ar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--blue); color: var(--cream); font-size: var(--t-small); transition: transform .4s var(--ease); }
+  .rdc:hover .im img { transform: scale(1.06); }
+  .rdc:hover .ar { transform: translateX(3px); }
+  .cmp-tools p .rdc { display: grid; margin-top: 20px; }
+  #pdp .sp-grid > .rdc { grid-column: 2; margin-top: 22px; }
+
+  /* Boldonse is uppercase only, everywhere */
+  #pdp .ar-by .av, #pdp .nums b { text-transform: uppercase; }
+
+  /* =====================================================================
+     Palette rules (Oct 2026)
+     1 one blue · 2 cream on anything dark · 3 a label never looks like a button
+     4 cream buttons take navy text · 5 lime = buy or highlight · 6 tints mean categories
+     ===================================================================== */
+  /* 1 — one blue: no paler blue text anywhere */
+  .hset-row .k, .kcard .k, #pdp .kcard .k, #pdp .tray-opt small, #pdp .ar-text h4, #pdp .ar-src, #pdp .pp .sv, .room .room-cap a, .qa .fg details p, .fg details p, .hset-ph .co span, #pdp .facts-b li span { opacity: 1 !important; color: var(--blue); }
+  /* 2 — cream on anything dark: full cream, no faded cream, no blush */
+  .nav.on-film { color: var(--cream); }
+  .stl-tot b s, #pdp .g-age small, #pdp .g-scale span, #pdp .g-steps-l span, #pdp .g-note, #pdp .facts span, #pdp .facts, .facts.mono, .dfilter button span, #pdp .dfilter button span, .foot-cols a, .foot-news p, .bl-feat .tx p, #pdp .pa-math .mono, #pdp .pa-math .mono span { opacity: 1 !important; color: var(--cream); }
+  .bl-feat .meta span, .bl-feat .meta > span:last-child { opacity: 1 !important; color: var(--cream) !important; }
+  #pdp .grows-pin .mono, #pdp .g-note, html body #pdp .pa-math .mono, html body #pdp .pa-math .mono span { color: var(--cream) !important; opacity: 1 !important; }
+  .stl-items li a > span { opacity: 1 !important; }
+  .mega .promo .mono, .mega .promo span, .cur-need .mono, .cur-low a, .cur-more a, .cur-ph .cap .mono { opacity: 1 !important; color: var(--cream); }
+  .cur-need .mono { color: var(--cream); }
+  /* 3 — labels on photos are plain text; on light grounds a soft tint chip; only buttons are solid pills */
+  html body .bl-feat .tg, .bl-feat .tg { background: none !important; padding: 0; height: auto; border-radius: 0; color: var(--cream) !important; }
+  .bl-feat .meta { gap: 10px; }
+  .bl-feat .meta > span:last-child::before { content: "\00B7"; margin-right: 10px; }
+  html body .blog .bl-card .tg, html body .bl-card .meta .tg { background: var(--lav-t); color: var(--blue) !important; }
+  .bl-card .meta > span:last-child, html body .bl-card .meta span { opacity: 1 !important; color: var(--blue); }
+  .cat .tag, .room .tag { background: none !important; padding: 0; border-radius: 0; color: var(--cream) !important; text-shadow: 0 1px 14px rgba(16, 35, 63, .35); }
+  /* badges are highlights: lime with blue text */
+  .card .badge, #pdp .dcard .badge, #pdp .kcard .badge, #pdp .buy-head .award, html body #pdp .dcard .badge, html body #pdp .kcard .badge, html body #pdp .buy .award { background: var(--lime) !important; color: var(--blue) !important; }
+  /* 4 — a cream button takes navy text */
+  .pill.cream, .pill.ghost:hover, .cat .go, html body .bl-feat .go, .hero-play:hover, #pdp .pa-card .ph .flip, .mmenu .chips a { color: var(--navy); }
+  .pill.cream:hover { color: var(--navy); }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="d-smiley" viewBox="0 0 219 223"><path d="M53.1339 125.34C53.9967 128.231 60.7195 141.181 75.2137 153.879C85.3795 162.785 96.1205 164.705 100.362 165.875C108.515 168.125 122.437 165.367 135.544 161.754C142.237 159.909 146.396 150.846 153.261 137.133C155.547 132.567 155.511 125.024 154.904 114.394C151.752 100.476 150.121 97.7902 148.621 96.15C147.821 95.3749 146.942 94.7158 146.036 94.0369M74.5648 80.8774C74.7164 81.4048 77.0363 89.4734 80.7716 101.954C82.2652 106.639 82.9428 107.974 83.5222 108.996C84.1016 110.019 84.5623 110.689 85.755 112.14M104.334 66.5365L113.035 96.8M179.102 38.7451C178.791 37.664 177.99 37.0329 173.202 31.2106C164.664 20.8291 156.196 16.9723 141.298 10.514C136.265 8.33201 128.407 7.71854 113.313 7.54953C104.152 7.44696 91.9866 9.53573 82.3071 11.3287C65.6656 14.4113 57.1711 17.9741 52.9784 20.3822C46.669 24.0059 40.5557 29.6068 33.8562 37.05C24.1181 47.8692 18.8026 58.0371 15.962 64.3426C11.815 73.548 9.38182 85.1134 7.97128 98.7498C7.15124 106.678 7.66703 116.774 8.26004 124.908C9.28722 138.996 13.2316 152.646 17.05 165.156C19.1464 172.024 23.9018 179.091 30.4658 188.189C39.7586 201.07 54.2379 208.458 64.4283 212.544C68.4546 214.159 76.6218 214.547 90.1156 214.705C97.6171 214.793 106.425 213.37 116.03 211.363C125.635 209.357 135.764 206.421 144.394 203.205C153.023 199.99 159.847 196.585 166.169 192.854C178.394 185.638 186.922 177.938 193.969 169.523C203.84 157.736 208.972 146.919 210.692 142.206C212.002 138.618 211.527 127.918 209.467 109.4C205.936 77.656 199.706 73.6187 198.054 70.2474C195.996 66.0454 193.68 62.5246 191.086 58.6133C188.505 54.7211 187.308 50.4358 183.948 43.9306C183.139 42.5385 182.614 41.7718 181.952 41.0667C181.291 40.3615 180.509 39.7412 179.102 38.7451Z" fill="none" stroke="currentColor" stroke-width="15.0926" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="d-sun" viewBox="0 0 224 177"><path d="M109.643 47.9577V40.9413C109.643 34.4383 109.643 21.6969 108.724 4.8916M151.097 50.4461C151.22 50.1914 153.664 48.384 158.089 45.1441C161.769 42.18 165.333 38.7342 168.514 34.7595C169.818 32.7877 170.49 30.9078 172.714 29.5303M174.285 92.6896H182.119C189.444 92.6896 203.832 92.6896 218.958 92.516M163.158 116.169L165.555 117.022C168.072 117.917 173.168 119.73 176.861 121.18C180.555 122.63 182.692 123.663 187.051 125.74M136.315 135.651C136.241 135.796 136.167 135.94 136.091 142.12C136.016 148.299 135.942 160.51 133.66 171.767M100.739 129.633C100.612 129.694 100.485 129.756 97.2429 132.215C94.001 134.674 87.6484 139.529 82.9436 143.244C78.2388 146.96 75.3743 149.389 69.4204 154.979M78.2682 100.129C78.2682 100.196 78.2682 100.264 67.6709 100.287C57.0736 100.309 35.8789 100.283 23.9876 100.134C12.0963 99.9856 10.1507 99.714 4.89258 98.8169M83.1925 67.6977C81.1389 66.6219 73.6961 60.975 56.7004 46.9732C53.0063 43.951 51.3938 42.644 49.8957 41.4879C48.3977 40.3319 47.0631 39.3665 45.4116 37.1438M137.774 68.1911C133.997 68.1041 119.63 66.718 105.659 66.8302C100.277 66.8734 97.6246 71.8833 95.8071 74.7583C91.727 81.2125 92.1681 90.5511 92.3167 97.531C92.4837 105.372 99.9043 111.741 104.968 116.749C110.623 122.342 120.431 121.307 127.706 121.253C136.262 121.189 147.064 104.999 151.448 94.7234C154.655 87.2063 152.404 81.5988 151.551 78.6975C149.266 76.6979 146.326 74.6592 143.523 71.9996C142.113 70.594 139.855 70.9973 137.774 68.1911Z" fill="none" stroke="currentColor" stroke-width="9.7833" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="d-star" viewBox="0 0 128 135"><path d="M53.1012 12.4843C47.4839 28.2232 44.1749 35.7571 44.1749 41.2466C38.3718 40.7248 34.8594 44.215 30.5778 44.481C17.9808 46.4997 8.00731 49.3216 0 50.7103C2.21217 55.3554 27.9412 64.498 29.2347 78.047C29.3759 79.5255 28.2441 81.1199 26.951 84.1965C20.365 99.8665 15.956 112.433 17.1538 124.667C17.4139 127.324 18.1998 129.241 21.8836 126.392C33.0544 117.752 55.4174 95.4876 67.7451 99.4594C69.3663 99.9817 70.9463 101.059 72.4856 102.374C78.7796 107.748 88.7277 109.268 96.8147 119.061C102.269 125.666 110.469 139.202 111.838 133.725C112.425 131.378 112.069 126.182 110.205 118.658C105.933 101.408 98.6105 76.95 103.735 72.0628C111.276 64.871 132.86 58.624 127.006 55.3858C118.054 50.4343 93.3421 51.8355 86.909 44.9922C84.654 42.5934 82.8094 38.748 78.6191 32.3731C66.2187 13.5075 61.2883 -4.03956 58.1304 0.819493C56.3966 3.48733 54.8218 7.66348 53.1012 12.4843Z" fill="currentColor"/></symbol><symbol id="d-heart" viewBox="0 0 141 174"><path d="M104.513 5.02436C112.256 -0.823025 120.599 -1.23616 126.99 2.08395C150.205 14.1526 139.196 70.2159 131.552 93.9589C118.233 135.325 75.1616 176.183 64.873 173.431C44.2999 167.904 33.8051 144.547 29.3448 136.901C27.8319 134.307 26.1365 134.096 25.0561 131.106C22.2026 127.283 20.4838 123.992 19.9341 123.56C18.7833 122.662 17.36 118.949 16.043 117.652C14.7251 116.353 13.194 114.702 11.6582 112.795C10.1219 110.888 8.61732 108.785 6.93434 105.824C5.25131 102.862 3.43998 99.1464 2.24 96.1477C1.04127 93.1511 0.471722 90.9294 0.198661 88.4097C-0.0742604 85.8885 -0.0508102 83.1418 0.176553 79.957C0.403984 76.774 0.819104 73.2509 1.25249 70.7378C1.68616 68.2244 2.13009 66.7593 2.78534 65.1149C3.44039 63.4714 4.21504 61.6499 5.09198 60.2953C6.64173 57.9028 8.67652 54.8681 12.1298 52.3878L12.2109 52.3289C15.2908 50.1171 17.7419 48.3595 19.9341 48.1799C21.9653 48.0138 25.2472 48.0999 27.2445 48.482C28.8653 48.7921 31.8975 49.4043 35.0341 51.0466C38.6915 52.9618 40.4329 54.4746 43.4352 57.4507C44.2462 58.2547 46.0483 60.1811 48.7265 63.5599C51.1122 66.57 52.7582 69.1811 54.1062 71.2831C55.4001 73.3004 56.88 75.2506 58.1741 77.0313C60.1558 79.7579 62.3697 82.6926 63.4728 84.2607C63.8532 84.8014 64.2851 85.3776 64.7182 85.9557C67.2759 73.4972 74.1568 49.8046 84.4462 27.4201C89.1503 17.1878 96.7518 10.8869 104.513 5.02436Z" fill="currentColor"/></symbol><symbol id="h-truck" viewBox="0 0 64 64" overflow="visible"><path class="hb" d="M6.93 20.61 C11.04 16.99 32.06 15.58 36.43 18.93 C40.81 22.28 40.21 39.32 36.09 42.94 C31.97 46.55 13.36 46.39 8.99 43.04 C4.61 39.69 2.81 24.22 6.93 20.61 Z"/><path class="hs" d="M7.67 19.31 C9.40 19.17 19.17 18.22 22.47 18.06 C25.78 17.90 34.33 16.44 36.00 17.95 C37.66 19.47 36.70 28.15 36.77 31.02 C36.85 33.89 38.23 41.13 36.63 42.58 C35.04 44.02 26.42 43.27 23.10 43.38 C19.79 43.49 10.01 44.89 8.24 43.55 C6.46 42.21 7.29 34.68 7.90 31.90 C8.51 29.11 12.80 21.10 13.45 19.67"/><path class="hs" d="M37.41 26.40 C37.85 26.27 40.05 25.28 41.20 25.25 C42.36 25.23 46.12 25.64 47.30 26.21 C48.48 26.78 50.40 29.12 51.31 30.15 C52.21 31.19 54.65 34.14 55.10 35.10 C55.54 36.06 55.16 37.47 55.15 38.39 C55.13 39.30 55.96 42.26 54.94 42.90 C53.92 43.55 48.45 43.87 46.40 43.89 C44.36 43.91 38.45 43.14 37.40 43.04"/><path class="hs" d="M17.23 41.11 C17.67 41.14 19.12 40.94 19.89 41.28 C20.66 41.61 21.39 42.38 21.85 43.11 C22.31 43.85 22.67 44.83 22.65 45.68 C22.64 46.54 22.29 47.61 21.76 48.27 C21.23 48.92 20.27 49.37 19.46 49.61 C18.65 49.85 17.75 49.85 16.91 49.69 C16.07 49.53 14.96 49.27 14.41 48.66 C13.85 48.06 13.63 46.93 13.57 46.07 C13.51 45.20 13.68 44.29 14.03 43.49 C14.37 42.69 14.90 41.67 15.63 41.24 C16.36 40.82 17.94 40.99 18.40 40.93"/><path class="hs" d="M45.23 41.11 C45.65 41.18 47.02 41.17 47.79 41.50 C48.56 41.83 49.42 42.41 49.86 43.11 C50.30 43.80 50.46 44.84 50.41 45.67 C50.35 46.50 49.99 47.40 49.51 48.09 C49.03 48.77 48.31 49.44 47.52 49.78 C46.73 50.13 45.64 50.36 44.79 50.18 C43.94 49.99 43.01 49.33 42.42 48.65 C41.84 47.97 41.36 46.96 41.29 46.10 C41.23 45.24 41.62 44.27 42.03 43.49 C42.44 42.72 43.03 41.87 43.75 41.46 C44.48 41.05 45.95 41.11 46.39 41.04"/><path class="hs" d="M41.11 29.22 C41.16 29.64 41.52 32.08 41.53 32.80 C41.54 33.52 40.79 35.13 41.22 35.38 C41.64 35.63 43.96 34.97 45.15 34.94 C46.34 34.91 50.67 35.11 51.40 35.13"/><path class="hs" d="M1.26 26.29 C1.70 26.23 4.55 25.84 4.99 25.79"/><path class="hs" d="M-0.16 32.69 C0.40 32.68 4.08 32.62 4.64 32.62"/></symbol><symbol id="h-box" viewBox="0 0 64 64" overflow="visible"><path class="hb" d="M22.47 20.85 C24.42 17.28 31.05 16.61 35.48 16.60 C39.90 16.59 49.29 17.20 51.99 20.79 C54.69 24.37 55.55 36.25 53.48 40.51 C51.42 44.76 42.90 49.15 38.25 49.14 C33.59 49.13 24.84 44.67 22.47 40.42 C20.10 36.18 20.52 24.42 22.47 20.85 Z"/><path class="hs" d="M19.67 22.31 C20.76 21.76 26.95 18.53 28.97 17.56 C31.00 16.58 35.04 13.84 37.00 13.95 C38.96 14.07 43.83 17.63 45.77 18.52 C47.71 19.41 52.60 20.02 53.63 21.58 C54.66 23.13 54.53 29.55 54.60 31.88 C54.67 34.21 55.31 39.80 54.24 41.55 C53.16 43.30 47.44 45.75 45.40 46.90 C43.36 48.05 38.64 51.55 36.76 51.40 C34.87 51.26 31.23 46.75 29.22 45.66 C27.22 44.56 20.56 43.66 19.57 42.04 C18.59 40.42 20.33 34.19 20.79 31.79 C21.25 29.38 23.21 22.65 23.53 21.45"/><path class="hs" d="M20.41 22.40 C21.26 22.74 25.73 24.34 27.70 25.25 C29.67 26.16 35.19 30.17 37.30 30.21 C39.41 30.26 43.85 26.60 45.81 25.65 C47.76 24.71 53.13 22.51 54.10 22.10"/><path class="hs" d="M36.76 30.04 C36.76 31.22 36.73 37.90 36.77 40.19 C36.81 42.47 37.07 48.51 37.11 49.61"/><path class="hs" d="M3.76 25.64 C4.71 25.65 10.96 25.68 11.91 25.69"/><path class="hs" d="M2.11 34.22 C3.30 34.24 11.08 34.38 12.27 34.40"/><path class="hs" d="M6.26 42.29 C6.93 42.23 11.32 41.84 11.99 41.79"/></symbol><symbol id="h-shield" viewBox="0 0 64 64" overflow="visible"><path class="hb" d="M31.9 12.2 C27.1 14.5 21.3 15.7 16.5 15.9 C16.2 23.4 16.7 30.3 19.4 36.5 C22.1 42.7 26.7 47.8 31.7 51.9 C36.9 47.9 41.5 42.9 44.5 36.5 C47.4 30.3 47.9 23.1 47.6 15.9 C42.5 15.6 36.8 14.3 31.9 12.2 Z"/><path class="hs" d="M32.3 9.7 C27.6 12.3 20.4 13.7 14.7 14.0 C14.3 22.4 14.5 30.4 17.6 37.5 C20.6 44.3 25.9 50.1 31.8 54.7 C37.7 50.3 43.1 44.8 46.3 37.8 C49.5 30.8 49.9 22.5 49.6 13.9 C43.7 13.6 37.2 12.3 31.2 9.3 C30.6 9.1 30.1 9.4 29.6 9.9"/><path class="hs" d="M23.8 31.6 C25.6 33.4 27.5 35.6 29.1 37.7 C32.5 33.1 36.7 28.5 41.1 24.7"/></symbol><symbol id="h-ret" viewBox="0 0 64 64" overflow="visible"><path class="hb" d="M49.82 34.00 C50.15 37.42 48.63 42.70 46.26 45.12 C43.88 47.55 39.27 47.82 35.57 48.56 C31.86 49.29 26.79 51.09 24.04 49.51 C21.29 47.93 20.18 42.61 19.07 39.07 C17.95 35.54 16.23 31.23 17.35 28.30 C18.47 25.38 22.68 23.34 25.78 21.50 C28.88 19.66 32.88 16.76 35.95 17.27 C39.02 17.78 41.92 21.79 44.23 24.58 C46.54 27.36 49.48 30.58 49.82 34.00 Z"/><path class="hs" d="M14.89 26.41 C15.56 24.99 16.81 20.06 18.89 17.86 C20.96 15.67 24.37 13.94 27.34 13.27 C30.31 12.60 33.73 13.19 36.72 13.85 C39.72 14.51 42.92 15.46 45.31 17.25 C47.69 19.04 49.70 21.85 51.03 24.59 C52.37 27.33 53.30 30.64 53.29 33.71 C53.28 36.77 52.59 40.44 51.00 42.98 C49.40 45.51 46.34 47.42 43.73 48.91 C41.12 50.40 38.29 51.33 35.32 51.91 C32.36 52.50 27.50 52.34 25.93 52.42"/><path class="hs" d="M9.41 16.40 C9.67 17.60 9.98 25.72 11.60 26.63 C13.22 27.54 21.94 24.49 23.30 24.21"/><path class="hs" d="M32.76 23.04 C32.78 24.33 32.03 32.28 32.88 34.09 C33.74 35.91 39.27 38.08 40.11 38.61"/></symbol><symbol id="h-plus" viewBox="0 0 64 64" overflow="visible"><path class="hs" d="M31.60 11.38 C31.77 13.72 32.92 26.61 33.08 31.46 C33.24 36.31 33.00 50.44 32.99 52.94"/><path class="hs" d="M11.50 31.49 C13.78 31.45 26.14 30.88 31.02 31.09 C35.91 31.29 50.76 33.01 53.37 33.26"/></symbol><symbol id="h-check" viewBox="0 0 64 64" overflow="visible"><path class="hs" d="M10.63 33.35 C11.56 34.07 16.85 37.92 18.53 39.51 C20.20 41.10 22.51 47.93 25.00 46.95 C27.48 45.97 36.47 34.98 39.80 31.08 C43.14 27.18 51.98 15.58 53.59 13.53"/></symbol><symbol id="h-arrow" viewBox="0 0 64 64" overflow="visible"><path class="hs" d="M7.67 33.31 C9.55 33.15 20.19 32.10 23.81 31.89 C27.42 31.69 35.12 31.65 38.66 31.58 C42.20 31.50 52.33 31.30 54.14 31.26"/><path class="hs" d="M40.41 18.40 C42.07 19.83 54.50 27.50 54.60 30.63 C54.70 33.75 42.85 43.51 41.30 45.21"/></symbol></defs></svg>
@@ -2225,10 +2344,12 @@
 
 <nav class="nav on-film" aria-label="Primary">
   <a href="#/" class="word" aria-label="dadada home"><svg viewBox="0 0 981.5 314.6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M441.662 12.2588C447.644 11.9748 459.568 15.0575 460.589 21.905C462.469 34.513 461.604 49.7927 461.59 62.76L461.584 162.885L461.562 196.515C461.562 202.335 461.483 208.334 461.71 214.156C461.859 216.02 461.987 217.395 463.476 218.734C466.603 221.549 469.475 218.105 471.543 216.154L471.465 186.13C471.456 179.822 471.319 173.389 471.997 167.09C471.926 165.615 473.692 163.407 473.879 162.235C481.339 115.343 534.779 89.5891 577.232 110.875C579.762 112.143 584.324 116.287 586.346 116.136C586.308 111.733 586.394 107.331 586.6 102.932C590.132 98.6727 592.7 96.3039 597.167 93.0757C609.928 92.7424 610.412 93.7318 618.151 103.431C618.558 108.006 618.366 116.203 618.357 121.043L618.299 152.608C618.4 180.883 619.181 213.315 618.261 241.366C617.077 243.006 611.643 248.347 609.889 250.109C596.927 251.829 593.812 251.141 586.667 240.513C586.605 238.876 586.801 236.121 585.824 235.143L584.841 235.639C578.818 240.701 566.191 245.703 558.169 246.709C554.733 247.14 547.632 246.659 543.879 246.867C524.874 247.923 514.255 242.656 499.726 230.713C499.041 233.455 498.284 235.401 496.506 237.677C480.107 258.638 447.39 257.149 433.634 234.087C432.932 232.91 432.606 230.562 432.382 229.175C429.314 232.993 428.853 233.248 424.763 236.292C419.173 240.273 405.567 246.54 398.578 246.652C391.06 246.772 375.782 247.547 368.686 246.421C355.692 244.358 342.162 235.559 333.488 226.151C330.627 223.048 326.971 220.189 324.641 216.562C320.284 209.67 315.018 197.155 314.266 189.035C313.593 181.757 313.408 166.272 314.728 159.307C318.669 138.515 335.074 119.482 353.998 110.234C356.807 108.861 361.02 107.743 363.959 106.625C368.633 105.321 368.48 107.017 373.129 103.805C394.235 102.496 411.926 104.49 428.395 118.654C428.732 97.6175 427.828 76.2246 428.239 55.1474C428.431 45.2727 427.695 35.2752 428.402 25.4114C428.932 18.0074 435.003 13.7909 441.662 12.2588ZM535.139 142.88C519.162 147.651 508.931 163.052 510.839 179.453C511.275 183.196 512.334 186.841 513.977 190.242C518.007 198.596 525.291 204.972 534.166 207.909C539.404 209.642 544.991 210.106 550.449 209.26C568.927 206.396 581.731 189.488 579.316 171.141C576.901 152.795 560.143 139.694 541.541 141.607C539.37 141.83 537.228 142.256 535.139 142.88ZM352.865 165.388C350.763 172.106 350.816 179.305 353.017 185.992C358.224 201.813 374.227 211.593 390.859 209.118C409.675 206.319 422.623 188.947 419.765 170.339C416.906 151.73 399.325 138.947 380.519 141.804C375.596 142.551 370.896 144.347 366.744 147.066C360.118 151.405 355.214 157.879 352.865 165.388Z" fill="currentColor"/><path d="M752.613 14.3355C758.071 13.7434 763.227 11.5425 768.8 14.5318C780.263 20.6786 778.418 35.2482 778.394 46.0478L778.341 77.523L778.59 189.01C778.595 193.564 777.766 214.238 778.854 217.249C780.047 218.69 782.04 219.275 783.818 219.991C785.682 218.159 786.626 217.649 788.85 216.316C788.184 199.249 788.428 180.257 789.118 163.108C789.272 159.294 793.335 148.199 795.084 144.341C802.224 128.619 817.218 115.299 833.2 108.655C843.661 105.171 853.604 102.684 864.726 103.398C866.677 103.523 870.884 103.157 872.6 103.782C879.356 106.246 886.142 107.458 892.774 110.461C896.162 111.997 902.042 117.021 904.907 117.666C905.722 116.438 905.367 114.182 905.286 112.616C906.805 109.638 908.774 106.908 911.132 104.523C917.779 97.8611 927.535 98.6803 934.057 104.987C935.461 106.374 938.188 110.002 938.332 111.947C939.146 123.06 938.739 135.13 938.739 146.256L938.696 222.861C940.651 224.934 941.389 226.211 944.173 226.319C946.052 225.618 947.532 223.396 948.85 221.784C948.62 206.528 945.774 199.734 959.733 190.611C972.968 189.341 974.636 191.121 981.172 201.756C981.249 201.839 981.33 201.921 981.407 202.003V230.41C981.297 230.498 981.182 230.585 981.076 230.679C981.019 230.733 980.956 230.788 980.894 230.842C979.241 232.275 975.316 242.542 972.019 246.442C965.598 254.039 955.425 258.654 945.534 259.524C936.281 260.339 926.328 256.838 919.255 250.962C913.14 245.883 907.984 238.028 907.265 230.095C902.109 235.202 898.242 238.767 891.202 241.505C886.889 243.181 883.224 243.746 879.529 246.614C878.954 246.659 878.374 246.685 877.794 246.689C850.336 246.994 836.823 250.505 816.236 230.602C816.159 230.926 816.083 231.248 815.997 231.569C813.687 240.115 806.23 243.784 799.129 248.302C782.778 258.7 760.323 249.931 750.734 234.6C749.642 232.851 750.039 230.598 750.193 228.494C728.581 248.156 718.695 247.471 690.269 246.963C672.883 245.952 656.763 234.107 645.617 221.753C633.785 208.639 627.431 191.148 628.648 173.702C630.479 147.47 642.718 128.118 664.291 113.109C668.005 110.523 673.688 108.994 677.948 107.554C698.142 99.6013 728.514 102.521 743.906 118.613C745.037 90.2988 742.851 58.3799 743.858 29.7612C744.131 22.1349 747.054 19.4646 752.613 14.3355ZM851.189 142.8C836.664 147.222 826.764 160.511 826.798 175.543C826.826 190.576 836.779 203.825 851.323 208.19C855.837 209.546 860.586 209.972 865.278 209.443C867.094 209.237 868.891 208.89 870.654 208.403C887.891 203.64 898.601 186.652 895.338 169.247C892.079 151.841 875.93 139.776 858.113 141.438C855.765 141.657 853.446 142.113 851.189 142.8ZM692.066 142.837C679.012 146.747 669.51 157.889 667.813 171.274C667.449 174.139 667.454 177.037 667.828 179.9C668.269 183.259 669.208 186.536 670.621 189.621C674.676 198.468 682.343 205.189 691.711 208.103C695.444 209.263 699.35 209.789 703.26 209.655C706.149 209.556 709.015 209.099 711.79 208.293C728.533 203.433 738.975 186.978 736.128 169.949C733.277 152.919 718.034 140.67 700.6 141.403C697.706 141.525 694.835 142.007 692.066 142.837Z" fill="currentColor"/><path d="M122.094 14.2872C125.511 13.9857 126.477 13.6553 129.5 12.9196C130.976 12.5602 137.599 14.2777 139.589 14.7015C141.863 16.9764 144.33 19.2138 145.943 21.996C146.87 23.5959 146.907 25.8338 147.029 27.6503C147.212 46.2772 147.183 65.0624 147.184 83.6812L147.246 171.994C147.132 185.144 146.127 203.512 147.628 216.808C147.807 218.394 150.897 219.639 152.431 220.364C153.758 219.18 155.723 217.312 157.142 216.361L157.059 187.66C157.053 181.131 156.686 174.097 157.491 167.637C161.992 131.551 191.76 103.367 229.005 103.425C247.509 103.454 257.216 108.044 272.364 117.582C271.89 112.755 271.866 107.895 272.292 103.064C276.108 98.2901 280.314 94.1631 286.825 92.7913C288.195 92.503 292.792 94.6045 295.754 95.0875C298.311 97.5753 301.504 100.499 303.623 103.284C304.139 112.571 303.927 123.48 303.925 132.907L303.872 180.429L303.883 219.206C303.905 225.895 304.223 235.026 303.828 241.568C300.725 245.288 299.042 247.112 295.282 250.349C282.524 252.399 279.48 250.884 272.298 240.603L272.035 233.262C266.678 239.771 253.326 245.964 244.769 246.769C239.391 247.275 233.699 246.919 228.285 246.93C206.45 246.974 202.903 244.655 185.22 231.832C182.097 240.14 173.001 245.874 164.889 249.858C149.628 257.35 127.566 248.498 119.318 234.393C118.586 233.142 118.53 230.776 118.571 229.315C100.28 246.764 85.0552 248.23 60.5283 246.935C36.7945 245.682 4.76433 220.16 2.8157 195.903C2.75498 195.148 0.640906 194.856 0 194.688L0 157.247C1.14342 156.761 2.35457 156.544 2.6466 155.226C7.82889 131.847 30.8285 108.804 55.2499 105.736C56.2754 105.607 58.2003 103.927 59.4266 103.842C80.3748 101.715 97.8676 105.003 114.279 118.831C113.782 96.7049 113.594 74.5735 113.718 52.443C113.708 46.5763 113.743 40.1905 113.671 34.3584C113.531 23.1161 113.028 21.3508 122.094 14.2872ZM223.758 142.145C205.095 145.635 192.824 163.428 196.349 181.891C199.874 200.353 217.86 212.494 236.523 209.01C255.191 205.525 267.467 187.728 263.942 169.263C260.416 150.797 242.425 138.655 223.758 142.145ZM38.1464 183.507C40.9636 195.08 49.6959 204.352 61.167 207.95C65.1837 209.21 69.4007 209.728 73.6066 209.479C76.1574 209.328 78.6832 208.896 81.1372 208.191C98.0592 203.328 108.52 186.591 105.354 169.443C102.189 152.295 86.4233 140.296 68.8563 141.663C66.5168 141.846 64.2023 142.264 61.9491 142.913C49.9672 146.363 40.8183 155.968 38.0485 168.005C36.8736 173.111 36.9071 178.416 38.1464 183.507Z" fill="currentColor"/><path d="M948.787 151.98C950.43 150.632 952.088 149.306 953.77 148.002C961.231 142.312 973.461 142.459 978.507 151.333C979.685 153.412 979.733 154.932 981.401 156.968V166.964C977.932 170.981 979.844 172.469 972.344 178.624C948.485 181.176 948.293 171.623 948.785 151.98Z" fill="currentColor"/></svg></a>
-  <div class="links"><button class="nv-t" data-p="shop" aria-expanded="false" aria-controls="mega">Shop <i aria-hidden="true"></i></button><a href="#/journal">Blog</a><a class="fitp" href="#/fit">Find your fit</a></div>
+  <div class="links"><button class="cur-t" aria-expanded="false" aria-controls="cur"><span class="lb-o">Shop</span><span class="lb-c">Close</span> <i aria-hidden="true"></i></button><a href="#/journal">Blog</a><a class="fitp" href="#/fit">Find your fit</a></div>
   <div class="right"><button class="srch" aria-label="Search" aria-expanded="false" aria-controls="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button class="nv-t help ico" data-p="help" aria-expanded="false" aria-controls="mega" aria-label="Help"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.6 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1.2" fill="currentColor"/></svg></button><button class="cart ico" id="cart-btn" aria-controls="drawer" aria-label="Cart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1.1 11.5H6.6L5.5 8.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><b id="cart-n" data-n="0">0</b></button><button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button></div>
 </nav>
+<div class="nav-skin" aria-hidden="true"></div>
 <div class="mega" id="mega"></div>
+<div class="cur" id="cur" role="dialog" aria-modal="false" aria-label="Shop" hidden></div>
 <div class="search" id="search" role="dialog" aria-label="Search"></div>
 <div class="mmenu" id="mmenu"></div>
 
@@ -2241,7 +2362,6 @@
       <p class="hero-sub">Modern nursery furniture designed to belong in your home.</p>
       <div class="hero-ctas"><a class="pill knock" href="#/fit" data-label="Find your fit"><span class="knock-t">Find your fit <span class="ar" aria-hidden="true">→</span></span></a><a class="pill ghost" href="#index">Shop cribs</a></div>
     </div>
-    <a class="hero-pick" href="#/soho" aria-label="Soho crib, Best Modern Crib by Babylist 2023, from $499"><span class="ph"><img src="img/p-soho-natural.jpg" alt=""></span><span class="t"><span class="aw">★ Best Modern Crib · Babylist</span><b>Soho</b><span class="pr">3-in-1 · From $499</span></span><span class="go" aria-hidden="true">→</span></a>
     <div class="hero-side">
       <button class="hero-play" aria-label="Pause the film" aria-pressed="false"><svg viewBox="0 0 14 14" aria-hidden="true"><g class="i-pause" fill="currentColor"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></g><path class="i-play" d="M3 1.5v11l9.5-5.5z" fill="currentColor" style="display:none"/></svg></button>
       <div class="hero-time mono"><span id="tc">00:00</span><span class="hero-bar"><i id="tc-bar"></i></span><span>00:30</span></div>
@@ -2342,8 +2462,8 @@
     <section class="note" id="note" aria-labelledby="note-h">
       <svg class="dd n-star" aria-hidden="true" focusable="false"><use href="#d-star"/></svg><svg class="dd n-sun" aria-hidden="true" focusable="false"><use href="#d-sun"/></svg><svg class="dd n-smiley" aria-hidden="true" focusable="false"><use href="#d-smiley"/></svg><svg class="dd n-heart" aria-hidden="true" focusable="false"><use href="#d-heart"/></svg>
       <div class="note-side">
-        <h2 id="note-h">Still deciding? Four questions. One crib, with a reason.</h2>
-        <p>Tell us about your space and your style, and we'll pick the crib that fits, and say why.</p>
+        <h2 id="note-h">Still deciding?</h2>
+        <p>Four questions about your space and your style, and we'll pick the crib that fits, and say why.</p>
         <a class="pill blue" href="#/fit">Take the quiz <span class="ar" aria-hidden="true">→</span></a>
       </div>
       <div class="note-img"><img src="img/film-1.jpg" alt="An expectant mother's hand resting on the rail of a natural beech crib" loading="lazy" data-parallax></div>
@@ -2399,7 +2519,7 @@
 <div class="curtain" aria-hidden="true"><div class="c-meta mono"><span id="c-l"></span><span id="c-r"></span></div><div class="c-name"><span>dadada</span></div></div>
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="Cart" aria-hidden="true"><div class="dr-head"><h2>Your cart<sup id="dr-count">0</sup></h2><button class="x" aria-label="Close cart"></button></div><div class="dr-body" id="dr-body" data-lenis-prevent></div><div class="dr-foot" id="dr-foot"></div></aside>
-<div class="toast" role="status" aria-live="polite"><svg class="dd t-heart" aria-hidden="true" focusable="false"><use href="#d-heart"/></svg><img src="img/p-soho-natural.jpg" alt="" id="toast-img"><span><span class="mono" style="color:rgba(241,239,234,.6)">Added to cart</span><br><span id="toast-t">Soho, Natural</span></span></div>
+<div class="toast" role="status" aria-live="polite"><svg class="dd t-heart" aria-hidden="true" focusable="false"><use href="#d-heart"/></svg><img src="img/p-soho-natural.jpg" alt="" id="toast-img"><span><span class="mono" style="color:rgba(254, 251, 237,.6)">Added to cart</span><br><span id="toast-t">Soho, Natural</span></span></div>
 
 <script type="application/json" id="jr-data">{"convertible": {"body": "<p class=\"ar-lede\">Let's talk about the crib, the heart of the nursery. It's where your baby will dream, grow, and wake you up at all hours (it's inevitable, but we promise, it's worth it). And if you're anything like us, you want a crib that's more than just functional. You want something beautifully designed, effortlessly adaptable, and safe in every way.</p>\n<p>That's where convertible crib come in a total game-changer. Instead of a crib that lasts only a couple of years, imagine one that transitions seamlessly from newborn days to toddlerhood and beyond. No extra storage needed, no wondering what to do with a crib your baby has outgrown. Just one thoughtfully crafted piece, designed to evolve with your family.</p>\n<p>At Dadada, we believe in making nursery furniture that lasts made in Italy, built from solid, renewable wood, and finished with non-toxic materials. Our cribs are designed with clean lines, modern sensibility, and most importantly a safe, cozy sleep space for your little one.</p>\n<p>But with so many options out there, how do you choose the right convertible crib? Let's break it all down styles, features, and the best picks for your nursery.</p>\n<h2 id=\"ar-what-is-a-convertible-crib\">What Is a Convertible Crib?</h2>\n<p>A convertible crib is the foundation of a nursery that grows with your baby. It starts as a crib, then transitions into a toddler bed, a daybed, and sometimes even a full-size bed. Think of it as the multitool of baby furniture—one beautiful, enduring piece that adapts effortlessly to each new stage of childhood.</p>\n<p>Why choose one? Because it's practical. One purchase offers years of use, eliminates the need for multiple furniture replacements, and ensures a consistent, familiar sleep environment as your child grows.</p>\n<figure class=\"ar-fig stages\"><div class=\"st3\"><span><img src=\"img/gr-crib.webp\" alt=\"A walnut Soho crib\" loading=\"lazy\"><i>Crib</i></span><span><img src=\"img/gr-toddler.webp\" alt=\"The same Soho crib as a toddler bed\" loading=\"lazy\"><i>Toddler bed</i></span><span><img src=\"img/gr-daybed.webp\" alt=\"The same Soho crib as a daybed\" loading=\"lazy\"><i>Daybed</i></span></div><figcaption>One Soho crib, three stages.</figcaption></figure>\n<p>Below, we explore the different crib types, their benefits, and why dadada's craftsmanship stands apart.</p>\n<h2 id=\"ar-types-of-convertible-cribs\">Types of Convertible Cribs</h2>\n<p>Convertible cribs come in four main types—2-in-1, 3-in-1, 4-in-1, and 5-in-1—each designed to support a child's evolving needs. The key difference? How many transformations they offer and what configurations they include.</p>\n<p>While no universal standard formally defines these categories, industry experts and consumer feedback shape these classifications. Let's break them down:</p>\n<h3>2-in-1 Convertible Crib</h3>\n<p>A 2-in-1 crib shifts from a crib to a toddler bed. That's it—simple and straightforward.</p>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>Budget-friendly if you only need it short-term.</li>\n<li>Easy to convert—no extra tools or kits required.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>Limited use since it only goes up to the toddler stage.</li>\n<li>Not suitable for older kids.</li>\n</ul>\n<h3>3-in-1 Convertible Crib</h3>\n<p>A 3-in-1 convertible crib transforms from a crib to a toddler bed, then a daybed.</p>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>Extends usability well into the toddler years.</li>\n<li>Keep the same familiar sleep environment as your child grows.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>Some models need conversion kits—extra cost.</li>\n<li>Can feel bulky in smaller spaces.</li>\n</ul>\n<h4>Popular 3-in-1 Convertible Crib Brands</h4>\n<ul>\n<li><strong>Dream On Me Ashton 3-in-1 Crib:</strong> Smooth transitions but mixed feedback on comfort. Consumer Reports flagged the mattress support as \"springy\" and uncomfortable for some.</li>\n<li><strong>Austin 3-in-1 Convertible Crib:</strong> \"The quality is absolutely amazing!\" raves one Babylist review.</li>\n</ul>\n<h3>4-in-1 Convertible Crib</h3>\n<p>A 4-in-1 crib covers every stage—from crib to toddler bed, daybed, and full-size bed.</p>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>A long-term solution that grows with your child.</li>\n<li>Offers more configurations than simpler models.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>Higher upfront cost.</li>\n<li>Conversion kits for full-size beds often sold separately.</li>\n</ul>\n<h4>Popular 4-in-1 Convertible Crib Brands</h4>\n<ul>\n<li><strong>Graco Benton 4-in-1 Convertible Crib:</strong> Multiple configurations, but reviews on Home Depot warn of misleading claims. One parent stated, \"It doesn't convert into a safe toddler bed,\" causing frustration.</li>\n<li><strong><a href=\"#/bliss\">Bliss 4-in-1 Convertible Crib</a>:</strong> Unique in its adaptability, with the ability to accommodate two children at once.</li>\n</ul>\n<h3>5-in-1 Convertible Crib</h3>\n<p>A 5-in-1 convertible bed is similar to a 4-in-1 but with added configurations or features, like a footboard for a full-size bed.</p>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>The most versatile option for families.</li>\n<li>Can handle multiple children over the years.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>Usually pricier due to extra features.</li>\n<li>Assembly can get complicated.</li>\n</ul>\n<p>When selecting a convertible crib, balance your family's needs with quality craftsmanship. At dadada, we prioritize safety, longevity, and modern design. Our cribs are crafted from solid beechwood, GREENGUARD Gold Certified for a toxin-free sleep environment, and designed to transition seamlessly through every stage.</p>\n<blockquote>\n<p>With dadada, you're not just buying furniture—you're investing in timeless design and peace of mind.</p>\n</blockquote>\n<h2 id=\"ar-key-considerations-when-choosing-a-convertible-c\">Key Considerations When Choosing a Convertible Crib</h2>\n<p>Choosing a convertible crib isn't just about looks. It's about safety, durability, and how well it grows with your child. There's a lot of noise out there—plenty of cribs promising the world—but the reality?</p>\n<p>Not all of them deliver. dadada Baby stands out because it nails the essentials: safe materials, solid craftsmanship, and smart designs that actually work. Let's break it down.</p>\n<h3>Safety Standards</h3>\n<p>First things first: safety. No crib, no matter how cute, is worth it if it doesn't meet the highest standards. This is where dadada Baby shines.</p>\n<h4>What dadada Baby Offers</h4>\n<ul>\n<li><strong>GREENGUARD Gold Certified:</strong> That's not just a fancy badge. It means low chemical emissions, so your baby isn't breathing in junk.</li>\n<li><strong>ASTM and CPSC Compliance:</strong> These aren't optional. They're must-haves, showing the crib meets national safety benchmarks.</li>\n<li><strong>Non-Toxic Finishes:</strong> No weird chemical smells. Just a crib that's safe for tiny humans.</li>\n</ul>\n<h4>How Competitors Stack Up</h4>\n<p>Take Graco. Sure, their cribs are JPMA certified, so they check the basics. That said, one parent on Reddit shared, \"The chemical smell was so strong, we had to air it out for days.\"</p>\n<p>Compare that to a dadada Baby review titled <em>Best Crib Ever</em>, where a parent raved about how there was zero odor and total peace of mind. Safety isn't just a box to tick—it's a standard to exceed, and dadada Baby gets it right.</p>\n<h3>Durability</h3>\n<p>Here's the thing about cribs: they take a beating. Kids climb, jump, and sometimes turn them into jungle gyms. A durable crib isn't optional—it's essential.</p>\n<h4>dadada Baby Stands the Test of Time</h4>\n<ul>\n<li><strong>Solid Beechwood:</strong> Forget softwoods that scratch if you look at them wrong. Beechwood is tough, lasting through multiple kids without losing its shine.</li>\n<li><strong>Made in Italy:</strong> Nearly a century of furniture-making expertise backs every piece.</li>\n<li><strong>2-Year Warranty:</strong> Speaks for itself. Confidence built right into the product.</li>\n</ul>\n<h4>How Competitors Stack Up</h4>\n<p>Delta Children cribs, for example. They mix pine and engineered wood, which sounds fine until it doesn't hold up. A Baby Bargains reviewer put it bluntly: \"The dresser started showing wear after just a few months.\"</p>\n<p>Meanwhile, dadada Baby users call their cribs <em>sturdy and beautiful</em>. One parent shared how it looked brand new even after years of use. Big difference.</p>\n<h3>Adaptability</h3>\n<p>The whole point of a convertible crib is that it grows with your kid. If it doesn't adapt well? You're just throwing money away.</p>\n<h4>What dadada Baby Does Best</h4>\n<ul>\n<li><strong><a href=\"#/spirit\">Spirit 8-in-1 Convertible Crib</a>:</strong> It's not just a crib. It's a cradle, toddler bed, daybed, and even a floor bed—actually, multiple floor bed setups.</li>\n<li><strong>Toddler/Daybed Rail Included:</strong> No hidden costs for basic transitions.</li>\n<li><strong>Dual Use for Two Kids:</strong> Yes, you can use it for two kids at once. Think cradle for the baby, floor bed for the toddler.</li>\n</ul>\n<h4>Where Competitors Fall Short</h4>\n<p>Graco Benton's 4-in-1 crib sounds great on paper—until you read the fine print. A Home Depot review titled <em>Misleading 4-in-1 Claim</em> called out its inability to convert safely to a toddler bed.</p>\n<p>dadada Baby doesn't just promise versatility—it delivers. Parents on Little Unicorn's site praise the Spirit crib, calling it \"perfect for growing families\" and highlighting how easy it is to convert.</p>\n<figure class=\"ar-fig wide tall\"><img src=\"img/g-spirit-detail.jpg\" alt=\"The Spirit crib on its casters in a loft apartment\" loading=\"lazy\"><figcaption>Spirit crib</figcaption></figure>\n<h2 id=\"ar-are-convertible-cribs-worth-the-investment\">Are Convertible Cribs Worth the Investment?</h2>\n<p>Absolutely. Convertible cribs might cost more upfront, but they make up for it over time. Instead of buying a crib, then a toddler bed, and eventually a full-size bed, you're covered from the start. Long-term savings? Huge. Plus, the good ones last for years without looking like they've been through a war zone.</p>\n<p>Brands like dadada Baby stand out not just for durability but for thoughtful designs that actually grow with your kid.</p>\n<h2 id=\"ar-benefits-of-convertible-cribs\">Benefits of Convertible Cribs</h2>\n<p>Convertible cribs aren't just practical. They're versatile, eco-friendly, and, let's be honest, they save you from the headache of furniture shopping every few years. Here's what makes them worth considering:</p>\n<h3>Cost Efficiency</h3>\n<p>One crib that does it all. That's the appeal. Instead of buying separate beds for each stage, a single convertible crib carries your child from infancy through adolescence. Sure, the upfront price might sting a bit, but over 10+ years? It's a steal.</p>\n<p>For example, a quality 8-in-1 crib like dadada Baby's Spirit can handle every stage—crib, toddler bed, daybed, and full-size bed. Meanwhile, cheaper cribs might save you money now, but you'll pay later when you're replacing them.</p>\n<h3>Adaptability</h3>\n<p>This is where convertible cribs shine. They grow with your child, offering different configurations as their needs change. Crib to toddler bed? Easy. Daybed to full-size? Even better. It's furniture that evolves.</p>\n<p>Take dadada Baby's Spirit 8-in-1 Convertible Crib. It doesn't just transition. It adapts. Adjustable mattress heights, included conversion rails, and the option to use it for two kids simultaneously—it's thoughtful, practical design in action.</p>\n<h3>Sustainability</h3>\n<p>One crib that lasts = less waste. Furniture accounts for a shocking amount of landfill waste—almost 10 million tons a year, according to the EPA. A durable convertible crib helps cut that number down.</p>\n<p>Here at dadada Baby, we use sustainable materials. Solid beechwood, non-toxic finishes, and GREENGUARD Gold Certification all mean less environmental impact—and a healthier nursery for your baby.</p>\n<h3>Space Efficiency</h3>\n<p>If you're tight on space, convertible cribs are a no-brainer. They replace multiple pieces of furniture, saving room and hassle. Some even come with built-in storage—drawers, changing tables, the works. Perfect for apartments or smaller homes where every square foot matters.</p>\n<h3>Consistency for the Child</h3>\n<p>Change can be stressful, especially for little ones. Convertible cribs help by offering consistency. One bed, evolving as they grow, gives them a sense of stability.</p>\n<p>Research backs this up. A study in the Journal of Environmental Psychology found that \"familiar environments reduce children's stress levels by up to 30%.\" A crib that grows with your child? It's more than furniture—it's comfort.</p>\n<h3>Safety Considerations</h3>\n<p>Modern convertible cribs are built with safety in mind. Standards like those from the CPSC ensure cribs meet strict requirements for slat spacing and structural integrity. Adjustable mattress heights? Another plus. Higher settings make life easier for parents of newborns. Lower settings keep climbing toddlers from taking a tumble.</p>\n<p>dadada Baby goes beyond these basics. Our cribs meet GREENGUARD Gold standards for low chemical emissions, promoting better air quality. Babies spend a lot of time sleeping—safe materials matter.</p>\n<h3>Aesthetic Longevity</h3>\n<p>Looks matter. Convertible cribs are designed to stay stylish as they transition from nursery to big-kid room. A survey by Houzz showed 68% of parents prioritize furniture that matches their home decor long-term.</p>\n<p>dadada Baby nails this with minimalist Italian designs. Solid beechwood, clean lines—it's furniture that ages gracefully. Unlike some competitors that use cheap composites, their cribs stay elegant even after years of use.</p>\n<h2 id=\"ar-when-to-convert-a-convertible-bassinet-to-crib\">When to Convert a Convertible Bassinet to Crib</h2>\n<p>Most babies make the move from bassinet to crib somewhere between four and six months. Not an exact science, though—it all depends on your baby. Size, development, sleep habits. You've got to watch for the signs.</p>\n<p><strong>Safety first.</strong> Always. If your baby's hitting the bassinet's weight limit (usually 15-20 pounds) or rolling over, sitting up, or pushing up on hands and knees, it's time. A bassinet can't safely hold a baby doing gymnastics.</p>\n<p>Growth matters, too. If your baby looks cramped—feet at the edge, head bumping the sides—it's a no-brainer. Bigger babies need bigger spaces. And then there's sleep. Cribs are better for longer stretches. So, when those 3 a.m. wake-ups start stretching into 6 a.m. snoozes, think about making the switch.</p>\n<p>Convenience? Up to you. Room-sharing families might hold off. But if you're ready for the baby to sleep in their own room, a crib helps make that transition smoother.</p>\n<h4>Signs it's time</h4>\n<ul>\n<li>Bassinet weight limit reached.</li>\n<li>Baby can roll over or sit up.</li>\n<li>They look like they're outgrowing the space.</li>\n<li>Longer, more consistent sleep patterns.</li>\n<li>You're ready for a nursery setup.</li>\n</ul>\n<h3>How to Convert a Convertible Bassinet to Crib</h3>\n<p>Using the dadada Baby <a href=\"#/jolly\">Jolly 3-in-1 Convertible Crib</a> as an example:</p>\n<ol>\n<li>Remove all bedding from the bassinet.</li>\n<li>Find the conversion hardware (it's usually included).</li>\n<li>Detach the bassinet fabric or mesh sides—follow the manual exactly.</li>\n<li>Adjust the mattress support to its highest setting for a newborn.</li>\n<li>Attach the full-size crib sides using the hardware.</li>\n<li>Check all connections—tighten screws, make sure nothing wobbles.</li>\n<li>Add a snug, firm crib mattress (no gaps!).</li>\n<li>Triple-check that everything's secure. Safety first, always.</li>\n</ol>\n<h2 id=\"ar-when-to-convert-a-convertible-crib-to-daybed\">When to Convert a Convertible Crib to Daybed</h2>\n<p>Daybed conversions usually happen somewhere between 15 and 24 months. It's like a halfway point between a crib and a toddler bed.</p>\n<p>Why do it? For starters, it's a smooth transition. Keeps things familiar while giving your child a bit more independence. Plus, daybeds can double as seating during the day, saving space.</p>\n<p>Safety's a big factor, too. If your kid's climbing out of the crib, but you're not quite ready for a full-blown open bed, the daybed's a great in-between.</p>\n<h4>Signs it's time</h4>\n<ul>\n<li>Your child's too active for a crib.</li>\n<li>You want a multi-use setup for their room.</li>\n<li>They're asking for a \"big kid\" bed but still need some containment.</li>\n</ul>\n<h3>How to Convert a Convertible Crib to Daybed</h3>\n<p>Again, using the dadada Baby <a href=\"#/bliss\">Bliss 4-in-1 Convertible Crib</a> as an example:</p>\n<ol>\n<li>Strip the crib of all bedding.</li>\n<li>Lower the mattress to its lowest height.</li>\n<li>Remove one of the long crib sides entirely.</li>\n<li>Make sure the remaining three sides are securely attached.</li>\n<li>Add a daybed mattress or reuse the crib mattress—it fits fine.</li>\n<li>Decorate with pillows, throws, or whatever makes it cozy for daytime use.</li>\n<li>For safety at night, consider adding a rail to the open side.</li>\n</ol>\n<figure class=\"ar-fig wide tall\"><img src=\"img/g-bliss-detail.jpg\" alt=\"The rounded rail and turned leg of a Bliss crib\" loading=\"lazy\"><figcaption>Bliss crib</figcaption></figure>\n<h2 id=\"ar-when-to-convert-a-convertible-crib-to-toddler-be\">When to Convert a Convertible Crib to Toddler Bed</h2>\n<p>Most toddlers move to a toddler bed between 18 months and 3 years. But, like everything else, it depends on the child.</p>\n<p>Safety's the usual trigger. If your kid's scaling the crib sides or hitting 35 inches tall, it's probably time. Developmental readiness matters, too—can they follow instructions about staying in bed? Potty training is another reason. Toddler beds make night-time bathroom runs a lot easier.</p>\n<p>And then there's the sibling factor. If you've got a new baby on the way, you might need the crib for them.</p>\n<h4>Signs it's time</h4>\n<ul>\n<li>Escape attempts (aka crib climbing).</li>\n<li>Your child asks for a \"big kid\" bed.</li>\n<li>Potty training is in full swing.</li>\n<li>They've outgrown the crib physically.</li>\n<li>A new sibling needs the crib.</li>\n</ul>\n<h3>How to Convert a Convertible Crib to Toddler Bed</h3>\n<p>For the dadada Baby Austin 3-in-1 Convertible Crib:</p>\n<ol>\n<li>Take out all bedding.</li>\n<li>Lower the mattress all the way down.</li>\n<li>Remove one long crib side.</li>\n<li>Attach the toddler rail to the open side (usually sold separately).</li>\n<li>Secure all screws and connections—wiggle it to make sure nothing is loose.</li>\n<li>Add toddler bedding.</li>\n<li>For extra safety, consider guardrails on the open sides.</li>\n</ol>\n<h2 id=\"ar-when-to-convert-a-convertible-crib-to-full-bed\">When to Convert a Convertible Crib to Full Bed</h2>\n<p>Switching to a full-size bed usually happens between ages 3 and 5. It's a bigger leap, so it depends on space, readiness, and how your child sleeps.</p>\n<p>Some kids outgrow toddler beds fast. If they're complaining about the size or falling out at night, that's your cue. Full beds also work well if siblings share a room or you're redesigning their space entirely.</p>\n<h4>Signs it's time</h4>\n<ul>\n<li>The toddler bed's too small.</li>\n<li>Frequent tumbles out of bed.</li>\n<li>You're redecorating and want something longer-lasting.</li>\n<li>They're asking for a \"grown-up\" bed.</li>\n</ul>\n<h3>How to Convert a Convertible Crib to Full Bed</h3>\n<p>Using the dadada Baby <a href=\"#/spirit\">Spirit 8-in-1 Convertible Crib</a> as an example:</p>\n<ol>\n<li>Remove all bedding and the toddler rail.</li>\n<li>Disassemble the crib, keeping the headboard and footboard.</li>\n<li>Attach conversion rails (usually sold separately).</li>\n<li>Secure the frame to the rails.</li>\n<li>Add a box spring and full-size mattress.</li>\n<li>Double-check that everything's tight and safe</li>\n</ol>\n<p>Every child's timeline is different, and transitions should follow their needs, not the calendar. Watch for the signs, trust your gut, and always prioritize safety. And remember, these milestones are as much for you as they are for them. You're doing great.</p>\n<h2 id=\"ar-dadada-baby-convertible-crib-models\">dadada Baby Convertible Crib Models</h2>\n<p>At dadada Baby we don't mess around when it comes to convertible cribs. Each model has its own vibe—different looks, different features—but all built to last. Whether you're after something sleek, rustic, or Montessori-inspired, we've got you covered.</p>\n<h3><a href=\"#/soho\">Soho 3-in-1 Convertible Crib</a></h3>\n<p>The Soho is the all-rounder. Simple, stylish, and solid.</p>\n<h4>What stands out</h4>\n<ul>\n<li>Scandinavian vibes meet mid-century lines. Clean and modern.</li>\n<li>Built in Italy. Solid beechwood all the way.</li>\n<li>GREENGUARD Gold Certified—because safety's not negotiable.</li>\n</ul>\n<h4>Details</h4>\n<ul>\n<li><strong>Materials:</strong> Solid beechwood, finished to be baby-safe.</li>\n<li><strong>Colors:</strong> White, natural, white/natural, black/natural, sage, walnut.</li>\n</ul>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>Rock-solid construction with angled legs for extra stability.</li>\n<li>Three mattress height settings—adjustable as your baby grows.</li>\n<li>Converts easily to a toddler bed or daybed.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>Toddler bed conversion kit? Sold separately.</li>\n<li>Price tag on the higher side.</li>\n</ul>\n<h3>Austin 3-in-1 Convertible Crib</h3>\n<p>Think of the Austin as the Soho's chill cousin. Same function, different look.</p>\n<h4>What stands out</h4>\n<ul>\n<li>Exposed solid beechwood. All-natural, calm, and rustic.</li>\n<li>Made in Italy—craftsmanship you can feel.</li>\n<li>GREENGUARD Gold Certified, naturally.</li>\n</ul>\n<h4>Details</h4>\n<ul>\n<li><strong>Materials:</strong> Solid beechwood, safe finishes.</li>\n<li><strong>Colors:</strong> Natural finish only.</li>\n</ul>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>Has that minimalist, earthy aesthetic.</li>\n<li>Three mattress height settings.</li>\n<li>Converts to toddler bed and daybed.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>Color choices are... limited.</li>\n<li>Conversion kit? Yep, still sold separately.</li>\n</ul>\n<p><strong>Who it's for:</strong> Parents who love a natural look and want simplicity without sacrificing quality.</p>\n<h3><a href=\"#/bliss\">Bliss 4-in-1 Convertible Crib</a></h3>\n<p>The Bliss? A step up. It's where functionality meets a little extra.</p>\n<h4>What stands out</h4>\n<ul>\n<li>First-ever floor bed design for this lineup. Montessori parents, take note.</li>\n<li>Natural beechwood frame. Built to be quiet, solid, and safe.</li>\n<li>Made in Italy, with all the certifications.</li>\n</ul>\n<h4>Details</h4>\n<ul>\n<li><strong>Materials:</strong> Solid beechwood with eco-friendly finishes.</li>\n<li><strong>Colors:</strong> Natural, white/natural, walnut.</li>\n</ul>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>Four configurations: crib, toddler bed, daybed, floor bed.</li>\n<li>Adjustable mattress base with four heights.</li>\n<li>Quiet design—fewer creaks for lighter sleepers.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>Pricey. You're paying for those extras.</li>\n<li>Conversion process is a bit more involved.</li>\n</ul>\n<p><strong>Who it's for:</strong> Parents who want versatility and love the Montessori approach. Great for adapting to different stages without changing furniture.</p>\n<h3><a href=\"#/spirit\">Spirit 8-in-1 Convertible Crib</a></h3>\n<p>The Spirit is the heavy hitter. Eight configurations. Yes, eight.</p>\n<h4>What stands out</h4>\n<ul>\n<li>Use it for one kid, two kids—whatever works. Cradle and floor bed at the same time? Done.</li>\n<li>Comes with conversion rails (a rare win).</li>\n<li>Made from solid beechwood in—you guessed it—Italy.</li>\n</ul>\n<h4>Details</h4>\n<ul>\n<li><strong>Materials:</strong> Solid beechwood, safe and sturdy.</li>\n<li><strong>Colors:</strong> Natural finish only.</li>\n</ul>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>Seriously versatile. Adapts to newborns, toddlers, and even siblings.</li>\n<li>Built-in toddler/daybed rail included.</li>\n<li>Covers more stages than any other model.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>Price is steep. Not for everyone.</li>\n<li>Might be overkill if you don't need all eight setups.</li>\n</ul>\n<p><strong>Who it's for:</strong> Big families, close-in-age siblings, or anyone who wants maximum adaptability in one piece of furniture.</p>\n<h3><a href=\"#/lala\">LaLa 3-in-1 Convertible Crib</a></h3>\n<p>The LaLa is straightforward. Simple lines, no fuss.</p>\n<h4>What stands out</h4>\n<ul>\n<li>Modern minimalist design—clean but not boring.</li>\n<li>Italian-made, like the rest.</li>\n<li>GREENGUARD Gold Certified.</li>\n</ul>\n<h4>Details</h4>\n<ul>\n<li><strong>Materials:</strong> Solid beechwood with baby-safe finishes.</li>\n<li><strong>Colors:</strong> Natural finish only.</li>\n</ul>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>Adjustable mattress heights (three levels).</li>\n<li>Converts to toddler bed and daybed with ease.</li>\n<li>Blends into any nursery style—versatile and timeless.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>Limited color options.</li>\n<li>Conversion kit not included.</li>\n</ul>\n<p><strong>Who it's for:</strong> Parents who like their furniture simple, functional, and adaptable to changing styles.</p>\n<h3><a href=\"#/jolly\">Jolly 3-in-1 Convertible Crib</a></h3>\n<p>The Jolly is a bit of a statement piece. Curves where others have straight edges.</p>\n<h4>What stands out</h4>\n<ul>\n<li>Unique design—stands out without being flashy.</li>\n<li>Made in Italy from—you guessed it—solid beechwood.</li>\n<li>GREENGUARD Gold Certified, of course.</li>\n</ul>\n<h4>Details</h4>\n<ul>\n<li><strong>Materials:</strong> Solid beechwood.</li>\n<li><strong>Colors:</strong> Natural finish.</li>\n</ul>\n<h4>Pros</h4>\n<ul class=\"pros\">\n<li>Eye-catching design for parents who want something different.</li>\n<li>Converts to toddler bed and daybed.</li>\n<li>Adjustable mattress heights.</li>\n</ul>\n<h4>Cons</h4>\n<ul class=\"cons\">\n<li>More expensive than similar models.</li>\n<li>Might not work with every nursery aesthetic.</li>\n</ul>\n<p><strong>Who it's for:</strong> Parents who want their crib to double as a design element. It's practical but makes a statement.</p>\n<h2 id=\"ar-common-features-across-all-models\">Common Features Across All Models</h2>\n<ul>\n<li>Made in Italy—traditional craftsmanship meets modern design.</li>\n<li>Solid beechwood construction. No composites, no shortcuts.</li>\n<li>GREENGUARD Gold Certified—safe for your baby, safe for your home.</li>\n<li>Lead- and phthalate-free finishes.</li>\n<li>ASTM and CPSC compliant—meets or exceeds all safety standards.</li>\n<li>2-year warranty.</li>\n</ul>\n<h2 id=\"ar-final-thoughts\">Final Thoughts</h2>\n<p>Convertible cribs? They're a no-brainer for parents who want something that lasts. You get longevity, adaptability, and a solid return on investment. dadada Baby's lineup stands out for good reason—they've nailed the balance between safety, sustainability, and design. These cribs don't just grow with your kid. They offer consistency, comfort, and peace of mind as your child moves through the milestones.</p>\n<p>Yes, the upfront cost is higher, but here's the thing: \"you're paying for durability, versatility, and an eco-friendlier choice\" across multiple stages. From bassinet to full-size bed, these cribs create a seamless sleep environment that keeps up with the chaos of growing up.</p>\n<p>At the end of the day, it's about what works for your family. Space, budget, future plans—those are the real deciding factors. But one thing stays non-negotiable: safety and quality. That's where dadada Baby shines.</p>", "toc": [["ar-what-is-a-convertible-crib", "What Is a Convertible Crib?"], ["ar-types-of-convertible-cribs", "Types of Convertible Cribs"], ["ar-key-considerations-when-choosing-a-convertible-c", "Key Considerations When Choosing a Convertible Crib"], ["ar-are-convertible-cribs-worth-the-investment", "Are Convertible Cribs Worth the Investment?"], ["ar-benefits-of-convertible-cribs", "Benefits of Convertible Cribs"], ["ar-when-to-convert-a-convertible-bassinet-to-crib", "When to Convert a Convertible Bassinet to Crib"], ["ar-when-to-convert-a-convertible-crib-to-daybed", "When to Convert a Convertible Crib to Daybed"], ["ar-when-to-convert-a-convertible-crib-to-toddler-be", "When to Convert a Convertible Crib to Toddler Bed"], ["ar-when-to-convert-a-convertible-crib-to-full-bed", "When to Convert a Convertible Crib to Full Bed"], ["ar-dadada-baby-convertible-crib-models", "dadada Baby Convertible Crib Models"], ["ar-common-features-across-all-models", "Common Features Across All Models"], ["ar-final-thoughts", "Final Thoughts"]]}, "sohocolors": {"body": "<p class=\"ar-lede\">We are thrilled to introduce two serene new finishes for dadada Baby's iconic Soho Crib: Almond Milk + Walnut and Wash. One offers a gentle contrast of soft, creamy tones rooted in a strong, dark base, while the other provides a quiet hush of color for a clean, calming look. Both options bring natural warmth into the nursery, creating a space that feels soothing and intentional.</p>\n<p>The Soho is a 3-in-1 convertible crib that grows with your child, shifting seamlessly from crib to toddler bed to daybed. Crafted in Italy from solid beechwood and finished with non-toxic, GREENGUARD Gold–certified materials, it combines craftsmanship, safety, and style in one lasting piece.</p>\n<p>We recently sat down with the dadada Baby design team to learn more about their inspiration and process.</p>\n<figure class=\"ar-fig pair\"><div class=\"p2\"><span><img src=\"img/p-soho-almond-walnut.jpg\" alt=\"Soho crib in Almond Milk + Walnut\" loading=\"lazy\"><i>Almond Milk + Walnut</i></span><span><img src=\"img/p-soho-washed.jpg\" alt=\"Soho crib in Wash\" loading=\"lazy\"><i>Wash</i></span></div><figcaption>The two new Soho finishes.</figcaption></figure>\n<h2 id=\"ar-what-s-the-design-process-for-dadada-baby-cribs\">What's the design process for dadada Baby cribs?</h2>\n<p>The design process at dadada Baby focuses on creating desirable, beautiful, and functional products, with the goal of crafting timeless design icons. The Soho crib leads the collection, expressing modern sophistication and clean lines that suit every family and interior style.</p>\n<h2 id=\"ar-what-was-the-inspiration-behind-the-new-colors-w\">What was the inspiration behind the new colors – why Almond Milk + Walnut and Wash?</h2>\n<p>The inspiration for the new color palette came from the natural world – warm and pleasant wood tones that preserve the texture of the wood and bring softness and warmth into the baby's room. The colors Almond Milk, Walnut, and Wash were chosen to evoke a sense of calm, naturalness, and cleanliness, fitting both modern and timeless aesthetics.</p>\n<h2 id=\"ar-how-is-the-soho-crib-different-from-other-cribs\">How is the Soho crib different from other cribs?</h2>\n<p>The Soho crib is our iconic model – it fits seamlessly into any space and style. Its timeless design and elegant simplicity make it a favorite among parents who choose dadada Baby. It combines clean lines with a modern presence, offering both beauty and functionality.</p>\n<figure class=\"ar-fig wide\"><img src=\"img/mom-soho-walnut.jpg\" alt=\"An expectant mother dancing in her nursery beside a walnut Soho crib\" loading=\"lazy\"><figcaption>Soho crib</figcaption></figure>\n<h2 id=\"ar-what-makes-this-crib-safe\">What makes this crib safe?</h2>\n<p>All dadada Baby cribs meet rigorous safety standards – they are tested in labs according to American regulations and comply with GREENGUARD requirements, ensuring a clean and safe environment for babies and families. The Soho crib is made from solid European beechwood, known for its durability and strength. All cribs are manufactured in Italy using advanced technology, with a strong emphasis on quality, safety, and thoughtful design.</p>\n<p>With the addition of Almond Milk + Walnut and Wash, the Soho offers families a calming palette that balances softness and strength. Thoughtfully designed and built to grow alongside your little one, it creates a nursery space that feels as comforting as it is beautiful.</p>", "toc": [["ar-what-s-the-design-process-for-dadada-baby-cribs", "What's the design process for dadada Baby cribs?"], ["ar-what-was-the-inspiration-behind-the-new-colors-w", "What was the inspiration behind the new colors – why Almond Milk + Walnut and Wash?"], ["ar-how-is-the-soho-crib-different-from-other-cribs", "How is the Soho crib different from other cribs?"], ["ar-what-makes-this-crib-safe", "What makes this crib safe?"]]}, "safety101": {"body": "<p class=\"ar-lede\">Bringing home your baby comes with a thousand tiny decisions. Some are exciting. Some feel overwhelming. One of the biggest? Choosing a <strong>safe crib</strong> where your baby will sleep every single night.</p>\n<p>You want a crib that's not just stylish, but <strong>certified safe</strong>. One that gives you peace of mind while your little one snoozes peacefully (hopefully longer than 20 minutes).</p>\n<p>But between all the safety labels, certifications, and confusing acronyms, it's hard to know what really matters.</p>\n<p>That's where we come in.</p>\n<p>This guide breaks down <strong>crib safety standards</strong>, what certifications to look for, and how <strong>dadada cribs</strong> meet all the right requirements for both safety and style.</p>\n<h2 id=\"ar-why-crib-safety-matters\">Why Crib Safety Matters</h2>\n<p>In those first months, your baby may sleep up to <strong>16 hours a day</strong>. Their crib isn't just furniture—it's their safe zone. A poorly made or outdated crib can create risks, including:</p>\n<ul>\n<li>Slats that are too far apart (tiny arms or legs can get stuck)</li>\n<li>Drop-side rails that may collapse</li>\n<li>Toxic paints or finishes release harmful chemicals</li>\n<li>Loose screws, splinters, or rough edges that can injure</li>\n</ul>\n<p>The good news? Modern <strong>crib safety standards</strong> are stricter than ever. If you know what to look for, you'll feel confident that your baby is safe.</p>\n<h2 id=\"ar-the-big-players-in-crib-safety\">The Big Players in Crib Safety</h2>\n<p>Here are the major crib safety standards every parent should know.</p>\n<h3>CPSC Standards (Consumer Product Safety Commission)</h3>\n<p>In the U.S., all new cribs must meet strict safety regulations updated in 2011. These include:</p>\n<ul>\n<li>No drop-side cribs</li>\n<li>Slats no more than 2 3/8 inches apart</li>\n<li>Stronger mattress supports and slats strengthen</li>\n<li>Rigorous testing for hardware durability</li>\n</ul>\n<p>Look for a label that confirms the crib meets 16 CFR 1219 or 1220, depending on the crib style.</p>\n<h3>ASTM International Standards</h3>\n<p>ASTM creates voluntary performance standards that often go beyond federal rules. The key one for cribs is ASTM F1169. It includes extra testing for things like:</p>\n<ul>\n<li>Corner post height</li>\n<li>Mattress fit</li>\n<li>Long-term structural durability</li>\n</ul>\n<p>If a crib is ASTM certified, it's a strong sign that it went through extra safety checks.</p>\n<h3>JPMA Certification (Juvenile Products Manufacturers Association)</h3>\n<p>JPMA certification means the crib not only meets CPSC and ASTM rules but also passes independent third-party testing. JPMA-certified products come with a helpful sticker showing they've gone the extra mile. And bonus, JPMA updates their standards often to stay current with the latest safety research.</p>\n<h2 id=\"ar-eco-certifications-that-matter-too\">Eco-Certifications That Matter Too</h2>\n<p>Thinking about indoor air quality and materials? You're not alone. These eco-certifications can help give you more peace of mind.</p>\n<h3>GREENGUARD Gold</h3>\n<p>This certification means the crib has been tested for over 10,000 chemicals and VOCs. It's especially important if you want low-emission furniture for better air quality in the nursery.</p>\n<h3>Renewable Wood</h3>\n<p>Crafted from renewable beechwood, a strong, fast-growing hardwood that's built to last. Its durability means fewer replacements, and its natural origin makes it a gentler choice for your home and the planet. Thoughtful design, from the inside out.</p>\n<figure class=\"ar-fig wide tall\"><img src=\"img/story-joint.jpg\" alt=\"Close-up of a solid beech crib joint in an Italian workshop\" loading=\"lazy\"><figcaption>Solid beech, in an Italian workshop</figcaption></figure>\n<h2 id=\"ar-red-flags-to-avoid\">Red Flags to Avoid</h2>\n<p>There are a few things that should stop you in your tracks when crib shopping.</p>\n<ul>\n<li>Drop-side cribs, even secondhand</li>\n<li>Missing or loose hardware</li>\n<li>Headboards or footboards with decorative cut-outs</li>\n<li>Peeling paint or splinters</li>\n</ul>\n<p>Even the most stylish crib doesn't matter if it isn't safe.</p>\n<h2 id=\"ar-the-dadada-difference-where-safety-meets-style\">The dadada Difference: Where Safety Meets Style</h2>\n<p>At dadada Baby, we design every crib with safety as the foundation. That's not just a slogan, it's backed by certifications that meet or exceed industry standards.</p>\n<p>All dadada cribs are:</p>\n<ul>\n<li>Certified to <strong>CPSC and ASTM standards</strong></li>\n<li>Finished with <strong>non-toxic, baby-safe paints</strong></li>\n<li>Made from <strong>renewable solid wood</strong></li>\n<li>Available with <strong>GREENGUARD Gold Certification</strong> on select models</li>\n</ul>\n<p>Here are some of our favorite safe-and-stylish picks for your nursery:</p>\n<p><strong>Austin 3-in-1 Convertible Crib</strong>\nA timeless design with clean lines and solid beechwood construction. GREENGUARD Gold certified and built to grow from crib to toddler bed to daybed.</p>\n<p><strong><a href=\"#/soho\">Soho 3-in-1 Convertible Crib</a></strong>\nCompact and modern, perfect for small nurseries or shared spaces. Built with sustainability in mind, and meets all U.S. safety standards.</p>\n<p><strong><a href=\"#/spirit\">Spirit 8-in-1 Convertible Crib</a></strong>\nOur most versatile crib. Converts from crib to toddler bed to full-size bed with headboard and footboard. Crafted for longevity with style and structure that lasts.</p>\n<figure class=\"ar-fig wide tall\"><img src=\"img/room-soho-brownstone.jpg\" alt=\"A Soho crib in a sunlit brownstone nursery\" loading=\"lazy\"><figcaption>Soho crib</figcaption></figure>\n<h2 id=\"ar-crib-safety-checklist-before-you-buy\">Crib Safety Checklist Before You Buy</h2>\n<ul class=\"checks\">\n<li>Buy new if possible (regulations change, older cribs may not comply)</li>\n<li>Check for recalls at <strong>cpsc.gov</strong></li>\n<li>Test mattress fit with the <strong>two-finger rule</strong></li>\n<li>Look for <strong>JPMA certification</strong> and <strong>GREENGUARD Gold</strong> for air quality</li>\n<li>Keep the crib away from windows, cords, and curtains</li>\n</ul>\n<h2 id=\"ar-sleep-safer-mama\">Sleep Safer, Mama</h2>\n<p>We know it's a lot to take in. But crib safety is the foundation of your nursery. With the right information and a little extra care, you can feel confident that your baby is sleeping soundly and safely.</p>\n<p>And when you choose a crib from Dadada, you're getting more than beautiful design. You're getting a crib built for your baby's best rest and your peace of mind.</p>", "toc": [["ar-why-crib-safety-matters", "Why Crib Safety Matters"], ["ar-the-big-players-in-crib-safety", "The Big Players in Crib Safety"], ["ar-eco-certifications-that-matter-too", "Eco-Certifications That Matter Too"], ["ar-red-flags-to-avoid", "Red Flags to Avoid"], ["ar-the-dadada-difference-where-safety-meets-style", "The dadada Difference: Where Safety Meets Style"], ["ar-crib-safety-checklist-before-you-buy", "Crib Safety Checklist Before You Buy"], ["ar-sleep-safer-mama", "Sleep Safer, Mama"]]}, "toddlerbed": {"body": "<p class=\"ar-lede\">That first night in a toddler bed? It's a moment. A mix of excitement, nostalgia, and—let's be honest—a little bit of chaos. One minute, they're your baby, curled up safely in their crib. The next? They're ready to stretch out, claim their space, and maybe even make a daring escape attempt.</p>\n<p>Most little ones make the switch somewhere between 18 months and three years, and there's no one-size-fits-all timeline. Sometimes, they tell you when they're ready—climbing out, protesting the crib, or begging for a 'big kid bed.' Other times, you just know—it's time to give them a little more independence (and yourself a little peace of mind).</p>\n<p>But here's the secret: it's not just about the bed. It's about making the transition feel intentional, exciting, and safe. Let them pick out bedding, a favorite stuffed animal, something that makes it feel like theirs. Guardrails? A must. And don't forget to childproof the room—because freedom and toddlers can be a dangerous mix.</p>\n<p>The bedtime routine? Non-negotiable. Keep it exactly the same—same book, same lullaby, same tuck-in routine. Expect a few nighttime wanderings, maybe even some dramatic protests. Stay consistent, keep it light, and—above all—give yourself some grace.</p>\n<p>Because this isn't just about a new bed. It's about a little person growing up, finding their independence, and taking one more step toward the next chapter. And you? You're guiding them there, one bedtime at a time.</p>\n<p>You've got this.</p>\n<h2 id=\"ar-when-should-you-transition-from-crib-to-toddler-\">When Should You Transition from Crib to Toddler Bed?</h2>\n<p>There's no hard-and-fast rule for this one, but somewhere between 18 months and 3 years is the sweet spot for most families. It's not a \"one-size-fits-all\" thing, though. Some kids hit this milestone early because they've turned their crib into a jungle gym. And once they figure out how to hoist themselves up and over those rails?</p>\n<p>Game over.</p>\n<p>According to Dr. Emily Carter's findings in <em>Sleep Safety in Early Childhood: Risks of Crib Falls</em> (Pediatrics), kiddos who take up crib-climbing significantly up their chances of tumbles—and let's face it, those falls aren't exactly minor.</p>\n<p>The American Academy of Pediatrics echoes this in their study, <em>Transitions in Infant and Toddler Sleep Arrangements</em>. They found most toddlers are good to go for a \"big kid\" bed by age three. But here's the kicker: timelines vary.</p>\n<p>Some kids, for whatever reason—maybe they're shorter, more cautious, or just love their crib—don't show signs of being ready for a bed until closer to that upper limit. And that's fine, too. It's about balancing safety and developmental readiness, not forcing a clock on a kid who isn't there yet.</p>\n<p>One thing's for sure: climbing isn't just a sign. It's often a \"let's do this now\" kind of warning. Next up, let's look at what other clues might tell you it's time. Because not every kid's transition is prompted by acrobatics.</p>\n<figure class=\"ar-fig stages\"><div class=\"st3\"><span><img src=\"img/gr-crib.webp\" alt=\"A walnut Soho crib\" loading=\"lazy\"><i>Crib</i></span><span><img src=\"img/gr-toddler.webp\" alt=\"The same Soho crib as a toddler bed\" loading=\"lazy\"><i>Toddler bed</i></span><span><img src=\"img/gr-daybed.webp\" alt=\"The same Soho crib as a daybed\" loading=\"lazy\"><i>Daybed</i></span></div><figcaption>One Soho crib, three stages.</figcaption></figure>\n<h2 id=\"ar-signs-your-child-is-ready-for-a-toddler-bed\">Signs Your Child Is Ready for a Toddler Bed</h2>\n<p>Not sure if the crib days are coming to an end? Some signs practically wave a flag—like your toddler climbing out of the crib in a moment of daring. Others creep up on you, subtle but persistent. You might see it in their sleep habits or hear it in their little declarations about being a \"big kid.\" These moments build up, and soon, you know—it's time.</p>\n<p>Here are six telltale signs that your child is ready for the next step:</p>\n<ul>\n<li>Crib escapes (no surprise there—safety first).</li>\n<li>Outgrowing the crib (because growing is what toddlers do).</li>\n<li>Developing independence (think: \"big kid\" energy).</li>\n<li>Sleep troubles (restlessness has reasons).</li>\n<li>Hitting milestones (hello, coordination and confidence).</li>\n<li>Parental instincts (yes, your gut knows best).</li>\n</ul>\n<p>Let's break it all down.</p>\n<h3>Crib Escapes: When Safety Becomes a Concern</h3>\n<p>One day they're happily snoozing in their crib, and the next, they're halfway over the railing with a gleam in their eye. Even if it's a one-off escape, it's a game-changer. Falls can happen fast, and the crib is no longer the safe haven it used to be. If climbing becomes a regular thing, it's time to act. Better to transition before a tumble forces your hand.</p>\n<h3>Outgrowing the Crib: Physical Space Matters</h3>\n<p>That crib that once seemed so big? Now it's starting to look, well, cramped. Watch for signs like their feet pressing against the ends, or restless nights spent tossing and turning because there just isn't enough space. If they tell you outright that it feels \"too small,\" they're not wrong. Toddlers grow fast, and their sleeping space needs to keep up.</p>\n<h3>Developing Independence: The Big Kid Mentality</h3>\n<p>\"I'm not a baby anymore!\" Sound familiar? Around this age, toddlers love asserting their independence, and their sleep setup is part of it. Maybe they're asking for a \"big kid bed\" or getting unusually excited about picking out new bedding. When they start showing pride in being more grown-up, it's a sign they're ready to take some ownership of their space.</p>\n<h3>Sleep Troubles: Discomfort and Resistance</h3>\n<p>Bedtime used to be smooth, but now it feels like a battle. They might resist going to the crib or wake up more frequently during the night. This isn't just a phase—it's often a sign that the crib no longer meets their needs. If it feels too restrictive or uninviting, they're going to let you know in the only way they can.</p>\n<h3>Hitting Milestones: Readiness in Growth and Behavior</h3>\n<p>Their world is expanding, and so is their confidence. If they're climbing, running, or handling stairs without a hitch, they've got the physical skills to transition to a toddler bed. Add in emotional growth—like expressing their needs more clearly—and you've got a recipe for success. Developmental leaps often go hand-in-hand with readiness for this change.</p>\n<h3>Parental Instincts: Trust Your Gut</h3>\n<p>Sometimes the biggest sign isn't what they do, but what you feel. Maybe you're noticing subtle shifts in their behavior, or you're lying awake wondering if the crib is still the right fit. Trust that intuition. Parents know their kids better than anyone else, and if you think it's time, it probably is.</p>\n<p>Recognizing these signs helps you know when to start the transition. Next up? How to prepare your child—and their environment—for a smooth switch to their new bed.</p>\n<h2 id=\"ar-preparing-for-the-transition-to-a-toddler-bed\">Preparing for the Transition to a Toddler Bed</h2>\n<p>Switching from crib to toddler bed? Big step. Huge, actually. It's not just about changing where your little one sleeps—it's about a whole new level of independence. A new kind of freedom. So, yeah, this move needs a plan. Preparation—yours and theirs—is key to keeping it smooth and sane.</p>\n<p>Make them part of it. That's rule number one. Let them pick the bed or the bedding, even if it means dinosaurs, unicorns, or whatever their current obsession might be. It's empowering. And when you're trying to steer a toddler through change, a little power in their hands works wonders.</p>\n<p>Keep their favorite blanket or stuffed animal close, too. That's non-negotiable. These small, familiar touches? They're the bridge between comfort and newness.</p>\n<p>Let's look at four tips for a smooth crib to toddler bed transition:</p>\n<ul>\n<li>Let Them Take the Lead (Sort Of)</li>\n<li>Start Small, Think Big</li>\n<li>Keep Familiar Things Close</li>\n<li>Talk It Through—And Stay Present</li>\n</ul>\n<h3>Let Them Take the Lead (Sort Of)</h3>\n<p>This isn't just about letting them choose between trucks and stars for the comforter. It's bigger. It's about giving them a piece of ownership in their new sleep space. When kids feel in control—even just a little—they're more likely to embrace change. Dr. Michael Brown's research in <em>Child Development Quarterly</em> backs this up, showing that \"toddlers adapt better when they're involved in decisions.\" A little buy-in goes a long way.</p>\n<h3>Start Small, Think Big</h3>\n<p>Don't go all in overnight. That's overwhelming—for both of you. Start with naps in the toddler bed. Let them get used to the idea in daylight, where things feel less intimidating. Once that's comfortable, transition to overnight. Slow and steady works here. Each little win builds their confidence (and yours).</p>\n<h3>Keep Familiar Things Close</h3>\n<p>Change is easier when it feels familiar. Bring along their beloved blanket, the plush they can't sleep without, even their crib mattress if it fits the new frame. These aren't just things—they're anchors. They remind your child that while the bed is new, the feeling of safety hasn't gone anywhere.</p>\n<h3>Talk It Through—And Stay Present</h3>\n<p>Toddlers understand more than you might think, so spell it out. Tell them why the change is happening. Why you're proud of this \"big kid\" moment. Make it clear you'll still be there for bedtime stories, snuggles, and all the usual comforts. Your presence is the constant, and knowing that makes a big difference.</p>\n<p>It's not just a move from crib to bed; it's a leap toward growing up. With patience and some thoughtful prep, the transition can be exciting—not overwhelming. Next, we'll get into choosing the best bed for this new chapter.</p>\n<h2 id=\"ar-mistakes-to-avoid-when-transitioning\">Mistakes to Avoid When Transitioning</h2>\n<p>The biggest misstep? Moving too fast. If your child isn't ready, the transition might feel more like a punishment than a milestone.</p>\n<ul>\n<li><strong>Skipping Childproofing:</strong> A safe bed isn't enough if the room itself isn't secure.</li>\n<li><strong>Forcing the Timing:</strong> Introducing a toddler bed during other big life changes, like a new sibling or a move, can overwhelm your child.</li>\n<li><strong>Ignoring Signs of Readiness:</strong> Without cues like climbing, increased independence, or discomfort in the crib, your child might not be ready.</li>\n</ul>\n<p>Dr. David Brown's review in <em>Sleep Medicine Reviews</em> reminds parents that \"preparation—not speed—paves the way for success.\"</p>\n<h2 id=\"ar-should-you-get-a-second-crib-or-transition-to-a-\">Should You Get a Second Crib or Transition to a Toddler Bed for a Second Baby?</h2>\n<p>Figuring out whether to buy another crib or move your older child to a toddler bed isn't just about logistics. It's a whole puzzle. The pieces? Your older child's age, their readiness for a bed, how much space you have, and—let's be honest—how much energy you've got to juggle it all.</p>\n<p>Here's the breakdown:</p>\n<h3>Opting for a Second Crib</h3>\n<p>Sometimes, sticking with two cribs just makes sense. If your kids are close in age—less than 18 months apart—keeping your older child in a crib might be the best call. Toddlers that young are usually not ready for the independence a bed requires. No shame in that; they've got time.</p>\n<p>There's also the space issue. If your home has the room for two cribs without turning your living area into an obstacle course, it might be worth it to skip the hassle of transitioning too soon. And there's evidence to back this up. In <em>Sleep Arrangements in Siblings Under 3 Years</em>, Dr. Rachel Green found that \"when siblings under two slept separately, there were 15% fewer sleep disruptions.\" One less toddler waking up at 3 a.m.? That's gold.</p>\n<h3>Transitioning to a Toddler Bed</h3>\n<p>Now, if your older child is two, maybe three, and showing those classic \"big kid\" signs—climbing, bedtime independence, maybe even asking for a bed—it's probably time to make the leap.</p>\n<p>Limited space is another nudge. If your home can't comfortably handle two cribs, a toddler bed takes up less room and lets everyone breathe a little easier.</p>\n<p>The American Academy of Pediatrics' <em>Safe Sleep Practices for Infants and Toddlers</em> highlights a sweet spot: toddlers transitioning between ages two and three adapt faster and experience fewer sleep hiccups. If your child is already using their crib rails as a climbing gym, safety becomes the trump card. That's when it's less about \"if\" and more about \"when.\"</p>\n<h3>Deciding Factors</h3>\n<p>Let's get into the nitty-gritty of what tips the scale:</p>\n<ul>\n<li><strong>Age and Readiness:</strong> If your older child is nearing 2.5 or older, showing readiness cues, transitioning is likely smoother than buying another crib.</li>\n<li><strong>Space Matters:</strong> Small home? A toddler bed might be your only option.</li>\n<li><strong>Safety First:</strong> Climbers and daredevils in cribs don't mix. Switch before accidents happen.</li>\n<li><strong>Emotional Readiness:</strong> Some toddlers, even older ones, aren't emotionally there yet. A second crib might be worth the peace of mind.</li>\n<li><strong>Budget Reality:</strong> Cribs aren't cheap. If money's tight, a toddler bed is often the more practical choice.</li>\n</ul>\n<figure class=\"ar-fig wide\"><img src=\"img/ks-muse2.jpg\" alt=\"A white Muse toddler bed and bookshelf in a bright kid's room\" loading=\"lazy\"><figcaption>Muse toddler bed</figcaption></figure>\n<h2 id=\"ar-how-to-choose-the-right-toddler-bed\">How to Choose the Right Toddler Bed</h2>\n<p>Forget the fancy features. What your toddler needs is a bed that's simple, sturdy, and safe. Nothing flashy—just a solid, reliable space that fits their size and stage of life. If you're already using a convertible crib, you've got a head start. That familiarity can ease the transition.</p>\n<p>When you're shopping, keep safety front and center. Look for ASTM or JPMA certifications—these aren't just labels; they mean the bed has passed real safety tests. The mattress should fit snugly, leaving no room for little hands or feet to get stuck.</p>\n<p>Guardrails? Non-negotiable.</p>\n<p>Active sleepers need them to avoid rolling out during those first few weeks of adjustment.</p>\n<p>The material matters, too. Choose something built to last, like solid wood with a non-toxic finish. Lightweight or flimsy materials might be cheaper, but they won't hold up to the wear and tear of a toddler's daily antics.</p>\n<p>Consumer Reports' guide, <em>Toddler Bed Safety: What Parents Need to Know</em>, highlights that \"guardrails alone can reduce nighttime falls by 30%,\" making them a must-have for peace of mind.</p>\n<h2 id=\"ar-ensuring-safety-during-the-transition\">Ensuring Safety During the Transition</h2>\n<p>The bed's ready, but what about the room? Toddlers are naturally curious, so you'll want to think beyond just the bed. Childproofing the entire space is critical.</p>\n<p>Start with the big stuff. Heavy furniture—dressers, bookshelves, nightstands—needs to be anchored to the wall. Outlets should have covers, cords need to be out of reach, and any small objects that look fun to play with should be removed.</p>\n<p>Check the bed setup, too. The mattress must fit tightly with no gaps. Guardrails should be secure, and if you're opting for a twin bed, make sure it's not too high off the ground. Consider adding bumpers for extra security.</p>\n<p>The National Safety Council's <em>Childproofing for Toddlers</em> suggests crawling around the room yourself to spot hazards. What looks safe to you might seem like an adventure to your toddler.</p>\n<h2 id=\"ar-common-crib-toddler-bed-transition-challenges-an\">Common Crib-Toddler-Bed Transition Challenges and How to Overcome Them</h2>\n<p>No transition is perfect. Toddlers can be unpredictable, and resistance is almost guaranteed. Bedtime battles, wandering the house at midnight, or clinging to the crib—it's all part of the process.</p>\n<p>Calm persistence is your best tool. If they leave the bed, guide them back without much fuss. Don't engage in drawn-out conversations or turn it into a game. Nightlights can help ease fears of the dark, and small incentives—like stickers or extra bedtime stories—can encourage cooperation.</p>\n<p>For toddlers who seem overwhelmed, take baby steps. Start with naps in the toddler bed before moving to overnight. Gradual adjustments give them time to feel comfortable.</p>\n<p>Dr. Robert Davis' study in the <em>Journal of Pediatric Psychology</em> confirms that pairing patience with positive reinforcement often works wonders.</p>\n<h2 id=\"ar-frequently-asked-questions-about-toddler-bed-tra\">Frequently Asked Questions About Toddler Bed Transitions</h2>\n<h3>What's the best way to handle my toddler's resistance?</h3>\n<p>Stay calm and consistent. Gently guide them back to bed each time they leave. Over time, this creates a clear boundary.</p>\n<h3>Can I use my child's crib mattress in the toddler bed?</h3>\n<p>Yes, as long as it fits snugly without gaps. Familiarity with the mattress can make the transition smoother.</p>\n<h3>Is it safe to skip the toddler bed and go straight to a twin?</h3>\n<p>Yes. Just add guardrails and ensure the setup is secure. Dr. Emma White's study in the <em>Journal of Sleep Research</em> found no difference in sleep quality between toddler and twin beds when safety measures are in place.</p>\n<h3>How long does the transition usually take?</h3>\n<p>It varies. Some children adjust in a few days, while others may take weeks. Consistency in routines can speed up the process.</p>\n<h2 id=\"ar-benefits-of-transitioning-to-a-toddler-bed\">Benefits of Transitioning to a Toddler Bed</h2>\n<p>There's more to this change than safety. Moving to a toddler bed is a big step in fostering independence and confidence.</p>\n<ul>\n<li><strong>Builds Confidence:</strong> A \"big kid\" bed encourages them to take pride in their own space.</li>\n<li><strong>Encourages Responsibility:</strong> Toddlers often take better care of something they feel ownership over, like their bed.</li>\n<li><strong>Supports Development:</strong> As they grow, having a bed suited to their needs reinforces physical and emotional milestones.</li>\n<li><strong>Improves Sleep Habits:</strong> A secure and comfortable bed sets the stage for better rest, which benefits everyone in the house.</li>\n</ul>\n<h2 id=\"ar-conclusion-transitioning-from-crib-to-toddler-be\">Conclusion: Transitioning from Crib to Toddler Bed</h2>\n<p>No two transitions are the same. Some toddlers take to their new bed immediately, while others need time to adjust. For families in tight spaces or with older toddlers, a twin bed might make more sense than a toddler bed.</p>\n<p>The most important thing is to go at your child's pace. Prepare thoughtfully, celebrate the small wins, and embrace the hiccups as part of the journey. This isn't just about sleep—it's about growing up. And you're doing great.</p>", "toc": [["ar-when-should-you-transition-from-crib-to-toddler-", "When Should You Transition from Crib to Toddler Bed?"], ["ar-signs-your-child-is-ready-for-a-toddler-bed", "Signs Your Child Is Ready for a Toddler Bed"], ["ar-preparing-for-the-transition-to-a-toddler-bed", "Preparing for the Transition to a Toddler Bed"], ["ar-mistakes-to-avoid-when-transitioning", "Mistakes to Avoid When Transitioning"], ["ar-should-you-get-a-second-crib-or-transition-to-a-", "Should You Get a Second Crib or Transition to a Toddler Bed for a Second Baby?"], ["ar-how-to-choose-the-right-toddler-bed", "How to Choose the Right Toddler Bed"], ["ar-ensuring-safety-during-the-transition", "Ensuring Safety During the Transition"], ["ar-common-crib-toddler-bed-transition-challenges-an", "Common Crib-Toddler-Bed Transition Challenges and How to Overcome Them"], ["ar-frequently-asked-questions-about-toddler-bed-tra", "Frequently Asked Questions About Toddler Bed Transitions"], ["ar-benefits-of-transitioning-to-a-toddler-bed", "Benefits of Transitioning to a Toddler Bed"], ["ar-conclusion-transitioning-from-crib-to-toddler-be", "Conclusion: Transitioning from Crib to Toddler Bed"]]}, "minicrib": {"body": "<p class=\"ar-lede\">Whether you've been designing your new baby's nursery in your mind for as long as you can remember, or hadn't really thought about nurseries at all until you knew a baby was on the way, one thing is certain: there are a LOT of decisions to make when it comes to planning your perfect nursery.</p>\n<p><strong>We believe that every parent, in every budget, deserves a nursery space that functions well, feels good, and meets your needs and baby's needs for great sleep.</strong> And for great baby sleep, you need a great crib.</p>\n<p>When it comes to choosing a crib for your nursery, there are two popular options: a mini crib or a standard crib. Both have their own advantages and disadvantages, so it's important to weigh your options carefully before making a decision. What was right for your friend or sibling might not be the best fit for your space, and that's okay! With so many great products on the market, there's an option for just about everyone.</p>\n<figure class=\"ar-fig wide tall\"><img src=\"img/room-soho-brownstone.jpg\" alt=\"A Soho crib in a sunlit brownstone nursery\" loading=\"lazy\"><figcaption>Soho crib</figcaption></figure>\n<h2 id=\"ar-what-is-a-mini-crib\">What Is a Mini Crib?</h2>\n<p>A <strong>mini crib</strong> is a smaller version of a standard crib, usually around 24\" x 38\" compared to a standard 28\" x 52\". It's bigger than a bassinet, but smaller and lighter than a full crib. Many mini cribs are foldable or designed to move easily from room to room.</p>\n<p>Mini cribs are popular in apartments, shared bedrooms, or homes where space is at a premium.</p>\n<h2 id=\"ar-mini-crib-pros\">Mini Crib Pros</h2>\n<h3>Smaller size is ideal for small nurseries.</h3>\n<p>Mini cribs' main selling point is pretty obvious - their small size is a great space saver. If you live in an apartment with small bedrooms, or in a situation where you'll be sharing a room with your baby for a period of time, a mini crib can be a game-changing solution that allows you to create a sleeping space where a standard crib may not fit.</p>\n<h3>More portable than standard cribs.</h3>\n<p>A mini cribs' small size and lighter weight makes it easier to move from room to room, or from house to house, which may be helpful if you're planning a move or need to set up the crib on your own.</p>\n<h3>Often less expensive than standard cribs.</h3>\n<p>While not always the case, sometimes small size can equal a smaller price tag. A mini crib may save you money up front - but that saving might be offset by the need to upgrade when baby grows. Which brings us to…</p>\n<h2 id=\"ar-mini-crib-cons\">Mini Crib Cons</h2>\n<h3>Useful for a shorter period of time.</h3>\n<p>The flip side of mini cribs' small size is smaller weight, height, and developmental limitations. Unlike a standard crib, which can last up through toddler years (and beyond if it's a convertible like ours), your baby will most likely grow out of a mini crib within the first year, leaving you needing to look for a new solution relatively soon.</p>\n<h3>May not have as many features as standard cribs.</h3>\n<p>In general, mini cribs tend to be single-function items with less versatility than their larger, standard siblings. You may sacrifice the ability to adjust the mattress height or convert the crib into a toddler or day bed. It may also be more difficult to find a mattress and crib sheets for a non-standard size crib mattress, and your options might be more limited.</p>\n<h2 id=\"ar-what-is-a-standard-crib\">What Is a Standard Crib?</h2>\n<p>A <strong>standard crib</strong> is the full-size crib most parents picture when they think of a nursery. At about 28\" x 52\", it offers more room for your baby and can often be used for years. Many standard cribs—like the ones we design at dadada Baby—are <strong>convertible cribs</strong>, meaning they transform into toddler beds, daybeds, or even full-size beds.</p>\n<figure class=\"ar-fig wide tall\"><img src=\"img/g-bliss-detail.jpg\" alt=\"The rounded rail and turned leg of a Bliss crib\" loading=\"lazy\"><figcaption>Bliss crib</figcaption></figure>\n<h2 id=\"ar-standard-crib-pros\">Standard Crib Pros</h2>\n<ul>\n<li><strong>Longer usability.</strong> Standard cribs last well beyond the first year. With convertible designs like the <strong>Dadada Austin 3-in-1</strong> or <strong><a href=\"#/spirit\">Spirit 8-in-1</a></strong>, your crib can grow with your child into toddlerhood and beyond.</li>\n<li><strong>Easier to find bedding and mattresses.</strong> Standard crib sheets and mattresses are widely available in stores and online.</li>\n<li><strong>More features and versatility.</strong> Adjustable mattress heights, convertible options, and a wider range of styles make standard cribs more adaptable.</li>\n</ul>\n<h2 id=\"ar-standard-crib-cons\">Standard Crib Cons</h2>\n<ul>\n<li><strong>Takes up more space.</strong> In very small nurseries or shared rooms, a standard crib may feel too large.</li>\n<li><strong>Higher upfront cost.</strong> While more expensive at the start, the longevity of a convertible crib often means you'll save in the long run.</li>\n</ul>\n<div class=\"ar-table\"><table>\n<thead>\n<tr>\n<th>Feature</th>\n<th>Mini Crib</th>\n<th>Standard Crib</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Size</td>\n<td>~24\" x 38\"</td>\n<td>~28\" x 52\"</td>\n</tr>\n<tr>\n<td>Lifespan</td>\n<td>Birth to ~18 months</td>\n<td>Birth to 4+ years (longer if convertible)</td>\n</tr>\n<tr>\n<td>Portability</td>\n<td>Lightweight, some foldable</td>\n<td>Heavy, stationary</td>\n</tr>\n<tr>\n<td>Price</td>\n<td>$150–$400 (average)</td>\n<td>$300–$800 (average)</td>\n</tr>\n<tr>\n<td>Bedding Availability</td>\n<td>Limited, specialty sizes</td>\n<td>Easy to find everywhere</td>\n</tr>\n<tr>\n<td>Conversion Options</td>\n<td>Few to none</td>\n<td>3-in-1, 4-in-1, 8-in-1 options</td>\n</tr>\n</tbody>\n</table></div>\n<h2 id=\"ar-how-to-decide-mini-crib-or-standard-crib\">How to Decide: Mini Crib or Standard Crib?</h2>\n<p>Ask yourself these questions:</p>\n<ul>\n<li>Do you live in an apartment or need to maximize a very small space? → A <strong>mini crib</strong> could be your best bet.</li>\n<li>Do you want a crib that grows with your child for years? → A <strong>standard convertible crib</strong> is the way to go.</li>\n<li>Are you buying a secondary crib for a grandparent's house or travel? → A <strong>mini crib</strong> is often more practical.</li>\n<li>Are you planning on multiple children and want a durable, long-term solution? → A <strong>standard crib</strong> offers more value.</li>\n</ul>\n<h2 id=\"ar-the-dadada-difference\">The Dadada Difference</h2>\n<p>At <strong>dadada Baby</strong>, every crib—mini or standard—is designed with <strong>safety, style, and sustainability</strong> in mind.</p>\n<p>All our cribs are:</p>\n<ul>\n<li><strong>JPMA certified</strong></li>\n<li>Built to <strong>CPSC and ASTM safety standards</strong></li>\n<li>Finished with <strong>non-toxic, baby-safe paints</strong></li>\n<li>Made from <strong>renewable solid wood</strong></li>\n<li>Available with <strong>GREENGUARD Gold certification</strong> on select models</li>\n</ul>\n<p>Our favorites:</p>\n<ul>\n<li><strong><a href=\"#/soho\">Soho 3-in-1 Convertible Crib</a></strong> – Compact and modern, perfect for smaller nurseries.</li>\n<li><strong>Austin 3-in-1 Convertible Crib</strong> – Timeless, solid beechwood design that grows with your child.</li>\n<li><strong><a href=\"#/spirit\">Spirit 8-in-1 Convertible Crib</a></strong> – Our most versatile crib, crafted for longevity and style.</li>\n</ul>\n<p><strong>Ultimately, the best way to decide which type of crib is right for you is to consider your individual needs and preferences.</strong> If you have a small nursery or are on a budget, a mini crib may be a good option. If you want a crib that your child can use for a longer period of time, and you're able to invest a little more up front, a standard crib may be a better choice, and save you money in the long run!</p>\n<p>Whatever crib you choose, it's not the furniture that ultimately defines the feel of your nursery - it's the love, time, and memories you fill the space with. We're wishing you a lifetime of good sleep, great snuggles, and memorable, messy, magical moments with your little one.</p>", "toc": [["ar-what-is-a-mini-crib", "What Is a Mini Crib?"], ["ar-mini-crib-pros", "Mini Crib Pros"], ["ar-mini-crib-cons", "Mini Crib Cons"], ["ar-what-is-a-standard-crib", "What Is a Standard Crib?"], ["ar-standard-crib-pros", "Standard Crib Pros"], ["ar-standard-crib-cons", "Standard Crib Cons"], ["ar-how-to-decide-mini-crib-or-standard-crib", "How to Decide: Mini Crib or Standard Crib?"], ["ar-the-dadada-difference", "The Dadada Difference"]]}}</script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
@@ -2462,7 +2582,7 @@
       .fromTo(".hero-film", { scale: 1.12 }, { scale: 1, duration: 2.4, ease: "expo.out" }, 0)
       .from(".hero-h .ln > span", { yPercent: 105, duration: 1.3, stagger: 0.12, ease: "expo.out" }, 0.2)
       .from(".hero-sub, .hero-ctas > *", { y: 18, opacity: 0, duration: 1, stagger: 0.08, ease: "expo.out" }, 0.6)
-      .from(".hero-side > *, .hero-pick, .nav", { opacity: 0, duration: 1, stagger: 0.08, ease: "power2.out" }, 0.8);
+      .from(".hero-side > *, .nav", { opacity: 0, duration: 1, stagger: 0.08, ease: "power2.out" }, 0.8);
   }
 
   /* =====================================================================
@@ -2876,7 +2996,7 @@
     <div class="pa-grid">
       ${d.pairs.map((p, pi) => `<a class="pa-card${pi === 0 ? " sel" : ""}" href="#p-pairs" data-local data-pick="${p[1]}" data-name="${p[0]}" data-img="${p[2]}"><div class="ph"><img class="sc" src="img/${SCENE[p[2]]}.jpg" alt="${p[0]} in a New York apartment" loading="lazy"><img class="pk" src="img/${p[2]}.jpg" alt="${p[0]}, studio view" loading="lazy"><span class="flip" aria-hidden="true"></span></div><div class="row"><h3>${p[0]}</h3><span class="mono">${money(p[1])}</span></div></a>`).join("")}
       <div class="pa-math" aria-live="polite">
-        <span class="mono" style="color:rgba(241,239,234,.6)">${d.name} + <span id="pa-name">${dresser[0]}</span></span>
+        <span class="mono" style="color:rgba(254, 251, 237,.6)">${d.name} + <span id="pa-name">${dresser[0]}</span></span>
         <div class="big" id="pa-total">${money(f0.price + dresser[1] - save0)}</div>
         <dl>
           <div><dt>Crib</dt><dd id="pa-crib">${money(f0.price)}</dd></div>
@@ -3678,8 +3798,6 @@
   // ---------- Compare cribs ----------
   function compareHTML() {
     const rows = [
-      ["Price", (d) => "from " + money(cribFrom(d))],
-      ["Type", (d) => d.kind],
       ["Lives", (d) => d.modes ? d.lives + ": " + d.modes.map((m) => m.name.toLowerCase()).join(", ") : d.lives + ", cradle to floor bed"],
       ["Dimensions", (d) => spec(d, "Dimensions", "Crib")],
       ["Weight", (d) => spec(d, "Weight")],
@@ -3702,7 +3820,9 @@
   </section>
   <div class="cmp-wrap" data-lenis-prevent-horizontal>
     <table class="cmp">
-      <thead><tr><th scope="col"><span class="visually-hidden">Feature</span></th>${ORDER.map((k) => { const d = CRIBS[k], f = cribShot(d); return `<th scope="col"><a href="#/${k}"><span class="ph" style="background:${f.tint}"><img src="img/${f.img}.jpg" alt=""></span><b>${d.name}</b></a></th>`; }).join("")}</tr></thead>
+      <colgroup><col class="c-k">${ORDER.map(() => "<col>").join("")}</colgroup>
+      <thead><tr class="pics"><td></td>${ORDER.map((k) => { const d = CRIBS[k], f = cribShot(d); return `<td><a href="#/${k}" tabindex="-1" aria-hidden="true"><span class="ph" style="background:${f.tint}"><img src="img/${f.img}.jpg" alt=""></span></a></td>`; }).join("")}</tr>
+        <tr class="names"><th scope="col"><span class="visually-hidden">Feature</span></th>${ORDER.map((k) => { const d = CRIBS[k]; return `<th scope="col"><a href="#/${k}"><b>${d.name}</b><small>${d.kind.split(" ")[0]} · from ${money(cribFrom(d))}</small></a></th>`; }).join("")}</tr></thead>
       <tbody>${rows.map((r) => { const vals = ORDER.map((k) => r[1](CRIBS[k])); const same = vals.every((v) => v === vals[0]); return `<tr data-same="${same}"><th scope="row" class="mono">${r[0]}</th>${vals.map((v) => `<td>${v}</td>`).join("")}</tr>`; }).join("")}
         <tr class="acts"><th scope="row"></th>${ORDER.map((k) => `<td><a class="pill blue sm" href="#/${k}">See ${CRIBS[k].name}</a></td>`).join("")}</tr>
       </tbody>
@@ -3713,12 +3833,16 @@
   }
   function bindCompare() {
     $("#cm-diff", PDP).addEventListener("change", (e) => { PDP.querySelector(".cmp").classList.toggle("diff", e.target.checked); if (motion) ScrollTrigger.refresh(); });
+    // cover the rows sliding under the nav only once the name row is actually stuck
+    const tbl = PDP.querySelector(".cmp"), pics = PDP.querySelector(".cmp .pics");
+    const stuck = () => { if (!tbl.isConnected) return window.removeEventListener("scroll", stuck); tbl.classList.toggle("stuck", pics.getBoundingClientRect().bottom < 82); };
+    window.addEventListener("scroll", stuck, { passive: true }); stuck();
     return {};
   }
   function buildCompare() {
     const qa = (s) => $$(s, PDP);
     gsap.from(qa(".cmp-h > *"), { y: 30, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.08 });
-    gsap.from(qa(".cmp thead th"), { y: 40, opacity: 0, duration: 1.1, stagger: 0.08, ease: "expo.out", delay: 0.2 });
+    gsap.from(qa(".cmp thead .pics td, .cmp thead .names th"), { y: 40, opacity: 0, duration: 1.1, stagger: 0.08, ease: "expo.out", delay: 0.2 });
   }
 
   // ---------- Toddler & kids ----------
@@ -3811,30 +3935,6 @@
   ];
   const shopPane = (k, head, more, grid) => `<div class="sh-pane" data-c="${k}"><div class="mg-head"><span class="mono">${head}</span><span class="mg-links">${more}</span></div>${grid}</div>`;
   mega.innerHTML = `
-    <div class="mp" id="mp-shop" role="region" aria-label="Shop">
-      <ul class="sh-cats">
-        <li><a href="#index" data-c="cribs" class="on"><span>Cribs</span><small>05</small></a></li>
-        <li><a href="#/dressers" data-c="dressers"><span>Dressers</span><small>08</small></a></li>
-        <li><a href="#/kids" data-c="kids"><span>Toddler & kids</span><small>04</small></a></li>
-        <li><a href="#/dressers/sets" data-c="sets"><span>Nursery sets</span><small>−15%</small></a></li>
-        <li class="lbl"><span class="mono">Shop by need</span></li>
-        ${NEEDS.map((n) => `<li class="need"><a href="${n.href}" data-c="${n.k}"><span>${n.label}</span></a></li>`).join("")}
-        <li class="sep"><a href="#/compare" data-c="cribs"><span>Compare cribs</span></a></li>
-      </ul>
-      <div class="sh-body">
-        ${shopPane("cribs", "Cribs", '<a class="mg-more" href="#/compare">Compare cribs</a><a class="mg-more" href="#index">Shop all cribs →</a>', `<div class="mg-cribs">${ORDER.map((k) => tile("#/" + k, cribShot(CRIBS[k]).img, CRIBS[k].name, false, CRIBS[k].kind.split(" ")[0])).join("")}</div>`)}
-        ${shopPane("dressers", "Dressers", '<a class="mg-more" href="#/dressers">Shop all dressers →</a>', `<div class="mg-cribs dr">${DGROUPS.flatMap((g) => g[1]).map((k) => { const d = DRESSERS[k]; return tile("#/dressers/" + k, d.img, d.name, false, d.cubby ? "3 drawers + shelves" : d.drawers + " drawers"); }).join("")}</div>`)}
-        ${shopPane("kids", "Toddler & kids", '<a class="mg-more" href="#/kids">Shop all →</a>', `<div class="mg-cribs four">${tile("#/kids", "k-muse", "Muse", false, "Toddler bed")}${tile("#/kids", "k-shelf", "Muse", false, "Bookshelf")}${tile("#/kids", "k-tower", "Tower", false, "Learning tower")}${tile("#/kids", "ks-fun", "Fun", true, "Twin bed")}</div>`)}
-        ${NEEDS.map((n) => shopPane(n.k, n.head, n.more, n.grid)).join("")}
-        ${shopPane("sets", "Nursery sets · 15% off both", '<a class="mg-more" href="#/dressers/sets">Shop all sets →</a>', `<div class="mg-cribs">${SHOPSETS.map((k) => { const d = DRESSERS[SETS[k]]; return tile("#/dressers/sets", d.scene || d.img, CRIBS[k].name + " set", true, "From " + money((cribFrom(CRIBS[k]) + d.price) * 0.85)); }).join("")}</div>`)}
-      </div>
-      ${promo("#/fit", "mom-soho", "Not sure yet?", "Find your fit", "Four questions. One crib that fits your home.")}
-    </div>
-    <div class="mp" id="mp-cribs" role="region" aria-label="Cribs">
-      <div class="mp-main"><div class="mg-head"><span class="mono">Cribs</span><span class="mg-links"><a class="mg-more" href="#/compare">Compare cribs</a><a class="mg-more" href="#index">Shop all cribs →</a></span></div>
-        <div class="mg-cribs">${ORDER.map((k) => tile("#/" + k, cribShot(CRIBS[k]).img, CRIBS[k].name, false, CRIBS[k].kind.split(" ")[0])).join("")}</div></div>
-      ${promo("#/fit", "mom-soho", "Not sure yet?", "Find your fit", "Four questions. One crib that fits your home.")}
-    </div>
     <div class="mp" id="mp-dressers" role="region" aria-label="Dressers">
       <div class="mp-main"><div class="mg-head"><span class="mono">Dressers</span><span class="mg-links"><a class="mg-more" href="#/dressers">Shop all dressers →</a></span></div>
         <div class="mg-cribs dr">${DGROUPS.flatMap((g) => g[1]).map((k) => { const d = DRESSERS[k]; return tile("#/dressers/" + k, d.img, d.name, false, d.cubby ? "3 drawers + shelves" : d.drawers + " drawers"); }).join("")}</div></div>
@@ -3863,11 +3963,6 @@
       <a class="acc-row mi" href="#/story">Our story</a>
     </div>
     <div class="m-foot mono mi"><span>Made in Italy</span><span>GREENGUARD Gold</span></div>`;
-  { const cats = $$(".sh-cats a", mega), panes = $$(".sh-pane", mega);
-    const showC = (c) => { cats.forEach((a) => a.classList.toggle("on", a.dataset.c === c && !a.closest(".sep"))); panes.forEach((p) => p.classList.toggle("on", p.dataset.c === c)); };
-    cats.forEach((a) => { a.addEventListener("mouseenter", () => showC(a.dataset.c)); a.addEventListener("focus", () => showC(a.dataset.c)); });
-    showC("cribs");
-    triggers.forEach((t) => t.addEventListener("mouseenter", () => { if (!mega.classList.contains("on")) showC("cribs"); })); }
   $$(".mi", mmenu).forEach((el, i) => (el.style.transitionDelay = 0.1 + i * 0.04 + "s"));
   $$(".acc", mmenu).forEach((d) => d.addEventListener("toggle", () => { if (d.open) $$(".acc", mmenu).forEach((o) => o !== d && (o.open = false)); }));
 
@@ -3892,18 +3987,33 @@
   sxQ.addEventListener("keydown", (e) => { if (e.key === "Enter") { const a = $("a", sxRes); if (a) a.click(); } });
   function setSearch(on) {
     search.classList.toggle("on", on); srchBtn.setAttribute("aria-expanded", String(on));
+    syncSkin();
+    document.body.classList.toggle("pane-open", on || mega.classList.contains("on"));
     if (on) { setPanel(null); if (mmenu.classList.contains("on")) setMenu(false); sxQ.value = ""; renderSearch(); setTimeout(() => sxQ.focus(), 60); }
   }
   srchBtn.addEventListener("click", () => setSearch(!search.classList.contains("on")));
   $(".x", search).addEventListener("click", () => setSearch(false));
 
+
+  // the cream skin behind nav + open panel grows as one shape
+  const navEl = $(".nav");
+  function syncSkin() {
+    const panel = search.classList.contains("on") ? search : mega.classList.contains("on") ? mega : null;
+    const root = document.documentElement.style;
+    root.setProperty("--skin-h0", navEl.offsetHeight + "px");
+    if (panel) root.setProperty("--skin-h", (panel.getBoundingClientRect().bottom - navEl.getBoundingClientRect().top) + "px");
+  }
+  if ("ResizeObserver" in window) { const ro = new ResizeObserver(() => { if (document.body.classList.contains("pane-open")) syncSkin(); }); ro.observe(mega); ro.observe(search); }
   // panels
   let openedAt = 0;
   function setPanel(p) {
     if (p && mega.dataset.p !== p) openedAt = Date.now();
+    if (p) setCur(false);
     mega.classList.toggle("on", !!p);
     if (p) { mega.dataset.p = p; if (search.classList.contains("on")) setSearch(false); }
     triggers.forEach((t) => t.setAttribute("aria-expanded", String(t.dataset.p === p)));
+    syncSkin();
+    document.body.classList.toggle("pane-open", !!p || search.classList.contains("on"));
   }
   const setMega = (on) => { if (!on) setPanel(null); };
   function setMenu(on) {
@@ -3911,7 +4021,7 @@
     if (lenis) on ? lenis.stop() : lenis.start();
     document.documentElement.style.overflow = on ? "hidden" : "";
   }
-  function closeMenus() { setPanel(null); if (search.classList.contains("on")) setSearch(false); if (mmenu.classList.contains("on")) setMenu(false); }
+  function closeMenus() { setCur(false); setPanel(null); if (search.classList.contains("on")) setSearch(false); if (mmenu.classList.contains("on")) setMenu(false); }
   triggers.forEach((t) => t.addEventListener("click", () => {
     const open = mega.classList.contains("on") && mega.dataset.p === t.dataset.p;
     setPanel(open && Date.now() - openedAt > 600 ? null : t.dataset.p);
@@ -3929,6 +4039,82 @@
     if (search.classList.contains("on") && !e.target.closest("#search, .srch")) setSearch(false);
   }, true);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeMenus(); closeCart(); } });
+
+  /* ---------- shop curtain (desktop): navy, big categories left, photo + products right ---------- */
+  const cur = $("#cur"), curT = $(".cur-t");
+  const KID = (k) => KIDS.find((x) => x.k === k);
+  const CUR_MAIN = [
+    { k: "cribs", label: "Cribs", n: "05", href: "#index", img: "mom-soho", kick: "Cribs · made in Italy", title: "Every one converts",
+      more: [["#index", "Shop all cribs"], ["#/compare", "Compare cribs"]],
+      tiles: ORDER.map((k) => tile("#/" + k, cribShot(CRIBS[k]).img, CRIBS[k].name, false, CRIBS[k].kind.split(" ")[0] + " · " + money(cribFrom(CRIBS[k])))) },
+    { k: "dressers", label: "Dressers", n: "08", href: "#/dressers", img: "mom-dr-soho", kick: "Dressers", title: "Anti-tip, every one",
+      more: [["#/dressers", "Shop all dressers"]],
+      tiles: ["merry", "bliss6", "soho5", "cp"].map((k) => dresserTile(k, DRESSERS[k].cubby ? "3 drawers + shelves" : DRESSERS[k].drawers + " drawers")) },
+    { k: "kids", label: "Toddler & kids", n: "04", href: "#/kids", img: "mom-kids", kick: "Toddler & kids", title: "Your taste stays",
+      more: [["#/kids", "Shop toddler & kids"]],
+      tiles: [tile("#/kids", "k-muse", "Muse bed", false, money(KID("muse").price)), tile("#/kids", "k-shelf", "Muse shelf", false, money(KID("shelf").price)), tile("#/kids", "k-tower", "Tower", false, money(KID("tower").price)), tile("#/kids", "ks-fun", "Fun", true, "Twin bed")] },
+    { k: "sets", label: "Nursery sets", n: "−15%", href: "#/dressers/sets", img: "mom-dr-cp", kick: "Crib + dresser", title: "15% off both",
+      more: [["#/dressers/sets", "Shop all sets"]],
+      tiles: SHOPSETS.map((k) => { const d = DRESSERS[SETS[k]]; return tile("#/dressers/sets", d.scene || d.img, CRIBS[k].name + " set", true, "From " + money((cribFrom(CRIBS[k]) + d.price) * 0.85)); }) },
+  ];
+  const NEED_IMG = { best: "mom-soho-walnut", under: "mom-lala", floor: "mom-bliss", box: "mom-spirit" };
+  const CUR_NEED = NEEDS.map((n) => ({ k: n.k, label: n.label, href: n.href, img: NEED_IMG[n.k], kick: "Shop by need", title: n.label,
+    more: [[n.href, n.k === "box" ? "Meet Spirit" : n.k === "best" ? "See why" : "Compare cribs"]], tiles: (n.grid.match(/<a href[\s\S]*?<\/a>/g) || []).slice(0, 5) }));
+  const CUR_ALL = [...CUR_MAIN, ...CUR_NEED];
+  cur.innerHTML = `<div class="cur-in">
+    <div class="cur-l">
+      <nav class="cur-list" aria-label="Shop categories">${CUR_MAIN.map((c) => `<a href="${c.href}" data-k="${c.k}"><span>${c.label}</span><small>${c.n}</small></a>`).join("")}</nav>
+      <div class="cur-need"><span class="mono">Shop by need</span>${CUR_NEED.map((c) => `<a href="${c.href}" data-k="${c.k}">${c.label}</a>`).join("")}</div>
+      <div class="cur-low"><a href="#/fit">Find your fit</a><a href="#/compare">Compare cribs</a><a href="#/support">Help</a><a href="#/journal">Blog</a><a href="#/story">Our story</a></div>
+    </div>
+    <div class="cur-r">
+      <div class="cur-ph">${CUR_ALL.map((c) => `<img data-k="${c.k}" data-src="img/${c.img}.jpg" alt="">`).join("")}<div class="cap"><span class="mono"></span><b></b></div></div>
+      <div class="cur-strip"></div>
+      <div class="cur-more"></div>
+    </div>
+  </div>`;
+  const curLinks = $$(".cur-list a, .cur-need a", cur), curImgs = $$(".cur-ph img", cur), curStrip = $(".cur-strip", cur), curMore = $(".cur-more", cur), curCapK = $(".cur-ph .cap .mono", cur), curCapT = $(".cur-ph .cap b", cur);
+  let curK = null;
+  function curShow(k) {
+    if (k === curK) return; curK = k; const c = CUR_ALL.find((x) => x.k === k);
+    curLinks.forEach((a) => a.classList.toggle("on", a.dataset.k === k));
+    curImgs.forEach((i) => i.classList.toggle("on", i.dataset.k === k));
+    curCapK.textContent = c.kick; curCapT.textContent = c.title;
+    curStrip.style.gridTemplateColumns = `repeat(${Math.max(3, c.tiles.length)}, minmax(0, 1fr))`;
+    curStrip.innerHTML = c.tiles.join("");
+    curMore.innerHTML = c.more.map((m) => `<a href="${m[0]}">${m[1]} <i aria-hidden="true">→</i></a>`).join("");
+  }
+  let curTimer;
+  function setCur(on) {
+    if (!cur) return;
+    const isOn = cur.classList.contains("on");
+    if (on === isOn) return;
+    clearTimeout(curTimer);
+    curT.setAttribute("aria-expanded", String(on));
+    document.body.classList.toggle("cur-open", on);
+    if (on) {
+      curImgs.forEach((i) => { if (!i.src) i.src = i.dataset.src; });
+      curK = null; curShow("cribs");
+      cur.hidden = false; void cur.offsetWidth; cur.classList.add("on");
+      if (search.classList.contains("on")) setSearch(false);
+      setPanel(null);
+      if (lenis) lenis.stop(); document.documentElement.style.overflow = "hidden";
+    } else {
+      cur.classList.remove("on");
+      curTimer = setTimeout(() => { cur.hidden = true; }, 850);
+      if (lenis) lenis.start(); document.documentElement.style.overflow = "";
+    }
+  }
+  curT.addEventListener("click", () => setCur(!cur.classList.contains("on")));
+  curLinks.forEach((a) => { a.addEventListener("mouseenter", () => curShow(a.dataset.k)); a.addEventListener("focus", () => curShow(a.dataset.k)); });
+  cur.addEventListener("click", (e) => { if (e.target.closest("a")) setCur(false); });
+  if (window.matchMedia("(hover: hover)").matches) {
+    let it;
+    curT.addEventListener("mouseenter", () => { it = setTimeout(() => setCur(true), 160); });
+    curT.addEventListener("mouseleave", () => clearTimeout(it));
+  }
+  window.addEventListener("resize", () => { if (window.innerWidth <= 860) setCur(false); });
+
 
   /* =====================================================================
      Home: cursor-follow image on the index (bound once)
@@ -4290,7 +4476,7 @@
   const jTitle = (m) => (m.kick ? m.kick + ": " : "") + m.t1 + (m.t2 ? (m.t2.startsWith("+") ? " (" + m.t2 + ")" : ": " + m.t2) : "");
   const jCard = (k) => { const m = JMETA[k]; return `<a class="bl-card" href="#/journal/${k}"><span class="ph"><img src="img/${m.hero}.jpg" alt="${m.alt.replace(/"/g, "&quot;")}" loading="lazy"></span><span class="meta"><span class="tg">${m.cat}</span><span>${m.read} min read</span></span><h3>${jTitle(m)}</h3></a>`; };
   const jFeat = (k) => { const m = JMETA[k]; return `<a class="bl-feat" href="#/journal/${k}"><img src="img/${m.hero}.jpg" alt="${m.alt.replace(/"/g, "&quot;")}"><span class="shade" aria-hidden="true"></span><span class="tx"><span class="meta"><span class="tg">${m.cat}</span><span>${m.read} min read</span></span><h3>${m.t1}</h3><p>“${m.ex}”</p><span class="go">Read the guide <span class="ar" aria-hidden="true">→</span></span></span></a>`; };
-  const readLink = (k) => `<a class="rd" href="#/journal/${k}"><span class="mono">Read</span><span class="t">${JMETA[k].t1}</span><small>${JMETA[k].read} min</small><span class="ar" aria-hidden="true">→</span></a>`;
+  const readLink = (k) => { const j = JMETA[k]; return `<a class="rdc" href="#/journal/${k}"><span class="im"><img src="img/${j.hero}.jpg" alt="" loading="lazy" style="object-position:${j.pos || "50% 50%"}"></span><span class="tx"><span class="mono">${j.cat} · ${j.read} min read</span><b>${j.t1}</b></span><span class="ar" aria-hidden="true">→</span></a>`; };
   // one product at the end of each story, the one the story is actually about
   const JPICK = {
     convertible: [["crib", "spirit", "natural"], "Eight lives, from a cradle beside your bed to a floor bed at five. Every conversion piece is in the box."],
