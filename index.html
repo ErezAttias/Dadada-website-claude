@@ -2065,7 +2065,10 @@
   html body .qa-more, html body .revs-head p, html body .pill:not(.sm), html body .hs-more, html body #pdp .pa-card h3, html body #pdp .buy .add span, html body #pdp .lede,
   html body #pdp .rv-row p { font-size: var(--t-body); }
   html body .rev blockquote { font-weight: 500; }
-  html body .note-side h2 { font-size: var(--d2); line-height: 1.5; letter-spacing: -0.045em; }
+  html body .note-side { gap: 0; }
+  html body .note-side h2#note-h { font-size: var(--d2); line-height: 1.24 !important; letter-spacing: -0.045em; margin: 0 0 22px; }
+  html body .note-side p { margin: 0 0 28px; }
+  @media (max-width: 600px) { html body .note-side h2#note-h { line-height: 1.5 !important; margin-bottom: 14px; } }
   /* Boldonse caps fill ~1.2em, so stacked heads need real air between lines */
   html body .h2, html body .qa h2, html body .note-side h2, html body .rooms-head h2,
   html body #pdp .sec-head h2, html body #pdp .g-left h2, html body #pdp #faq-h, html body #pdp .ex-panel h2 { line-height: 1.5 !important; }
