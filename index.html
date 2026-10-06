@@ -4668,23 +4668,18 @@
     if (!motion) { leave(); enter(target, anchor); return; }
     busy = true;
     if (lenis) lenis.stop();
-    const cur = target === "home" ? ["dadada", "Room to be you", "Index"] : pageOf(target).curtain;
-    $(".c-name span").textContent = cur[0];
-    $("#c-l").textContent = cur[1];
-    $("#c-r").textContent = cur[2];
-    { const cn = $(".c-name"), cs = $(".c-name span"); cn.style.fontSize = ""; const maxW = curtain.clientWidth - 2 * parseFloat(getComputedStyle(curtain).paddingLeft || 0), w = cs.getBoundingClientRect().width; if (w > maxW) cn.style.fontSize = (parseFloat(getComputedStyle(cn).fontSize) * maxW * 0.98) / w + "px"; }
-    curtain.classList.add("busy");
-    const tl = gsap.timeline();
-    tl.set(curtain, { clipPath: "inset(100% 0% 0% 0%)" })
-      .to(curtain, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.85, ease: "expo.inOut" })
-      .fromTo(".c-name span", { yPercent: 100 }, { yPercent: 0, duration: 1, ease: "expo.out" }, 0.3)
-      .fromTo(".c-meta", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.45)
-      .add(() => { leave(); enter(target, anchor); }, "+=0.1")
-      .to(curtain, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.9, ease: "expo.inOut" }, "+=0.05")
-      .add(() => { if (view !== "home" && pdpCtx) pdpCtx.add(() => curPage.intro()); }, "<0.15")
+    // quick fade between pages (the full-screen curtain was decorative only and slowed every navigation)
+    const out = view === "home" ? HOME : PDP;
+    gsap.timeline()
+      .to(out, { opacity: 0, duration: 0.18, ease: "power1.out" })
       .add(() => {
-        curtain.classList.remove("busy");
-        gsap.set(curtain, { clipPath: "inset(100% 0% 0% 0%)" });
+        leave(); enter(target, anchor);
+        gsap.set(out, { opacity: 1 });
+        gsap.fromTo(view === "home" ? HOME : PDP, { opacity: 0 }, { opacity: 1, duration: 0.32, ease: "power1.out" });
+        if (view !== "home" && pdpCtx) pdpCtx.add(() => curPage.intro());
+      })
+      .add(() => {}, "+=0.32")
+      .add(() => {
         if (lenis) lenis.start();
         busy = false;
         if (queued) { queued = false; if (parse() !== view) route(); }
