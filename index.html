@@ -11249,6 +11249,28 @@
   .palsw button[aria-pressed="true"] .sws i { box-shadow: 0 0 0 1.5px #fff; }
   .palsw .sws i:first-child { margin-left: 0; }
   @media (max-width: 760px) { .palsw { left: 10px; top: 76px; bottom: auto; } .palsw > span { display: none; } .palsw button { padding: 0 10px 0 6px; } .palsw button .nm { display: none; } .palsw button[aria-pressed="true"] .nm { display: inline; } }
+
+  .palsw .cu { font-size: 14px; }
+  .cpanel { position: fixed; left: 14px; bottom: 66px; z-index: 2147483001; width: 340px; max-height: calc(100vh - 90px); overflow: auto; padding: 14px; border-radius: 18px; background: rgba(20,20,24,.96); color: #fff; font: 500 12.5px/1.3 Inter, system-ui, sans-serif; box-shadow: 0 10px 40px rgba(0,0,0,.4); display: none; }
+  .cpanel.open { display: block; }
+  .cpanel h6 { margin: 0 0 8px; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .6; font-weight: 600; }
+  .cpanel .row { display: grid; grid-template-columns: 30px 1fr 74px 30px 36px; gap: 7px; align-items: center; padding: 5px 4px; border-radius: 10px; cursor: pointer; }
+  .cpanel .row.sel { background: rgba(255,255,255,.12); }
+  .cpanel .row.arm { outline: 2px solid #fff; }
+  .cpanel .row input[type=color] { width: 30px; height: 30px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; }
+  .cpanel .row input[type=color]::-webkit-color-swatch-wrapper { padding: 0; } .cpanel .row input[type=color]::-webkit-color-swatch { border: 2px solid rgba(255,255,255,.5); border-radius: 50%; }
+  .cpanel .row b { display: block; font-weight: 600; } .cpanel .row small { opacity: .55; font-size: 10.5px; }
+  .cpanel input[type=text] { width: 100%; height: 28px; border-radius: 8px; border: 1px solid rgba(255,255,255,.25); background: transparent; color: #fff; font: 500 12px ui-monospace, monospace; padding: 0 6px; text-transform: lowercase; }
+  .cpanel button { height: 28px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); background: transparent; color: #fff; font: 600 11.5px Inter, sans-serif; cursor: pointer; padding: 0 10px; }
+  .cpanel button:hover, .cpanel button.on { background: #fff; color: #141418; }
+  .cpanel .sw { font-size: 14px; padding: 0; width: 30px; }
+  .cpanel .ratio { font-size: 10.5px; text-align: center; border-radius: 6px; padding: 3px 0; font-weight: 700; }
+  .cpanel .pool { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 12px; }
+  .cpanel .pool i { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(255,255,255,.45); cursor: pointer; }
+  .cpanel .pool i:hover { transform: scale(1.15); }
+  .cpanel .acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .cpanel .hint { opacity: .55; font-size: 11px; margin: 8px 2px 0; }
+  @media (max-width: 760px) { .cpanel { left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 62vh; border-radius: 18px 18px 0 0; } }
 </style>
 <script>
 (() => {
@@ -11256,21 +11278,102 @@
     base: { name: "Original", sw: ["#1f25f5", "#eefe53", "#b5a8e1", "#10233f"], map: {} },
     pantone: { name: "Pantone", sw: ["#233563", "#fbeda4", "#d52d32", "#18233f"], map: { "#10233f": "#18233f", "#b5a8e1": "#d52d32", "#eefe53": "#fbeda4", "#1f25f5": "#233563" } },
     tropina: { name: "Tropina", sw: ["#b8321a", "#d2ea4c", "#ea532f", "#fefbed"], map: { "#10233f": "#ea532f", "#b5a8e1": "#ea532f", "#eefe53": "#d2ea4c", "#1f25f5": "#b8321a" } },
+    custom: { name: "Custom ✎", sw: ["#1f25f5", "#eefe53", "#b5a8e1", "#10233f"], map: {} },
   };
   const keys = Object.keys(P);
   let cur = "base";
-  try { const q = new URLSearchParams(location.search).get("pal") || localStorage.getItem("dd-pal"); if (q && P[q]) cur = q; } catch (e) {}
+  try { const q = new URLSearchParams(location.search).get("pal") || localStorage.getItem("dd-pal"); if (q && P[q]) cur = q; if (new URLSearchParams(location.search).get("c") && !new URLSearchParams(location.search).get("pal")) cur = "custom"; } catch (e) {}
   const bar = document.createElement("div"); bar.className = "palsw"; bar.setAttribute("role", "group"); bar.setAttribute("aria-label", "Colour palette");
   bar.innerHTML = "<span>Palette</span>" + keys.map((k) => '<button type="button" data-k="' + k + '" aria-pressed="false"><span class="sws">' + P[k].sw.map((c) => '<i style="background:' + c + '"></i>').join("") + '</span><span class="nm">' + P[k].name + "</span></button>").join("");
+  /* ---------- CUSTOM PALETTE ---------- */
+  const lum = (h) => { h = h.slice(1); const f = (c) => (c <= .03928 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4)); const [r, g, b] = [0, 2, 4].map((i) => f(parseInt(h.substr(i, 2), 16) / 255)); return .2126 * r + .7152 * g + .0722 * b; };
+  const cr = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+  const mix = (a, b, t) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(a.substr(i, 2), 16) * (1 - t) + parseInt(b.substr(i, 2), 16) * t).toString(16).padStart(2, "0")).join("");
+  const rgb = (h) => [1, 3, 5].map((i) => parseInt(h.substr(i, 2), 16)).join(", ");
+  const pick = (cands, g, h) => {
+    const toward = lum(g) > .4 ? "#000000" : "#ffffff";
+    for (const c of cands) { if (c === g || c === h) continue; for (let i = 0; i < 10; i++) { const m = mix(c, toward, i / 20); if (cr(m, g) >= 3 && cr(m, h) > 1.25) return m; } }
+    const ok = cands.filter((c) => c !== g && c !== h && cr(c, h) > 1.25);
+    return ok.length ? ok.reduce((a, b) => (cr(b, g) > cr(a, g) ? b : a)) : h;
+  };
+  const ROLES = [["blue", "Ink", "text, headings, links"], ["lime", "Accent", "highlights, footer titles"], ["lav", "Bold ground", "big colour blocks"], ["navy", "Dark ground", "dark sections"], ["cream", "Page", "background"], ["blush", "Soft tint", "note panels"]];
+  const PRE = {
+    base: { blue: "#1f25f5", lime: "#eefe53", lav: "#b5a8e1", navy: "#10233f", cream: "#fefbed", blush: "#f0d8d8" },
+    pantone: { blue: "#233563", lime: "#fbeda4", lav: "#d52d32", navy: "#18233f", cream: "#fefbed", blush: "#f7e2d6" },
+    tropina: { blue: "#b8321a", lime: "#d2ea4c", lav: "#ea532f", navy: "#ea532f", cream: "#fefbed", blush: "#fad8c6" },
+  };
+  const SEL = { light: "html body", note: "html body .note", stl: "html body .stl", hset: "html body .hset", foot: "html body .foot", dark: "html body #pdp .pa-math, html body .buybar" };
+  const buildCss = (c) => {
+    const base = document.getElementById("pal-base").textContent;
+    const lavt = mix(c.lav, "#ffffff", .84), sky = mix(c.blue, "#ffffff", .9), line = mix(c.cream, c.blue, .12);
+    const vars = { "--blue": c.blue, "--lime": c.lime, "--blush": c.blush, "--cream": c.cream, "--navy": c.navy, "--lav": c.lav, "--lav-t": lavt, "--sky": sky, "--line": line };
+    const a = base.indexOf(":root {"), b = base.indexOf("}", a); let blk = base.slice(a, b);
+    for (const k in vars) blk = blk.replace(new RegExp(k + ": #[0-9a-fA-F]{6};"), k + ": " + vars[k] + ";");
+    let s = base.slice(0, a) + blk + base.slice(b);
+    const hm = { "#1f25f5": c.blue, "#eefe53": c.lime, "#10233f": c.navy, "#b5a8e1": c.lav }; s = s.replace(/#(1f25f5|eefe53|10233f|b5a8e1)/gi, (m) => hm[m.toLowerCase()]);
+    s = s.split("rgba(31, 37, 245").join("rgba(" + rgb(c.blue)).split("rgba(238, 254, 83").join("rgba(" + rgb(c.lime));
+    const tob = [c.cream, c.navy, c.blue].reduce((x, y) => (cr(y, c.lav) > cr(x, c.lav) ? y : x));
+    const secs = { light: [c.cream, c.blue], note: [c.blush, c.blue], stl: [c.navy, c.cream], hset: [c.lav, tob], foot: [c.navy, c.lime], dark: [c.navy, c.cream] };
+    const cands = [c.lav, c.navy, c.lime, c.blue, c.cream], dd = [c.lav, c.lime, c.blue, c.navy];
+    let o = "\n  html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup, html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body #pdp .cmp-cta, html body #pdp .cmp-cta h2, html body #pdp .cmp-cta p, html body .cmp-cta h2, html body .cmp-cta p, html body #pdp .next, html body #pdp .next .next-name, html body #pdp .next .mono, html body #pdp .next .mono span, html body .next .next-name, html body .next .mono span { color: " + tob + " !important; }\n  html body .foot h4, html body .foot-cols h4 { color: " + c.lime + " !important; }\n  html body .stl-tot small { color: " + c.cream + " !important; }\n";
+    for (const k in secs) { const [g, h] = secs[k]; o += "  " + SEL[k] + " { --sec-bg: " + g + "; --sec-h: " + h + "; --btn-hv: " + pick(cands, g, h) + "; --dd-a: " + pick(dd, g, h) + "; }\n"; }
+    const B = "html body .pill:not(.ghost):not(.knock), html body #pdp .add, html body .foot-news button, html body #pdp .pa-math button, html body .buybar button";
+    o += "  " + B + " { background: var(--sec-h) !important; color: var(--sec-bg) !important; border-color: transparent !important; transition: background-color .35s var(--ease), color .35s var(--ease), transform .35s var(--ease); }\n";
+    o += "  html body .pill:not(.ghost):not(.knock) *, html body #pdp .add *, html body .foot-news button *, html body #pdp .pa-math button * { color: inherit !important; }\n";
+    o += "  " + B.split(",").map((x) => x.trim() + ":hover").join(", ") + " { background: var(--btn-hv) !important; color: var(--sec-bg) !important; }\n";
+    o += "  html body .note .dd, html body .fl, html body .dd-free { color: var(--sec-h) !important; }\n";
+    const pool = [c.lav, c.navy, c.lime, c.blue, c.cream, c.blush].filter((x) => x !== c.lav);
+    const tx = pool.reduce((x, y) => (cr(y, c.lav) > cr(x, c.lav) ? y : x));
+    o += "  html body .index-row::before { background: " + c.lav + " !important; }\n  @media (hover: hover) { html body .index-row:hover, html body .index-row:hover .name, html body .index-row:hover .spec, html body .index-row:hover .spec *, html body .index-row:hover .n, html body .index-row:hover .price, html body .index-row:hover .price *, html body .index-row:hover > * { color: " + tx + " !important; opacity: 1 !important; }\n    html body .index-row:hover .go { background: " + tx + " !important; color: " + c.lav + " !important; } }\n";
+    return s + o;
+  };
+  const HEX = /^#[0-9a-f]{6}$/;
+  let C = Object.assign({}, PRE.base);
+  try { const sv = JSON.parse(localStorage.getItem("dd-custom")); if (sv && ROLES.every((r) => HEX.test(sv[r[0]]))) C = sv; } catch (e) {}
+  try { const q = new URLSearchParams(location.search).get("c"); if (q) { const p = q.toLowerCase().split("-").map((x) => "#" + x); if (p.length === 6 && p.every((x) => HEX.test(x))) ROLES.forEach((r, i) => { C[r[0]] = p[i]; }); } } catch (e) {}
+  const cst = document.createElement("style"); cst.id = "pal-custom"; cst.media = "not all"; document.head.appendChild(cst);
+  const syncCustom = () => {
+    P.custom.sw = [C.blue, C.lime, C.lav, C.navy];
+    P.custom.map = { "#1f25f5": C.blue, "#eefe53": C.lime, "#b5a8e1": C.lav, "#10233f": C.navy };
+    const btn = bar.querySelector('[data-k="custom"] .sws'); if (btn) btn.innerHTML = P.custom.sw.map((c) => '<i style="background:' + c + '"></i>').join("");
+  };
+  let rebuildT; const rebuild = () => { clearTimeout(rebuildT); rebuildT = setTimeout(() => { cst.textContent = buildCss(C); syncCustom(); try { localStorage.setItem("dd-custom", JSON.stringify(C)); const u = new URL(location.href); u.searchParams.set("c", ROLES.map((r) => C[r[0]].slice(1)).join("-")); history.replaceState(null, "", u); } catch (e) {} }, 60); };
+  const panel = document.createElement("div"); panel.className = "cpanel"; document.body.appendChild(panel);
+  let sel = "blue", arm = null;
+  const badge = (k) => { const pairs = { blue: ["cream"], lime: ["navy"], lav: ["cream"], navy: ["cream"], cream: ["blue"], blush: ["blue"] }[k]; const r = cr(C[k], C[pairs[0]]); return '<span class="ratio" title="contrast vs ' + pairs[0] + '" style="background:' + (r >= 4.5 ? "#1f7a3a" : r >= 3 ? "#8a6d00" : "#8a1f1f") + '">' + r.toFixed(1) + "</span>"; };
+  const render = () => {
+    const pool = [...new Set(Object.values(PRE).flatMap((p) => Object.values(p)).concat(Object.values(C)))];
+    panel.innerHTML = "<h6>Start from</h6><div class='acts' style='margin:0 0 12px'>" + Object.keys(PRE).map((k) => "<button data-pre='" + k + "'>" + P[k].name + "</button>").join("") + "</div><h6>Roles — edit a colour, or ⇄ two roles to swap</h6>" +
+      ROLES.map((r) => "<div class='row" + (sel === r[0] ? " sel" : "") + (arm === r[0] ? " arm" : "") + "' data-r='" + r[0] + "'><input type='color' value='" + C[r[0]] + "' data-c='" + r[0] + "'><div><b>" + r[1] + "</b><small>" + r[2] + "</small></div><input type='text' maxlength='7' value='" + C[r[0]] + "' data-t='" + r[0] + "'><button class='sw" + (arm === r[0] ? " on" : "") + "' data-s='" + r[0] + "' title='Swap with another role'>⇄</button>" + badge(r[0]) + "</div>").join("") +
+      "<h6 style='margin-top:12px'>Pool — click a colour to give it to “" + ROLES.find((r) => r[0] === sel)[1] + "”</h6><div class='pool'>" + pool.map((c) => "<i data-p='" + c + "' style='background:" + c + "' title='" + c + "'></i>").join("") + "</div>" +
+      "<div class='acts'><button data-a='link'>Copy link</button><button data-a='hex'>Copy hex list</button><button data-a='shuffle'>Shuffle roles</button></div><p class='hint'>Badges show contrast against the page / ink colour. Buttons, doodles and hover bands re-balance automatically.</p>";
+  };
+  const setC = (k, v, keep) => { C[k] = v; rebuild(); if (!keep) render(); };
+  panel.addEventListener("input", (e) => {
+    const t = e.target;
+    if (t.dataset.c) { setC(t.dataset.c, t.value.toLowerCase(), true); const tx = panel.querySelector("[data-t=" + t.dataset.c + "]"); if (tx) tx.value = t.value; }
+    if (t.dataset.t) { let v = t.value.trim().toLowerCase(); if (v[0] !== "#") v = "#" + v; if (HEX.test(v)) setC(t.dataset.t, v); }
+  });
+  panel.addEventListener("click", (e) => {
+    const t = e.target;
+    const row = t.closest(".row");
+    if (t.dataset.s) { if (arm && arm !== t.dataset.s) { const a = arm, b = t.dataset.s; [C[a], C[b]] = [C[b], C[a]]; arm = null; sel = b; rebuild(); render(); } else { arm = arm === t.dataset.s ? null : t.dataset.s; render(); } return; }
+    if (t.dataset.pre) { Object.assign(C, PRE[t.dataset.pre]); arm = null; rebuild(); render(); return; }
+    if (t.dataset.p) { setC(sel, t.dataset.p); return; }
+    if (t.dataset.a === "shuffle") { const ks = ["blue", "lime", "lav", "navy"], v = ks.map((k) => C[k]).sort(() => Math.random() - .5); ks.forEach((k, i) => { C[k] = v[i]; }); rebuild(); render(); return; }
+    if (t.dataset.a) { const txt = t.dataset.a === "link" ? location.href : ROLES.map((r) => r[1] + " " + C[r[0]]).join("\n"); try { navigator.clipboard.writeText(txt); } catch (er) {} t.textContent = "Copied"; setTimeout(() => { t.textContent = t.dataset.a === "link" ? "Copy link" : "Copy hex list"; }, 1200); return; }
+    if (row && !t.matches("input")) { sel = row.dataset.r; render(); }
+  });
   const apply = (k) => {
     window.__pq = (x) => (P[k].map[String(x).toLowerCase()] || x);
     keys.forEach((n) => { const s = document.getElementById("pal-" + n); if (s) s.media = n === k ? "all" : "not all"; });
     bar.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.k === k)));
     document.documentElement.dataset.palette = k;
+    if (k === "custom") { cst.textContent = buildCss(C); syncCustom(); render(); panel.classList.add("open"); } else panel.classList.remove("open");
     try { localStorage.setItem("dd-pal", k); } catch (e) {}
     try { const u = new URL(location.href); u.searchParams.set("pal", k); history.replaceState(null, "", u); } catch (e) {}
   };
-  bar.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) apply(b.dataset.k); });
+  bar.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; if (b.dataset.k === "custom" && cur === "custom") { panel.classList.toggle("open"); return; } cur = b.dataset.k; apply(b.dataset.k); });
   document.body.appendChild(bar); apply(cur);
 })();
 </script>
