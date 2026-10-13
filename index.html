@@ -2941,6 +2941,17 @@
   html body .note .note-side .pill { grid-area: btn; white-space: nowrap; }
   @media (max-width: 700px) { html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; row-gap: 8px; } html body .note .note-side .pill { margin-top: 8px; justify-self: start; } html body .note .note-img { width: 56px; } }
   html body .tstrip + .best { padding-top: clamp(20px, 2.5vw, 40px); }
+
+  /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
+  html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
+  html body .hero-rib .rs-list li { gap: 12px; }
+  html body .hero-rib .rs-list .hd { color: var(--cream); background: rgba(254, 251, 237, .1); }
+  html body .hero-rib .rs-list .rs-t { font-family: var(--sans); font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none; color: rgba(254, 251, 237, .92); line-height: 1.2; white-space: nowrap; }
+  @media (max-width: 1100px) { html body .hero-rib .rs-list { gap: 28px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 92px; } html body .hero-rib { overflow: hidden !important; } html body .hero-rib .rs-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding: 0 var(--g) !important; } html body .hero-rib .rs-list .hd { width: 30px; height: 30px; padding: 7px; flex: none; } html body .hero-rib .rs-list .rs-t { font-size: 13px !important; white-space: normal; } }
+  /* retailer caption */
+  .ts-cap { text-align: center; margin: 0 var(--g) 16px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .06em !important; text-transform: uppercase; color: #77777a !important; opacity: 1 !important; }
+  .tstrip { padding-top: clamp(22px, 2.6vw, 36px) !important; }
 </style>
 <style id="pal-pantone" media="not all">
   :root {
@@ -5873,6 +5884,17 @@
   html body .note .note-side .pill { grid-area: btn; white-space: nowrap; }
   @media (max-width: 700px) { html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; row-gap: 8px; } html body .note .note-side .pill { margin-top: 8px; justify-self: start; } html body .note .note-img { width: 56px; } }
   html body .tstrip + .best { padding-top: clamp(20px, 2.5vw, 40px); }
+
+  /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
+  html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
+  html body .hero-rib .rs-list li { gap: 12px; }
+  html body .hero-rib .rs-list .hd { color: var(--cream); background: rgba(254, 251, 237, .1); }
+  html body .hero-rib .rs-list .rs-t { font-family: var(--sans); font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none; color: rgba(254, 251, 237, .92); line-height: 1.2; white-space: nowrap; }
+  @media (max-width: 1100px) { html body .hero-rib .rs-list { gap: 28px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 92px; } html body .hero-rib { overflow: hidden !important; } html body .hero-rib .rs-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding: 0 var(--g) !important; } html body .hero-rib .rs-list .hd { width: 30px; height: 30px; padding: 7px; flex: none; } html body .hero-rib .rs-list .rs-t { font-size: 13px !important; white-space: normal; } }
+  /* retailer caption */
+  .ts-cap { text-align: center; margin: 0 var(--g) 16px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .06em !important; text-transform: uppercase; color: #77777a !important; opacity: 1 !important; }
+  .tstrip { padding-top: clamp(22px, 2.6vw, 36px) !important; }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -8828,6 +8850,17 @@
   html body .note .note-side .pill { grid-area: btn; white-space: nowrap; }
   @media (max-width: 700px) { html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; row-gap: 8px; } html body .note .note-side .pill { margin-top: 8px; justify-self: start; } html body .note .note-img { width: 56px; } }
   html body .tstrip + .best { padding-top: clamp(20px, 2.5vw, 40px); }
+
+  /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
+  html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
+  html body .hero-rib .rs-list li { gap: 12px; }
+  html body .hero-rib .rs-list .hd { color: var(--cream); background: rgba(254, 251, 237, .1); }
+  html body .hero-rib .rs-list .rs-t { font-family: var(--sans); font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none; color: rgba(254, 251, 237, .92); line-height: 1.2; white-space: nowrap; }
+  @media (max-width: 1100px) { html body .hero-rib .rs-list { gap: 28px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 92px; } html body .hero-rib { overflow: hidden !important; } html body .hero-rib .rs-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding: 0 var(--g) !important; } html body .hero-rib .rs-list .hd { width: 30px; height: 30px; padding: 7px; flex: none; } html body .hero-rib .rs-list .rs-t { font-size: 13px !important; white-space: normal; } }
+  /* retailer caption */
+  .ts-cap { text-align: center; margin: 0 var(--g) 16px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .06em !important; text-transform: uppercase; color: #77777a !important; opacity: 1 !important; }
+  .tstrip { padding-top: clamp(22px, 2.6vw, 36px) !important; }
   /* ---------- TROPINA PROTOTYPE: tomato grounds, acid-lime type ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -8884,15 +8917,13 @@
       <div class="hero-time mono"><span id="tc">00:00</span><span class="hero-bar"><i id="tc-bar"></i></span><span>00:30</span></div>
     </div>
     <div class="hero-rib" aria-label="Shipping, warranty and returns">
-      <ul class="vh"><li>Free shipping to the contiguous 48 states</li><li>Ships in 1 business day</li><li>2-year crib warranty</li><li>14-day returns</li></ul>
-      <div class="rib-track" aria-hidden="true"><span class="it"><b>Free shipping</b></span><span class="it"><b>Ships in 1 business day</b></span><span class="it"><b>2-year crib warranty</b></span><span class="it"><b>14-day returns</b></span><span class="it"><b>Free shipping</b></span><span class="it"><b>Ships in 1 business day</b></span><span class="it"><b>2-year crib warranty</b></span><span class="it"><b>14-day returns</b></span><span class="it"><b>Free shipping</b></span><span class="it"><b>Ships in 1 business day</b></span><span class="it"><b>2-year crib warranty</b></span><span class="it"><b>14-day returns</b></span><span class="it"><b>Free shipping</b></span><span class="it"><b>Ships in 1 business day</b></span><span class="it"><b>2-year crib warranty</b></span><span class="it"><b>14-day returns</b></span></div>
+      <ul class="rs-list"><li><svg class="hd" aria-hidden="true" focusable="false"><use href="#h-truck"/></svg><span class="rs-t">Free shipping to the 48 states</span></li><li><svg class="hd" aria-hidden="true" focusable="false"><use href="#h-box"/></svg><span class="rs-t">Ships in 1 business day</span></li><li><svg class="hd" aria-hidden="true" focusable="false"><use href="#h-shield"/></svg><span class="rs-t">2-year crib warranty</span></li><li><svg class="hd" aria-hidden="true" focusable="false"><use href="#h-ret"/></svg><span class="rs-t">14-day returns</span></li></ul>
     </div>
   </section>
 
   <div class="sheet">
     <div class="floaters" aria-hidden="true"><span class="fl fl-moon" data-speed="-0.35"><svg viewBox="0 0 160 160" focusable="false"><use href="#t-sparkles"/></svg></span><span class="fl fl-cloud" data-speed="-0.6"><svg viewBox="0 0 160 160" focusable="false"><use href="#t-plane"/></svg></span></div>
     <section class="tstrip" aria-label="Why parents trust dadada">
-      <ul class="ts-icons"><li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 38V20l14-9 14 9v18"/><path d="M6 38h36"/><path d="M18 38V26h12v12"/><path d="M24 11V6"/></svg><div><b>Made in Italy</b><span>Solid beech, built to last</span></div></li><li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M24 6c8 4 14 5 14 5v13c0 9-6 15-14 18C16 39 10 33 10 24V11s6-1 14-5z"/><path d="M17 24l5 5 9-10"/></svg><div><b>GREENGUARD Gold</b><span>Certified for low emissions</span></div></li><li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="24" cy="21" r="12"/><path d="M17 31l-3 12 10-5 10 5-3-12"/><path d="M19 21l4 4 7-8"/></svg><div><b>Babylist award</b><span>Best Modern Crib, 2023</span></div></li><li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 34h36"/><path d="M10 34V20h28v14"/><path d="M10 26h28"/><path d="M16 20v-6M32 20v-6"/></svg><div><b>Grows with baby</b><span>Converts from cradle to big-kid bed</span></div></li></ul>
       <p class="ts-cap">Find dadada at</p>
       <div class="logo-marquee" role="group" aria-label="Retailers that carry dadada"><div class="lm-track"><ul><li><img src="img/logos/babylist.webp" alt="Babylist" loading="lazy" decoding="async"></li><li><img src="img/logos/target.webp" alt="Target" loading="lazy" decoding="async"></li><li><img src="img/logos/amazon.webp" alt="Amazon" loading="lazy" decoding="async"></li><li><img src="img/logos/wayfair.webp" alt="Wayfair" loading="lazy" decoding="async"></li><li><img src="img/logos/albee.webp" alt="Albee Baby" loading="lazy" decoding="async"></li><li><img src="img/logos/projectnursery.webp" alt="Project Nursery" loading="lazy" decoding="async"></li><li><img src="img/logos/modernnursery.webp" alt="Modern Nursery" loading="lazy" decoding="async"></li><li><img src="img/logos/ellaelliot.webp" alt="Ella and Elliot" loading="lazy" decoding="async"></li><li><img src="img/logos/nestled.webp" alt="Nestled by Snuggle Bugz" loading="lazy" decoding="async"></li><li><img src="img/logos/macklems.webp" alt="Macklem's" loading="lazy" decoding="async"></li></ul><ul aria-hidden="true"><li><img src="img/logos/babylist.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/target.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/amazon.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/wayfair.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/albee.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/projectnursery.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/modernnursery.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/ellaelliot.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/nestled.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/macklems.webp" alt="" loading="lazy" decoding="async"></li></ul></div></div>
     </section>
