@@ -2924,22 +2924,13 @@
   .lm-track { display: flex; width: max-content; animation: lm 70s linear infinite; }
   .logo-marquee:hover .lm-track { animation-play-state: paused; }
   .lm-track ul { list-style: none; margin: 0; padding: 0 clamp(20px, 3vw, 48px) 0 0; display: flex; align-items: center; gap: clamp(40px, 5.5vw, 88px); flex: 0 0 auto; padding-right: clamp(40px, 5.5vw, 88px); }
-  .lm-track img { display: block; height: clamp(26px, 2.6vw, 38px); width: auto; max-width: 160px; object-fit: contain; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; opacity: .5; transition: opacity .3s var(--ease); }
+  .lm-track img { display: block; height: calc(var(--h) * var(--lgs, 1)); width: auto; opacity: .62; transition: opacity .3s var(--ease); }
   .lm-track img:hover { opacity: .9; }
   @keyframes lm { to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .lm-track { animation: none; } .logo-marquee { overflow-x: auto; } }
   @media (max-width: 900px) { .ts-icons { grid-template-columns: 1fr 1fr; gap: 22px 16px; } }
   @media (max-width: 480px) { .ts-icons svg { width: 36px; height: 36px; } .ts-icons li { gap: 12px; } .lm-track { animation-duration: 55s; } }
 
-  /* ---------- QUIZ NOTE as a slim strip ---------- */
-  html body .note { grid-template-columns: auto minmax(0, 1fr) !important; gap: clamp(20px, 3vw, 44px) !important; padding-top: clamp(28px, 3vw, 44px) !important; padding-bottom: clamp(28px, 3vw, 44px) !important; align-items: center; }
-  html body .note .dd { display: none !important; }
-  html body .note .note-img { order: -1; width: clamp(64px, 7vw, 96px); aspect-ratio: 4 / 5; border-radius: 999px 999px 14px 14px; }
-  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(20px, 3vw, 48px); row-gap: 4px; align-items: center; }
-  html body .note .note-side h2#note-h { grid-area: h; margin: 0; font-size: clamp(22px, 2.4vw, 38px); }
-  html body .note .note-side p { grid-area: p; margin: 0; max-width: 60ch; font-size: 16px; }
-  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; }
-  @media (max-width: 700px) { html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; row-gap: 8px; } html body .note .note-side .pill { margin-top: 8px; justify-self: start; } html body .note .note-img { width: 56px; } }
   html body .tstrip + .best { padding-top: clamp(20px, 2.5vw, 40px); }
 
   /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
@@ -2958,6 +2949,38 @@
   html body .tstrip .logo-marquee { width: 100%; }
   @media (max-width: 860px) { html body .tstrip { height: 120px; } }
   html body .tstrip + .best { padding-top: var(--s-sec); }
+
+  /* ---------- QUIZ BAND: photo, heading + line, button ---------- */
+  html body .note { grid-template-columns: clamp(220px, 22vw, 340px) minmax(0, 1fr) !important; gap: clamp(28px, 4vw, 64px) !important; padding-top: clamp(36px, 4vw, 56px) !important; padding-bottom: clamp(36px, 4vw, 56px) !important; align-items: center; }
+  html body .note .dd { display: none !important; }
+  html body .note .note-img { order: -1; width: 100%; aspect-ratio: 16 / 10; border-radius: 28px; overflow: hidden; }
+  html body .note .note-img img { width: 100%; height: 100% !important; object-fit: cover; object-position: 50% 60%; transform: none !important; display: block; }
+  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(28px, 4vw, 64px); row-gap: 0; align-items: center; align-content: center; }
+  html body .note .note-side h2#note-h { grid-area: h; margin: 0 0 14px; font-size: var(--d2); line-height: 1.04 !important; }
+  html body .note .note-side p { grid-area: p; margin: 0; max-width: 46ch; font-size: 18px; line-height: 1.45; }
+  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; align-self: center; }
+  @media (max-width: 900px) { html body .note { grid-template-columns: 1fr !important; gap: 24px !important; } html body .note .note-img { aspect-ratio: 16 / 9; } html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; } html body .note .note-side h2#note-h { margin-bottom: 10px; } html body .note .note-side .pill { justify-self: start; margin-top: 22px; } }
+  /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
+  html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
+  html body .hero-rib .rs-list li { gap: 12px; }
+  html body .hero-rib .rs-list .hd { color: var(--cream); background: rgba(254, 251, 237, .1); }
+  html body .hero-rib .rs-list .rs-t { font-family: var(--sans); font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none; color: rgba(254, 251, 237, .92); line-height: 1.2; white-space: nowrap; }
+  @media (max-width: 1100px) { html body .hero-rib .rs-list { gap: 28px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 92px; } html body .hero-rib { overflow: hidden !important; } html body .hero-rib .rs-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding: 0 var(--g) !important; } html body .hero-rib .rs-list .hd { width: 30px; height: 30px; padding: 7px; flex: none; } html body .hero-rib .rs-list .rs-t { font-size: 13px !important; white-space: normal; } }
+  /* retailer caption */
+  .ts-cap { text-align: center; margin: 0 var(--g) 16px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .06em !important; text-transform: uppercase; color: #77777a !important; opacity: 1 !important; }
+  .tstrip { padding-top: clamp(22px, 2.6vw, 36px) !important; }
+
+  /* ---------- LOGO STRIP: faint ground, exactly twice the ribbon's height ---------- */
+  html body .tstrip { display: flex; align-items: center; padding: 0 !important; height: calc(2 * clamp(64px, 7vh, 84px)); background: color-mix(in srgb, var(--blue) 5%, var(--cream)); }
+  html body .tstrip .logo-marquee { width: 100%; }
+  @media (max-width: 860px) { html body .tstrip { height: 120px; } }
+  html body .tstrip + .best { padding-top: var(--s-sec); }
+
+
+  @media (max-width: 700px) { .lm-track { --lgs: .8; } }
+  /* ---------- NO DOODLES ---------- */
+  html body .dd, html body .fl, html body .floaters, html body .dd-free, html body svg.dd { display: none !important; }
 </style>
 <style id="pal-pantone" media="not all">
   :root {
@@ -5873,22 +5896,13 @@
   .lm-track { display: flex; width: max-content; animation: lm 70s linear infinite; }
   .logo-marquee:hover .lm-track { animation-play-state: paused; }
   .lm-track ul { list-style: none; margin: 0; padding: 0 clamp(20px, 3vw, 48px) 0 0; display: flex; align-items: center; gap: clamp(40px, 5.5vw, 88px); flex: 0 0 auto; padding-right: clamp(40px, 5.5vw, 88px); }
-  .lm-track img { display: block; height: clamp(26px, 2.6vw, 38px); width: auto; max-width: 160px; object-fit: contain; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; opacity: .5; transition: opacity .3s var(--ease); }
+  .lm-track img { display: block; height: calc(var(--h) * var(--lgs, 1)); width: auto; opacity: .62; transition: opacity .3s var(--ease); }
   .lm-track img:hover { opacity: .9; }
   @keyframes lm { to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .lm-track { animation: none; } .logo-marquee { overflow-x: auto; } }
   @media (max-width: 900px) { .ts-icons { grid-template-columns: 1fr 1fr; gap: 22px 16px; } }
   @media (max-width: 480px) { .ts-icons svg { width: 36px; height: 36px; } .ts-icons li { gap: 12px; } .lm-track { animation-duration: 55s; } }
 
-  /* ---------- QUIZ NOTE as a slim strip ---------- */
-  html body .note { grid-template-columns: auto minmax(0, 1fr) !important; gap: clamp(20px, 3vw, 44px) !important; padding-top: clamp(28px, 3vw, 44px) !important; padding-bottom: clamp(28px, 3vw, 44px) !important; align-items: center; }
-  html body .note .dd { display: none !important; }
-  html body .note .note-img { order: -1; width: clamp(64px, 7vw, 96px); aspect-ratio: 4 / 5; border-radius: 999px 999px 14px 14px; }
-  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(20px, 3vw, 48px); row-gap: 4px; align-items: center; }
-  html body .note .note-side h2#note-h { grid-area: h; margin: 0; font-size: clamp(22px, 2.4vw, 38px); }
-  html body .note .note-side p { grid-area: p; margin: 0; max-width: 60ch; font-size: 16px; }
-  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; }
-  @media (max-width: 700px) { html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; row-gap: 8px; } html body .note .note-side .pill { margin-top: 8px; justify-self: start; } html body .note .note-img { width: 56px; } }
   html body .tstrip + .best { padding-top: clamp(20px, 2.5vw, 40px); }
 
   /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
@@ -5907,6 +5921,38 @@
   html body .tstrip .logo-marquee { width: 100%; }
   @media (max-width: 860px) { html body .tstrip { height: 120px; } }
   html body .tstrip + .best { padding-top: var(--s-sec); }
+
+  /* ---------- QUIZ BAND: photo, heading + line, button ---------- */
+  html body .note { grid-template-columns: clamp(220px, 22vw, 340px) minmax(0, 1fr) !important; gap: clamp(28px, 4vw, 64px) !important; padding-top: clamp(36px, 4vw, 56px) !important; padding-bottom: clamp(36px, 4vw, 56px) !important; align-items: center; }
+  html body .note .dd { display: none !important; }
+  html body .note .note-img { order: -1; width: 100%; aspect-ratio: 16 / 10; border-radius: 28px; overflow: hidden; }
+  html body .note .note-img img { width: 100%; height: 100% !important; object-fit: cover; object-position: 50% 60%; transform: none !important; display: block; }
+  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(28px, 4vw, 64px); row-gap: 0; align-items: center; align-content: center; }
+  html body .note .note-side h2#note-h { grid-area: h; margin: 0 0 14px; font-size: var(--d2); line-height: 1.04 !important; }
+  html body .note .note-side p { grid-area: p; margin: 0; max-width: 46ch; font-size: 18px; line-height: 1.45; }
+  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; align-self: center; }
+  @media (max-width: 900px) { html body .note { grid-template-columns: 1fr !important; gap: 24px !important; } html body .note .note-img { aspect-ratio: 16 / 9; } html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; } html body .note .note-side h2#note-h { margin-bottom: 10px; } html body .note .note-side .pill { justify-self: start; margin-top: 22px; } }
+  /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
+  html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
+  html body .hero-rib .rs-list li { gap: 12px; }
+  html body .hero-rib .rs-list .hd { color: var(--cream); background: rgba(254, 251, 237, .1); }
+  html body .hero-rib .rs-list .rs-t { font-family: var(--sans); font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none; color: rgba(254, 251, 237, .92); line-height: 1.2; white-space: nowrap; }
+  @media (max-width: 1100px) { html body .hero-rib .rs-list { gap: 28px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 92px; } html body .hero-rib { overflow: hidden !important; } html body .hero-rib .rs-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding: 0 var(--g) !important; } html body .hero-rib .rs-list .hd { width: 30px; height: 30px; padding: 7px; flex: none; } html body .hero-rib .rs-list .rs-t { font-size: 13px !important; white-space: normal; } }
+  /* retailer caption */
+  .ts-cap { text-align: center; margin: 0 var(--g) 16px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .06em !important; text-transform: uppercase; color: #77777a !important; opacity: 1 !important; }
+  .tstrip { padding-top: clamp(22px, 2.6vw, 36px) !important; }
+
+  /* ---------- LOGO STRIP: faint ground, exactly twice the ribbon's height ---------- */
+  html body .tstrip { display: flex; align-items: center; padding: 0 !important; height: calc(2 * clamp(64px, 7vh, 84px)); background: color-mix(in srgb, var(--blue) 5%, var(--cream)); }
+  html body .tstrip .logo-marquee { width: 100%; }
+  @media (max-width: 860px) { html body .tstrip { height: 120px; } }
+  html body .tstrip + .best { padding-top: var(--s-sec); }
+
+
+  @media (max-width: 700px) { .lm-track { --lgs: .8; } }
+  /* ---------- NO DOODLES ---------- */
+  html body .dd, html body .fl, html body .floaters, html body .dd-free, html body svg.dd { display: none !important; }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -8845,22 +8891,13 @@
   .lm-track { display: flex; width: max-content; animation: lm 70s linear infinite; }
   .logo-marquee:hover .lm-track { animation-play-state: paused; }
   .lm-track ul { list-style: none; margin: 0; padding: 0 clamp(20px, 3vw, 48px) 0 0; display: flex; align-items: center; gap: clamp(40px, 5.5vw, 88px); flex: 0 0 auto; padding-right: clamp(40px, 5.5vw, 88px); }
-  .lm-track img { display: block; height: clamp(26px, 2.6vw, 38px); width: auto; max-width: 160px; object-fit: contain; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; opacity: .5; transition: opacity .3s var(--ease); }
+  .lm-track img { display: block; height: calc(var(--h) * var(--lgs, 1)); width: auto; opacity: .62; transition: opacity .3s var(--ease); }
   .lm-track img:hover { opacity: .9; }
   @keyframes lm { to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .lm-track { animation: none; } .logo-marquee { overflow-x: auto; } }
   @media (max-width: 900px) { .ts-icons { grid-template-columns: 1fr 1fr; gap: 22px 16px; } }
   @media (max-width: 480px) { .ts-icons svg { width: 36px; height: 36px; } .ts-icons li { gap: 12px; } .lm-track { animation-duration: 55s; } }
 
-  /* ---------- QUIZ NOTE as a slim strip ---------- */
-  html body .note { grid-template-columns: auto minmax(0, 1fr) !important; gap: clamp(20px, 3vw, 44px) !important; padding-top: clamp(28px, 3vw, 44px) !important; padding-bottom: clamp(28px, 3vw, 44px) !important; align-items: center; }
-  html body .note .dd { display: none !important; }
-  html body .note .note-img { order: -1; width: clamp(64px, 7vw, 96px); aspect-ratio: 4 / 5; border-radius: 999px 999px 14px 14px; }
-  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(20px, 3vw, 48px); row-gap: 4px; align-items: center; }
-  html body .note .note-side h2#note-h { grid-area: h; margin: 0; font-size: clamp(22px, 2.4vw, 38px); }
-  html body .note .note-side p { grid-area: p; margin: 0; max-width: 60ch; font-size: 16px; }
-  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; }
-  @media (max-width: 700px) { html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; row-gap: 8px; } html body .note .note-side .pill { margin-top: 8px; justify-self: start; } html body .note .note-img { width: 56px; } }
   html body .tstrip + .best { padding-top: clamp(20px, 2.5vw, 40px); }
 
   /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
@@ -8879,6 +8916,38 @@
   html body .tstrip .logo-marquee { width: 100%; }
   @media (max-width: 860px) { html body .tstrip { height: 120px; } }
   html body .tstrip + .best { padding-top: var(--s-sec); }
+
+  /* ---------- QUIZ BAND: photo, heading + line, button ---------- */
+  html body .note { grid-template-columns: clamp(220px, 22vw, 340px) minmax(0, 1fr) !important; gap: clamp(28px, 4vw, 64px) !important; padding-top: clamp(36px, 4vw, 56px) !important; padding-bottom: clamp(36px, 4vw, 56px) !important; align-items: center; }
+  html body .note .dd { display: none !important; }
+  html body .note .note-img { order: -1; width: 100%; aspect-ratio: 16 / 10; border-radius: 28px; overflow: hidden; }
+  html body .note .note-img img { width: 100%; height: 100% !important; object-fit: cover; object-position: 50% 60%; transform: none !important; display: block; }
+  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(28px, 4vw, 64px); row-gap: 0; align-items: center; align-content: center; }
+  html body .note .note-side h2#note-h { grid-area: h; margin: 0 0 14px; font-size: var(--d2); line-height: 1.04 !important; }
+  html body .note .note-side p { grid-area: p; margin: 0; max-width: 46ch; font-size: 18px; line-height: 1.45; }
+  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; align-self: center; }
+  @media (max-width: 900px) { html body .note { grid-template-columns: 1fr !important; gap: 24px !important; } html body .note .note-img { aspect-ratio: 16 / 9; } html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; } html body .note .note-side h2#note-h { margin-bottom: 10px; } html body .note .note-side .pill { justify-self: start; margin-top: 22px; } }
+  /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
+  html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
+  html body .hero-rib .rs-list li { gap: 12px; }
+  html body .hero-rib .rs-list .hd { color: var(--cream); background: rgba(254, 251, 237, .1); }
+  html body .hero-rib .rs-list .rs-t { font-family: var(--sans); font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none; color: rgba(254, 251, 237, .92); line-height: 1.2; white-space: nowrap; }
+  @media (max-width: 1100px) { html body .hero-rib .rs-list { gap: 28px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 92px; } html body .hero-rib { overflow: hidden !important; } html body .hero-rib .rs-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding: 0 var(--g) !important; } html body .hero-rib .rs-list .hd { width: 30px; height: 30px; padding: 7px; flex: none; } html body .hero-rib .rs-list .rs-t { font-size: 13px !important; white-space: normal; } }
+  /* retailer caption */
+  .ts-cap { text-align: center; margin: 0 var(--g) 16px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .06em !important; text-transform: uppercase; color: #77777a !important; opacity: 1 !important; }
+  .tstrip { padding-top: clamp(22px, 2.6vw, 36px) !important; }
+
+  /* ---------- LOGO STRIP: faint ground, exactly twice the ribbon's height ---------- */
+  html body .tstrip { display: flex; align-items: center; padding: 0 !important; height: calc(2 * clamp(64px, 7vh, 84px)); background: color-mix(in srgb, var(--blue) 5%, var(--cream)); }
+  html body .tstrip .logo-marquee { width: 100%; }
+  @media (max-width: 860px) { html body .tstrip { height: 120px; } }
+  html body .tstrip + .best { padding-top: var(--s-sec); }
+
+
+  @media (max-width: 700px) { .lm-track { --lgs: .8; } }
+  /* ---------- NO DOODLES ---------- */
+  html body .dd, html body .fl, html body .floaters, html body .dd-free, html body svg.dd { display: none !important; }
   /* ---------- TROPINA PROTOTYPE: tomato grounds, acid-lime type ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -8942,7 +9011,7 @@
   <div class="sheet">
     <div class="floaters" aria-hidden="true"><span class="fl fl-moon" data-speed="-0.35"><svg viewBox="0 0 160 160" focusable="false"><use href="#t-sparkles"/></svg></span><span class="fl fl-cloud" data-speed="-0.6"><svg viewBox="0 0 160 160" focusable="false"><use href="#t-plane"/></svg></span></div>
     <section class="tstrip" aria-label="Why parents trust dadada">
-      <div class="logo-marquee" role="group" aria-label="Retailers that carry dadada"><div class="lm-track"><ul><li><img src="img/logos/babylist.webp" alt="Babylist" loading="lazy" decoding="async"></li><li><img src="img/logos/target.webp" alt="Target" loading="lazy" decoding="async"></li><li><img src="img/logos/amazon.webp" alt="Amazon" loading="lazy" decoding="async"></li><li><img src="img/logos/wayfair.webp" alt="Wayfair" loading="lazy" decoding="async"></li><li><img src="img/logos/albee.webp" alt="Albee Baby" loading="lazy" decoding="async"></li><li><img src="img/logos/projectnursery.webp" alt="Project Nursery" loading="lazy" decoding="async"></li><li><img src="img/logos/modernnursery.webp" alt="Modern Nursery" loading="lazy" decoding="async"></li><li><img src="img/logos/ellaelliot.webp" alt="Ella and Elliot" loading="lazy" decoding="async"></li><li><img src="img/logos/nestled.webp" alt="Nestled by Snuggle Bugz" loading="lazy" decoding="async"></li><li><img src="img/logos/macklems.webp" alt="Macklem's" loading="lazy" decoding="async"></li></ul><ul aria-hidden="true"><li><img src="img/logos/babylist.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/target.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/amazon.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/wayfair.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/albee.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/projectnursery.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/modernnursery.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/ellaelliot.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/nestled.webp" alt="" loading="lazy" decoding="async"></li><li><img src="img/logos/macklems.webp" alt="" loading="lazy" decoding="async"></li></ul></div></div>
+      <div class="logo-marquee" role="group" aria-label="Retailers that carry dadada"><div class="lm-track"><ul><li><img src="img/logos/babylist.png" alt="Babylist" style="--h:33px" loading="lazy" decoding="async"></li><li><img src="img/logos/target.png" alt="Target" style="--h:38px" loading="lazy" decoding="async"></li><li><img src="img/logos/amazon.png" alt="Amazon" style="--h:38px" loading="lazy" decoding="async"></li><li><img src="img/logos/wayfair.png" alt="Wayfair" style="--h:35px" loading="lazy" decoding="async"></li><li><img src="img/logos/albee.png" alt="Albee Baby" style="--h:29px" loading="lazy" decoding="async"></li><li><img src="img/logos/projectnursery.png" alt="Project Nursery" style="--h:30px" loading="lazy" decoding="async"></li><li><img src="img/logos/modernnursery.png" alt="Modern Nursery" style="--h:37px" loading="lazy" decoding="async"></li><li><img src="img/logos/ellaelliot.png" alt="Ella and Elliot" style="--h:38px" loading="lazy" decoding="async"></li><li><img src="img/logos/nestled.png" alt="Nestled by Snuggle Bugz" style="--h:29px" loading="lazy" decoding="async"></li><li><img src="img/logos/macklems.png" alt="Macklem's" style="--h:38px" loading="lazy" decoding="async"></li></ul><ul aria-hidden="true"><li><img src="img/logos/babylist.png" alt="" style="--h:33px" loading="lazy" decoding="async"></li><li><img src="img/logos/target.png" alt="" style="--h:38px" loading="lazy" decoding="async"></li><li><img src="img/logos/amazon.png" alt="" style="--h:38px" loading="lazy" decoding="async"></li><li><img src="img/logos/wayfair.png" alt="" style="--h:35px" loading="lazy" decoding="async"></li><li><img src="img/logos/albee.png" alt="" style="--h:29px" loading="lazy" decoding="async"></li><li><img src="img/logos/projectnursery.png" alt="" style="--h:30px" loading="lazy" decoding="async"></li><li><img src="img/logos/modernnursery.png" alt="" style="--h:37px" loading="lazy" decoding="async"></li><li><img src="img/logos/ellaelliot.png" alt="" style="--h:38px" loading="lazy" decoding="async"></li><li><img src="img/logos/nestled.png" alt="" style="--h:29px" loading="lazy" decoding="async"></li><li><img src="img/logos/macklems.png" alt="" style="--h:38px" loading="lazy" decoding="async"></li></ul></div></div>
     </section>
     <section class="best" id="best" aria-labelledby="best-h">
       <div class="best-head"><div class="best-ht"><h2 class="h2" id="best-h">Our best sellers.</h2><p class="sec-sub">The pieces parents choose most. Filter by what you're shopping for.</p><div class="best-tabs" role="group" aria-label="Filter best sellers"><button type="button" data-cat="all" aria-pressed="true">All</button><button type="button" data-cat="cribs" aria-pressed="false">Cribs</button><button type="button" data-cat="dressers" aria-pressed="false">Dressers</button><button type="button" data-cat="kids" aria-pressed="false">Toddler &amp; kids</button></div></div><a class="pill ghost dark sm" href="#best">Shop all <span class="ar" aria-hidden="true">→</span></a></div>
@@ -9017,7 +9086,7 @@
         <p>Four questions about your space and your style, and we'll pick the crib that fits, and say why.</p>
         <a class="pill blue" href="#/fit">Take the quiz <span class="ar" aria-hidden="true">→</span></a>
       </div>
-      <div class="note-img"><img src="img/film-1.jpg" alt="An expectant mother's hand resting on the rail of a natural beech crib" loading="lazy" data-parallax></div>
+      <div class="note-img"><img src="img/film-1.jpg" alt="An expectant mother's hand resting on the rail of a natural beech crib" loading="lazy"></div>
     </section>
 
     <section class="blog" id="journal" aria-labelledby="bl-h"><svg class="dd dd-free dd-zzz" viewBox="0 0 160 160" aria-hidden="true" focusable="false"><use href="#t-zzz"/></svg>
