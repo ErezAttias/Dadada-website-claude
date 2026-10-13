@@ -1,0 +1,20 @@
+  /* ---------- DENIM PROTOTYPE: tomato grounds carry navy text ---------- */
+  html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
+  html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
+  html body #pdp .cmp-cta, html body #pdp .cmp-cta h2, html body #pdp .cmp-cta p, html body .cmp-cta h2, html body .cmp-cta p,
+  html body #pdp .next, html body #pdp .next .next-name, html body #pdp .next .mono, html body #pdp .next .mono span, html body .next .next-name, html body .next .mono span { color: var(--navy) !important; }
+  html body .foot h4, html body .foot-cols h4 { color: var(--lime) !important; }
+  html body .stl-tot small { color: var(--cream) !important; }
+  html body .pill.lime-p, html body .pill.lime-p .ar, html body .pill.lime, html body .pill.lime .ar, html body #pdp .add, html body #pdp .add .p, html body .hset .pill.lime { color: var(--navy) !important; }
+  html body .hero-shade { background: linear-gradient(180deg, rgba(30, 37, 64, .5) 0%, rgba(30, 37, 64, .08) 28%, rgba(30, 37, 64, .3) 48%, rgba(30, 37, 64, .78) 100%); }
+  /* headings on the butter ground are tomato (a touch deeper for 4:1) */
+  html body .cats-head h2.h2, html body .best-head h2.h2, html body .revs-head h2.h2, html body .bl-head h2.h2, html body #coll-h, html body .qa h2, html body .rooms-head h2,
+  html body .index-row .name, html body .foot-big.x, html body #pdp .sec-head h2, html body #pdp .pl-head h2, html body #pdp #faq-h, html body #pdp .buy-head h1, html body #pdp .g-left h2, html body #pdp .rv-score { color: #e23a18; }
+  html body .rooms-head h2 { color: #e23a18; }
+  html body #rv-home-h, html body #rooms-h, html body #note-h, html body #pdp .rv-score, html body #pdp #rv-h { color: #e23a18 !important; }
+  /* subtitles and slider arrows on the butter ground follow the headings */
+  html body .sec-sub, html body .sec-sub b, html body .rooms-head p, html body #pdp .sec-head .lede, html body .best-ht .sec-sub, html body .bl-head .sec-sub, html body .qa p.sec-sub, html body #note-h + p { color: #d93616; }
+  html body .stl-head .sec-sub, html body .stl-head .sec-sub b, html body .hset .sec-sub { color: var(--cream); }
+  html body .r-arr { background: #e23a18; color: var(--cream); }
+  html body .r-arr:disabled { background: #e23a18; }
+  html body .index-row .go, html body .best-tabs button[aria-pressed="true"], html body #pdp .hot, html body #pdp .ex-reset, html body #pdp .size-up .lt, html body #pdp .buybar, html body #pdp .flip { background: #e23a18; }

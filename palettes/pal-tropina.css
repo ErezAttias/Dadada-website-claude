@@ -1,0 +1,10 @@
+  /* ---------- TROPINA PROTOTYPE: tomato grounds, acid-lime type ---------- */
+  html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
+  html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
+  html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup,
+  html body #pdp .cmp-cta h2, html body #pdp .cmp-cta p, html body .cmp-cta h2, html body .cmp-cta p,
+  html body #pdp .next, html body #pdp .next .mono, html body #pdp .next .mono span, html body .next .mono span { color: var(--cream) !important; }
+  html body .foot h4, html body .foot-cols h4 { color: var(--lime) !important; }
+  html body .stl-tot small { color: var(--cream) !important; }
+  html body .foot h4, html body .foot-cols h4 { color: var(--cream) !important; opacity: 1; }
+  html body .pill.lime-p, html body .pill.lime-p .ar, html body .pill.lime, html body .pill.lime .ar, html body #pdp .add, html body #pdp .add .p, html body .hset .pill.lime { color: var(--blue) !important; }

@@ -1,0 +1,33 @@
+  /* ---------- VITAME PROTOTYPE: periwinkle ink, sage, orange action, charcoal grounds ---------- */
+  /* periwinkle blocks speak sage and cream (the reference pairing) */
+  html body .hset h2 { color: #dce7ad !important; }
+  html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span { color: var(--cream) !important; }
+  /* orange buttons carry charcoal */
+  html body .pill.lime-p, html body .pill.lime-p .ar, html body .pill.lime, html body .pill.lime .ar, html body #pdp .add, html body #pdp .add .p, html body .hset .pill.lime { color: var(--navy) !important; }
+  html body .foot h4, html body .foot-cols h4 { color: #dce7ad !important; }
+  html body .stl-tot small { color: var(--cream) !important; }
+  html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
+  html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup { color: var(--cream) !important; }
+  /* over the film: sage */
+  html body .hero-h, html body .hero-h .ln, html body .hero-h .ln-lime, html body .hero-sub, html body .hero .pill.ghost, html body .hero .pill.ghost:hover,
+  html body .nav.on-film:not(.pill-on), html body .nav.on-film:not(.pill-on) .word, html body .nav.on-film:not(.pill-on) .links a, html body .nav.on-film:not(.pill-on) .links button, html body .nav.on-film:not(.pill-on) .right button, html body .nav.on-film:not(.pill-on) .right a { color: #dce7ad !important; }
+  html body .hero .pill.knock svg .fill { fill: #dce7ad; }
+  html body .nav.on-film:not(.pill-on) .burger { background: #dce7ad; }
+  html body .nav.on-film:not(.pill-on) .burger i { background: var(--navy); }
+  /* periwinkle and orange never sit on each other as text: orange grounds take charcoal, periwinkle grounds take cream */
+  html body #rv-home-h .hl, html body .hl { color: var(--navy) !important; }
+  html body .card .badge, html body .best-grid .card .badge, html body #pdp .buy-head .award, html body .foot-news button, html body .foot-news button *, html body .nav.on-film .cart.ico b { color: var(--navy) !important; }
+  html body .pill.blue, html body .pill.blue .ar, html body .nav .cart b, html body #pdp .hot, html body #pdp .ex-reset, html body #pdp #p-stage .ex-reset, html body #pdp .size-up .lt, html body .stl .hot, html body .stl-stage .hot, html body .best-tabs button[aria-pressed="true"] { color: var(--cream) !important; }
+  html body .stl-stage .hot, html body .stl .hot { background: var(--lime); color: var(--navy) !important; }
+  html body #pdp .next { background: var(--lime) !important; color: var(--navy) !important; }
+  html body #pdp .next .next-name, html body #pdp .next .mono, html body #pdp .next .mono span { color: var(--navy) !important; }
+  html body #pdp .pa-math button { background: var(--lime) !important; color: var(--navy) !important; }
+  /* v2: sage is the loud type colour; orange becomes a ground — "Still deciding?" sits on it, in charcoal */
+  html body .note h2, html body .note #note-h, html body .note .note-side p { color: var(--navy) !important; }
+  html body .note .pill.blue { background: var(--navy); color: var(--cream) !important; }
+  html body .note .pill.blue .ar { color: var(--cream) !important; }
+  /* set section on charcoal */
+  html body .hset { background: var(--navy) !important; }
+  /* category tiles: arrow button sage at rest, orange on hover */
+  html body .cat .go { background: #dce7ad; color: var(--navy); }
+  html body .cat:hover .go, html body .cat:focus-visible .go { background: #ec643a; color: var(--navy); }

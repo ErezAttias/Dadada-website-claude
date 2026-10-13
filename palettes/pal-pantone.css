@@ -1,0 +1,7 @@
+  /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
+  html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
+  html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
+  html body #pdp .cmp-cta, html body #pdp .cmp-cta h2, html body #pdp .cmp-cta p, html body .cmp-cta h2, html body .cmp-cta p,
+  html body #pdp .next, html body #pdp .next .next-name, html body #pdp .next .mono, html body #pdp .next .mono span, html body .next .next-name, html body .next .mono span { color: var(--cream) !important; }
+  html body .foot h4, html body .foot-cols h4 { color: var(--lime) !important; }
+  html body .stl-tot small { color: var(--cream) !important; }

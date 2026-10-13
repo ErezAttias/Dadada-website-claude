@@ -1,0 +1,35 @@
+<style id="palsw-css">
+  .palsw { position: fixed; left: 14px; bottom: 14px; z-index: 2147483000; display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: 999px; background: rgba(20, 20, 24, .92); color: #fff; font: 600 12px/1 Inter, system-ui, sans-serif; box-shadow: 0 6px 24px rgba(0, 0, 0, .28); backdrop-filter: blur(8px); }
+  .palsw > span { padding: 0 8px 0 10px; letter-spacing: .08em; text-transform: uppercase; opacity: .6; font-size: 10.5px; }
+  .palsw button { display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 12px 0 8px; border-radius: 999px; border: 0; background: transparent; color: #fff; font: inherit; cursor: pointer; }
+  .palsw button[aria-pressed="true"] { background: #fff; color: #141418; }
+  .palsw .sws { display: inline-flex; }
+  .palsw .sws i { width: 12px; height: 12px; border-radius: 50%; margin-left: -4px; box-shadow: 0 0 0 1.5px rgba(20, 20, 24, .92); }
+  .palsw button[aria-pressed="true"] .sws i { box-shadow: 0 0 0 1.5px #fff; }
+  .palsw .sws i:first-child { margin-left: 0; }
+  @media (max-width: 760px) { .palsw { left: 10px; top: 76px; bottom: auto; } .palsw > span { display: none; } .palsw button { padding: 0 10px 0 6px; } .palsw button .nm { display: none; } .palsw button[aria-pressed="true"] .nm { display: inline; } }
+</style>
+<script>
+(() => {
+  const P = {
+    base: { name: "Original", sw: ["#1f25f5", "#eefe53", "#b5a8e1", "#10233f"], map: {} },
+    pantone: { name: "Pantone", sw: ["#233563", "#fbeda4", "#d52d32", "#18233f"], map: { "#10233f": "#18233f", "#b5a8e1": "#d52d32", "#eefe53": "#fbeda4", "#1f25f5": "#233563" } },
+    tropina: { name: "Tropina", sw: ["#b8321a", "#d2ea4c", "#ea532f", "#fefbed"], map: { "#10233f": "#ea532f", "#b5a8e1": "#ea532f", "#eefe53": "#d2ea4c", "#1f25f5": "#b8321a" } },
+  };
+  const keys = Object.keys(P);
+  let cur = "base";
+  try { const q = new URLSearchParams(location.search).get("pal") || localStorage.getItem("dd-pal"); if (q && P[q]) cur = q; } catch (e) {}
+  const bar = document.createElement("div"); bar.className = "palsw"; bar.setAttribute("role", "group"); bar.setAttribute("aria-label", "Colour palette");
+  bar.innerHTML = "<span>Palette</span>" + keys.map((k) => '<button type="button" data-k="' + k + '" aria-pressed="false"><span class="sws">' + P[k].sw.map((c) => '<i style="background:' + c + '"></i>').join("") + '</span><span class="nm">' + P[k].name + "</span></button>").join("");
+  const apply = (k) => {
+    window.__pq = (x) => (P[k].map[String(x).toLowerCase()] || x);
+    keys.forEach((n) => { const s = document.getElementById("pal-" + n); if (s) s.media = n === k ? "all" : "not all"; });
+    bar.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.k === k)));
+    document.documentElement.dataset.palette = k;
+    try { localStorage.setItem("dd-pal", k); } catch (e) {}
+    try { const u = new URL(location.href); u.searchParams.set("pal", k); history.replaceState(null, "", u); } catch (e) {}
+  };
+  bar.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) apply(b.dataset.k); });
+  document.body.appendChild(bar); apply(cur);
+})();
+</script>

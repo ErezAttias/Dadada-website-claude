@@ -1,0 +1,24 @@
+  /* ---------- FRESH PROTOTYPE: banana ground, black ink, azure blocks, red-orange action ---------- */
+  /* azure sections speak black */
+  html body .hset, html body .hset h2, html body .hset .hset-copy > p, html body .hset .hs-more, html body .hset .hs-more span { color: var(--blue) !important; }
+  /* black grounds speak banana; red-orange is the loud bit */
+  html body .foot h4, html body .foot-cols h4 { color: var(--lime) !important; }
+  html body .stl-tot small { color: var(--cream) !important; }
+  html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
+  html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup { color: var(--cream) !important; }
+  /* product cut-outs were shot on cream: multiply them into the banana ground */
+  html body .card .ph img.main.pl, html body #pdp .shop .product .shot, html body .hset-card img, html body .pa-card .pk, html body .cur img, html body .index-row img { mix-blend-mode: multiply; }
+  html body #pdp .shop .pimg, html body #pdp .shop .product { background: var(--cream) !important; }
+  /* over the film the loud colour is sun yellow, the poster's shorts — red-orange can't hold on video */
+  html body .hero-h, html body .hero-h .ln, html body .hero-h .ln-lime, html body .hero-sub, html body .hero .pill.ghost, html body .hero .pill.ghost:hover,
+  html body .nav.on-film:not(.pill-on), html body .nav.on-film:not(.pill-on) .word, html body .nav.on-film:not(.pill-on) .links a, html body .nav.on-film:not(.pill-on) .links button, html body .nav.on-film:not(.pill-on) .right button, html body .nav.on-film:not(.pill-on) .right a { color: #ffe14d !important; }
+  html body .hero .pill.knock svg .fill { fill: #ffe14d; }
+  html body .nav.on-film:not(.pill-on) .burger { background: #ffe14d; }
+  html body .rib-track .it::after { color: #ffe14d; }
+  html body .hero { --hero-c: #ffe14d; }
+  /* category tiles: titles in banana; on hover title, line and arrow all go sun yellow */
+  html body .cat h3 { color: var(--cream) !important; transition: color .45s var(--ease); }
+  html body .cat .bot p { transition: color .45s var(--ease); }
+  html body .cat .go { background: var(--cream); color: var(--blue); }
+  html body .cat:hover h3, html body .cat:hover .bot p, html body .cat:focus-visible h3, html body .cat:focus-visible .bot p { color: #ffe14d !important; }
+  html body .cat:hover .go, html body .cat:focus-visible .go { background: #ffe14d; color: var(--blue); }
