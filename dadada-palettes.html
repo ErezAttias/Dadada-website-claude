@@ -2899,6 +2899,18 @@
   html body #pdp .shop .dsp .sp-list { max-width: none; width: 100%; }
   html body #pdp .shop .plate-s .dsp { grid-column: 1 / -1; grid-row: auto; }
   html body #pdp .shop .plate-s .dsp .sp-list { grid-column: auto; grid-row: auto; }
+  /* MOBILE: categories and best sellers go full width, one per row */
+  @media (max-width: 760px) {
+    html body .cats-grid.four { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    html body .cats-grid.four .cat, html body .cats-grid.four .cat:first-child, html body .cats-grid.four .cat:nth-child(4) { aspect-ratio: 5 / 4; padding: 18px; border-radius: 22px; }
+    html body .cats .cat h3, html body .cats .cat:first-child h3 { font-size: 28px !important; }
+    html body .best-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    html body .best-grid .card .ph { aspect-ratio: 4 / 3; }
+    html body .best-grid .card h3, html body .best-grid .card.v2 h3 { font-size: 22px; }
+    html body .best-grid .card .k { font-size: 15px; }
+    html body .best-grid .card .pr { font-size: 19px; }
+    html body .best-grid .card .go { display: inline; }
+  }
 </style>
 <style id="pal-pantone" media="not all">
   :root {
@@ -5789,6 +5801,18 @@
   html body #pdp .shop .dsp .sp-list { max-width: none; width: 100%; }
   html body #pdp .shop .plate-s .dsp { grid-column: 1 / -1; grid-row: auto; }
   html body #pdp .shop .plate-s .dsp .sp-list { grid-column: auto; grid-row: auto; }
+  /* MOBILE: categories and best sellers go full width, one per row */
+  @media (max-width: 760px) {
+    html body .cats-grid.four { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    html body .cats-grid.four .cat, html body .cats-grid.four .cat:first-child, html body .cats-grid.four .cat:nth-child(4) { aspect-ratio: 5 / 4; padding: 18px; border-radius: 22px; }
+    html body .cats .cat h3, html body .cats .cat:first-child h3 { font-size: 28px !important; }
+    html body .best-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    html body .best-grid .card .ph { aspect-ratio: 4 / 3; }
+    html body .best-grid .card h3, html body .best-grid .card.v2 h3 { font-size: 22px; }
+    html body .best-grid .card .k { font-size: 15px; }
+    html body .best-grid .card .pr { font-size: 19px; }
+    html body .best-grid .card .go { display: inline; }
+  }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -8702,6 +8726,18 @@
   html body #pdp .shop .dsp .sp-list { max-width: none; width: 100%; }
   html body #pdp .shop .plate-s .dsp { grid-column: 1 / -1; grid-row: auto; }
   html body #pdp .shop .plate-s .dsp .sp-list { grid-column: auto; grid-row: auto; }
+  /* MOBILE: categories and best sellers go full width, one per row */
+  @media (max-width: 760px) {
+    html body .cats-grid.four { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    html body .cats-grid.four .cat, html body .cats-grid.four .cat:first-child, html body .cats-grid.four .cat:nth-child(4) { aspect-ratio: 5 / 4; padding: 18px; border-radius: 22px; }
+    html body .cats .cat h3, html body .cats .cat:first-child h3 { font-size: 28px !important; }
+    html body .best-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    html body .best-grid .card .ph { aspect-ratio: 4 / 3; }
+    html body .best-grid .card h3, html body .best-grid .card.v2 h3 { font-size: 22px; }
+    html body .best-grid .card .k { font-size: 15px; }
+    html body .best-grid .card .pr { font-size: 19px; }
+    html body .best-grid .card .go { display: inline; }
+  }
   /* ---------- TROPINA PROTOTYPE: tomato grounds, acid-lime type ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
