@@ -2911,6 +2911,36 @@
     html body .best-grid .card .pr { font-size: 19px; }
     html body .best-grid .card .go { display: inline; }
   }
+
+  /* ---------- TRUST STRIP: static icons over a slow grey logo marquee ---------- */
+  .tstrip { position: relative; z-index: 2; background: var(--cream); padding: clamp(36px, 4.5vw, 64px) 0 clamp(28px, 3.5vw, 48px); }
+  .ts-icons { list-style: none; margin: 0 var(--g); padding: 0 0 clamp(26px, 3vw, 40px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-bottom: 1.5px solid var(--line); }
+  .ts-icons li { display: flex; align-items: center; gap: 16px; }
+  .ts-icons svg { flex: 0 0 auto; width: 44px; height: 44px; color: var(--blue); }
+  .ts-icons b { display: block; font-size: 16px; font-weight: 700; line-height: 1.25; }
+  .ts-icons span { display: block; font-size: 14px; line-height: 1.35; opacity: .7; margin-top: 2px; }
+  .ts-cap { margin: clamp(22px, 2.6vw, 34px) var(--g) 18px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .55; }
+  .logo-marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+  .lm-track { display: flex; width: max-content; animation: lm 70s linear infinite; }
+  .logo-marquee:hover .lm-track { animation-play-state: paused; }
+  .lm-track ul { list-style: none; margin: 0; padding: 0 clamp(20px, 3vw, 48px) 0 0; display: flex; align-items: center; gap: clamp(40px, 5.5vw, 88px); flex: 0 0 auto; padding-right: clamp(40px, 5.5vw, 88px); }
+  .lm-track img { display: block; height: clamp(26px, 2.6vw, 38px); width: auto; max-width: 160px; object-fit: contain; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; opacity: .5; transition: opacity .3s var(--ease); }
+  .lm-track img:hover { opacity: .9; }
+  @keyframes lm { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .lm-track { animation: none; } .logo-marquee { overflow-x: auto; } }
+  @media (max-width: 900px) { .ts-icons { grid-template-columns: 1fr 1fr; gap: 22px 16px; } }
+  @media (max-width: 480px) { .ts-icons svg { width: 36px; height: 36px; } .ts-icons li { gap: 12px; } .lm-track { animation-duration: 55s; } }
+
+  /* ---------- QUIZ NOTE as a slim strip ---------- */
+  html body .note { grid-template-columns: auto minmax(0, 1fr) !important; gap: clamp(20px, 3vw, 44px) !important; padding-top: clamp(28px, 3vw, 44px) !important; padding-bottom: clamp(28px, 3vw, 44px) !important; align-items: center; }
+  html body .note .dd { display: none !important; }
+  html body .note .note-img { order: -1; width: clamp(64px, 7vw, 96px); aspect-ratio: 4 / 5; border-radius: 999px 999px 14px 14px; }
+  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(20px, 3vw, 48px); row-gap: 4px; align-items: center; }
+  html body .note .note-side h2#note-h { grid-area: h; margin: 0; font-size: clamp(22px, 2.4vw, 38px); }
+  html body .note .note-side p { grid-area: p; margin: 0; max-width: 60ch; font-size: 16px; }
+  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; }
+  @media (max-width: 700px) { html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; row-gap: 8px; } html body .note .note-side .pill { margin-top: 8px; justify-self: start; } html body .note .note-img { width: 56px; } }
+  html body .tstrip + .best { padding-top: clamp(20px, 2.5vw, 40px); }
 </style>
 <style id="pal-pantone" media="not all">
   :root {
@@ -5813,6 +5843,36 @@
     html body .best-grid .card .pr { font-size: 19px; }
     html body .best-grid .card .go { display: inline; }
   }
+
+  /* ---------- TRUST STRIP: static icons over a slow grey logo marquee ---------- */
+  .tstrip { position: relative; z-index: 2; background: var(--cream); padding: clamp(36px, 4.5vw, 64px) 0 clamp(28px, 3.5vw, 48px); }
+  .ts-icons { list-style: none; margin: 0 var(--g); padding: 0 0 clamp(26px, 3vw, 40px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-bottom: 1.5px solid var(--line); }
+  .ts-icons li { display: flex; align-items: center; gap: 16px; }
+  .ts-icons svg { flex: 0 0 auto; width: 44px; height: 44px; color: var(--blue); }
+  .ts-icons b { display: block; font-size: 16px; font-weight: 700; line-height: 1.25; }
+  .ts-icons span { display: block; font-size: 14px; line-height: 1.35; opacity: .7; margin-top: 2px; }
+  .ts-cap { margin: clamp(22px, 2.6vw, 34px) var(--g) 18px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .55; }
+  .logo-marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+  .lm-track { display: flex; width: max-content; animation: lm 70s linear infinite; }
+  .logo-marquee:hover .lm-track { animation-play-state: paused; }
+  .lm-track ul { list-style: none; margin: 0; padding: 0 clamp(20px, 3vw, 48px) 0 0; display: flex; align-items: center; gap: clamp(40px, 5.5vw, 88px); flex: 0 0 auto; padding-right: clamp(40px, 5.5vw, 88px); }
+  .lm-track img { display: block; height: clamp(26px, 2.6vw, 38px); width: auto; max-width: 160px; object-fit: contain; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; opacity: .5; transition: opacity .3s var(--ease); }
+  .lm-track img:hover { opacity: .9; }
+  @keyframes lm { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .lm-track { animation: none; } .logo-marquee { overflow-x: auto; } }
+  @media (max-width: 900px) { .ts-icons { grid-template-columns: 1fr 1fr; gap: 22px 16px; } }
+  @media (max-width: 480px) { .ts-icons svg { width: 36px; height: 36px; } .ts-icons li { gap: 12px; } .lm-track { animation-duration: 55s; } }
+
+  /* ---------- QUIZ NOTE as a slim strip ---------- */
+  html body .note { grid-template-columns: auto minmax(0, 1fr) !important; gap: clamp(20px, 3vw, 44px) !important; padding-top: clamp(28px, 3vw, 44px) !important; padding-bottom: clamp(28px, 3vw, 44px) !important; align-items: center; }
+  html body .note .dd { display: none !important; }
+  html body .note .note-img { order: -1; width: clamp(64px, 7vw, 96px); aspect-ratio: 4 / 5; border-radius: 999px 999px 14px 14px; }
+  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(20px, 3vw, 48px); row-gap: 4px; align-items: center; }
+  html body .note .note-side h2#note-h { grid-area: h; margin: 0; font-size: clamp(22px, 2.4vw, 38px); }
+  html body .note .note-side p { grid-area: p; margin: 0; max-width: 60ch; font-size: 16px; }
+  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; }
+  @media (max-width: 700px) { html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; row-gap: 8px; } html body .note .note-side .pill { margin-top: 8px; justify-self: start; } html body .note .note-img { width: 56px; } }
+  html body .tstrip + .best { padding-top: clamp(20px, 2.5vw, 40px); }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -8738,6 +8798,36 @@
     html body .best-grid .card .pr { font-size: 19px; }
     html body .best-grid .card .go { display: inline; }
   }
+
+  /* ---------- TRUST STRIP: static icons over a slow grey logo marquee ---------- */
+  .tstrip { position: relative; z-index: 2; background: var(--cream); padding: clamp(36px, 4.5vw, 64px) 0 clamp(28px, 3.5vw, 48px); }
+  .ts-icons { list-style: none; margin: 0 var(--g); padding: 0 0 clamp(26px, 3vw, 40px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-bottom: 1.5px solid var(--line); }
+  .ts-icons li { display: flex; align-items: center; gap: 16px; }
+  .ts-icons svg { flex: 0 0 auto; width: 44px; height: 44px; color: var(--blue); }
+  .ts-icons b { display: block; font-size: 16px; font-weight: 700; line-height: 1.25; }
+  .ts-icons span { display: block; font-size: 14px; line-height: 1.35; opacity: .7; margin-top: 2px; }
+  .ts-cap { margin: clamp(22px, 2.6vw, 34px) var(--g) 18px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .55; }
+  .logo-marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+  .lm-track { display: flex; width: max-content; animation: lm 70s linear infinite; }
+  .logo-marquee:hover .lm-track { animation-play-state: paused; }
+  .lm-track ul { list-style: none; margin: 0; padding: 0 clamp(20px, 3vw, 48px) 0 0; display: flex; align-items: center; gap: clamp(40px, 5.5vw, 88px); flex: 0 0 auto; padding-right: clamp(40px, 5.5vw, 88px); }
+  .lm-track img { display: block; height: clamp(26px, 2.6vw, 38px); width: auto; max-width: 160px; object-fit: contain; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; opacity: .5; transition: opacity .3s var(--ease); }
+  .lm-track img:hover { opacity: .9; }
+  @keyframes lm { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .lm-track { animation: none; } .logo-marquee { overflow-x: auto; } }
+  @media (max-width: 900px) { .ts-icons { grid-template-columns: 1fr 1fr; gap: 22px 16px; } }
+  @media (max-width: 480px) { .ts-icons svg { width: 36px; height: 36px; } .ts-icons li { gap: 12px; } .lm-track { animation-duration: 55s; } }
+
+  /* ---------- QUIZ NOTE as a slim strip ---------- */
+  html body .note { grid-template-columns: auto minmax(0, 1fr) !important; gap: clamp(20px, 3vw, 44px) !important; padding-top: clamp(28px, 3vw, 44px) !important; padding-bottom: clamp(28px, 3vw, 44px) !important; align-items: center; }
+  html body .note .dd { display: none !important; }
+  html body .note .note-img { order: -1; width: clamp(64px, 7vw, 96px); aspect-ratio: 4 / 5; border-radius: 999px 999px 14px 14px; }
+  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(20px, 3vw, 48px); row-gap: 4px; align-items: center; }
+  html body .note .note-side h2#note-h { grid-area: h; margin: 0; font-size: clamp(22px, 2.4vw, 38px); }
+  html body .note .note-side p { grid-area: p; margin: 0; max-width: 60ch; font-size: 16px; }
+  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; }
+  @media (max-width: 700px) { html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; row-gap: 8px; } html body .note .note-side .pill { margin-top: 8px; justify-self: start; } html body .note .note-img { width: 56px; } }
+  html body .tstrip + .best { padding-top: clamp(20px, 2.5vw, 40px); }
   /* ---------- TROPINA PROTOTYPE: tomato grounds, acid-lime type ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -8801,44 +8891,36 @@
 
   <div class="sheet">
     <div class="floaters" aria-hidden="true"><span class="fl fl-moon" data-speed="-0.35"><svg viewBox="0 0 160 160" focusable="false"><use href="#t-sparkles"/></svg></span><span class="fl fl-cloud" data-speed="-0.6"><svg viewBox="0 0 160 160" focusable="false"><use href="#t-plane"/></svg></span></div>
-    <section class="cats" id="cats" aria-labelledby="cats-h">
-      <div class="cats-head"><div class="sec-t"><h2 class="h2" id="cats-h">The whole nursery.</h2><p class="sec-sub">Cribs, dressers and the pieces that come after, designed to sit together in one room.</p></div></div>
-      <div class="cats-grid four">
-        <a class="cat" href="#index"><img src="img/cat-cribs.jpg" alt="An expecting mother resting a hand on a natural Soho crib" loading="lazy"><div class="bot"><div><h3>Cribs</h3></div><span class="go" aria-hidden="true">→</span></div></a>
-        <a class="cat" href="#/dressers"><img src="img/cat-dressers.jpg" alt="An expecting mother folding tiny clothes into a white dresser with wood pulls" loading="lazy"><div class="bot"><div><h3>Dressers</h3></div><span class="go" aria-hidden="true">→</span></div></a>
-        <a class="cat" href="#/dressers/sets"><img src="img/cat-sets.jpg" alt="A LaLa crib beside a LaLa Big dresser in a sunlit brownstone nursery" loading="lazy"><div class="top"><span class="tag">15% off</span></div><div class="bot"><div><h3>Nursery sets</h3></div><span class="go" aria-hidden="true">→</span></div></a>
-        <a class="cat" href="#/kids"><img src="img/cat-kids.jpg" alt="A mother laying out picture books beside a Muse toddler bed" loading="lazy"><div class="bot"><div><h3>Toddler & kids</h3></div><span class="go" aria-hidden="true">→</span></div></a>
-      </div>
+    <section class="tstrip" aria-label="Why parents trust dadada">
+      <ul class="ts-icons"><li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 38V20l14-9 14 9v18"/><path d="M6 38h36"/><path d="M18 38V26h12v12"/><path d="M24 11V6"/></svg><div><b>Made in Italy</b><span>Solid beech, built to last</span></div></li><li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M24 6c8 4 14 5 14 5v13c0 9-6 15-14 18C16 39 10 33 10 24V11s6-1 14-5z"/><path d="M17 24l5 5 9-10"/></svg><div><b>GREENGUARD Gold</b><span>Certified for low emissions</span></div></li><li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="24" cy="21" r="12"/><path d="M17 31l-3 12 10-5 10 5-3-12"/><path d="M19 21l4 4 7-8"/></svg><div><b>2-year warranty</b><span>On every crib</span></div></li><li><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 14h24a8 8 0 010 16H14"/><path d="M14 8l-6 6 6 6"/><path d="M14 36h20"/></svg><div><b>14-day returns</b><span>Free shipping to the 48 states</span></div></li></ul>
+      <p class="ts-cap">Find dadada at</p>
+      <div class="logo-marquee" role="group" aria-label="Retailers that carry dadada"><div class="lm-track"><ul><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/babylist_d1003da5-670c-4467-96a6-c4fea021a9d5_480x480.png?v=1651593118" alt="Babylist" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/Target-logo-1_480x480.png?v=1686244793" alt="Target" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/Amazon_480x480.png?v=1668613901" alt="Amazon" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/Wayfair_logo_with_tagline.png?v=1773564909" alt="Wayfair" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/albeebaby_logo_480x480.png?v=1684262987" alt="Albee Baby" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/pn-pj-logo_400x_7fc6bb48-510b-4d1a-ab7c-5817154edf8e_480x480.png?v=1651594131" alt="Project Nursery" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/ModernNurseryLogo_dcb0df16-f58a-4700-add9-f443aa26cdb6_480x480.png?v=1629321704" alt="Modern Nursery" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/ella_elliot_480x480.webp?v=1670523172" alt="Ella and Elliot" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://www.tanguay.ca/skins/default/media/images/refonte2021/tanguay-logo.svg" alt="Tanguay" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/logo.avif?v=1773564754" alt="Nestled" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/Macklems_480x480.jpg?v=1700452964" alt="Macklem's" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/logo.svg?v=1773564844" alt="West Coast Kids" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li></ul><ul aria-hidden="true"><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/babylist_d1003da5-670c-4467-96a6-c4fea021a9d5_480x480.png?v=1651593118" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/Target-logo-1_480x480.png?v=1686244793" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/Amazon_480x480.png?v=1668613901" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/Wayfair_logo_with_tagline.png?v=1773564909" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/albeebaby_logo_480x480.png?v=1684262987" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/pn-pj-logo_400x_7fc6bb48-510b-4d1a-ab7c-5817154edf8e_480x480.png?v=1651594131" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/ModernNurseryLogo_dcb0df16-f58a-4700-add9-f443aa26cdb6_480x480.png?v=1629321704" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/ella_elliot_480x480.webp?v=1670523172" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://www.tanguay.ca/skins/default/media/images/refonte2021/tanguay-logo.svg" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/logo.avif?v=1773564754" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/Macklems_480x480.jpg?v=1700452964" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li><li><img src="https://cdn.shopify.com/s/files/1/0552/9301/8283/files/logo.svg?v=1773564844" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></li></ul></div></div>
     </section>
-
-    
-
-    <section class="collection" id="index" aria-labelledby="coll-h">
-      <div class="coll-head">
-        <div class="sec-t"><h2 class="h2" id="coll-h"><span class="mask"><span>Five cribs.</span></span><span class="mask"><span>Different personalities.</span></span></h2><p class="sec-sub">Every one converts as your baby grows. Hover a name to meet it.</p></div>
-        <a class="pill blue sm" href="#/compare">Compare cribs <span class="ar" aria-hidden="true">→</span></a>
-      </div>
-      <ol class="index-list" id="index-list">
-        <li><a class="index-row" href="#/soho" data-img="ix-soho"><span class="n">01</span><span class="name">Soho</span><span class="spec"><span class="p">The bestseller</span></span><span class="price"><span>From $499</span><span class="go">Explore Soho</span></span><span class="inline"><img src="img/p-soho-natural.jpg" alt="Soho crib" loading="lazy"></span></a></li>
-        <li><a class="index-row" href="#/lala" data-img="ix-lala"><span class="n">02</span><span class="name">LaLa</span><span class="spec"><span class="p">Our most affordable</span></span><span class="price"><span>$459</span><span class="go">Explore LaLa</span></span><span class="inline"><img src="img/p-lala-natural.jpg" alt="LaLa crib" loading="lazy"></span></a></li>
-        <li><a class="index-row" href="#/bliss" data-img="ix-bliss"><span class="n">03</span><span class="name">Bliss</span><span class="spec"><span class="p">Rounded and low</span></span><span class="price"><span>$699</span><span class="go">Explore Bliss</span></span><span class="inline"><img src="img/p-bliss-walnut.jpg" alt="Bliss crib" loading="lazy"></span></a></li>
-        <li><a class="index-row" href="#/spirit" data-img="ix-spirit"><span class="n">04</span><span class="name">Spirit</span><span class="spec"><span class="p">Cradle to big-kid bed</span></span><span class="price"><span>$799</span><span class="go">Explore Spirit</span></span><span class="inline"><img src="img/p-spirit-natural.jpg" alt="Spirit crib" loading="lazy"></span></a></li>
-        <li><a class="index-row" href="#/jolly" data-img="ix-jolly"><span class="n">05</span><span class="name">Jolly</span><span class="spec"><span class="p">The statement piece</span></span><span class="price"><span>$999</span><span class="go">Explore Jolly</span></span><span class="inline"><img src="img/p-jolly.jpg" alt="Jolly crib" loading="lazy"></span></a></li>
-      </ol>
-    </section>
-
-    <div class="follow" aria-hidden="true">
-      <img src="img/ixc-soho.webp" data-k="ix-soho" alt=""><img src="img/ixc-bliss.webp" data-k="ix-bliss" alt=""><img src="img/ixc-lala.webp" data-k="ix-lala" alt=""><img src="img/ixc-spirit.webp" data-k="ix-spirit" alt=""><img src="img/ixc-jolly.webp" data-k="ix-jolly" alt="">
-    </div>
-
     <section class="best" id="best" aria-labelledby="best-h">
-      <div class="best-head"><div class="best-ht"><h2 class="h2" id="best-h">Our best sellers.</h2><p class="sec-sub">The pieces parents choose most. Filter by what you're shopping for.</p><div class="best-tabs" role="group" aria-label="Filter best sellers"><button type="button" data-cat="all" aria-pressed="true">All</button><button type="button" data-cat="cribs" aria-pressed="false">Cribs</button><button type="button" data-cat="dressers" aria-pressed="false">Dressers</button><button type="button" data-cat="kids" aria-pressed="false">Toddler &amp; kids</button></div></div><a class="pill ghost dark sm" href="#index">Shop all <span class="ar" aria-hidden="true">→</span></a></div>
+      <div class="best-head"><div class="best-ht"><h2 class="h2" id="best-h">Our best sellers.</h2><p class="sec-sub">The pieces parents choose most. Filter by what you're shopping for.</p><div class="best-tabs" role="group" aria-label="Filter best sellers"><button type="button" data-cat="all" aria-pressed="true">All</button><button type="button" data-cat="cribs" aria-pressed="false">Cribs</button><button type="button" data-cat="dressers" aria-pressed="false">Dressers</button><button type="button" data-cat="kids" aria-pressed="false">Toddler &amp; kids</button></div></div><a class="pill ghost dark sm" href="#best">Shop all <span class="ar" aria-hidden="true">→</span></a></div>
       <div class="best-grid">
         <a class="card" href="#/soho"><div class="ph"><span class="badge">Babylist pick</span><img src="img/p-soho-natural.jpg" alt="Soho crib in natural beech" loading="lazy"><img class="sc" src="img/mom-soho.jpg" alt="" loading="lazy"></div><span class="ck">Crib</span><h3>Soho</h3><span class="k">3-in-1 · Six finishes</span><div class="cb"><span class="pr">From $499</span><span class="go">Shop <span aria-hidden="true">→</span></span></div></a>
         <a class="card" href="#/dressers/cp"><div class="ph"><img src="img/d-cp.jpg" alt="Central Park three-drawer dresser" loading="lazy"><img class="sc" src="img/room-cp-wv.jpg" alt="" loading="lazy"></div><span class="ck">Dresser</span><h3>Central Park</h3><span class="k">3 drawers · 2 open shelves</span><div class="cb"><span class="pr">$499</span><span class="go">Shop <span aria-hidden="true">→</span></span></div></a>
         <a class="card" href="#/lala"><div class="ph"><img src="img/p-lala-natural.jpg" alt="LaLa crib in natural beech" loading="lazy"><img class="sc" src="img/mom-lala.jpg" alt="" loading="lazy"></div><span class="ck">Crib</span><h3>LaLa</h3><span class="k">3-in-1 · Four finishes</span><div class="cb"><span class="pr">$459</span><span class="go">Shop <span aria-hidden="true">→</span></span></div></a>
         <a class="card" href="#/dressers/austin5"><div class="ph"><img src="img/d-austin5.jpg" alt="Austin five-drawer dresser" loading="lazy"><img class="sc" src="img/s-austin5.jpg" alt="" loading="lazy"></div><span class="ck">Dresser</span><h3>Austin 5-Drawer</h3><span class="k">5 drawers · Anti-tip kit</span><div class="cb"><span class="pr">$599</span><span class="go">Shop <span aria-hidden="true">→</span></span></div></a>
       </div>
+    </section>
+
+    <section class="hset hx" aria-labelledby="hs-h">
+      <div class="hx-head">
+        <h2 class="h2" id="hs-h">Crib + dresser.<br>15% off both.</h2>
+        <div class="hx-side">
+          <p>Pair any crib with any dresser and the saving comes off both pieces at checkout. Matching woods, one delivery.</p>
+          <div class="hset-ctas"><button class="pill lime" id="hs-add" type="button">Add the Soho set · Save $225 <span class="ar" aria-hidden="true">→</span></button><a class="hs-more" href="#/dressers/sets">See all sets <span class="ar" aria-hidden="true">→</span></a></div>
+        </div>
+      </div>
+      <a class="hx-tray" href="#/dressers/sets" aria-label="The Soho set: Soho crib, natural, $599, plus Soho 5-drawer dresser, $899, together $1,273 instead of $1,498">
+        <figure class="hx-it"><img src="img/pl-p-soho-natural.jpg" alt="" loading="lazy"><figcaption><b>Soho crib</b><span>Natural · $599</span></figcaption></figure>
+        <span class="hx-op" aria-hidden="true">+</span>
+        <figure class="hx-it"><img src="img/pl-d-soho5.jpg" alt="" loading="lazy"><figcaption><b>Soho 5-drawer dresser</b><span>White + Natural · $899</span></figcaption></figure>
+        <span class="hx-op" aria-hidden="true">=</span>
+        <div class="hx-sum"><span class="hx-tag">The Soho set</span><b>$1,273</b><span class="hx-was"><s>$1,498</s> · you save $225</span></div>
+      </a>
     </section>
 
     <section class="stl" id="look" aria-labelledby="stl-h">
@@ -8890,23 +8972,6 @@
       <div class="note-img"><img src="img/film-1.jpg" alt="An expectant mother's hand resting on the rail of a natural beech crib" loading="lazy" data-parallax></div>
     </section>
 
-    <section class="hset hx" aria-labelledby="hs-h">
-      <div class="hx-head">
-        <h2 class="h2" id="hs-h">Crib + dresser.<br>15% off both.</h2>
-        <div class="hx-side">
-          <p>Pair any crib with any dresser and the saving comes off both pieces at checkout. Matching woods, one delivery.</p>
-          <div class="hset-ctas"><button class="pill lime" id="hs-add" type="button">Add the Soho set · Save $225 <span class="ar" aria-hidden="true">→</span></button><a class="hs-more" href="#/dressers/sets">See all sets <span class="ar" aria-hidden="true">→</span></a></div>
-        </div>
-      </div>
-      <a class="hx-tray" href="#/dressers/sets" aria-label="The Soho set: Soho crib, natural, $599, plus Soho 5-drawer dresser, $899, together $1,273 instead of $1,498">
-        <figure class="hx-it"><img src="img/pl-p-soho-natural.jpg" alt="" loading="lazy"><figcaption><b>Soho crib</b><span>Natural · $599</span></figcaption></figure>
-        <span class="hx-op" aria-hidden="true">+</span>
-        <figure class="hx-it"><img src="img/pl-d-soho5.jpg" alt="" loading="lazy"><figcaption><b>Soho 5-drawer dresser</b><span>White + Natural · $899</span></figcaption></figure>
-        <span class="hx-op" aria-hidden="true">=</span>
-        <div class="hx-sum"><span class="hx-tag">The Soho set</span><b>$1,273</b><span class="hx-was"><s>$1,498</s> · you save $225</span></div>
-      </a>
-    </section>
-
     <section class="blog" id="journal" aria-labelledby="bl-h"><svg class="dd dd-free dd-zzz" viewBox="0 0 160 160" aria-hidden="true" focusable="false"><use href="#t-zzz"/></svg>
       <div class="bl-head"><div class="sec-t"><h2 class="h2" id="bl-h">Read up. Rest easy.</h2><p class="sec-sub">Plain-spoken guides on safety, sleep and setting up the nursery.</p></div><div class="bl-side"><a class="pill ghost dark sm" href="#/journal">All stories <span class="ar" aria-hidden="true">→</span></a></div></div>
       <div class="bl-grid">
@@ -8939,7 +9004,7 @@
 
   <footer class="foot">
     <div class="foot-cols">
-      <div><h4>Shop</h4><a href="#index">Cribs</a><a href="#/dressers">Dressers</a><a href="#/kids">Toddler & kids</a><a href="#/dressers/sets">Nursery sets</a><a href="#/fit">Find your fit</a></div>
+      <div><h4>Shop</h4><a href="#best">Cribs</a><a href="#/dressers">Dressers</a><a href="#/kids">Toddler & kids</a><a href="#/dressers/sets">Nursery sets</a><a href="#/fit">Find your fit</a></div>
       <div><h4>About</h4><a href="#/story">Our story</a><a href="#/story/italy">Made in Italy</a><a href="#/story/safety">Safety</a><a href="#/story/sustainability">Sustainability</a><a href="#/journal">Journal</a></div>
       <div><h4>Help</h4><a href="#/compare">Compare cribs</a><a href="#/support/shipping">Shipping</a><a href="#/support/returns">Returns</a><a href="#/support/assembly">Assembly</a><a href="#/support/register">Product registration</a><a href="#/support/contact">Contact</a></div>
       <div><h4>Legal</h4><a href="#/support/returns">Return policy</a><a href="#/support/warranty">Warranty</a><a href="#/support">Privacy policy</a><a href="#/support">Terms of service</a></div>
@@ -8978,7 +9043,7 @@
   try { history.scrollRestoration = "manual"; } catch (e) {}
 
   const HOME = $("#home"), PDP = $("#pdp"), curtain = $(".curtain");
-  const follow = $(".follow"), nav = $(".nav");
+  const nav = $(".nav");
   const intro = $(".intro"), heroSec = $(".hero");
   const heroVid = $(".hero-film video"), heroPoster = $(".hero-film img");
   const playBtn = $(".hero-play");
@@ -9342,7 +9407,7 @@
     return `
   <section class="shop" id="p-stage" aria-label="${d.name} crib" style="--tint:${f0.tint}">
     <div class="shop-media">
-      <nav class="crumbs mono" aria-label="Breadcrumb"><a href="#index">Cribs</a><span class="sep">/</span><span class="step"><a href="#/${ORDER[(i + ORDER.length - 1) % ORDER.length]}" aria-label="Previous crib">←</a><span>${pad(i + 1)} of ${pad(ORDER.length)}</span><a href="#/${nextKey}" aria-label="Next crib">→</a></span></nav>
+      <nav class="crumbs mono" aria-label="Breadcrumb"><a href="#best">Cribs</a><span class="sep">/</span><span class="step"><a href="#/${ORDER[(i + ORDER.length - 1) % ORDER.length]}" aria-label="Previous crib">←</a><span>${pad(i + 1)} of ${pad(ORDER.length)}</span><a href="#/${nextKey}" aria-label="Next crib">→</a></span></nav>
       <figure class="plate plate-shot">
         <div class="product">
           <div class="pimg">
@@ -9995,7 +10060,7 @@
     const n = cart.reduce((a, x) => a + x.qty, 0);
     $("#cart-n").textContent = n; $("#cart-n").dataset.n = n; drCount.textContent = n;
     if (!n) {
-      drBody.innerHTML = `<div class="dr-empty"><svg class="dd e-smiley" aria-hidden="true" focusable="false"><use href="#d-smiley"/></svg><h3>Nothing here yet.</h3><p>Start with the crib. Everything else in the room follows it.</p><div class="row"><a class="pill blue sm" href="#index">Shop cribs</a><a class="pill ghost dark sm" href="#/fit">Find your fit</a></div><div class="pics"><a href="#index"><img src="img/mom-soho.jpg" alt="Cribs"><span>Cribs</span></a><a href="#/dressers"><img src="img/mom-dr-cp.jpg" alt="Dressers"><span>Dressers</span></a></div></div>`;
+      drBody.innerHTML = `<div class="dr-empty"><svg class="dd e-smiley" aria-hidden="true" focusable="false"><use href="#d-smiley"/></svg><h3>Nothing here yet.</h3><p>Start with the crib. Everything else in the room follows it.</p><div class="row"><a class="pill blue sm" href="#best">Shop cribs</a><a class="pill ghost dark sm" href="#/fit">Find your fit</a></div><div class="pics"><a href="#best"><img src="img/mom-soho.jpg" alt="Cribs"><span>Cribs</span></a><a href="#/dressers"><img src="img/mom-dr-cp.jpg" alt="Dressers"><span>Dressers</span></a></div></div>`;
       drFoot.hidden = true; return;
     }
     const sub = cart.reduce((a, x) => a + x.price * x.qty, 0), save = setSavings(), allUps = upsells();
@@ -10093,7 +10158,7 @@
   <section class="manifesto" aria-labelledby="mf-h">
     <span class="mono">Room to be you</span>
     <h2 id="mf-h">A nursery is the first room you design for someone else. <em>It should still feel like you.</em></h2>
-    <div class="ctas"><a class="pill blue" href="#index">Shop cribs <span class="ar">→</span></a><a class="pill ghost" href="#/fit">Find your fit</a></div>
+    <div class="ctas"><a class="pill blue" href="#best">Shop cribs <span class="ar">→</span></a><a class="pill ghost" href="#/fit">Find your fit</a></div>
   </section>
 
   ${FOOT}`;
@@ -10268,7 +10333,7 @@
 
   <div class="duo">
     <a href="#k-grid"><img src="img/ks-muse2.jpg" alt="A Muse toddler bed and bookshelf in a bright kid's room" loading="lazy"><div><b>Muse, together</b><span>Bed $199 · Bookshelf $249</span></div></a>
-    <a href="#index"><img src="img/mom-lala.jpg" alt="An expecting couple assembling a LaLa crib" loading="lazy"><div><b>Still at the crib stage?</b><span>Start with the nursery.</span></div></a>
+    <a href="#best"><img src="img/mom-lala.jpg" alt="An expecting couple assembling a LaLa crib" loading="lazy"><div><b>Still at the crib stage?</b><span>Start with the nursery.</span></div></a>
   </div>
 
   ${FOOT}`;
@@ -10336,7 +10401,7 @@
   mmenu.innerHTML = `
     <a class="fitcard mi" href="#/fit"><img src="img/mom-soho.jpg" alt=""><span><small class="mono">Not sure yet?</small><b>Find your fit</b></span></a>
     <div class="acc-wrap">
-      <details class="acc mi"><summary>Cribs</summary><div class="acc-b"><div class="hs">${ORDER.map((k) => tile("#/" + k, cribShot(CRIBS[k]).img, CRIBS[k].name)).join("")}</div><div class="acc-l"><a href="#index">Shop all cribs</a><a href="#/compare">Compare cribs</a></div></div></details>
+      <details class="acc mi"><summary>Cribs</summary><div class="acc-b"><div class="hs">${ORDER.map((k) => tile("#/" + k, cribShot(CRIBS[k]).img, CRIBS[k].name)).join("")}</div><div class="acc-l"><a href="#best">Shop all cribs</a><a href="#/compare">Compare cribs</a></div></div></details>
       <details class="acc mi"><summary>Dressers</summary><div class="acc-b"><div class="hs">${DORDER.map((k) => tile("#/dressers/" + k, DRESSERS[k].img, DRESSERS[k].name)).join("")}</div><div class="acc-l"><a href="#/dressers">Shop all dressers</a><a href="#/dressers/sets">Nursery sets, 15% off</a></div></div></details>
       <details class="acc mi"><summary>Toddler & kids</summary><div class="acc-b"><div class="hs">${tile("#/kids", "k-muse", "Muse bed")}${tile("#/kids", "k-shelf", "Bookshelf")}${tile("#/kids", "k-tower", "Tower")}${tile("#/kids", "ks-fun", "Fun twin bed", true)}</div><div class="acc-l"><a href="#/kids">Shop toddler & kids</a></div></div></details>
       <a class="acc-row mi" href="#/dressers/sets">Nursery sets</a>
@@ -10427,8 +10492,8 @@
   const cur = $("#cur"), curT = $(".cur-t");
   const KID = (k) => KIDS.find((x) => x.k === k);
   const CUR_MAIN = [
-    { k: "cribs", label: "Cribs", n: "05", href: "#index", img: "mom-soho", kick: "Cribs · made in Italy", title: "Every one converts",
-      more: [["#index", "Shop all cribs"], ["#/compare", "Compare cribs"]],
+    { k: "cribs", label: "Cribs", n: "05", href: "#best", img: "mom-soho", kick: "Cribs · made in Italy", title: "Every one converts",
+      more: [["#best", "Shop all cribs"], ["#/compare", "Compare cribs"]],
       tiles: ORDER.map((k) => tile("#/" + k, cribShot(CRIBS[k]).img, CRIBS[k].name, false, CRIBS[k].kind.split(" ")[0] + " · " + money(cribFrom(CRIBS[k])))) },
     { k: "dressers", label: "Dressers", n: "08", href: "#/dressers", img: "mom-dr-soho", kick: "Dressers", title: "Anti-tip, every one",
       more: [["#/dressers", "Shop all dressers"]],
@@ -10558,7 +10623,7 @@
     const renderBest = (cat) => { bestGrid.innerHTML = BEST[cat].map(card).join(""); bindCards(); };
     renderBest("all");
     const tabs = $$(".best-tabs button", HOME), shopAll = $(".best-head .pill", HOME);
-    const ALL_HREF = { all: "#index", cribs: "#index", dressers: "#/dressers", kids: "#/kids" };
+    const ALL_HREF = { all: "#best", cribs: "#best", dressers: "#/dressers", kids: "#/kids" };
     tabs.forEach((t) => t.addEventListener("click", () => {
       if (t.getAttribute("aria-pressed") === "true") return;
       tabs.forEach((x) => x.setAttribute("aria-pressed", String(x === t)));
@@ -10834,24 +10899,6 @@
   const noteH = $("#note-h");
   noteH.innerHTML = noteH.textContent.split(" ").map((w) => '<span class="w">' + w + "</span>").join(" ").replace("deciding?</span> ", "deciding?</span><br>");
 
-  {
-    // bound unconditionally; the media query is checked live, so a window that starts narrow
-    // (or an artifact panel that is widened later) still gets the hover preview
-    const mqF = window.matchMedia("(hover: hover) and (min-width: 901px)");
-    gsap.set(follow, { xPercent: -50, yPercent: -50 });
-    const dur = (d) => (motion ? d : 0);
-    const xTo = gsap.quickTo(follow, "x", { duration: dur(0.6), ease: "power3" });
-    const yTo = gsap.quickTo(follow, "y", { duration: dur(0.6), ease: "power3" });
-    const rTo = gsap.quickTo(follow, "rotation", { duration: dur(0.8), ease: "power3" });
-    let lastX = 0;
-    const list = $(".index-list");
-    window.addEventListener("mousemove", (e) => { if (!mqF.matches) return; xTo(e.clientX); yTo(e.clientY); if (motion) rTo(gsap.utils.clamp(-6, 6, (e.clientX - lastX) * 0.4)); lastX = e.clientX; });
-    list.addEventListener("mouseenter", (e) => { if (!mqF.matches) return; gsap.set(follow, { x: e.clientX, y: e.clientY }); gsap.to(follow, { opacity: 1, scale: 1, duration: dur(0.5), ease: "expo.out", overwrite: "auto" }); });
-    list.addEventListener("mouseleave", () => gsap.to(follow, { opacity: 0, scale: 0.85, duration: dur(0.4), ease: "expo.out", overwrite: "auto" }));
-    list.querySelectorAll(".index-row").forEach((row) =>
-      row.addEventListener("mouseenter", () => { follow.dataset.k = row.dataset.img; follow.querySelectorAll("img").forEach((im) => im.classList.toggle("on", im.dataset.k === row.dataset.img)); })
-    );
-  }
 
   /* =====================================================================
      Home: scroll + motion (built inside a gsap.context, reverted on leave)
@@ -10869,15 +10916,6 @@
       gsap.to(el, { y: () => lag * 1.6 * window.innerHeight, ease: "none", scrollTrigger: { trigger: ".sheet", start: "top bottom", end: "top -60%", scrub: 1, invalidateOnRefresh: true } }); });
     // note doodles: four depths, so they slide past each other as the section scrolls by
     [[".note .n-star", -260], [".note .n-sun", -140], [".blog .dd-zzz", -240], [".qa .dd-heart", 200]].forEach(([sel, d]) => { const el = $(sel); if (el) gsap.fromTo(el, { "--py": `${-d / 2}px` }, { "--py": `${d / 2}px`, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: 0.4 } }); });
-
-    // categories
-    gsap.from(".cats-head > *", { y: 30, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.1, scrollTrigger: { trigger: ".cats", start: "top 80%" } });
-    gsap.from(".cat", { y: 40, opacity: 0, duration: 1.1, stagger: 0.08, ease: "expo.out", clearProps: "transform,opacity", scrollTrigger: { trigger: ".cats-grid", start: "top 85%" } });
-
-    // collection
-    gsap.from(".coll-head h2", { y: 30, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".coll-head", start: "top 80%" } });
-    gsap.from(".coll-head .pill", { y: 30, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".coll-head", start: "top 70%" } });
-    gsap.from(".index-row", { y: 40, opacity: 0, duration: 1.1, stagger: 0.08, ease: "expo.out", scrollTrigger: { trigger: ".index-list", start: "top 85%" } });
 
     // trust
     gsap.from(".stl-head > *", { y: 30, opacity: 0, duration: 1.2, ease: "expo.out", stagger: 0.1, scrollTrigger: { trigger: ".stl", start: "top 78%" } });
@@ -11084,7 +11122,6 @@
       homeY = window.scrollY;
       if (homeCtx) { homeCtx.revert(); homeCtx = null; }
       heroVid.pause();
-      gsap.set(follow, { opacity: 0, scale: 0.85 });
       HOME.hidden = true;
     } else if (view) {
       if (pdpCtx) { pdpCtx.revert(); pdpCtx = null; }
