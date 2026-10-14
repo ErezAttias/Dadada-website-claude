@@ -3099,6 +3099,22 @@
   html body .badge.sale, html body #pdp .dcard .badge.sale, html body #pdp .kcard .badge.sale, html body .card .badge.sale { background: var(--lav) !important; color: var(--cream) !important; }
   /* page-hero CTAs: one centre line */
   html body #pdp .dh .ctas > * { transform: none !important; }
+
+  /* BAND: a dresser top with its changing tray peeks up from the bottom edge, instead of the giant number */
+  html body #pdp .band { padding-bottom: 0 !important; align-items: end; }
+  html body #pdp .band > div:not(.big) { padding-bottom: clamp(56px, 7vw, 110px); align-self: center; }
+  html body #pdp .band .band-fig { display: block; width: clamp(300px, 38vw, 620px); height: auto; align-self: end; margin: clamp(40px, 5vw, 80px) 0 0 0; overflow: visible; }
+  @media (max-width: 800px) { html body #pdp .band .band-fig { width: min(100%, 460px); order: 2; margin-top: 0; } html body #pdp .band > div:not(.big) { padding-bottom: 8px; } }
+
+  /* page-hero primary button: palette red with cream text, a lighter red on hover */
+  html body #pdp .dh .ctas > .pill:not(.ghost) { background: var(--lav) !important; color: var(--cream) !important; border-color: transparent !important; transition: background-color .35s var(--ease); }
+  html body #pdp .dh .ctas > .pill:not(.ghost) * { color: inherit !important; }
+  html body #pdp .dh .ctas > .pill:not(.ghost):hover { background: color-mix(in srgb, var(--lav) 78%, #fff) !important; }
+
+  /* footer: smaller white text */
+  html body .foot-cols a, html body .foot-cols, html body .foot-news p { font-size: 14px !important; }
+  html body .foot-news input { font-size: 14px !important; }
+  html body .foot-cols a { padding: 3px 0; }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -4029,7 +4045,23 @@
   </section>
 
   <section class="band" aria-labelledby="bd-h">
-    <div class="big" aria-hidden="true">34<sup>″</sup></div>
+    <svg class="band-fig" viewBox="0 0 560 300" role="img" aria-label="The top of a dresser with a changing tray on it" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="280" cy="176" rx="250" ry="10" fill="rgba(16,35,63,.25)"/>
+      <rect x="8" y="172" width="544" height="150" rx="16" fill="var(--cream)"/>
+      <rect x="8" y="172" width="544" height="14" rx="7" fill="rgba(16,35,63,.10)"/>
+      <path d="M8 246h544" stroke="rgba(16,35,63,.16)" stroke-width="2"/>
+      <rect x="64" y="210" width="52" height="13" rx="6.5" fill="#c9a574"/><rect x="190" y="210" width="52" height="13" rx="6.5" fill="#c9a574"/>
+      <rect x="44" y="30" width="472" height="40" rx="16" fill="#d9b98c"/>
+      <rect x="58" y="52" width="444" height="104" rx="24" fill="#f6efe0"/>
+      <path d="M96 84c52 16 108 16 160 0M304 84c52 16 108 16 160 0" fill="none" stroke="rgba(16,35,63,.16)" stroke-width="3.5" stroke-linecap="round"/>
+      <rect x="32" y="40" width="34" height="128" rx="16" fill="#c9a574"/><rect x="494" y="40" width="34" height="128" rx="16" fill="#c9a574"/>
+      <rect x="44" y="128" width="472" height="44" rx="18" fill="#d9b98c"/>
+      <rect x="44" y="128" width="472" height="10" rx="5" fill="rgba(255,255,255,.3)"/>
+      <g><rect x="352" y="112" width="104" height="26" rx="8" fill="#fff"/><rect x="352" y="112" width="104" height="8" rx="4" fill="var(--lav)"/><rect x="364" y="92" width="104" height="26" rx="8" fill="#fff"/><rect x="364" y="92" width="104" height="8" rx="4" fill="var(--blue)" opacity=".45"/></g>
+      <path d="M528 180v120" stroke="var(--navy)" stroke-width="2" stroke-dasharray="4 6" opacity=".55"/>
+      <path d="M520 180h16M520 299h16" stroke="var(--navy)" stroke-width="2" opacity=".55"/>
+      <text x="508" y="276" text-anchor="end" fill="var(--navy)" style="font-family:var(--display);font-size:50px;letter-spacing:-.04em">34&#8243;</text>
+    </svg>
     <div><h2 id="bd-h">Every dresser is a changing table in waiting.</h2>
       <p>All eight stand 34 inches tall. Add a tray on top for the diaper years, then lift it off and keep the dresser.</p>
       <div class="trays"><span>Soho, Bliss, Merry tray · $119</span><span>Austin, Central Park, LaLa Big · $99</span><span>LaLa Little · $69</span></div></div>
@@ -4123,7 +4155,23 @@
   </section>
 
   <section class="band" aria-labelledby="bd-h">
-    <div class="big" aria-hidden="true">34<sup>″</sup></div>
+    <svg class="band-fig" viewBox="0 0 560 300" role="img" aria-label="The top of a dresser with a changing tray on it" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="280" cy="172" rx="236" ry="9" fill="rgba(16,35,63,.22)"/>
+          <rect x="24" y="170" width="512" height="140" rx="14" fill="var(--cream)"/>
+          <rect x="24" y="170" width="512" height="12" rx="6" fill="rgba(16,35,63,.10)"/>
+          <path d="M24 238h512" stroke="rgba(16,35,63,.16)" stroke-width="2"/>
+          <rect x="116" y="204" width="46" height="12" rx="6" fill="#c9a574"/><rect x="398" y="204" width="46" height="12" rx="6" fill="#c9a574"/>
+          <rect x="82" y="78" width="396" height="30" rx="12" fill="#d9b98c"/>
+          <rect x="92" y="94" width="376" height="70" rx="20" fill="#f6efe0"/>
+          <path d="M118 112c40 12 84 12 124 0M318 112c40 12 84 12 124 0" fill="none" stroke="rgba(16,35,63,.14)" stroke-width="3" stroke-linecap="round"/>
+          <rect x="72" y="86" width="26" height="82" rx="12" fill="#c9a574"/><rect x="462" y="86" width="26" height="82" rx="12" fill="#c9a574"/>
+          <rect x="82" y="140" width="396" height="30" rx="14" fill="#d9b98c"/>
+          <rect x="82" y="140" width="396" height="8" rx="4" fill="rgba(255,255,255,.28)"/>
+          <g><rect x="146" y="120" width="92" height="22" rx="7" fill="#fff"/><rect x="146" y="120" width="92" height="7" rx="3.5" fill="var(--lav)"/><rect x="156" y="106" width="92" height="20" rx="7" fill="#fff" opacity=".96"/><rect x="156" y="106" width="92" height="6" rx="3" fill="var(--blue)" opacity=".5"/></g>
+          <path d="M520 176v124" stroke="var(--navy)" stroke-width="2" stroke-dasharray="4 6" opacity=".55"/>
+          <path d="M512 176h16M512 300h16" stroke="var(--navy)" stroke-width="2" opacity=".55"/>
+          <text x="498" y="262" text-anchor="end" fill="var(--navy)" style="font-family:var(--display);font-size:46px;letter-spacing:-.04em">34&#8243;</text>
+        </svg>
     <div><h2 id="bd-h">A changing table now. A dresser for years.</h2>
       <p>${d.name} stands 34 inches tall, a comfortable height for changing. Add the ${money(d.tray)} tray for the diaper years; when they're over, lift it off and it's simply a dresser again.</p></div>
   </section>
