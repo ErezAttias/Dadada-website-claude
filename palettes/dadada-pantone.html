@@ -3049,6 +3049,12 @@
   html body.pane-open .nav-skin { box-shadow: 0 24px 50px rgba(11, 36, 65, .14); }
   @media (max-width: 860px) { html body .nav { padding: 0 18px !important; } }
   html body.pane-open .nav, html body.pane-open .nav.pill-on, html body.cur-open .nav, html body.cur-open .nav.pill-on { background: transparent !important; box-shadow: none !important; }
+
+  /* BLOG: the feature card takes exactly the height of the card column, so both sides end on the same line */
+  @media (min-width: 1101px) { html body .bl-grid { align-items: stretch; } html body .bl-feat { min-height: 0 !important; } html body .bl-cards { align-content: space-between; } }
+
+  /* FAQ answers: 14px everywhere */
+  html body .qa details p, html body #pdp .faq details p, html body #pdp .faq-wrap details p, html body details.faq p, html body .faq details > p { font-size: 14px !important; line-height: 1.6; }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
