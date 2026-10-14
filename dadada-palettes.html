@@ -3020,6 +3020,15 @@
   .pill { height: 52px; padding: 0 26px; font-size: 16px; }
   .pill.sm { height: 40px; padding: 0 18px; font-size: 14px; }
   html body .hero-h { font-size: clamp(30px, min(4vw, 8.4vh), 64px) !important; }
+
+  /* HERO RIBBON: thinner, darker; copy sits higher */
+  html body .hero { --rib-h: clamp(50px, 5.6vh, 62px); --rib-gap: clamp(44px, 8vh, 92px); }
+  html body .hero-rib { background: color-mix(in srgb, var(--navy) 62%, #000) !important; }
+  html body .hero-copy, html body .hero-side { bottom: calc(var(--rib-h) + var(--rib-gap)) !important; }
+  html body .hero-rib .rs-list .hd { width: 26px; height: 26px; padding: 6px; }
+  html body .tstrip { height: calc(2 * clamp(50px, 5.6vh, 62px)); }
+  @media (max-width: 860px) { html body .tstrip { height: 104px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 80px; --rib-gap: 36px; } html body .hero-rib .rs-list { gap: 8px 18px !important; } }
 </style>
 <style id="pal-pantone" media="not all">
   :root {
@@ -6031,6 +6040,15 @@
   .pill { height: 52px; padding: 0 26px; font-size: 16px; }
   .pill.sm { height: 40px; padding: 0 18px; font-size: 14px; }
   html body .hero-h { font-size: clamp(30px, min(4vw, 8.4vh), 64px) !important; }
+
+  /* HERO RIBBON: thinner, darker; copy sits higher */
+  html body .hero { --rib-h: clamp(50px, 5.6vh, 62px); --rib-gap: clamp(44px, 8vh, 92px); }
+  html body .hero-rib { background: color-mix(in srgb, var(--navy) 62%, #000) !important; }
+  html body .hero-copy, html body .hero-side { bottom: calc(var(--rib-h) + var(--rib-gap)) !important; }
+  html body .hero-rib .rs-list .hd { width: 26px; height: 26px; padding: 6px; }
+  html body .tstrip { height: calc(2 * clamp(50px, 5.6vh, 62px)); }
+  @media (max-width: 860px) { html body .tstrip { height: 104px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 80px; --rib-gap: 36px; } html body .hero-rib .rs-list { gap: 8px 18px !important; } }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -9065,6 +9083,15 @@
   .pill { height: 52px; padding: 0 26px; font-size: 16px; }
   .pill.sm { height: 40px; padding: 0 18px; font-size: 14px; }
   html body .hero-h { font-size: clamp(30px, min(4vw, 8.4vh), 64px) !important; }
+
+  /* HERO RIBBON: thinner, darker; copy sits higher */
+  html body .hero { --rib-h: clamp(50px, 5.6vh, 62px); --rib-gap: clamp(44px, 8vh, 92px); }
+  html body .hero-rib { background: color-mix(in srgb, var(--navy) 62%, #000) !important; }
+  html body .hero-copy, html body .hero-side { bottom: calc(var(--rib-h) + var(--rib-gap)) !important; }
+  html body .hero-rib .rs-list .hd { width: 26px; height: 26px; padding: 6px; }
+  html body .tstrip { height: calc(2 * clamp(50px, 5.6vh, 62px)); }
+  @media (max-width: 860px) { html body .tstrip { height: 104px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 80px; --rib-gap: 36px; } html body .hero-rib .rs-list { gap: 8px 18px !important; } }
   /* ---------- TROPINA PROTOTYPE: tomato grounds, acid-lime type ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
