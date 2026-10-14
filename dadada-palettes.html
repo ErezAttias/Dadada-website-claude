@@ -3029,6 +3029,26 @@
   html body .tstrip { height: calc(2 * clamp(50px, 5.6vh, 62px)); }
   @media (max-width: 860px) { html body .tstrip { height: 104px; } }
   @media (max-width: 760px) { html body .hero { --rib-h: 80px; --rib-gap: 36px; } html body .hero-rib .rs-list { gap: 8px 18px !important; } }
+
+  /* NAVBAR: flat full-width strip, no blur or shadow, equal weight for links and icons, 2px underline for hover and current */
+  :root { --nav-h: clamp(60px, 4vw, 76px); }
+  html body .nav { top: 0 !important; left: 0 !important; right: 0 !important; height: var(--nav-h) !important; border-radius: 0 !important; padding: 0 var(--g) !important; background: transparent; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; }
+  html body .nav.pill-on { background: var(--cream) !important; box-shadow: inset 0 -1px 0 var(--line) !important; }
+  html body .nav .links, html body .nav .links a, html body .nav .links .cur-t, html body .nav .links .nv-t { font-size: 13px; font-weight: 600; letter-spacing: .06em; }
+  html body .nav .links { gap: 36px; }
+  html body .nav .links a, html body .nav .links .cur-t { position: relative; padding: 8px 0; }
+  html body .nav .links .cur-t::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+  html body .nav .links .cur-t:hover::after, html body .nav .links .cur-t[aria-expanded="true"]::after, html body .nav .links a[aria-current]::after { transform: scaleX(1); transform-origin: left; }
+  html body .nav .links .fitp { border: 0 !important; background: transparent !important; color: inherit !important; }
+  html body .nav .srch svg, html body .nav .help.ico svg, html body .nav .cart.ico svg { width: 20px; height: 20px; }
+  html body .nav .srch svg *, html body .nav .help.ico svg *, html body .nav .cart.ico svg * { stroke-width: 2; }
+  html body .nav .srch, html body .nav .help.ico, html body .nav .cart.ico { border-radius: 0; width: 40px; height: 40px; }
+  html body .nav .srch:hover, html body .nav .help.ico:hover, html body .nav .cart.ico:hover, html body .nav.on-film .help.ico:hover, html body .nav.on-film .cart.ico:hover { background: transparent; opacity: .6; }
+  html body .nav-skin { top: 0 !important; left: 0 !important; right: 0 !important; border-radius: 0 !important; }
+  html body .mega, html body .search { top: var(--nav-h) !important; left: 0 !important; right: 0 !important; border-radius: 0 !important; box-shadow: none !important; border-top: 1px solid var(--line); }
+  html body.pane-open .nav-skin { box-shadow: 0 24px 50px rgba(11, 36, 65, .14); }
+  @media (max-width: 860px) { html body .nav { padding: 0 18px !important; } }
+  html body.pane-open .nav, html body.pane-open .nav.pill-on, html body.cur-open .nav, html body.cur-open .nav.pill-on { background: transparent !important; box-shadow: none !important; }
 </style>
 <style id="pal-pantone" media="not all">
   :root {
@@ -6049,6 +6069,26 @@
   html body .tstrip { height: calc(2 * clamp(50px, 5.6vh, 62px)); }
   @media (max-width: 860px) { html body .tstrip { height: 104px; } }
   @media (max-width: 760px) { html body .hero { --rib-h: 80px; --rib-gap: 36px; } html body .hero-rib .rs-list { gap: 8px 18px !important; } }
+
+  /* NAVBAR: flat full-width strip, no blur or shadow, equal weight for links and icons, 2px underline for hover and current */
+  :root { --nav-h: clamp(60px, 4vw, 76px); }
+  html body .nav { top: 0 !important; left: 0 !important; right: 0 !important; height: var(--nav-h) !important; border-radius: 0 !important; padding: 0 var(--g) !important; background: transparent; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; }
+  html body .nav.pill-on { background: var(--cream) !important; box-shadow: inset 0 -1px 0 var(--line) !important; }
+  html body .nav .links, html body .nav .links a, html body .nav .links .cur-t, html body .nav .links .nv-t { font-size: 13px; font-weight: 600; letter-spacing: .06em; }
+  html body .nav .links { gap: 36px; }
+  html body .nav .links a, html body .nav .links .cur-t { position: relative; padding: 8px 0; }
+  html body .nav .links .cur-t::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+  html body .nav .links .cur-t:hover::after, html body .nav .links .cur-t[aria-expanded="true"]::after, html body .nav .links a[aria-current]::after { transform: scaleX(1); transform-origin: left; }
+  html body .nav .links .fitp { border: 0 !important; background: transparent !important; color: inherit !important; }
+  html body .nav .srch svg, html body .nav .help.ico svg, html body .nav .cart.ico svg { width: 20px; height: 20px; }
+  html body .nav .srch svg *, html body .nav .help.ico svg *, html body .nav .cart.ico svg * { stroke-width: 2; }
+  html body .nav .srch, html body .nav .help.ico, html body .nav .cart.ico { border-radius: 0; width: 40px; height: 40px; }
+  html body .nav .srch:hover, html body .nav .help.ico:hover, html body .nav .cart.ico:hover, html body .nav.on-film .help.ico:hover, html body .nav.on-film .cart.ico:hover { background: transparent; opacity: .6; }
+  html body .nav-skin { top: 0 !important; left: 0 !important; right: 0 !important; border-radius: 0 !important; }
+  html body .mega, html body .search { top: var(--nav-h) !important; left: 0 !important; right: 0 !important; border-radius: 0 !important; box-shadow: none !important; border-top: 1px solid var(--line); }
+  html body.pane-open .nav-skin { box-shadow: 0 24px 50px rgba(11, 36, 65, .14); }
+  @media (max-width: 860px) { html body .nav { padding: 0 18px !important; } }
+  html body.pane-open .nav, html body.pane-open .nav.pill-on, html body.cur-open .nav, html body.cur-open .nav.pill-on { background: transparent !important; box-shadow: none !important; }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -9092,6 +9132,26 @@
   html body .tstrip { height: calc(2 * clamp(50px, 5.6vh, 62px)); }
   @media (max-width: 860px) { html body .tstrip { height: 104px; } }
   @media (max-width: 760px) { html body .hero { --rib-h: 80px; --rib-gap: 36px; } html body .hero-rib .rs-list { gap: 8px 18px !important; } }
+
+  /* NAVBAR: flat full-width strip, no blur or shadow, equal weight for links and icons, 2px underline for hover and current */
+  :root { --nav-h: clamp(60px, 4vw, 76px); }
+  html body .nav { top: 0 !important; left: 0 !important; right: 0 !important; height: var(--nav-h) !important; border-radius: 0 !important; padding: 0 var(--g) !important; background: transparent; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; }
+  html body .nav.pill-on { background: var(--cream) !important; box-shadow: inset 0 -1px 0 var(--line) !important; }
+  html body .nav .links, html body .nav .links a, html body .nav .links .cur-t, html body .nav .links .nv-t { font-size: 13px; font-weight: 600; letter-spacing: .06em; }
+  html body .nav .links { gap: 36px; }
+  html body .nav .links a, html body .nav .links .cur-t { position: relative; padding: 8px 0; }
+  html body .nav .links .cur-t::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+  html body .nav .links .cur-t:hover::after, html body .nav .links .cur-t[aria-expanded="true"]::after, html body .nav .links a[aria-current]::after { transform: scaleX(1); transform-origin: left; }
+  html body .nav .links .fitp { border: 0 !important; background: transparent !important; color: inherit !important; }
+  html body .nav .srch svg, html body .nav .help.ico svg, html body .nav .cart.ico svg { width: 20px; height: 20px; }
+  html body .nav .srch svg *, html body .nav .help.ico svg *, html body .nav .cart.ico svg * { stroke-width: 2; }
+  html body .nav .srch, html body .nav .help.ico, html body .nav .cart.ico { border-radius: 0; width: 40px; height: 40px; }
+  html body .nav .srch:hover, html body .nav .help.ico:hover, html body .nav .cart.ico:hover, html body .nav.on-film .help.ico:hover, html body .nav.on-film .cart.ico:hover { background: transparent; opacity: .6; }
+  html body .nav-skin { top: 0 !important; left: 0 !important; right: 0 !important; border-radius: 0 !important; }
+  html body .mega, html body .search { top: var(--nav-h) !important; left: 0 !important; right: 0 !important; border-radius: 0 !important; box-shadow: none !important; border-top: 1px solid var(--line); }
+  html body.pane-open .nav-skin { box-shadow: 0 24px 50px rgba(11, 36, 65, .14); }
+  @media (max-width: 860px) { html body .nav { padding: 0 18px !important; } }
+  html body.pane-open .nav, html body.pane-open .nav.pill-on, html body.cur-open .nav, html body.cur-open .nav.pill-on { background: transparent !important; box-shadow: none !important; }
   /* ---------- TROPINA PROTOTYPE: tomato grounds, acid-lime type ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -9338,8 +9398,11 @@
     const onFilm = view === "home" && y < heroSec.offsetHeight - 90;
     nav.classList.toggle("on-film", onFilm && y < 40);
     nav.classList.toggle("pill-on", !(onFilm && y < 40));
+    const h = location.hash;
+    nav.querySelectorAll(".links a").forEach(a => { const t = a.getAttribute("href"); a.toggleAttribute("aria-current", t !== "#/" && h.indexOf(t) === 0); });
   }
   window.addEventListener("scroll", navState, { passive: true });
+  window.addEventListener("hashchange", navState);
 
   function heroIntro() {
     return gsap.timeline()
