@@ -3058,6 +3058,8 @@
 
   /* section sub-headings: one size everywhere */
   html body .sec-sub, html body .note-side p, html body .hset-copy > p, html body .hx-side > p, html body .bl-side p, html body .stl .sec-sub, html body .revs-head p { font-size: 14px !important; line-height: 1.5; }
+  /* shop curtain: no caption on the photo */
+  html body .cur-ph .cap { display: none !important; }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -4720,7 +4722,7 @@
   const KID = (k) => KIDS.find((x) => x.k === k);
   const CUR_MAIN = [
     { k: "cribs", label: "Cribs", n: "05", href: "#best", img: "mom-soho", kick: "Cribs · made in Italy", title: "Every one converts",
-      more: [["#best", "Shop all cribs"], ["#/compare", "Compare cribs"]],
+      more: [["#best", "Shop all cribs"]],
       tiles: ORDER.map((k) => tile("#/" + k, cribShot(CRIBS[k]).img, CRIBS[k].name, false, CRIBS[k].kind.split(" ")[0] + " · " + money(cribFrom(CRIBS[k])))) },
     { k: "dressers", label: "Dressers", n: "08", href: "#/dressers", img: "mom-dr-soho", kick: "Dressers", title: "Anti-tip, every one",
       more: [["#/dressers", "Shop all dressers"]],
@@ -4740,7 +4742,7 @@
     <div class="cur-l">
       <nav class="cur-list" aria-label="Shop categories">${CUR_MAIN.map((c) => `<a href="${c.href}" data-k="${c.k}"><span>${c.label}</span></a>`).join("")}</nav>
       <div class="cur-need"><span class="mono">Shop by need</span>${CUR_NEED.map((c) => `<a href="${c.href}" data-k="${c.k}">${c.label}</a>`).join("")}</div>
-      <div class="cur-low"><a href="#/fit">Find your fit</a><a href="#/compare">Compare cribs</a><a href="#/support">Help</a><a href="#/journal">Learn</a><a href="#/story">Our story</a></div>
+      <div class="cur-low"><a href="#/story">Our story</a><a href="#/support">Help</a><a href="#/compare">Compare cribs</a></div>
     </div>
     <div class="cur-r">
       <div class="cur-ph">${CUR_ALL.map((c) => `<img data-k="${c.k}" data-src="img/${c.img}.jpg" alt="">`).join("")}<div class="cap"><span class="mono"></span><b></b></div></div>
