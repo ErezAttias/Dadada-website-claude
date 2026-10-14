@@ -2950,16 +2950,33 @@
   @media (max-width: 860px) { html body .tstrip { height: 120px; } }
   html body .tstrip + .best { padding-top: var(--s-sec); }
 
-  /* ---------- QUIZ BAND: photo, heading + line, button ---------- */
-  html body .note { grid-template-columns: clamp(220px, 22vw, 340px) minmax(0, 1fr) !important; gap: clamp(28px, 4vw, 64px) !important; padding-top: clamp(36px, 4vw, 56px) !important; padding-bottom: clamp(36px, 4vw, 56px) !important; align-items: center; }
+  /* ---------- QUIZ BAND: half photo, text and button stacked ---------- */
+  html body .note { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 0 !important; padding: 0 !important; align-items: stretch; }
   html body .note .dd { display: none !important; }
-  html body .note .note-img { order: -1; width: 100%; aspect-ratio: 16 / 10; border-radius: 28px; overflow: hidden; }
-  html body .note .note-img img { width: 100%; height: 100% !important; object-fit: cover; object-position: 50% 60%; transform: none !important; display: block; }
-  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(28px, 4vw, 64px); row-gap: 0; align-items: center; align-content: center; }
-  html body .note .note-side h2#note-h { grid-area: h; margin: 0 0 14px; font-size: var(--d2); line-height: 1.04 !important; }
-  html body .note .note-side p { grid-area: p; margin: 0; max-width: 46ch; font-size: 18px; line-height: 1.45; }
-  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; align-self: center; }
-  @media (max-width: 900px) { html body .note { grid-template-columns: 1fr !important; gap: 24px !important; } html body .note .note-img { aspect-ratio: 16 / 9; } html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; } html body .note .note-side h2#note-h { margin-bottom: 10px; } html body .note .note-side .pill { justify-self: start; margin-top: 22px; } }
+  html body .note .note-img { order: -1; width: 100%; height: 100%; min-height: clamp(280px, 24vw, 380px); aspect-ratio: auto; border-radius: 0; overflow: hidden; }
+  html body .note .note-img img { width: 100%; height: 100% !important; object-fit: cover; object-position: 50% 55%; transform: none !important; display: block; }
+  html body .note .note-side { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(36px, 4vw, 64px) var(--g) clamp(36px, 4vw, 64px) clamp(32px, 5vw, 88px); }
+  html body .note .note-side h2#note-h { margin: 0 0 22px; font-size: var(--d2); line-height: 1.2 !important; }
+  html body .note .note-side p { margin: 0; max-width: 40ch; font-size: 18px; line-height: 1.45; }
+  html body .note .note-side .pill { margin-top: 26px; white-space: nowrap; }
+  @media (max-width: 900px) { html body .note { grid-template-columns: 1fr !important; } html body .note .note-img { min-height: 0; aspect-ratio: 16 / 9; height: auto; } html body .note .note-side { padding: 28px var(--g) 40px; } }
+  /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
+  html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
+  html body .hero-rib .rs-list li { gap: 12px; }
+  html body .hero-rib .rs-list .hd { color: var(--cream); background: rgba(254, 251, 237, .1); }
+  html body .hero-rib .rs-list .rs-t { font-family: var(--sans); font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none; color: rgba(254, 251, 237, .92); line-height: 1.2; white-space: nowrap; }
+  @media (max-width: 1100px) { html body .hero-rib .rs-list { gap: 28px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 92px; } html body .hero-rib { overflow: hidden !important; } html body .hero-rib .rs-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding: 0 var(--g) !important; } html body .hero-rib .rs-list .hd { width: 30px; height: 30px; padding: 7px; flex: none; } html body .hero-rib .rs-list .rs-t { font-size: 13px !important; white-space: normal; } }
+  /* retailer caption */
+  .ts-cap { text-align: center; margin: 0 var(--g) 16px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .06em !important; text-transform: uppercase; color: #77777a !important; opacity: 1 !important; }
+  .tstrip { padding-top: clamp(22px, 2.6vw, 36px) !important; }
+
+  /* ---------- LOGO STRIP: faint ground, exactly twice the ribbon's height ---------- */
+  html body .tstrip { display: flex; align-items: center; padding: 0 !important; height: calc(2 * clamp(64px, 7vh, 84px)); background: color-mix(in srgb, var(--blue) 5%, var(--cream)); }
+  html body .tstrip .logo-marquee { width: 100%; }
+  @media (max-width: 860px) { html body .tstrip { height: 120px; } }
+  html body .tstrip + .best { padding-top: var(--s-sec); }
+
   /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
   html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
   html body .hero-rib .rs-list li { gap: 12px; }
@@ -5944,16 +5961,33 @@
   @media (max-width: 860px) { html body .tstrip { height: 120px; } }
   html body .tstrip + .best { padding-top: var(--s-sec); }
 
-  /* ---------- QUIZ BAND: photo, heading + line, button ---------- */
-  html body .note { grid-template-columns: clamp(220px, 22vw, 340px) minmax(0, 1fr) !important; gap: clamp(28px, 4vw, 64px) !important; padding-top: clamp(36px, 4vw, 56px) !important; padding-bottom: clamp(36px, 4vw, 56px) !important; align-items: center; }
+  /* ---------- QUIZ BAND: half photo, text and button stacked ---------- */
+  html body .note { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 0 !important; padding: 0 !important; align-items: stretch; }
   html body .note .dd { display: none !important; }
-  html body .note .note-img { order: -1; width: 100%; aspect-ratio: 16 / 10; border-radius: 28px; overflow: hidden; }
-  html body .note .note-img img { width: 100%; height: 100% !important; object-fit: cover; object-position: 50% 60%; transform: none !important; display: block; }
-  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(28px, 4vw, 64px); row-gap: 0; align-items: center; align-content: center; }
-  html body .note .note-side h2#note-h { grid-area: h; margin: 0 0 14px; font-size: var(--d2); line-height: 1.04 !important; }
-  html body .note .note-side p { grid-area: p; margin: 0; max-width: 46ch; font-size: 18px; line-height: 1.45; }
-  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; align-self: center; }
-  @media (max-width: 900px) { html body .note { grid-template-columns: 1fr !important; gap: 24px !important; } html body .note .note-img { aspect-ratio: 16 / 9; } html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; } html body .note .note-side h2#note-h { margin-bottom: 10px; } html body .note .note-side .pill { justify-self: start; margin-top: 22px; } }
+  html body .note .note-img { order: -1; width: 100%; height: 100%; min-height: clamp(280px, 24vw, 380px); aspect-ratio: auto; border-radius: 0; overflow: hidden; }
+  html body .note .note-img img { width: 100%; height: 100% !important; object-fit: cover; object-position: 50% 55%; transform: none !important; display: block; }
+  html body .note .note-side { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(36px, 4vw, 64px) var(--g) clamp(36px, 4vw, 64px) clamp(32px, 5vw, 88px); }
+  html body .note .note-side h2#note-h { margin: 0 0 22px; font-size: var(--d2); line-height: 1.2 !important; }
+  html body .note .note-side p { margin: 0; max-width: 40ch; font-size: 18px; line-height: 1.45; }
+  html body .note .note-side .pill { margin-top: 26px; white-space: nowrap; }
+  @media (max-width: 900px) { html body .note { grid-template-columns: 1fr !important; } html body .note .note-img { min-height: 0; aspect-ratio: 16 / 9; height: auto; } html body .note .note-side { padding: 28px var(--g) 40px; } }
+  /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
+  html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
+  html body .hero-rib .rs-list li { gap: 12px; }
+  html body .hero-rib .rs-list .hd { color: var(--cream); background: rgba(254, 251, 237, .1); }
+  html body .hero-rib .rs-list .rs-t { font-family: var(--sans); font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none; color: rgba(254, 251, 237, .92); line-height: 1.2; white-space: nowrap; }
+  @media (max-width: 1100px) { html body .hero-rib .rs-list { gap: 28px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 92px; } html body .hero-rib { overflow: hidden !important; } html body .hero-rib .rs-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding: 0 var(--g) !important; } html body .hero-rib .rs-list .hd { width: 30px; height: 30px; padding: 7px; flex: none; } html body .hero-rib .rs-list .rs-t { font-size: 13px !important; white-space: normal; } }
+  /* retailer caption */
+  .ts-cap { text-align: center; margin: 0 var(--g) 16px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .06em !important; text-transform: uppercase; color: #77777a !important; opacity: 1 !important; }
+  .tstrip { padding-top: clamp(22px, 2.6vw, 36px) !important; }
+
+  /* ---------- LOGO STRIP: faint ground, exactly twice the ribbon's height ---------- */
+  html body .tstrip { display: flex; align-items: center; padding: 0 !important; height: calc(2 * clamp(64px, 7vh, 84px)); background: color-mix(in srgb, var(--blue) 5%, var(--cream)); }
+  html body .tstrip .logo-marquee { width: 100%; }
+  @media (max-width: 860px) { html body .tstrip { height: 120px; } }
+  html body .tstrip + .best { padding-top: var(--s-sec); }
+
   /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
   html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
   html body .hero-rib .rs-list li { gap: 12px; }
@@ -8961,16 +8995,33 @@
   @media (max-width: 860px) { html body .tstrip { height: 120px; } }
   html body .tstrip + .best { padding-top: var(--s-sec); }
 
-  /* ---------- QUIZ BAND: photo, heading + line, button ---------- */
-  html body .note { grid-template-columns: clamp(220px, 22vw, 340px) minmax(0, 1fr) !important; gap: clamp(28px, 4vw, 64px) !important; padding-top: clamp(36px, 4vw, 56px) !important; padding-bottom: clamp(36px, 4vw, 56px) !important; align-items: center; }
+  /* ---------- QUIZ BAND: half photo, text and button stacked ---------- */
+  html body .note { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 0 !important; padding: 0 !important; align-items: stretch; }
   html body .note .dd { display: none !important; }
-  html body .note .note-img { order: -1; width: 100%; aspect-ratio: 16 / 10; border-radius: 28px; overflow: hidden; }
-  html body .note .note-img img { width: 100%; height: 100% !important; object-fit: cover; object-position: 50% 60%; transform: none !important; display: block; }
-  html body .note .note-side { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "h btn" "p btn"; column-gap: clamp(28px, 4vw, 64px); row-gap: 0; align-items: center; align-content: center; }
-  html body .note .note-side h2#note-h { grid-area: h; margin: 0 0 14px; font-size: var(--d2); line-height: 1.04 !important; }
-  html body .note .note-side p { grid-area: p; margin: 0; max-width: 46ch; font-size: 18px; line-height: 1.45; }
-  html body .note .note-side .pill { grid-area: btn; white-space: nowrap; align-self: center; }
-  @media (max-width: 900px) { html body .note { grid-template-columns: 1fr !important; gap: 24px !important; } html body .note .note-img { aspect-ratio: 16 / 9; } html body .note .note-side { grid-template-columns: 1fr; grid-template-areas: "h" "p" "btn"; } html body .note .note-side h2#note-h { margin-bottom: 10px; } html body .note .note-side .pill { justify-self: start; margin-top: 22px; } }
+  html body .note .note-img { order: -1; width: 100%; height: 100%; min-height: clamp(280px, 24vw, 380px); aspect-ratio: auto; border-radius: 0; overflow: hidden; }
+  html body .note .note-img img { width: 100%; height: 100% !important; object-fit: cover; object-position: 50% 55%; transform: none !important; display: block; }
+  html body .note .note-side { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(36px, 4vw, 64px) var(--g) clamp(36px, 4vw, 64px) clamp(32px, 5vw, 88px); }
+  html body .note .note-side h2#note-h { margin: 0 0 22px; font-size: var(--d2); line-height: 1.2 !important; }
+  html body .note .note-side p { margin: 0; max-width: 40ch; font-size: 18px; line-height: 1.45; }
+  html body .note .note-side .pill { margin-top: 26px; white-space: nowrap; }
+  @media (max-width: 900px) { html body .note { grid-template-columns: 1fr !important; } html body .note .note-img { min-height: 0; aspect-ratio: 16 / 9; height: auto; } html body .note .note-side { padding: 28px var(--g) 40px; } }
+  /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
+  html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
+  html body .hero-rib .rs-list li { gap: 12px; }
+  html body .hero-rib .rs-list .hd { color: var(--cream); background: rgba(254, 251, 237, .1); }
+  html body .hero-rib .rs-list .rs-t { font-family: var(--sans); font-size: 14px !important; font-weight: 400 !important; letter-spacing: 0 !important; text-transform: none; color: rgba(254, 251, 237, .92); line-height: 1.2; white-space: nowrap; }
+  @media (max-width: 1100px) { html body .hero-rib .rs-list { gap: 28px; } }
+  @media (max-width: 760px) { html body .hero { --rib-h: 92px; } html body .hero-rib { overflow: hidden !important; } html body .hero-rib .rs-list { display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px 18px; padding: 0 var(--g) !important; } html body .hero-rib .rs-list .hd { width: 30px; height: 30px; padding: 7px; flex: none; } html body .hero-rib .rs-list .rs-t { font-size: 13px !important; white-space: normal; } }
+  /* retailer caption */
+  .ts-cap { text-align: center; margin: 0 var(--g) 16px !important; font-size: 11px !important; font-weight: 500 !important; letter-spacing: .06em !important; text-transform: uppercase; color: #77777a !important; opacity: 1 !important; }
+  .tstrip { padding-top: clamp(22px, 2.6vw, 36px) !important; }
+
+  /* ---------- LOGO STRIP: faint ground, exactly twice the ribbon's height ---------- */
+  html body .tstrip { display: flex; align-items: center; padding: 0 !important; height: calc(2 * clamp(64px, 7vh, 84px)); background: color-mix(in srgb, var(--blue) 5%, var(--cream)); }
+  html body .tstrip .logo-marquee { width: 100%; }
+  @media (max-width: 860px) { html body .tstrip { height: 120px; } }
+  html body .tstrip + .best { padding-top: var(--s-sec); }
+
   /* ---------- HERO RIBBON: static, sentence case, icon badges ---------- */
   html body .hero-rib { overflow: visible !important; justify-content: center !important; white-space: normal; }
   html body .hero-rib .rs-list li { gap: 12px; }
