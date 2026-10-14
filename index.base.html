@@ -3116,9 +3116,9 @@
   html body .foot-news input { font-size: 14px !important; }
   html body .foot-cols a { padding: 3px 0; }
 
-  /* BAND photo: the dresser with its tray bleeds off the left and bottom edges of the red band */
-  html body #pdp .band .band-fig { width: clamp(320px, 44vw, 700px); height: auto; aspect-ratio: 4 / 3; object-fit: cover; margin: 0 0 0 calc(var(--g) * -1) !important; align-self: end; border-radius: 0 var(--r) 0 0; }
-  @media (max-width: 800px) { html body #pdp .band .band-fig { width: calc(100% + var(--g) * 2) !important; max-width: none !important; margin: 0 calc(var(--g) * -1) !important; border-radius: 0; order: 2; } }
+  /* BAND photo: the cut-out dresser peeks in from the left edge, front-on, standing on the band's bottom edge */
+  html body #pdp .band .band-fig { display: block; width: clamp(360px, 46vw, 740px) !important; max-width: none !important; height: auto; aspect-ratio: auto; object-fit: contain; margin: 0 !important; align-self: end; border-radius: 0; transform: translate(-34%, 7%); }
+  @media (max-width: 800px) { html body #pdp .band .band-fig { width: 112% !important; order: 2; margin: 0 !important; transform: translate(-30%, 7%); } }
   /* footer: white text a touch smaller */
   html body .foot-cols a, html body .foot-cols, html body .foot-news p, html body .foot-news input { font-size: 13px !important; }
 </style>
@@ -4028,7 +4028,7 @@
   </section>
 
   <section class="band" aria-labelledby="bd-h">
-    <img class="band-fig" src="img/dresser-tray.jpg" alt="The top of a dresser with a wooden changing tray, a soft pad and folded muslins on it" loading="lazy" width="1168" height="880">
+    <img class="band-fig" src="img/dresser-tray-front.png" alt="A cream dresser with a wooden changing tray, a soft pad and folded muslins on top" loading="lazy" width="937" height="738">
     <div><h2 id="bd-h">Every dresser is a changing table in waiting.</h2>
       <p>All eight stand 34 inches tall. Add a tray on top for the diaper years, then lift it off and keep the dresser.</p>
       <div class="trays"><span>Soho, Bliss, Merry tray · $119</span><span>Austin, Central Park, LaLa Big · $99</span><span>LaLa Little · $69</span></div></div>
@@ -4122,7 +4122,7 @@
   </section>
 
   <section class="band" aria-labelledby="bd-h">
-    <img class="band-fig" src="img/dresser-tray.jpg" alt="The top of a dresser with a wooden changing tray, a soft pad and folded muslins on it" loading="lazy" width="1168" height="880">
+    <img class="band-fig" src="img/dresser-tray-front.png" alt="A cream dresser with a wooden changing tray, a soft pad and folded muslins on top" loading="lazy" width="937" height="738">
     <div><h2 id="bd-h">A changing table now. A dresser for years.</h2>
       <p>${d.name} stands 34 inches tall, a comfortable height for changing. Add the ${money(d.tray)} tray for the diaper years; when they're over, lift it off and it's simply a dresser again.</p></div>
   </section>
