@@ -3087,6 +3087,18 @@
   /* blog card read time: quiet sentence-case line */
   html body .bl-card .meta, html body .bl-card .meta span { font-size: 13px !important; font-weight: 500 !important; letter-spacing: 0 !important; text-transform: none !important; }
   html body .bl-card .meta > span:last-child { opacity: .7 !important; }
+  /* page-hero CTAs: button and text link share one centre line, with real spacing */
+  html body #pdp .dh .ctas { display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap; }
+  html body #pdp .dh .ctas > .pill { margin: 0; align-self: center; }
+  html body #pdp .dh .ctas > .pill.ghost { height: 52px; padding: 0 18px; display: inline-flex; align-items: center; }
+
+  /* NO HIGHLIGHTS: no coloured marker behind words, anywhere */
+  html body .hl, html body #pdp h2 em, html body #pdp .gq em, html body .foot em, html body #pdp .sup-h h1 em, html body #pdp .cmp-h h1 em, html body .hset-copy .h2 .hl, html body #rv-home-h .hl, html body .stl-head .hl, html body #pdp .ar-text .ar-lede mark, html body #pdp .ar-text blockquote p, html body mark { background: none !important; padding: 0 !important; margin: 0 !important; color: inherit !important; }
+  html body #pdp .g-left h2 em { color: var(--lime) !important; }
+  /* SALE tags: palette red, cream text */
+  html body .badge.sale, html body #pdp .dcard .badge.sale, html body #pdp .kcard .badge.sale, html body .card .badge.sale { background: var(--lav) !important; color: var(--cream) !important; }
+  /* page-hero CTAs: one centre line */
+  html body #pdp .dh .ctas > * { transform: none !important; }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -4013,7 +4025,7 @@
   <section class="sec" id="dr-grid" aria-labelledby="dg-h">
     ${secHead("01", "dg-h", ["The collection", "Pick your <em>storage.</em>"], "")}
     <div class="dfilter" role="group" aria-label="Filter by number of drawers">${[["all", "All"], ["6", "Six drawers"], ["5", "Five drawers"], ["3", "Three drawers"]].map(([v, l], k) => `<button aria-pressed="${k === 0}" data-v="${v}">${l}<span>${cnt(v)}</span></button>`).join("")}</div>
-    <div class="dgrid">${DORDER.map((k) => { const d = DRESSERS[k]; return `<a class="dcard" href="#/dressers/${k}" data-v="${d.drawers}"><div class="ph">${d.was ? '<span class="badge">Sale</span>' : ""}<img class="pl" src="img/${plate(d.img)}.jpg" alt="${d.name} ${dkind(d)}" loading="lazy"><img class="sc" src="img/${d.scene}.jpg" alt="" loading="lazy"></div><div class="row"><h3>${d.name}</h3><span class="pr">${d.was ? `<s>${money(d.was)}</s>` : ""}${money(d.price)}</span></div><div class="meta"><span class="mono muted">${d.cubby ? "3 drawers + shelves" : d.drawers + " drawers"} · ${d.w}″</span><span class="dots">${d.finishes.map((f) => `<i style="background:${DSW[f]}" title="${f}"></i>`).join("")}</span></div></a>`; }).join("")}</div>
+    <div class="dgrid">${DORDER.map((k) => { const d = DRESSERS[k]; return `<a class="dcard" href="#/dressers/${k}" data-v="${d.drawers}"><div class="ph">${d.was ? '<span class="badge sale">Sale</span>' : ""}<img class="pl" src="img/${plate(d.img)}.jpg" alt="${d.name} ${dkind(d)}" loading="lazy"><img class="sc" src="img/${d.scene}.jpg" alt="" loading="lazy"></div><div class="row"><h3>${d.name}</h3><span class="pr">${d.was ? `<s>${money(d.was)}</s>` : ""}${money(d.price)}</span></div><div class="meta"><span class="mono muted">${d.cubby ? "3 drawers + shelves" : d.drawers + " drawers"} · ${d.w}″</span><span class="dots">${d.finishes.map((f) => `<i style="background:${DSW[f]}" title="${f}"></i>`).join("")}</span></div></a>`; }).join("")}</div>
   </section>
 
   <section class="band" aria-labelledby="bd-h">
@@ -4574,7 +4586,7 @@
 
   <section class="sec" id="k-grid" aria-labelledby="kg-h">
     ${secHead("01", "kg-h", ["The next room", "What comes <em>after the crib.</em>"], "")}
-    <div class="kgrid">${KIDS.map((p) => `<article class="kcard"><div class="ph${p.cover ? " cover" : ""}">${p.was ? '<span class="badge">Sale</span>' : ""}<img${p.cover ? "" : ' class="pl"'} src="img/${plate(p.img)}.jpg" alt="${p.name}" loading="lazy">${p.sc ? `<img class="sc" src="img/${p.sc}.jpg" alt="" loading="lazy">` : ""}</div>
+    <div class="kgrid">${KIDS.map((p) => `<article class="kcard"><div class="ph${p.cover ? " cover" : ""}">${p.was ? '<span class="badge sale">Sale</span>' : ""}<img${p.cover ? "" : ' class="pl"'} src="img/${plate(p.img)}.jpg" alt="${p.name}" loading="lazy">${p.sc ? `<img class="sc" src="img/${p.sc}.jpg" alt="" loading="lazy">` : ""}</div>
       <div class="row"><h3>${p.name}</h3><span class="pr">${p.was ? `<s>${money(p.was)}</s>` : ""}${money(p.price)}</span></div>
       <p class="k">${p.line}</p><ul class="facts mono">${p.facts.map((f) => `<li>${f}</li>`).join("")}</ul>
       <div class="meta"><span class="dots">${p.finishes.map((f) => `<i style="background:${KSW[f]}" title="${f}"></i>`).join("")}</span><button class="pill blue sm" data-kid="${p.k}">Add to cart</button></div></article>`).join("")}</div>
