@@ -3134,6 +3134,18 @@
   html body .wid-list span { font-size: 14px; line-height: 1.6; max-width: 40ch; }
   @media (max-width: 900px) { html body .wid { grid-template-columns: 1fr; } html body .wid-l { position: static; } }
   @media (max-width: 560px) { html body .wid-list { grid-template-columns: 1fr; } }
+
+  /* WHAT IS DADADA v2: text | badge close-up | four reasons */
+  html body .wid { grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.85fr) minmax(0, 1.2fr); gap: clamp(28px, 4vw, 72px); align-items: start; }
+  html body .wid-l { position: static; }
+  html body .wid-ph { margin: 0; border-radius: var(--r); overflow: hidden; aspect-ratio: 4 / 5; }
+  html body .wid-ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  html body .wid-list { grid-template-columns: 1fr; }
+  html body .wid-list li { padding: 18px 0 22px; gap: 6px; }
+  html body .wid-list li:last-child { border-bottom: 1.5px solid var(--navy); }
+  html body .wid-list b { font-family: var(--sans) !important; font-weight: 700 !important; text-transform: none !important; font-size: 18px !important; line-height: 1.3 !important; letter-spacing: -0.01em !important; }
+  @media (max-width: 1100px) { html body .wid { grid-template-columns: 1fr 1fr; } html body .wid-l { grid-column: 1 / -1; } }
+  @media (max-width: 640px) { html body .wid { grid-template-columns: 1fr; } }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -3234,6 +3246,7 @@
         <p class="sec-sub">A young brand with an old family trade. Every crib is handcrafted in family-owned Italian workshops, from solid beech, with clean lines made to outlast more than one childhood.</p>
         <a class="pill blue" href="#/story">Our story <span class="ar" aria-hidden="true">→</span></a>
       </div>
+      <figure class="wid-ph"><img src="img/crib-badge.jpg" alt="Close-up of a solid beech dadada crib with its brushed steel name badge" loading="lazy" width="896" height="1120"></figure>
       <ol class="wid-list">
         <li><b>Made in Italy</b><span>Handcrafted in family workshops, from a furniture heritage that goes back to 1932.</span></li>
         <li><b>100% solid beech</b><span>Kiln-dried European beechwood in every crib, from locally sourced timber.</span></li>
