@@ -3179,9 +3179,9 @@
   @media (max-width: 600px) { html body .logos-row .logos { justify-content: center; gap: 18px 24px; padding: 26px 0; } }
   /* QUIZ STRIP (from the performance version) */
   html body .qstrip { padding: 0 var(--g); }
-  html body .revs:has(+ .qstrip) { padding-bottom: calc(var(--s-sec) * .7) !important; }
-  html body .qstrip + .blog { padding-top: calc(var(--s-sec) * .42) !important; }
-  @media (max-width: 760px) { html body .qstrip + .blog { padding-top: calc(var(--s-sec) * .7) !important; } }
+  html body .revs:has(+ .qstrip) { padding-bottom: calc(var(--s-sec) * .7 - 13px) !important; }
+  html body .qstrip + .blog { padding-top: calc(var(--s-sec) * .42 + 11px) !important; }
+  @media (max-width: 760px) { html body .revs:has(+ .qstrip) { padding-bottom: calc(var(--s-sec) * .7) !important; } html body .qstrip + .blog { padding-top: calc(var(--s-sec) * .7) !important; } }
   html body .qs-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 26px; border-radius: var(--r); background: color-mix(in srgb, var(--navy) 5%, var(--cream)); }
   html body .qs-in p { font-size: 15px; font-weight: 600; color: var(--navy); }
   html body .qs-btn { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 24px; border-radius: 999px; background: var(--lav); color: var(--cream); font-weight: 600; font-size: 15px; white-space: nowrap; transition: background-color .3s var(--ease); }
@@ -3215,10 +3215,35 @@
   html body .qa-list, html body #pdp .faq-wrap { border-top-width: 1px !important; border-top-color: var(--line) !important; }
   html body .qa details, html body #pdp .faq details { border-bottom-width: 1px !important; border-bottom-color: var(--line) !important; }
   /* quiz strip: yellow, navy text, red button */
-  html body .qs-in { background: var(--lime) !important; }
+  html body .qs-in { background: var(--blush) !important; }
   html body .qs-in p { color: var(--navy) !important; }
-  html body .qs-btn { background: var(--lav) !important; color: var(--cream) !important; }
-  html body .qs-btn:hover { background: color-mix(in srgb, var(--lav) 80%, #fff) !important; }
+  html body .qs-btn { background: var(--blue) !important; color: var(--cream) !important; }
+  html body .qs-btn:hover { background: color-mix(in srgb, var(--blue) 82%, #fff) !important; }
+
+  /* WHAT IS DADADA: side by side, compact */
+  html body .wid.wid-b { display: block !important; padding: clamp(64px, 7vw, 110px) var(--g) !important; border-top: 0 !important; }
+  html body .wb-grid { max-width: var(--max, 1320px); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(40px, 6vw, 104px); align-items: stretch; }
+  html body .wb-copy { display: grid; gap: 20px; justify-items: start; }
+  html body .wb-kick { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); opacity: .6; }
+  html body .wb-title { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: var(--d2); line-height: 1.22; letter-spacing: -0.03em; color: var(--navy); max-width: 17ch; }
+  html body .wb-story { font-size: 14px !important; line-height: 1.6; color: var(--navy); max-width: 46ch !important; margin: 0; }
+  html body .wb-link { display: inline-flex; gap: 8px; align-items: center; min-height: 40px; font-size: 14px; font-weight: 600; color: var(--navy); }
+  html body .wb-link u { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+  html body .wb-link span { transition: transform .4s var(--ease); }
+  html body .wb-link:hover span { transform: translateX(4px); }
+  html body .wb-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; width: 100%; }
+  html body .wb-list li { display: grid; gap: 4px; align-content: start; padding-top: 12px; border-top: 1px solid var(--line); }
+  html body .wb-list b { font-size: 14px; font-weight: 700; color: var(--navy); }
+  html body .wb-list span { font-size: 14px; line-height: 1.5; color: var(--navy); opacity: .7; }
+  html body .wb-fig { margin: 0; position: relative; }
+  html body .wb-copy { align-content: center; }
+  html body .wb-fig img { width: 100% !important; height: 100% !important; position: absolute; inset: 0; aspect-ratio: auto; object-fit: cover; object-position: 40% 50%; border-radius: var(--r); display: block; }
+  @media (max-width: 900px) {
+    html body .wid.wid-b { padding: 64px var(--g) !important; }
+    html body .wb-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    html body .wb-fig { order: -1; }
+    html body .wb-fig { aspect-ratio: 4 / 3; }
+  }
   /* ---------- PANTONE PROTOTYPE: red grounds carry cream text ---------- */
   html body .hset .hset-copy > p, html body .hset .hx-side p, html body .hset .hs-more, html body .hset .hs-more span,
   html body #pdp .band, html body #pdp .band h2, html body #pdp .band p, html body #pdp .band .big, html body #pdp .band sup, html body .band, html body .band h2, html body .band p, html body .band .big, html body .band sup,
@@ -3316,18 +3341,22 @@
       <div class="stl-app" id="stl-app"></div>
     </section>
 
-    <section class="wid" id="what" aria-labelledby="wid-h">
-      <div class="wid-l">
-        <h2 class="h2" id="wid-h">What is dadada?</h2>
-        <p class="sec-sub">A young brand with an old family trade. Every crib is handcrafted in family-owned Italian workshops, from solid beech, with clean lines made to outlast more than one childhood.</p>
-        <a class="pill blue" href="#/story">Our story <span class="ar" aria-hidden="true">→</span></a>
+    <section class="wid wid-b" id="what" aria-labelledby="wid-h">
+      <div class="wb-grid">
+        <div class="wb-copy">
+          <span class="wb-kick">What is dadada?</span>
+          <h2 class="wb-title" id="wid-h">A young brand with an old family trade.</h2>
+          <p class="wb-story">dadada was founded by the Segal Group, whose furniture heritage goes back to 1932, to make the first pieces your child will ever own. Solid beech, clean lines, and a crib built to outlast more than one childhood.</p>
+          <a class="wb-link" href="#/story"><u>Read our story</u> <span aria-hidden="true">→</span></a>
+          <ol class="wb-list">
+            <li><b>Made in Italy</b><span>Family workshops, since 1932.</span></li>
+            <li><b>100% solid beech</b><span>Kiln-dried, locally sourced.</span></li>
+            <li><b>GREENGUARD Gold</b><span>Lead-, phthalate- and formaldehyde-free.</span></li>
+            <li><b>Built to grow</b><span>Convertible, with a 2-year warranty.</span></li>
+          </ol>
+        </div>
+        <figure class="wb-fig"><img src="../img/story-workshop.jpg" alt="A craftsman sanding a beech crib in a family workshop in Italy" loading="lazy" width="1920" height="1085"></figure>
       </div>
-      <ol class="wid-list">
-        <li><b>Made in Italy</b><span>Handcrafted in family workshops, from a furniture heritage that goes back to 1932.</span></li>
-        <li><b>100% solid beech</b><span>Kiln-dried European beechwood in every crib, from locally sourced timber.</span></li>
-        <li><b>GREENGUARD Gold</b><span>Every crib is certified, tested for thousands of chemicals and VOCs. Lead-, phthalate- and formaldehyde-free.</span></li>
-        <li><b>Built to grow</b><span>Cribs convert as your child grows, and a 2-year warranty covers every one.</span></li>
-      </ol>
     </section>
 
     <section class="rooms" id="rooms" aria-labelledby="rooms-h">
