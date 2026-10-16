@@ -6698,6 +6698,7 @@
       document.title = curPage.title;
       PDP.innerHTML = curPage.html();
       PDP.hidden = false;
+      window.scrollTo(0, 0); if (lenis) { lenis.resize(); lenis.scrollTo(0, { immediate: true, force: true }); }
       jump(0);
       const api = curPage.bind();
       if (motion) { pdpCtx = gsap.context(() => curPage.build(api), PDP); ScrollTrigger.refresh(); }
@@ -6732,6 +6733,7 @@
       })
       .add(() => {}, "+=0.32")
       .add(() => {
+        if (view !== "home" && !hashAnchor() && window.scrollY > 0) { window.scrollTo(0, 0); if (lenis) lenis.scrollTo(0, { immediate: true, force: true }); }
         if (lenis) lenis.start();
         busy = false;
         if (queued) { queued = false; if (parse() !== view) route(); }
