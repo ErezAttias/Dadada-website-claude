@@ -4474,6 +4474,16 @@
   @media (max-width: 760px) { html.v4 body #home .best-grid .card :is(h3, h3 a, .v4-desc, .pr) { font-size: 13px !important; } }
   /* cart drawer title in Inter Bold */
   html.v4 body .drawer .dr-head h2:not(#_) { font-family: var(--sans) !important; font-weight: 700 !important; text-transform: none !important; letter-spacing: -0.02em !important; font-size: 24px !important; line-height: 1.2 !important; }
+  /* journal intro: sits over the story list, sentence runs on one line */
+  @media (min-width: 901px) {
+    html.v4 body #home .v3-journal .v3-head-r { grid-column: 9 / -1 !important; align-self: end !important; }
+    html.v4 body #home .v3-journal .v3-head-r .v3-body { max-width: none !important; }
+  }
+  html.v4 body #home .v3-journal .v3-head-r .v3-body { text-wrap: balance; }
+  /* hide the navbar on scroll down, bring it back on scroll up */
+  html.v4 body nav.nav, html.v4 body .ann { transition: transform .45s cubic-bezier(.16, 1, .3, 1), top .35s cubic-bezier(.16, 1, .3, 1), background-color .5s, color .5s !important; }
+  html.v4.v4-navhide body nav.nav, html.v4.v4-navhide body .ann { transform: translateY(calc(-100% - 40px)) !important; }
+  html.v4 .intro { display: none !important; }
 
   /* ===== VERSION 5: Version 4 in the lava / flag red / papaya / deep blue / steel blue palette ===== */
   html.v5 body #home .v3-quiz { background: #780000 !important; }
@@ -7154,7 +7164,7 @@ function cartAdd(item) {
     const go = () => {
       if (went) return; went = true;
       enter(first);
-      gsap.to(intro, { yPercent: -100, duration: 1, ease: "expo.inOut", onComplete: () => intro.remove() });
+      intro.remove();
       pdpCtx && pdpCtx.add(() => { const tl = curPage.intro(); if (tl && tl.delay) tl.delay(0.35); });
       busy = false;
       if (queued) { queued = false; route(); }
@@ -7164,35 +7174,21 @@ function cartAdd(item) {
     return;
   }
 
-  if (lenis) lenis.stop();
-  const count = { v: 0 };
-  const countEl = intro.querySelector(".intro-count");
-  gsap.from(".intro-logo", { yPercent: 30, opacity: 0, duration: 1.2, ease: "expo.out" });
-  gsap.to(count, { v: 88, duration: 1.1, ease: "power2.out", onUpdate: () => (countEl.textContent = Math.round(count.v)) });
-  gsap.to(".intro-line span", { width: "88%", duration: 1.1, ease: "power2.out" });
+  intro.remove();
   let started = false;
   function start() {
     if (started) return; started = true;
-    count.v = 88;
     playHero();
-    gsap.timeline()
-      .to(count, { v: 100, duration: 0.7, ease: "power2.inOut", onUpdate: () => (countEl.textContent = Math.round(count.v)) })
-      .to(".intro-line span", { width: "100%", duration: 0.7, ease: "power2.inOut" }, 0)
-      .to(".intro-logo", { scale: 0.9, opacity: 0, duration: 0.6, ease: "power2.in" }, "+=0.05")
-      .to(intro, { yPercent: -100, duration: 1.1, ease: "expo.inOut" }, "<0.2")
-      .add(heroIntro(), "-=0.6")
-      .add(() => {
-        intro.remove();
-        if (lenis) lenis.start();
-        view = "home";
-        homeCtx = gsap.context(buildHome, HOME);
-        ScrollTrigger.refresh();
-        navState();
-        busy = false;
-        if (queued) { queued = false; route(); }
-      }, "-=0.9");
+    gsap.timeline().add(heroIntro()).add(() => {
+      view = "home";
+      homeCtx = gsap.context(buildHome, HOME);
+      ScrollTrigger.refresh();
+      navState();
+      busy = false;
+      if (queued) { queued = false; route(); }
+    }, 0.2);
   }
-  setTimeout(start, 4000);
+  setTimeout(start, 1500);
   ready.then(start);
 })();
 </script>
@@ -7367,5 +7363,20 @@ function cartAdd(item) {
     });
   }
   if (document.readyState === "complete") setTimeout(boot, 400); else window.addEventListener("load", function () { setTimeout(boot, 400); });
+})();
+</script>
+
+<script>
+/* V4/V5: the navbar (and the announcement bar above it) slides away while scrolling down and returns on any scroll up */
+(function () {
+  var last = window.scrollY, acc = 0, hidden = false;
+  function busy() { var b = document.body; return b.classList.contains("cur-open") || document.querySelector("#mmenu.on, .burger[aria-expanded=true], #search.on, #drawer[aria-hidden=false], #cur.on, #mega.on"); }
+  function set(h) { if (h === hidden) return; hidden = h; document.documentElement.classList.toggle("v4-navhide", h); }
+  window.addEventListener("scroll", function () {
+    var y = window.scrollY, d = y - last; last = y;
+    if (y < 120 || busy()) { acc = 0; set(false); return; }
+    acc = (d > 0) === (acc > 0) ? acc + d : d;
+    if (acc > 24) set(true); else if (acc < -8) set(false);
+  }, { passive: true });
 })();
 </script>
