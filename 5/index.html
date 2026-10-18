@@ -4486,6 +4486,8 @@
   html.v4 .intro { display: none !important; }
   /* navbar links: same Inter as the page, without the extra tracking */
   html.v4 body nav.nav:not(#_) .links > :is(a, button), html.v4 body nav.nav:not(#_) .links > button span { letter-spacing: 0 !important; font-size: 14px !important; }
+  /* the announcement bar stays put and only leaves together with the navbar */
+  html.v4 body.ann-off:not(.cur-open):not(.menu-open):not(.pane-open) { --ann: 36px !important; }
 
   /* ===== VERSION 5: Version 4 in the lava / flag red / papaya / deep blue / steel blue palette ===== */
   html.v5 body #home .v3-quiz { background: #780000 !important; }
