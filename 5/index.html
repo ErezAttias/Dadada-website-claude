@@ -4451,6 +4451,10 @@
   /* headings sit closer to their content (applies to every section, so the rhythm stays even) */
   html.v4 body { --head: clamp(24px, 2.2vw, 40px) !important; }
 
+  /* best sellers: add-to-cart under every card */
+  html.v4 body #home .best-grid .card .v4-add { order: 5; position: relative; z-index: 3; align-self: stretch; margin: 16px clamp(10px, 1vw, 16px) 0; height: 46px; border: 1px solid var(--navy); background: transparent; color: var(--navy); font: 600 13px/1 var(--sans); letter-spacing: .04em; cursor: pointer; transition: background-color .3s, color .3s; }
+  html.v4 body #home .best-grid .card .v4-add:hover { background: var(--navy); color: var(--cream); }
+
   /* ===== VERSION 5: Version 4 in the lava / flag red / papaya / deep blue / steel blue palette ===== */
   html.v5 body #home .v3-quiz { background: #780000 !important; }
   html.v5 body #home .v3-quiz .v3-h3 { color: #fdf0d5 !important; }
@@ -5685,7 +5689,8 @@
     const sb = $("[data-set]", drBody); if (sb) sb.addEventListener("click", () => { const u = { ...setUp }; delete u.why; cartAdd(u); });
     $("#checkout").addEventListener("click", () => toast("Checkout isn't connected in this mockup", null));
   }
-  function cartAdd(item) {
+  window.__cartAdd = function (i) { return cartAdd(i); };
+function cartAdd(item) {
     const ex = cart.find((x) => x.id === item.id);
     if (ex) ex.qty += 1; else cart.push({ ...item, qty: 1 });
     renderCart();
@@ -7249,6 +7254,17 @@
       h3.parentNode.insertBefore(k, h3);
       var sub = SUB[href] || KIDS[name];
       if (sub) { var d = document.createElement("p"); d.className = "v4-desc"; d.textContent = sub; h3.parentNode.insertBefore(d, h3.nextSibling); }
+      var btn = document.createElement("button"); btn.type = "button"; btn.className = "v4-add"; btn.textContent = "Add to cart";
+      btn.setAttribute("aria-label", "Add " + name + " to cart");
+      btn.addEventListener("click", function (ev) {
+        ev.preventDefault(); ev.stopPropagation();
+        var img = c.querySelector("img.main"), pr = c.querySelector(".pr"), on = c.querySelector(".sw-m[aria-pressed=true]");
+        var price = parseInt((pr ? pr.textContent : "0").replace(/[^0-9]/g, ""), 10) || 0;
+        var type = cat(href) === "Dresser" ? "dresser" : cat(href) === "Crib" ? "crib" : "kids";
+        if (window.__cartAdd) window.__cartAdd({ id: "b-" + href + "-" + (on ? on.dataset.i : 0), type: type, name: name + (type === "crib" ? " crib" : ""), sub: on ? on.getAttribute("aria-label") : (sub || ""), price: price, img: img ? img.getAttribute("src") : null });
+        btn.textContent = "Added"; setTimeout(function () { btn.textContent = "Add to cart"; }, 1600);
+      });
+      c.appendChild(btn);
     });
   }
   function boot() {
