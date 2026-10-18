@@ -4448,6 +4448,8 @@
   html.v4 body #home .v3-set-copy :is(.v3-h2, .v3-body, .v3-sum, .v3-sum *, .v3-link, dt, dd, s) { color: var(--cream) !important; opacity: 1 !important; }
   html.v4 body #home .v3-set-copy :is(.v3-sum, .v3-sum > div) { border-color: rgba(255, 250, 240, .35) !important; }
   html.v4 body #home .v3-set-copy .v3-sum s { text-decoration-color: currentColor; }
+  /* headings sit closer to their content (applies to every section, so the rhythm stays even) */
+  html.v4 body { --head: clamp(24px, 2.2vw, 40px) !important; }
 
   /* ===== VERSION 5: Version 4 in the lava / flag red / papaya / deep blue / steel blue palette ===== */
   html.v5 body #home .v3-quiz { background: #780000 !important; }
