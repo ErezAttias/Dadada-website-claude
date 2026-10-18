@@ -4540,6 +4540,19 @@
   }
   /* shop the look hotspots in the hero's neon */
   html.v4:not(.v5) body #home .stl-dot:not(#_) { background: #fdf0d5 !important; color: var(--navy) !important; }
+  /* footer wordmark as tall as the social buttons */
+  html.v4 body .foot-bot .word:not(#_) { width: auto !important; height: 42px !important; }
+  html.v4 body .foot-bot .word:not(#_) svg { width: auto !important; height: 42px !important; }
+  @media (max-width: 760px) { html.v4 body .foot-bot .word:not(#_), html.v4 body .foot-bot .word:not(#_) svg { height: 28px !important; } }
+  /* question "+" hover: a dark square so the mark stays visible */
+  @media (hover: hover) { html.v4 body #home .v4-terra .v3-faq summary:not(#_):hover::after, html.v4 body #home .v4-terra .v3-faq details[open] summary:not(#_):hover::after { background: var(--navy) !important; color: var(--cream) !important; } }
+  /* shop-the-look popover: solid add-to-cart in the palette */
+  html.v4 body #stl-pop:not(#_) button { background: var(--navy) !important; color: var(--cream) !important; border-color: var(--navy) !important; }
+  html.v4 body #stl-pop:not(#_) button:hover { background: var(--terra) !important; border-color: var(--terra) !important; color: var(--cream) !important; }
+  html.v4 body #stl-pop:not(#_) a:hover { background: var(--navy) !important; color: var(--cream) !important; }
+  html.v4 body #stl-pop:not(#_) { background: var(--cream) !important; }
+  html.v4 body #stl-pop:not(#_) .ph { background: #fff !important; }
+  html.v4 body #stl-pop:not(#_) .ph img { mix-blend-mode: multiply; }
 
   /* ===== VERSION 5: Version 4 in the lava / flag red / papaya / deep blue / steel blue palette ===== */
   html.v5 body #home .v3-quiz { background: #780000 !important; }
