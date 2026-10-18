@@ -7095,17 +7095,20 @@
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   function sheet() { return document.querySelector("#home .sheet"); }
   function box(el, s) { var r = el.getBoundingClientRect(), q = s.getBoundingClientRect(); return { t: r.top - q.top, b: r.bottom - q.top }; }
-  /* one pass: an S-ease in from the edge, n round loops, an S-ease out the far edge.
-     loops are a prolate trochoid: x = x0 + a*th + R*sin(th), y = y0 - k*R*(1 - cos(th)) */
-  function pass(W, y0, cfg) {
-    var R = cfg.R, a = R * 0.34, n = cfg.n, k = 1.18, run = 2 * Math.PI * n * a;
-    var xs = W * cfg.at - run / 2, xe = xs + run, pad = 40, pts = [], i, x, th;
-    var hIn = cfg.hIn, hOut = cfg.hOut, step = 3;
-    for (x = -pad; x < xs; x += step) { var u = (x + pad) / (xs + pad); pts.push([x, y0 + hIn * (1 + Math.cos(Math.PI * u)) / 2]); }
-    var N = Math.ceil(n * 140);
-    for (i = 0; i <= N; i++) { th = 2 * Math.PI * n * i / N; var r = R * (0.72 + 0.38 * Math.sin(Math.PI * i / N)); pts.push([xs + a * th + r * Math.sin(th), y0 - k * r * (1 - Math.cos(th))]); }
-    for (x = xe + step; x <= W + pad; x += step) { var v = (x - xe) / (W + pad - xe); pts.push([x, y0 - hOut * (1 - Math.cos(Math.PI * v)) / 2]); }
-    if (cfg.flip) pts = pts.map(function (p) { return [W - p[0], p[1]]; }).reverse();
+  /* one peek: the line slips in from a page edge, ties a few round loops in the empty space,
+     swings round in a soft U and slips back out the same edge. Built for the right edge, mirrored for the left.
+     loops are a prolate trochoid: x = xs - a*th - r*sin(th), y = y0 - k*r*(1 - cos(th)) */
+  function peek(W, y0, c) {
+    var R = c.R, a = R * 0.34, n = c.n, k = 1.18, pts = [], i, x, th, step = 2.5;
+    var xs = W - c.inset, run = 2 * Math.PI * n * a, xe = xs - run, rx = R * 1.5, ry = c.ry, out = W + 40;
+    for (x = out; x > xs; x -= step) { var u = (out - x) / (out - xs); pts.push([x, y0 - c.hIn * (1 + Math.cos(Math.PI * u)) / 2]); }
+    var N = Math.ceil(n * 150);
+    for (i = 0; i <= N; i++) { th = 2 * Math.PI * n * i / N; var r = R * (0.75 + 0.35 * Math.sin(Math.PI * i / N)); pts.push([xs - a * th - r * Math.sin(th), y0 - k * r * (1 - Math.cos(th))]); }
+    var M = 120;
+    for (i = 1; i <= M; i++) { var f = Math.PI * i / M; pts.push([xe - rx * Math.sin(f), y0 + ry * (1 - Math.cos(f))]); }
+    var yb = y0 + 2 * ry;
+    for (x = xe + step; x <= out; x += step) { var v = (x - xe) / (out - xe); pts.push([x, yb + c.hOut * (1 - Math.cos(Math.PI * v)) / 2]); }
+    if (c.side === "left") pts = pts.map(function (p) { return [W - p[0], p[1]]; });
     var d = "M" + pts[0][0].toFixed(1) + " " + pts[0][1].toFixed(1);
     for (i = 1; i < pts.length; i++) d += "L" + pts[i][0].toFixed(1) + " " + pts[i][1].toFixed(1);
     return d;
@@ -7121,12 +7124,9 @@
       [box(set, s).b, box(lookH, s).t],
       [box(story, s).b, box(roomsH, s).t]
     ];
-    var R = mob ? 15 : Math.max(22, Math.min(34, W * 0.018));
-    var cfgs = [
-      { at: mob ? 0.55 : 0.6, n: 3, flip: false },
-      { at: mob ? 0.5 : 0.62, n: 2, flip: true },
-      { at: mob ? 0.5 : 0.56, n: 3, flip: false }
-    ];
+    var m = parseFloat(getComputedStyle(s).getPropertyValue("--m")) || (mob ? 20 : 144);
+    var R0 = mob ? 14 : Math.max(20, Math.min(32, W * 0.017));
+    var sides = ["right", "left", "right"];
     if (!svg) {
       svg = document.createElementNS(NS, "svg"); svg.setAttribute("class", "v4-line"); svg.setAttribute("aria-hidden", "true"); svg.setAttribute("focusable", "false");
       s.insertBefore(svg, s.firstChild);
@@ -7136,13 +7136,15 @@
     var H = s.scrollHeight;
     svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.style.height = H + "px";
     gaps.forEach(function (g, i) {
-      var room = g[1] - g[0]; if (room < 60) return;
-      var c = cfgs[i], loopH = 2 * 1.18 * R;
-      var y0 = g[0] + room / 2 + loopH / 2;           /* loops sit centred in the gap */
-      c.R = R; c.hIn = Math.min(room * 0.3, mob ? 22 : 44); c.hOut = Math.min(room * 0.3, mob ? 18 : 36);
-      var p = document.createElementNS(NS, "path"); p.setAttribute("d", pass(W, y0, c)); svg.appendChild(p);
+      var room = g[1] - g[0]; if (room < 70) return;
+      var R = R0, ry = R * 0.9, hIn = R * 0.7, hOut = R * 0.45, k = 1.18;
+      var span = function () { return 2 * k * R * 1.1 + 2 * ry + hOut; };
+      var sc = Math.min(1, room * (mob ? 0.6 : 0.72) / span()); R *= sc; ry *= sc; hIn *= sc; hOut *= sc;
+      var top = g[0] + (room - span()) * (mob ? 0.4 : 0.5), y0 = top + 2 * k * R * 1.1;
+      var c = { R: R, n: 2, ry: ry, hIn: hIn, hOut: hOut, side: sides[i], inset: Math.max(28, m * (mob ? 1.4 : 0.9)) };
+      var p = document.createElementNS(NS, "path"); p.setAttribute("d", peek(W, y0, c)); svg.appendChild(p);
       var len = p.getTotalLength(); p.style.strokeDasharray = len + " " + len;
-      paths.push({ el: p, len: len, y: y0 - loopH / 2 });
+      paths.push({ el: p, len: len, y: top });
     });
     tick();
   }
