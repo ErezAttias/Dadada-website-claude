@@ -7267,6 +7267,10 @@ function cartAdd(item) {
   function enrich(root) {
     (root || document).querySelectorAll("#home .best-grid .card").forEach(function (c) {
       if (c.querySelector(".v4-cat")) return;
+      /* show each crib in a different finish so the models read apart */
+      var LOOK = { "#/soho": "Natural", "#/lala": "White", "#/bliss": "Walnut", "#/spirit": "White + Natural", "#/jolly": "Walnut" };
+      var la = c.querySelector("h3 a"), want = la && LOOK[la.getAttribute("href")];
+      if (want) { var sw = c.querySelector('.sw-m[aria-label="' + want + '"]'); if (sw && sw.getAttribute("aria-pressed") !== "true") sw.click(); }
       var a = c.querySelector("h3 a"); if (!a) return;
       var href = a.getAttribute("href") || "", name = a.textContent.trim();
       var h3 = c.querySelector("h3");
