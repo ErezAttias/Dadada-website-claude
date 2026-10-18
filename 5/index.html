@@ -4554,6 +4554,36 @@
   html.v4 body #stl-pop:not(#_) .ph { background: #fff !important; }
   html.v4 body #stl-pop:not(#_) .ph img { mix-blend-mode: multiply; }
 
+  /* product listing pages: one cream ground that matches the photo tiles, no grid lines */
+  html.v4 body:has(#pdp:not([hidden]) :is(.dgrid, .kgrid)) { background: var(--cream) !important; }
+  html.v4 body:has(#pdp:not([hidden]) :is(.dgrid, .kgrid)) #pdp :is(.sec, .dh, .dfilter, section) { background: transparent !important; }
+  html.v4 body #pdp:not(#_) :is(.dgrid, .kgrid) { border: 0 !important; gap: clamp(28px, 3vw, 48px) var(--gut) !important; }
+  html.v4 body #pdp:not(#_) :is(.dcard, .kcard) { border: 0 !important; box-shadow: none !important; padding: 0 !important; background: transparent !important; }
+  html.v4 body #pdp:not(#_) :is(.dcard, .kcard)::before, html.v4 body #pdp:not(#_) :is(.dcard, .kcard)::after { display: none !important; }
+  html.v4 body #pdp:not(#_) .dfilter { border-color: rgba(20, 28, 36, .12) !important; }
+  html.v4 body #pdp:not(#_) .dgrid { margin-top: clamp(32px, 3.4vw, 56px) !important; }
+  html.v4 body #pdp:not(#_):not(#__) .dgrid { margin-top: clamp(32px, 3.4vw, 56px) !important; padding-top: 0 !important; }
+  html.v4 body #pdp .v4-dg-head { display: grid; gap: 20px; margin-bottom: clamp(32px, 3.4vw, 56px); }
+  html.v4 body #pdp .v4-dg-head .v3-h2 { max-width: none !important; white-space: nowrap; }
+  html.v4 body #pdp .v4-dg-head .v3-body { max-width: 56ch !important; }
+  @media (max-width: 760px) { html.v4 body #pdp .v4-dg-head .v3-h2 { white-space: normal; } }
+
+  /* dresser cards = home best-seller cards */
+  html.v4 body #pdp:not(#_) .dcard { display: flex !important; flex-direction: column !important; gap: 0 !important; }
+  html.v4 body #pdp:not(#_) .dcard .ph { position: relative; aspect-ratio: 4 / 5 !important; margin: 0 0 16px !important; background: var(--navbg, var(--cream)) !important; outline: 1px solid rgba(20, 28, 36, .08); outline-offset: -1px; }
+  html.v4 body #pdp:not(#_) .dcard .ph img.pl { mix-blend-mode: multiply !important; object-fit: contain !important; padding: 9% 7% !important; box-sizing: border-box; }
+  html.v4 body #pdp:not(#_) .dcard .badge { position: absolute !important; top: 10px !important; left: 10px !important; z-index: 2; background: var(--lime) !important; color: var(--navy) !important; padding: 7px 10px !important; font: 500 13px/1 var(--sans) !important; }
+  html.v4 body #pdp:not(#_) .dcard .row { display: flex !important; justify-content: space-between !important; align-items: baseline !important; gap: 12px; padding: 0 clamp(10px, 1vw, 16px) !important; margin: 0 !important; }
+  html.v4 body #pdp:not(#_) .dcard :is(.row h3, .row .pr) { font: 700 14px/1.4 var(--sans) !important; letter-spacing: -0.01em !important; text-transform: none !important; color: var(--navy) !important; margin: 0 !important; }
+  html.v4 body #pdp:not(#_) .dcard .row .pr s { font-weight: 400 !important; opacity: .55; margin-right: 8px; }
+  html.v4 body #pdp:not(#_) .dcard .v4-desc { margin: 0 !important; padding: 0 clamp(10px, 1vw, 16px); font: 400 13px/1.35 var(--sans); color: var(--navy); opacity: .65; }
+  html.v4 body #pdp:not(#_) .dcard .meta { display: none !important; }
+  html.v4 body #pdp:not(#_) .dcard .v4-add { margin: 16px clamp(10px, 1vw, 16px) 0; height: 46px; border: 1px solid var(--navy); background: transparent; color: var(--navy); font: 600 13px/1 var(--sans); letter-spacing: .04em; cursor: pointer; transition: background-color .3s, color .3s; }
+  html.v4 body #pdp:not(#_) .dcard .v4-add:hover { background: var(--navy); color: var(--cream); }
+  html.v4 body #pdp:not(#_):not(#__) .dgrid { gap: clamp(28px, 3vw, 48px) 4px !important; }
+  html.v4 body #cur .cur-need > .mono { display: none !important; }
+  @media (max-width: 760px) { html.v4 body #pdp:not(#_) .dcard .row { flex-wrap: wrap; row-gap: 2px; } }
+
   /* ===== VERSION 5: Version 4 in the lava / flag red / papaya / deep blue / steel blue palette ===== */
   html.v5 body #home .v3-quiz { background: #780000 !important; }
   html.v5 body #home .v3-quiz .v3-h3 { color: #fdf0d5 !important; }
@@ -5472,7 +5502,7 @@
   </section>
 
   <section class="sec" id="dr-grid" aria-labelledby="dg-h">
-    ${secHead("01", "dg-h", ["The collection", "Pick your <em>storage.</em>"], "")}
+    <div class="v4-dg-head"><h2 class="v3-h2" id="dg-h">Pick your storage.</h2><p class="v3-body">Solid beech frames, soft-close drawers and a top at changing-table height. Every dresser takes a tray, and sits beside any crib in the same woods.</p></div>
     <div class="dfilter" role="group" aria-label="Filter by number of drawers">${[["all", "All"], ["6", "Six drawers"], ["5", "Five drawers"], ["3", "Three drawers"]].map(([v, l], k) => `<button aria-pressed="${k === 0}" data-v="${v}">${l}<span>${cnt(v)}</span></button>`).join("")}</div>
     <div class="dgrid">${DORDER.map((k) => { const d = DRESSERS[k]; return `<a class="dcard" href="#/dressers/${k}" data-v="${d.drawers}"><div class="ph">${d.was ? '<span class="badge sale">Sale</span>' : ""}<img class="pl" src="../img/${plate(d.img)}.jpg" alt="${d.name} ${dkind(d)}" loading="lazy"><img class="sc" src="../img/${d.scene}.jpg" alt="" loading="lazy"></div><div class="row"><h3>${d.name}</h3><span class="pr">${d.was ? `<s>${money(d.was)}</s>` : ""}${money(d.price)}</span></div><div class="meta"><span class="mono muted">${d.cubby ? "3 drawers + shelves" : d.drawers + " drawers"} · ${d.w}″</span><span class="dots">${d.finishes.map((f) => `<i style="background:${DSW[f]}" title="${f}"></i>`).join("")}</span></div></a>`; }).join("")}</div>
   </section>
@@ -7449,5 +7479,29 @@ function cartAdd(item) {
     acc = (d > 0) === (acc > 0) ? acc + d : d;
     if (acc > 24) set(true); else if (acc < -8) set(false);
   }, { passive: true });
+})();
+</script>
+
+<script>
+/* V4/V5: dresser cards match the home best-seller cards (name + price, type line, add to cart) */
+(function () {
+  function enrich() {
+    document.querySelectorAll("#pdp .dcard:not([data-v4])").forEach(function (c) {
+      c.setAttribute("data-v4", "1");
+      var h3 = c.querySelector("h3"), meta = c.querySelector(".meta .mono"), pr = c.querySelector(".pr"), img = c.querySelector("img.pl");
+      if (meta) { var d = document.createElement("p"); d.className = "v4-desc"; var n = (c.getAttribute("data-v") || "").trim(); d.textContent = meta.textContent.replace(/^(\d+) drawers/, function (m, k) { return k + "-drawer dresser"; }); c.querySelector(".row").after(d); }
+      var btn = document.createElement("button"); btn.type = "button"; btn.className = "v4-add"; btn.textContent = "Add to cart";
+      btn.setAttribute("aria-label", "Add " + (h3 ? h3.textContent : "dresser") + " to cart");
+      btn.addEventListener("click", function (ev) {
+        ev.preventDefault(); ev.stopPropagation();
+        var nums = (pr ? pr.textContent : "").match(/\d[\d,]*/g) || ["0"], price = parseInt(nums[nums.length - 1].replace(/,/g, ""), 10);
+        var dot = c.querySelector(".dots i"), key = (c.getAttribute("href") || "").split("/").pop();
+        if (window.__cartAdd) window.__cartAdd({ id: "d-" + key + "-0", type: "dresser", key: key, name: (h3 ? h3.textContent : "") + " dresser", sub: dot ? dot.getAttribute("title") : "", price: price, img: img ? img.getAttribute("src") : null });
+        btn.textContent = "Added"; setTimeout(function () { btn.textContent = "Add to cart"; }, 1600);
+      });
+      c.appendChild(btn);
+    });
+  }
+  setInterval(enrich, 600);
 })();
 </script>
