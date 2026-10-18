@@ -4458,6 +4458,19 @@
   html.v4 body #home .best-head .v3-head-r { display: flex !important; flex-wrap: nowrap !important; align-items: center !important; gap: clamp(20px, 2.4vw, 40px) !important; }
   html.v4 body #home .best-tabs { flex-wrap: nowrap !important; white-space: nowrap; }
 
+  /* best sellers: name + type on the left, price on the right, one size */
+  html.v4 body #home .best-grid .card { display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; column-gap: 12px !important; row-gap: 0 !important; align-content: start !important; }
+  html.v4 body #home .best-grid .card .ph { grid-column: 1 / -1 !important; grid-row: 1 !important; }
+  html.v4 body #home .best-grid .card h3 { grid-column: 1 !important; grid-row: 2 !important; }
+  html.v4 body #home .best-grid .card .v4-desc { grid-column: 1 !important; grid-row: 3 !important; margin: 2px 0 0 !important; padding-right: 0 !important; }
+  html.v4 body #home .best-grid .card .cb { grid-column: 2 !important; grid-row: 2 !important; margin: 0 !important; padding: 0 clamp(10px, 1vw, 16px) 0 0 !important; text-align: right; }
+  html.v4 body #home .best-grid .card .v4-add { grid-column: 1 / -1 !important; grid-row: 4 !important; }
+  html.v4 body #home .best-grid .card :is(h3, h3 a, .v4-desc, .pr) { font-size: 16px !important; line-height: 1.4 !important; }
+  html.v4 body #home .best-grid .card .pr { font-weight: 700 !important; }
+  html.v4 body #home .best-grid .card .v4-desc { font-weight: 400 !important; }
+  @media (max-width: 760px) { html.v4 body #home .best-grid .card :is(h3, h3 a, .v4-desc, .pr) { font-size: 14px !important; } }
+  @media (max-width: 760px) { html.v4 body #home .best-grid .card .v4-desc { white-space: normal !important; overflow: visible !important; } html.v4 body #home .best-grid .card .v4-desc { grid-column: 1 / -1 !important; } }
+
   /* ===== VERSION 5: Version 4 in the lava / flag red / papaya / deep blue / steel blue palette ===== */
   html.v5 body #home .v3-quiz { background: #780000 !important; }
   html.v5 body #home .v3-quiz .v3-h3 { color: #fdf0d5 !important; }
