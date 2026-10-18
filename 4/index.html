@@ -7278,14 +7278,14 @@
       queue = [];
     }
     var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); queue.push(e.target); } });
+      es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); var t = e.target.__v4for || e.target; if (queue.indexOf(t) < 0) queue.push(t); } });
       if (queue.length && !raf) raf = requestAnimationFrame(flush);
     }, { rootMargin: "0px 0px -6% 0px", threshold: 0.01 });
     GROUPS.forEach(function (g) {
       var sec = document.querySelector(g[0]); if (!sec) return;
       g[1].split(",").forEach(function (part) {
         var p = part.trim().split("|"), wipe = p[1] === "img";
-        sec.querySelectorAll(p[0]).forEach(function (el) { if (!el.__v4seen && el.offsetParent !== null) { el.__v4seen = true; prep(el, wipe); io.observe(el); } });
+        sec.querySelectorAll(p[0]).forEach(function (el) { if (!el.__v4seen && el.offsetParent !== null) { el.__v4seen = true; prep(el, wipe); if (wipe) { /* a clipped element has no visible area, so watch its parent instead */ var px = el.parentElement; px.__v4for = el; io.observe(px); } else io.observe(el); } });
       });
     });
   }
