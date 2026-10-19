@@ -4955,6 +4955,18 @@ html.v4 body #pdp .co-xb { display: grid; grid-template-columns: repeat(3, 1fr);
 html.v4 body #pdp .co-xb button { height: 52px; border: 0; background: var(--co-ink); color: #fbf8f1; font: 700 15px/1 var(--sans); letter-spacing: -0.01em; cursor: pointer; transition: opacity .25s; }
 html.v4 body #pdp .co-xb button:hover { opacity: .85; }
 html.v4 body #pdp .co-express .co-msg { margin: 10px 0 0; text-align: center; }
+/* express buttons carry their brand marks */
+html.v4 body #pdp .co-xb button { display: flex; align-items: center; justify-content: center; }
+html.v4 body #pdp .co-xb .xw { display: inline-flex; align-items: center; gap: 6px; line-height: 1; }
+html.v4 body #pdp .co-xb .x-shop { background: #5a31f4; color: #fff; }
+html.v4 body #pdp .co-xb .x-shop .xw { font: 800 21px/1 var(--sans); letter-spacing: -0.04em; gap: 5px; }
+html.v4 body #pdp .co-xb .x-shop .xw i:not(#_):not(#__) { font-style: normal; font-weight: 700; font-size: 15px; letter-spacing: -0.01em; background: #fff; color: #5a31f4; border-radius: 6px !important; padding: 4px 6px 5px; }
+html.v4 body #pdp .co-xb .x-pp { background: #ffc439; }
+html.v4 body #pdp .co-xb .x-pp .xw:not(#_) { gap: 0; } html.v4 body #pdp .co-xb .x-pp .xw b:not(#_):not(#__) { font: italic 800 19px/1 var(--sans) !important; letter-spacing: -0.03em !important; }
+html.v4 body #pdp .co-xb .x-pp .xw b:first-child { color: #003087; } html.v4 body #pdp .co-xb .x-pp .xw b:last-child { color: #0079c1; }
+html.v4 body #pdp .co-xb .x-gp { background: #000; color: #fff; }
+html.v4 body #pdp .co-xb .x-gp .xw { font: 500 19px/1 var(--sans); letter-spacing: -0.01em; }
+html.v4 body #pdp .co-xb .x-gp .xg { width: 19px; height: 19px; }
 html.v4 body #pdp .co-or { display: flex; align-items: center; gap: 16px; margin: 28px 0 8px; font: 400 13px/1 var(--sans); opacity: .65; }
 html.v4 body #pdp .co-or::before, html.v4 body #pdp .co-or::after { content: ""; flex: 1; height: 1px; background: currentColor; opacity: .35; }
 
@@ -8073,7 +8085,7 @@ function cartAdd(item) {
       '<div class="co-grid">' +
       '<aside class="co-sum" aria-label="Order summary"><button type="button" class="co-sum-t" aria-expanded="false" aria-controls="co-sum-b"><span>' + '<span class="co-sum-l">Show order summary</span>' + CHEV + '</span><b id="co-sum-total">' + money2(t.total) + '</b></button><div class="co-sum-b" id="co-sum-b"><h2 class="co-sum-h">Your order</h2>' + summaryHTML() + "</div></aside>" +
       '<form class="co-form" novalidate>' +
-      '<div class="co-express"><p>Express checkout</p><div class="co-xb"><button type="button" data-x>Shop Pay</button><button type="button" data-x>PayPal</button><button type="button" data-x>Google Pay</button></div><p class="co-msg" id="co-x-msg" role="status"></p></div>' +
+      '<div class="co-express"><p>Express checkout</p><div class="co-xb"><button type="button" class="x-shop" data-x="Shop Pay" aria-label="Shop Pay"><span class="xw" aria-hidden="true">shop<i>Pay</i></span></button><button type="button" class="x-pp" data-x="PayPal" aria-label="PayPal"><span class="xw" aria-hidden="true"><b>Pay</b><b>Pal</b></span></button><button type="button" class="x-gp" data-x="Google Pay" aria-label="Google Pay"><span class="xw" aria-hidden="true"><svg class="xg" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Pay</span></button></div><p class="co-msg" id="co-x-msg" role="status"></p></div>' +
       '<div class="co-or"><span>or pay with card</span></div>' +
       '<fieldset class="co-sec"><legend><span class="co-n">1</span>Contact</legend>' +
       field("email", "Email", { type: "email", ac: "email", mode: "email", hint: "For your receipt and delivery updates." }) +
@@ -8148,7 +8160,7 @@ function cartAdd(item) {
     bindCode(root);
     var tg = root.querySelector(".co-sum-t"), sb = root.querySelector(".co-sum-b");
     tg.addEventListener("click", function () { var o = tg.getAttribute("aria-expanded") !== "true"; tg.setAttribute("aria-expanded", o); root.querySelector(".co-sum").classList.toggle("open", o); tg.querySelector(".co-sum-l").textContent = o ? "Hide order summary" : "Show order summary"; });
-    root.querySelectorAll("[data-x]").forEach(function (b) { b.addEventListener("click", function () { var m = root.querySelector("#co-x-msg"); m.textContent = b.textContent + " isn’t connected in this prototype. Pay with a card below."; }); });
+    root.querySelectorAll("[data-x]").forEach(function (b) { b.addEventListener("click", function () { var m = root.querySelector("#co-x-msg"); m.textContent = b.dataset.x + " isn’t connected in this prototype. Pay with a card below."; }); });
     root.querySelectorAll('input[name="ship"]').forEach(function (r) { r.addEventListener("change", function () { state.ship = r.value; refresh(root); }); });
     var card = root.querySelector("#co-card");
     root.querySelectorAll('input[name="pay"]').forEach(function (r) { r.addEventListener("change", function () { state.pay = r.value; card.hidden = r.value !== "card"; }); });
