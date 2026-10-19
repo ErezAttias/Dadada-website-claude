@@ -4894,6 +4894,10 @@ html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_) { transform: none !importa
 @media (min-width: 761px) { html.v4 body #home .hero .hero-shade:not(#_):not(#__) { background: linear-gradient(180deg, rgba(71, 34, 43, .3) 0%, rgba(71, 34, 43, 0) 22%, rgba(71, 34, 43, .14) 40%, rgba(71, 34, 43, .52) 66%, rgba(71, 34, 43, .72) 100%) !important; } html.v4 body #home .hero .hero-sub:not(#_):not(#__) { font-family: "Inter SemiBold", var(--sans) !important; font-weight: 600 !important; } }
 /* phones: a deeper shade on the hero film so the copy reads */
 @media (max-width: 760px) { html.v4 body #home .hero .hero-shade:not(#_):not(#__) { background: linear-gradient(180deg, rgba(71, 34, 43, .34) 0%, rgba(71, 34, 43, .12) 22%, rgba(71, 34, 43, .2) 42%, rgba(71, 34, 43, .58) 68%, rgba(71, 34, 43, .78) 100%) !important; } }
+/* shared type tweaks: larger home button labels, lighter compare-table type */
+html.v4 body #home :is(.v3-btn, #stl-all, .best-grid .card .v4-add):not(#_):not(#__) { font-size: 15px !important; }
+html.v4 body #pdp .cmp :is(td, .names small):not(#_):not(#__) { font-size: 13px !important; line-height: 1.45 !important; }
+html.v4 body #pdp .cmp tbody th:not(#_):not(#__) { font-size: 11px !important; }
 /* dressers tray band: a little shorter on desktop */
 @media (min-width: 761px) { html.v4 body #pdp .band:not(.kband):not(#_) { min-height: 0 !important; } html.v4 body #pdp .band:not(.kband):not(#_) > div { padding: clamp(52px, 5vw, 96px) 0 !important; } html.v4 body #pdp .band:not(.kband):not(#_) .band-fig { height: 0 !important; min-height: 100% !important; } }
 @media (max-width: 760px) { html.v4 body #pdp .band:not(.kband) h2:not(#_) { font-size: var(--h-xl) !important; } }
