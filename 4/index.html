@@ -4823,6 +4823,41 @@ html.v4 body #home .rooms-track > .room.q:not(#_):not(#__) { padding-bottom: 0 !
 html.v4 body #home .rooms-track > .room.q:not(#_):not(#__) > .q-card { flex: 1 1 auto; height: 100% !important; box-sizing: border-box; }
 /* the heading: more air between "+10,000" and "happy moms" so the comma never meets the P */
 html.v4 body #home .rooms-head h2:not(#_):not(#__) { line-height: 1.5 !important; }
+/* ===== search sheet, tidy: one boxed field, one close, a labelled row of chips, results as clean rows; the page dims behind ===== */
+html.v4 body #search.search:not(#_):not(#__) { padding: 16px var(--m) 24px !important; border: 0 !important; box-shadow: 0 0 0 100vmax rgba(71, 34, 43, .38) !important; clip-path: inset(0 0 -100vmax 0); }
+html.v4 body #search:not(#_):not(#__) .sx-in { height: 54px; padding: 0 6px 0 16px !important; gap: 12px !important; border: 1px solid rgba(71, 34, 43, .28) !important; border-bottom-width: 1px !important; background: #fefbed !important; }
+html.v4 body #search:not(#_):not(#__) .sx-in:focus-within { border-color: var(--navy) !important; box-shadow: inset 0 0 0 1px var(--navy); }
+html.v4 body #search:not(#_):not(#__) .sx-in svg { width: 20px !important; height: 20px !important; opacity: .7; }
+html.v4 body #search:not(#_):not(#__) .sx-in input { height: 100%; font: 400 17px/1.2 var(--sans) !important; text-transform: none !important; letter-spacing: 0 !important; color: var(--navy) !important; }
+html.v4 body #search:not(#_):not(#__) .sx-in .x { flex: 0 0 auto; width: 42px !important; height: 42px !important; border: 0 !important; background: transparent !important; position: relative; }
+html.v4 body #search:not(#_):not(#__) .sx-in .x::before, html.v4 body #search:not(#_):not(#__) .sx-in .x::after { content: ""; position: absolute; left: 50%; top: 50%; width: 16px; height: 1.75px; background: var(--navy) !important; transform: translate(-50%, -50%) rotate(45deg); border: 0 !important; }
+html.v4 body #search:not(#_):not(#__) .sx-in .x::after { transform: translate(-50%, -50%) rotate(-45deg); }
+html.v4 body #search:not(#_):not(#__) .sx-res { padding-top: 20px !important; gap: 4px 24px !important; }
+html.v4 body #search:not(#_):not(#__) .sx-pop { display: flex !important; flex-wrap: wrap; gap: 8px !important; align-items: center; }
+html.v4 body #search:not(#_):not(#__) .sx-pop .mono { flex: 0 0 100%; margin: 0 0 4px !important; font: 600 12px/1 var(--sans) !important; letter-spacing: .06em !important; text-transform: uppercase !important; opacity: .55; }
+html.v4 body #search:not(#_):not(#__) .sx-pop button { height: 40px !important; padding: 0 14px !important; border: 1px solid rgba(71, 34, 43, .22) !important; border-radius: 0 !important; background: transparent !important; font: 600 14px/1 var(--sans) !important; color: var(--navy) !important; transition: background-color .2s, color .2s, border-color .2s; }
+html.v4 body #search:not(#_):not(#__) .sx-pop button:is(:hover, :focus-visible) { background: var(--navy) !important; color: var(--cream) !important; border-color: var(--navy) !important; }
+html.v4 body #search:not(#_):not(#__) .sx-res a { border-radius: 0 !important; padding: 8px 6px !important; }
+html.v4 body #search:not(#_):not(#__) .sx-res .ph { border-radius: 0 !important; background: #fefbed !important; }
+html.v4 body #search:not(#_):not(#__) .sx-res a + a { border-top: 0; }
+/* retailers as a true grid: "Also at" is the first cell, the seven logos fill the rest, hairlines between every cell */
+html.v4 body #home section.v3-logos:not(#_):not(#__) { display: grid !important; grid-template-columns: repeat(8, minmax(0, 1fr)) !important; gap: 1px !important; padding: 0 !important; margin: clamp(32px, 4vw, 64px) var(--m) 0 !important; background: rgba(71, 34, 43, .16) !important; border: 1px solid rgba(71, 34, 43, .16) !important; border-bottom: 1px solid rgba(71, 34, 43, .16) !important; }
+html.v4 body #home section.v3-logos:not(#_):not(#__) .logos { display: contents !important; }
+html.v4 body #home section.v3-logos:not(#_):not(#__) > p, html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { background: var(--paper, #edeadf) !important; margin: 0 !important; height: clamp(84px, 7vw, 112px) !important; box-sizing: border-box !important; }
+html.v4 body #home section.v3-logos:not(#_):not(#__) > p { display: flex !important; align-items: flex-start; padding: 14px 16px !important; font: 600 13px/1.3 var(--sans) !important; letter-spacing: 0 !important; text-transform: none !important; opacity: 1 !important; color: var(--navy) !important; }
+html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { width: 100% !important; max-width: none !important; flex: none !important; object-fit: contain !important; padding: calc((clamp(84px, 7vw, 112px) - var(--h) * .82) / 2) 18% !important; }
+@media (max-width: 900px) {
+  html.v4 body #home section.v3-logos:not(#_):not(#__) { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 560px) {
+  html.v4 body #home section.v3-logos:not(#_):not(#__) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  html.v4 body #home section.v3-logos:not(#_):not(#__) > p, html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { height: 76px !important; }
+  html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { padding: calc((76px - var(--h) * .64) / 2) 18% !important; }
+}
+html.v4 body #home section.v3-logos:not(#_):not(#__) { gap: 0 !important; background: transparent !important; border: 0 !important; border-top: 1px solid rgba(40, 30, 30, .16) !important; border-left: 1px solid rgba(40, 30, 30, .16) !important; }
+html.v4 body #home section.v3-logos:not(#_):not(#__) > p, html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { background: transparent !important; border-right: 1px solid rgba(40, 30, 30, .16) !important; border-bottom: 1px solid rgba(40, 30, 30, .16) !important; }
+html.v4 body #home section.v3-logos:not(#_):not(#__) > p { grid-column: auto !important; grid-row: auto !important; width: auto !important; }
+html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { opacity: 1 !important; }
 
 /* ===== V4/V5 checkout ===== */
 html.v4 body:has(#pdp:not([hidden]) .co) { background: #edeadf !important; }
@@ -7903,6 +7938,8 @@ function cartAdd(item) {
   function set(sel, k) { document.querySelectorAll(sel).forEach(function (s) { if (s.__v4i) return; s.__v4i = 1; s.setAttribute("viewBox", "0 0 24 24"); s.innerHTML = I[k]; }); }
   function run() { set("nav.nav .srch svg", "search"); set("#search .sx-in svg, #search label svg", "search"); set("nav.nav .help svg", "help"); set("nav.nav .cart svg", "bag"); }
   run(); setTimeout(run, 800);
+  /* a placeholder that fits a phone-width field */
+  var q = document.getElementById("sx-q"); if (q) q.setAttribute("placeholder", "Search the shop");
   /* the count reads as a number, not a decoration */
   var n = document.getElementById("cart-n"), btn = document.getElementById("cart-btn");
   function label() { if (!n || !btn) return; var c = parseInt(n.textContent, 10) || 0; var l = c ? "Cart, " + c + (c === 1 ? " item" : " items") : "Cart, empty"; if (btn.getAttribute("aria-label") !== l) btn.setAttribute("aria-label", l); }
