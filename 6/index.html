@@ -4894,6 +4894,8 @@ html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_) { transform: none !importa
 /* dressers tray band: a little shorter on desktop */
 @media (min-width: 761px) { html.v4 body #pdp .band:not(.kband):not(#_) { min-height: 0 !important; } html.v4 body #pdp .band:not(.kband):not(#_) > div { padding: clamp(52px, 5vw, 96px) 0 !important; } html.v4 body #pdp .band:not(.kband):not(#_) .band-fig { height: 0 !important; min-height: 100% !important; } }
 @media (max-width: 760px) { html.v4 body #pdp .band:not(.kband) h2:not(#_) { font-size: var(--h-xl) !important; } }
+/* hero headline: optical alignment, the B and P stems line up with the wordmark */
+html.v4 body #home .hero .hero-h:not(#_):not(#__) { margin-left: -0.055em !important; }
 /* hero foot: the button sits right after the paragraph instead of on a far grid column */
 @media (min-width: 761px) { html.v4 body #home .hero .v3-hero-foot:not(#_):not(#__) { display: flex !important; align-items: center; gap: clamp(32px, 3vw, 52px); } html.v4 body #home .hero .hero-sub:not(#_):not(#__) { flex: 0 1 auto; max-width: 22em !important; text-wrap: wrap; } html.v4 body #home .hero .hero-ctas:not(#_):not(#__) { flex: none; } }
 html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_):hover { transform: translateY(-2px) !important; }
