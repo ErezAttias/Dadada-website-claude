@@ -4868,6 +4868,8 @@ html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { opacity: 1 !im
   html.v4 body #home .hero .hero-ctas:not(#_):not(#__) { grid-column: 6 / -1 !important; align-self: center !important; justify-content: flex-start !important; flex-direction: row !important; margin-top: 0 !important; }
 }
 html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_) { transform: none !important; }
+/* hero foot: the button sits right after the paragraph instead of on a far grid column */
+@media (min-width: 761px) { html.v4 body #home .hero .v3-hero-foot:not(#_):not(#__) { display: flex !important; align-items: center; gap: clamp(32px, 3vw, 52px); } html.v4 body #home .hero .hero-sub:not(#_):not(#__) { flex: 0 1 auto; max-width: 22em !important; text-wrap: wrap; } html.v4 body #home .hero .hero-ctas:not(#_):not(#__) { flex: none; } }
 html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_):hover { transform: translateY(-2px) !important; }
 
 /* ===== V4/V5 checkout ===== */
