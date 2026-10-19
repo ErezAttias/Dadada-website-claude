@@ -9,6 +9,7 @@
 @font-face{font-family:"Boldonse";font-weight:400;font-display:swap;src:url(../fonts/boldonse-400.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-weight:500;font-display:swap;src:url(../fonts/inter-400.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-weight:700;font-display:swap;src:url(../fonts/inter-700.woff2) format("woff2")}
+@font-face{font-family:"Inter SemiBold";font-weight:600;font-display:swap;src:url(../fonts/inter-600.woff2) format("woff2")}
 </style>
 <style>
   :root {
@@ -4389,7 +4390,7 @@
   html.v4 body { --h-xl: clamp(29px, 3.68vw, 67px) !important; }
   @media (max-width: 760px) { html.v4 body { --h-xl: clamp(28px, 8.6vw, 38px) !important; } }
   html.v4 body #home .hero-h { font-size: clamp(26px, 4vw, 77px) !important; }
-  @media (max-width: 760px) { html.v4 body #home .hero-h { font-size: clamp(28px, 9vw, 44px) !important; } html.v4 body #home .hero .v3-hero-foot:not(#_):not(#__) { border-top: 0 !important; padding-top: 0 !important; } html.v4 body #home .hero .hero-sub:not(#_):not(#__) { font-weight: 500 !important; } }
+  @media (max-width: 760px) { html.v4 body #home .hero-h { font-size: clamp(28px, 9vw, 44px) !important; } html.v4 body #home .hero .v3-hero-foot:not(#_):not(#__) { border-top: 0 !important; padding-top: 0 !important; } html.v4 body #home .hero .hero-sub:not(#_):not(#__) { font-family: "Inter SemiBold", var(--sans) !important; font-weight: 600 !important; } }
 
   /* best sellers details, tidy: category + rating / name + price / one-line description */
   html.v4 body #home .best-grid .card { display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; column-gap: 16px !important; row-gap: 0 !important; align-content: start !important; }
@@ -4890,7 +4891,7 @@ html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_) { transform: none !importa
 @keyframes ann-rot { 0% { opacity: 0; transform: translateY(6px); } 3%, 30% { opacity: 1; transform: none; } 33%, 100% { opacity: 0; transform: translateY(-6px); } }
 @media (max-width: 760px) and (prefers-reduced-motion: reduce) { html.v4 body .ann .ann-m i { animation: none; } html.v4 body .ann .ann-m i:first-child { opacity: 1; } }
 /* desktop: a deeper shade behind the hero copy, and the paragraph a weight heavier */
-@media (min-width: 761px) { html.v4 body #home .hero .hero-shade:not(#_):not(#__) { background: linear-gradient(180deg, rgba(46, 18, 41, .3) 0%, rgba(46, 18, 41, 0) 22%, rgba(46, 18, 41, .14) 40%, rgba(46, 18, 41, .52) 66%, rgba(46, 18, 41, .72) 100%) !important; } html.v4 body #home .hero .hero-sub:not(#_):not(#__) { font-weight: 500 !important; } }
+@media (min-width: 761px) { html.v4 body #home .hero .hero-shade:not(#_):not(#__) { background: linear-gradient(180deg, rgba(46, 18, 41, .3) 0%, rgba(46, 18, 41, 0) 22%, rgba(46, 18, 41, .14) 40%, rgba(46, 18, 41, .52) 66%, rgba(46, 18, 41, .72) 100%) !important; } html.v4 body #home .hero .hero-sub:not(#_):not(#__) { font-family: "Inter SemiBold", var(--sans) !important; font-weight: 600 !important; } }
 /* phones: a deeper shade on the hero film so the copy reads */
 @media (max-width: 760px) { html.v4 body #home .hero .hero-shade:not(#_):not(#__) { background: linear-gradient(180deg, rgba(46, 18, 41, .34) 0%, rgba(46, 18, 41, .12) 22%, rgba(46, 18, 41, .2) 42%, rgba(46, 18, 41, .58) 68%, rgba(46, 18, 41, .78) 100%) !important; } }
 /* dressers tray band: a little shorter on desktop */
