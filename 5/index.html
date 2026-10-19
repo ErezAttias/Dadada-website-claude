@@ -4818,6 +4818,11 @@ html.v4 body #home .rooms-track > .room.q:not(#_):not(#__) { align-self: flex-st
 }
 /* mobile rhythm: 72px between sections instead of 104 (a phone screen is 660px tall) */
 @media (max-width: 760px) { html.v4 body:not(#_) { --sec: 72px !important; } html.v4 body #home:not(#_) { --sec: 72px !important; } }
+/* happy moms: quote cards fill exactly the height of the films and photos beside them */
+html.v4 body #home .rooms-track > .room.q:not(#_):not(#__) { padding-bottom: 0 !important; }
+html.v4 body #home .rooms-track > .room.q:not(#_):not(#__) > .q-card { flex: 1 1 auto; height: 100% !important; box-sizing: border-box; }
+/* the heading: more air between "+10,000" and "happy moms" so the comma never meets the P */
+html.v4 body #home .rooms-head h2:not(#_):not(#__) { line-height: 1.5 !important; }
 
 /* ===== V4/V5 checkout ===== */
 html.v4 body:has(#pdp:not([hidden]) .co) { background: #fdf0d5 !important; }
