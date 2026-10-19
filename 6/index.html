@@ -4878,11 +4878,15 @@ html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_) { transform: none !importa
   html.v4 body .ann .ann-m i:nth-child(2) { animation-delay: 4s; }
   html.v4 body .ann .ann-m i:nth-child(3) { animation-delay: 8s; }
   html.v4 body #home .hero-ctas .v3-btn:not(#_):not(#__) { height: 60px !important; padding: 0 36px !important; font-size: 15px !important; }
-  html.v4 body #home section.v3-logos:not(#_):not(#__):not(#___) { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 22px 12px !important; border: 0 !important; background: transparent !important; padding: 0 !important; }
-  html.v4 body #home section.v3-logos:not(#_):not(#__):not(#___) > p { grid-column: 1 / -1 !important; height: auto !important; padding: 0 !important; border: 0 !important; font: 500 12px/1.4 var(--sans) !important; opacity: .6 !important; }
-  html.v4 body #home section.v3-logos:not(#_):not(#__):not(#___) .logos img { height: calc(var(--h) * .62) !important; width: 100% !important; padding: 0 !important; border: 0 !important; object-fit: contain !important; justify-self: center; align-self: center; }
-  html.v4 body #home section.v3-logos:not(#_):not(#__):not(#___) .logos img:nth-child(n+7) { display: none !important; }
+  html.v4 body #home section.v3-logos:not(#_):not(#__):not(#___) { display: block !important; overflow: hidden !important; border: 0 !important; background: transparent !important; padding: 0 !important; margin: 16px 0 0 !important; width: auto !important; padding: 26px 0 !important; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  html.v4 body #home section.v3-logos:not(#_):not(#__):not(#___) > p { display: none !important; }
+  html.v4 body #home section.v3-logos:not(#_):not(#__):not(#___) .logos { display: flex !important; flex-wrap: nowrap !important; align-items: center !important; gap: 0 !important; width: max-content !important; padding: 0 !important; animation: logo-run 28s linear infinite !important; }
+  html.v4 body #home section.v3-logos:not(#_):not(#__):not(#___) .logos img { display: block !important; flex: none !important; height: calc(var(--h) * .7) !important; width: auto !important; max-width: none !important; padding: 0 22px !important; box-sizing: content-box !important; border: 0 !important; background: transparent !important; object-fit: contain !important; }
 }
+.lg-dup { display: none !important; }
+@media (max-width: 760px) { html.v4 body #home section.v3-logos .logos img.lg-dup:not(#_):not(#__):not(#___) { display: block !important; } }
+@keyframes logo-run { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { html.v4 body #home section.v3-logos .logos { animation: none !important; } }
 @keyframes ann-rot { 0% { opacity: 0; transform: translateY(6px); } 3%, 30% { opacity: 1; transform: none; } 33%, 100% { opacity: 0; transform: translateY(-6px); } }
 @media (max-width: 760px) and (prefers-reduced-motion: reduce) { html.v4 body .ann .ann-m i { animation: none; } html.v4 body .ann .ann-m i:first-child { opacity: 1; } }
 /* dressers tray band: a little shorter on desktop */
@@ -5116,7 +5120,7 @@ html.v6 body #pdp .cmp tbody th:not(#_):not(#__) { font-size: 11px !important; }
     <section class="v3-logos" aria-label="Where to find dadada">
       <p>Also at</p>
       <div class="logos">
-      <img src="../img/logos/babylist.png" alt="Babylist" style="--h:29px" loading="lazy"><img src="../img/logos/target.png" alt="Target" style="--h:46px" loading="lazy"><img src="../img/logos/amazon.png" alt="Amazon" style="--h:30px" loading="lazy"><img src="../img/logos/wayfair.png" alt="Wayfair" style="--h:28px" loading="lazy"><img src="../img/logos/albee.png" alt="Albee Baby" style="--h:25px" loading="lazy"><img src="../img/logos/modernnursery.png" alt="Modern Nursery" style="--h:33px" loading="lazy"><img src="../img/logos/macklems.png" alt="Macklem's" style="--h:33px" loading="lazy">
+      <img src="../img/logos/babylist.png" alt="Babylist" style="--h:29px" loading="lazy"><img src="../img/logos/target.png" alt="Target" style="--h:46px" loading="lazy"><img src="../img/logos/amazon.png" alt="Amazon" style="--h:30px" loading="lazy"><img src="../img/logos/wayfair.png" alt="Wayfair" style="--h:28px" loading="lazy"><img src="../img/logos/albee.png" alt="Albee Baby" style="--h:25px" loading="lazy"><img src="../img/logos/modernnursery.png" alt="Modern Nursery" style="--h:33px" loading="lazy"><img src="../img/logos/macklems.png" alt="Macklem's" style="--h:33px" loading="lazy"><img class="lg-dup" src="../img/logos/babylist.png" alt="" aria-hidden="true" style="--h:29px" loading="lazy"><img class="lg-dup" src="../img/logos/target.png" alt="" aria-hidden="true" style="--h:46px" loading="lazy"><img class="lg-dup" src="../img/logos/amazon.png" alt="" aria-hidden="true" style="--h:30px" loading="lazy"><img class="lg-dup" src="../img/logos/wayfair.png" alt="" aria-hidden="true" style="--h:28px" loading="lazy"><img class="lg-dup" src="../img/logos/albee.png" alt="" aria-hidden="true" style="--h:25px" loading="lazy"><img class="lg-dup" src="../img/logos/modernnursery.png" alt="" aria-hidden="true" style="--h:33px" loading="lazy"><img class="lg-dup" src="../img/logos/macklems.png" alt="" aria-hidden="true" style="--h:33px" loading="lazy">
     </div>
     </section>
 
