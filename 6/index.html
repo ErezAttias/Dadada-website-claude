@@ -1066,6 +1066,8 @@
   #pdp .cmp .sws { display: inline-flex; gap: 4px; vertical-align: middle; margin-right: 6px; }
   #pdp .cmp .sws i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(91, 31, 79, .28); }
   #pdp .cmp.diff tr[data-same="true"] { display: none; }
+  #pdp .cmp td[data-shared] > span { transition: opacity .3s; }
+  #pdp .cmp.diff td[data-shared] > span { opacity: .3; }
   #pdp .cmp .acts td, #pdp .cmp .acts th { border-top: 1.5px solid var(--blue); padding-top: 20px; }
   #pdp .cmp-cta { margin: clamp(60px, 7vw, 110px) var(--g) clamp(90px, 10vw, 150px); background: var(--lime); border-radius: 28px; padding: clamp(30px, 5vw, 80px); display: grid; gap: 16px; justify-items: start; }
   #pdp .cmp-cta h2 { font-size: clamp(30px, 4.4vw, 76px); line-height: 1.24; }
@@ -6455,7 +6457,7 @@ function cartAdd(item) {
       <colgroup><col class="c-k">${ORDER.map(() => "<col>").join("")}</colgroup>
       <thead><tr class="pics"><td></td>${ORDER.map((k) => { const d = CRIBS[k], f = cribShot(d); return `<td><a href="#/${k}" tabindex="-1" aria-hidden="true"><span class="ph" style="background:${f.tint}"><img src="../img/${f.img}.jpg" alt=""></span></a></td>`; }).join("")}</tr>
         <tr class="names"><th scope="col"><span class="visually-hidden">Feature</span></th>${ORDER.map((k) => { const d = CRIBS[k]; return `<th scope="col"><a href="#/${k}"><b>${d.name}</b><small>${d.kind.split(" ")[0]} · from ${money(cribFrom(d))}</small></a></th>`; }).join("")}</tr></thead>
-      <tbody>${rows.map((r) => { const vals = ORDER.map((k) => r[1](CRIBS[k])); const same = vals.every((v) => v === vals[0]); return `<tr data-same="${same}"><th scope="row" class="mono">${r[0]}</th>${vals.map((v) => `<td>${v}</td>`).join("")}</tr>`; }).join("")}
+      <tbody>${rows.map((r) => { const vals = ORDER.map((k) => r[1](CRIBS[k])); const same = vals.every((v) => v === vals[0]); return `<tr data-same="${same}"><th scope="row" class="mono">${r[0]}</th>${vals.map((v) => (vals.filter((x) => x === v).length * 2 > vals.length ? `<td data-shared><span>${v}</span></td>` : `<td>${v}</td>`)).join("")}</tr>`; }).join("")}
         <tr class="acts"><th scope="row"></th>${ORDER.map((k) => `<td><a class="pill blue sm" href="#/${k}">See ${CRIBS[k].name}</a></td>`).join("")}</tr>
       </tbody>
     </table>
