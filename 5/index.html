@@ -4749,7 +4749,8 @@ html.v4.v4-navhide body #pdp:not(#_):not(#__) .dfilter { top: 0 !important; }
   html.v4 body .mmenu .acc[open]:not(#_) > summary::after { content: "−" !important; }
 }
 /* add-to-cart buttons run the full width of the card, edge to edge with the product tile */
-html.v4 body #home .best-grid .card .v4-add:not(#_):not(#__), html.v4 body #pdp:not(#_):not(#__) .dcard .v4-add { margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; justify-self: stretch !important; align-self: stretch; box-sizing: border-box; }
+/* full-width card buttons on phones; on desktop they line up with the card text */
+@media (max-width: 760px) { html.v4 body #home .best-grid .card .v4-add:not(#_):not(#__), html.v4 body #pdp:not(#_):not(#__) .dcard .v4-add { margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; justify-self: stretch !important; align-self: stretch; box-sizing: border-box; } }
 html.v4 body #pdp:not(#_):not(#__) .kcard .meta { padding-left: 0 !important; padding-right: 0 !important; margin-left: 0 !important; margin-right: 0 !important; }
 html.v4 body #pdp:not(#_):not(#__) .kcard .meta button { width: 100% !important; margin: 0 !important; }
 /* one card system on mobile: same type, same spacing on home, dressers and kids */
