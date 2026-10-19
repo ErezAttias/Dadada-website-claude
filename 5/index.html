@@ -4489,7 +4489,7 @@
   /* the announcement bar stays put and only leaves together with the navbar */
   html.v4 body.ann-off, html.v4 body.cur-open, html.v4 body.menu-open, html.v4 body.pane-open { --ann: 36px !important; }
   /* hero: buttons sit at the right edge */
-  @media (min-width: 761px) { html.v4 body #home .hero-ctas { grid-column: 7 / -1 !important; justify-content: flex-start !important; flex-direction: row-reverse; } }
+  @media (min-width: 761px) { html.v4 body #home .hero-ctas { grid-column: 7 / -1 !important; justify-content: flex-start !important; flex-direction: row; align-self: center; } }
 
   /* open menus (shop dropdown and mobile menu) in the navbar's light cream */
   html.v4 body :is(#cur, .mmenu):not(#_) { background: var(--navbg, var(--cream)) !important; color: var(--navy) !important; }
@@ -4840,24 +4840,31 @@ html.v4 body #search:not(#_):not(#__) .sx-pop button:is(:hover, :focus-visible) 
 html.v4 body #search:not(#_):not(#__) .sx-res a { border-radius: 0 !important; padding: 8px 6px !important; }
 html.v4 body #search:not(#_):not(#__) .sx-res .ph { border-radius: 0 !important; background: #fffaf0 !important; }
 html.v4 body #search:not(#_):not(#__) .sx-res a + a { border-top: 0; }
-/* retailers as a true grid: "Also at" is the first cell, the seven logos fill the rest, hairlines between every cell */
+/* retailers on phones only: a true grid, "Also at" first, hairlines between every cell (desktop keeps the original row) */
+@media (max-width: 760px) {
 html.v4 body #home section.v3-logos:not(#_):not(#__) { display: grid !important; grid-template-columns: repeat(8, minmax(0, 1fr)) !important; gap: 1px !important; padding: 0 !important; margin: clamp(32px, 4vw, 64px) var(--m) 0 !important; background: rgba(20, 28, 36, .16) !important; border: 1px solid rgba(20, 28, 36, .16) !important; border-bottom: 1px solid rgba(20, 28, 36, .16) !important; }
 html.v4 body #home section.v3-logos:not(#_):not(#__) .logos { display: contents !important; }
 html.v4 body #home section.v3-logos:not(#_):not(#__) > p, html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { background: var(--paper, #fdf0d5) !important; margin: 0 !important; height: clamp(84px, 7vw, 112px) !important; box-sizing: border-box !important; }
 html.v4 body #home section.v3-logos:not(#_):not(#__) > p { display: flex !important; align-items: flex-start; padding: 14px 16px !important; font: 600 13px/1.3 var(--sans) !important; letter-spacing: 0 !important; text-transform: none !important; opacity: 1 !important; color: var(--navy) !important; }
 html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { width: 100% !important; max-width: none !important; flex: none !important; object-fit: contain !important; padding: calc((clamp(84px, 7vw, 112px) - var(--h) * .82) / 2) 18% !important; }
-@media (max-width: 900px) {
-  html.v4 body #home section.v3-logos:not(#_):not(#__) { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
-}
-@media (max-width: 560px) {
+
   html.v4 body #home section.v3-logos:not(#_):not(#__) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   html.v4 body #home section.v3-logos:not(#_):not(#__) > p, html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { height: 76px !important; }
   html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { padding: calc((76px - var(--h) * .64) / 2) 18% !important; }
-}
+
 html.v4 body #home section.v3-logos:not(#_):not(#__) { gap: 0 !important; background: transparent !important; border: 0 !important; border-top: 1px solid rgba(40, 30, 30, .16) !important; border-left: 1px solid rgba(40, 30, 30, .16) !important; }
 html.v4 body #home section.v3-logos:not(#_):not(#__) > p, html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { background: transparent !important; border-right: 1px solid rgba(40, 30, 30, .16) !important; border-bottom: 1px solid rgba(40, 30, 30, .16) !important; }
 html.v4 body #home section.v3-logos:not(#_):not(#__) > p { grid-column: auto !important; grid-row: auto !important; width: auto !important; }
 html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { opacity: 1 !important; }
+  html.v4 body #home section.v3-logos:not(#_):not(#__) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+/* hero: the main button sits right after the line of copy, centred on it */
+@media (min-width: 761px) {
+  html.v4 body #home .hero .hero-sub:not(#_):not(#__) { grid-column: 1 / span 5 !important; align-self: center !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+  html.v4 body #home .hero .hero-ctas:not(#_):not(#__) { grid-column: 6 / -1 !important; align-self: center !important; justify-content: flex-start !important; flex-direction: row !important; margin-top: 0 !important; }
+}
+html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_) { transform: none !important; }
+html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_):hover { transform: translateY(-2px) !important; }
 
 /* ===== V4/V5 checkout ===== */
 html.v4 body:has(#pdp:not([hidden]) .co) { background: #fdf0d5 !important; }
@@ -8007,7 +8014,7 @@ function cartAdd(item) {
    Prototype only: nothing is charged; the confirmation says so. */
 (function () {
   var money = function (n) { return "$" + Math.round(n).toLocaleString("en-US"); };
-  var money2 = function (n) { return "$" + (Math.round(n * 100) / 100).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 }); };
+  var money2 = function (n) { var r = Math.round(n * 100) / 100, d = r % 1 ? 2 : 0; return "$" + r.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d }); };
   var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var STATES = [["AL","Alabama"],["AZ","Arizona"],["AR","Arkansas"],["CA","California"],["CO","Colorado"],["CT","Connecticut"],["DE","Delaware"],["DC","District of Columbia"],["FL","Florida"],["GA","Georgia"],["ID","Idaho"],["IL","Illinois"],["IN","Indiana"],["IA","Iowa"],["KS","Kansas"],["KY","Kentucky"],["LA","Louisiana"],["ME","Maine"],["MD","Maryland"],["MA","Massachusetts"],["MI","Michigan"],["MN","Minnesota"],["MS","Mississippi"],["MO","Missouri"],["MT","Montana"],["NE","Nebraska"],["NV","Nevada"],["NH","New Hampshire"],["NJ","New Jersey"],["NM","New Mexico"],["NY","New York"],["NC","North Carolina"],["ND","North Dakota"],["OH","Ohio"],["OK","Oklahoma"],["OR","Oregon"],["PA","Pennsylvania"],["RI","Rhode Island"],["SC","South Carolina"],["SD","South Dakota"],["TN","Tennessee"],["TX","Texas"],["UT","Utah"],["VT","Vermont"],["VA","Virginia"],["WA","Washington"],["WV","West Virginia"],["WI","Wisconsin"],["WY","Wyoming"]];
   var SHIP = [
