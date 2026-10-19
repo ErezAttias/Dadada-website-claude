@@ -4387,9 +4387,9 @@
 
   /* all display headings 20% smaller */
   html.v4 body { --h-xl: clamp(29px, 3.68vw, 67px) !important; }
-  @media (max-width: 760px) { html.v4 body { --h-xl: clamp(24px, 7.2vw, 32px) !important; } }
+  @media (max-width: 760px) { html.v4 body { --h-xl: clamp(28px, 8.6vw, 38px) !important; } }
   html.v4 body #home .hero-h { font-size: clamp(26px, 4vw, 77px) !important; }
-  @media (max-width: 760px) { html.v4 body #home .hero-h { font-size: clamp(21px, 6.4vw, 32px) !important; } }
+  @media (max-width: 760px) { html.v4 body #home .hero-h { font-size: clamp(25px, 7.6vw, 38px) !important; } }
 
   /* best sellers details, tidy: category + rating / name + price / one-line description */
   html.v4 body #home .best-grid .card { display: grid !important; grid-template-columns: minmax(0, 1fr) auto !important; column-gap: 16px !important; row-gap: 0 !important; align-content: start !important; }
@@ -4870,6 +4870,7 @@ html.v4 body #home section.v3-logos:not(#_):not(#__) .logos img { opacity: 1 !im
 html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_) { transform: none !important; }
 /* dressers tray band: a little shorter on desktop */
 @media (min-width: 761px) { html.v4 body #pdp .band:not(.kband):not(#_) { min-height: min(68vh, 640px) !important; } }
+@media (max-width: 760px) { html.v4 body #pdp .band:not(.kband) h2:not(#_) { font-size: var(--h-xl) !important; } }
 /* hero foot: the button sits right after the paragraph instead of on a far grid column */
 @media (min-width: 761px) { html.v4 body #home .hero .v3-hero-foot:not(#_):not(#__) { display: flex !important; align-items: center; gap: clamp(32px, 3vw, 52px); } html.v4 body #home .hero .hero-sub:not(#_):not(#__) { flex: 0 1 auto; max-width: 22em !important; text-wrap: wrap; } html.v4 body #home .hero .hero-ctas:not(#_):not(#__) { flex: none; } }
 html.v4 body #home .hero .hero-ctas > .v3-btn:not(#_):hover { transform: translateY(-2px) !important; }
