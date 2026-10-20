@@ -47,7 +47,7 @@
         '<div class="hero-media"><img src="../img/mom-first.jpg" alt="" fetchpriority="high"><video id="heroVid" muted loop playsinline preload="none" poster="../img/mom-first.jpg" aria-label="A dadada film: expectant mothers at home with their cribs"><source data-src="../video/mom.webm" type="video/webm"><source data-src="../video/mom.mp4" type="video/mp4"></video></div>' +
         '<div class="wrap hero-in">' +
           '<h1 class="disp d1"><span class="ln">Bring your <b>personality.</b></span><span class="ln">We’ll bring <b>the crib.</b></span></h1>' +
-          '<p class="lede">Solid beech cribs, made in Italy in family workshops.<br>Designed to look as good as the home around them.</p>' +
+          '<p class="lede">Italian made cribs, made from solid beechwood.<br>Designed to look as good as the home around them.</p>' +
           '<a class="btn btn-lime lg" href="#/cribs">Shop cribs <span class="ar" aria-hidden="true">→</span></a>' +
         "</div>" +
       "</section>" +
