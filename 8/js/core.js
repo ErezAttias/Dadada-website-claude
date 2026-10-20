@@ -243,8 +243,8 @@
   $("#megaCribs").innerHTML = V8.list("crib").map(function (p) { return '<li><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></li>"; }).join("") + '<li><a href="#/cribs"><b>All cribs →</b></a></li>';
   $("#megaDressers").innerHTML = V8.list("dresser").slice(0, 6).map(function (p) { return '<li><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></li>"; }).join("") + '<li><a href="#/dressers"><b>All dressers →</b></a></li>';
   var mega = $("#mega"), megaBtn = $("#megaBtn"), megaT;
-  function openMega() { clearTimeout(megaT); mega.classList.add("open"); megaBtn.setAttribute("aria-expanded", "true"); }
-  function closeMega() { mega.classList.remove("open"); megaBtn.setAttribute("aria-expanded", "false"); }
+  function openMega() { clearTimeout(megaT); mega.classList.add("open"); megaBtn.setAttribute("aria-expanded", "true"); $(".hdr").classList.add("mega-on"); }
+  function closeMega() { mega.classList.remove("open"); megaBtn.setAttribute("aria-expanded", "false"); $(".hdr").classList.remove("mega-on"); }
   var megaHoverAt = 0;
   megaBtn.addEventListener("click", function () { if (mega.classList.contains("open") && Date.now() - megaHoverAt > 600) closeMega(); else openMega(); });
   [megaBtn, mega].forEach(function (el) { el.addEventListener("mouseenter", function () { if (matchMedia("(hover:hover)").matches) { if (!mega.classList.contains("open")) megaHoverAt = Date.now(); openMega(); } }); el.addEventListener("mouseleave", function () { megaT = setTimeout(closeMega, 180); }); });

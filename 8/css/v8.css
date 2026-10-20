@@ -296,6 +296,9 @@ main:focus { outline: none; }
 /* over the home film: transparent with light type until scrolled */
 .hdr.over { background: transparent; color: var(--white); }
 .hdr.over .logo svg { color: var(--lime); }
+/* menu open over the hero: the bar turns solid so it joins the panel */
+.hdr.over.mega-on { background: var(--white); color: var(--ink); }
+.hdr.over.mega-on .logo svg { color: var(--orange); }
 .hdr.scrolled { background: var(--white); color: var(--ink); border-bottom-color: var(--line); }
 .hdr.scrolled .logo svg { color: var(--orange); }
 .logo svg { color: var(--orange); transition: color .35s; }
