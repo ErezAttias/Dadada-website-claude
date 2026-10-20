@@ -34,6 +34,7 @@
   var FAN = [["ugc-jolly", -2, 30, -9, .82], ["ugc-bliss", -1, 12, -5, .92], ["ugc-soho-nursery", 0, 0, 0, 1], ["ugc-lala", 1, 12, 5, .92], ["ugc-soho-build", 2, 30, 9, .82]];
   var STAGES = [["stage-1", "62% 50%", "Newborn", "A safe space for all their first moments.", "Crib · included"], ["stage-2", "60% 50%", "Toddler", "One side comes down. Independence goes up.", "Conversion kit · $120"], ["stage-3", "52% 50%", "Day bed", "The crib years end. Their bed stays.", "Same kit · nothing extra"]];
 
+  var CATS = [["cribs", "Cribs", "room-soho-brownstone.jpg", "crib"], ["dressers", "Dressers", "s-soho5.jpg", "dresser"], ["kids", "Toddler &amp; kids", "stl-kids.jpg", "kids"], ["sets", "Nursery sets", "mom-dr-soho.jpg", null]];
   function tabCards(key) { return TABS[key].map(function (id, i) { return V8.card(P[id], { d: i * .06 }); }).join(""); }
 
   V8.pages.home = function () {
@@ -56,10 +57,11 @@
       // manifesto
       '<section class="sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em> is not a <em>nursery</em>, and a nursery without <em>you</em> isn’t your child’s <span class="nowrap"><em>home</em>.' + V8.doodle("dd-heart-o") + '</span></h2><a class="link rv" href="#/story">Why we make them this way <span class="ar" aria-hidden="true">→</span></a></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
       // best sellers
-      '<section class="sec bg-paper" id="best" aria-labelledby="best-h"><div class="wrap">' +
-        '<div class="sec-head"><h2 class="disp d2 c-orange" id="best-h">Our <b>best sellers.</b></h2>' +
-        '<div class="row" style="--s:18px"><div class="seg" role="tablist" aria-label="Best sellers by category" id="bestTabs"><button type="button" role="tab" aria-selected="true" data-tab="cribs">Cribs</button><button type="button" role="tab" aria-selected="false" data-tab="dressers">Dressers</button><button type="button" role="tab" aria-selected="false" data-tab="kids">Kids</button></div><a class="link" id="bestAll" href="#/cribs">Shop all cribs</a></div></div>' +
-        '<div class="pgrid" id="bestGrid" role="tabpanel" aria-labelledby="best-h">' + tabCards("cribs") + "</div>" +
+      '<section class="sec" id="best" aria-labelledby="best-h"><div class="wrap">' +
+        '<div class="sec-head"><h2 class="sr" id="best-h">Shop dadada</h2><div class="modes" role="tablist" aria-label="Browse by"><button type="button" role="tab" class="disp d2" aria-selected="true" aria-controls="bestPanel" data-mode="best">Our <b>best sellers.</b></button><button type="button" role="tab" class="disp d2" aria-selected="false" aria-controls="catPanel" data-mode="cats" tabindex="-1">Shop by <b>category.</b></button></div>' +
+        '<div class="row" style="--s:18px" id="bestCtl"><div class="seg" role="tablist" aria-label="Best sellers by category" id="bestTabs"><button type="button" role="tab" aria-selected="true" data-tab="cribs">Cribs</button><button type="button" role="tab" aria-selected="false" data-tab="dressers">Dressers</button><button type="button" role="tab" aria-selected="false" data-tab="kids">Kids</button></div><a class="link" id="bestAll" href="#/cribs">Shop all cribs</a></div></div>' +
+        '<div id="bestPanel" role="tabpanel"><div class="pgrid" id="bestGrid">' + tabCards("cribs") + "</div></div>" +
+        '<div id="catPanel" role="tabpanel" hidden><div class="pgrid">' + CATS.map(function (c) { var ps = c[3] ? V8.list(c[3]) : null; return '<a class="ccard" href="#/' + c[0] + '"><span class="ccard-im"><img src="../img/' + c[2] + '" alt="" loading="lazy"></span><span class="ccard-body"><span class="ccard-kick">' + (ps ? ps.length + (ps.length === 1 ? " piece" : " pieces") : "Crib + dresser") + '</span><b class="ccard-name">' + c[1] + '</b><span class="ccard-sub">' + (ps ? "From " + money(Math.min.apply(null, ps.map(V8.minPrice))) : "15% off both") + ' <span aria-hidden="true">→</span></span></span></a>'; }).join("") + "</div></div>" +
       "</div></section>" +
       // promises
       '<section class="sec tight" aria-label="Our promises"><div class="wrap"><ul class="promise" role="list">' +
@@ -157,6 +159,15 @@
     var tabBtns = $$("[role=tab]", tabs);
     function pick(b) { tabBtns.forEach(function (t) { var on = t === b; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; }); grid.innerHTML = tabCards(b.dataset.tab); V8.reveal(grid); all.href = "#/" + b.dataset.tab; all.textContent = "Shop all " + (b.dataset.tab === "kids" ? "toddler & kids" : b.dataset.tab); }
     tabBtns.forEach(function (b, i) { b.tabIndex = i ? -1 : 0; b.addEventListener("click", function () { pick(b); }); b.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); var n = tabBtns[(i + (e.key === "ArrowRight" ? 1 : tabBtns.length - 1)) % tabBtns.length]; n.focus(); pick(n); } }); });
+
+    // the section switches between best sellers and categories
+    var modes = $$(".modes [role=tab]", root), bestCtl = $("#bestCtl", root);
+    function mode(b) {
+      modes.forEach(function (t) { var on = t === b; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; $("#" + t.getAttribute("aria-controls"), root).hidden = !on; });
+      bestCtl.hidden = b.dataset.mode !== "best";
+      V8.reveal($("#" + b.getAttribute("aria-controls"), root));
+    }
+    modes.forEach(function (b, i) { b.addEventListener("click", function () { mode(b); }); b.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); var n = modes[1 - i]; n.focus(); mode(n); } }); });
 
     // shop the look carousel + hotspots
     var track = $("#stlTrack", root), rooms = $$(".stl-room", track), cur = 0, timer, hc = $("#hotCard", root), stl = $("#stl", root), openHot = null;

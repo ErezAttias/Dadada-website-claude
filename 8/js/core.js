@@ -90,23 +90,26 @@
     if (fin) return '<span class="price">' + money(fin.price) + (fin.was ? "<s>" + money(fin.was) + "</s>" : "") + "</span>";
     return '<span class="price">' + (V8.hasRange(p) ? '<span class="from">From</span>' : "") + money(V8.minPrice(p)) + (p.was ? "<s>" + money(p.was) + "</s>" : "") + "</span>";
   };
+  // small label in the card's top corner, as in the original V8 cards
+  V8.kicker = function (p) {
+    if (p.type === "crib") return p.kind.split(" ")[0];
+    if (p.type === "dresser") return p.kind.replace(/-drawer dresser/, " drawers");
+    return p.type === "kit" ? "Add-on" : p.kind;
+  };
   V8.card = function (p, o) {
     o = o || {};
-    var f = o.f || 0, fin = p.finishes[f], tags = [];
-    if (p.was) tags.push('<span class="chip orange">Sale</span>');
-    if (p.awards && p.awards[0]) tags.push('<span class="chip lime">' + esc(p.awards[0].split(" · ")[0]) + "</span>");
-    else if (o.tag) tags.push('<span class="chip">' + esc(o.tag) + "</span>");
+    var f = o.f || 0, fin = p.finishes[f];
     var sw = p.finishes.length > 1 ? '<div class="swatches" role="radiogroup" aria-label="' + esc(p.full) + ' finish">' + p.finishes.map(function (x, i) {
       return '<button type="button" class="sw" role="radio" aria-checked="' + (i === f) + '" tabindex="' + (i === f ? 0 : -1) + '" aria-label="' + esc(x.name) + '" title="' + esc(x.name) + '" data-f="' + i + '" style="background:' + x.sw + '"></button>';
     }).join("") + "</div>" : "";
     var cut = V8.cut(fin.img), word = V8.word(p);
     return '<article class="pcard rv" data-id="' + p.id + '" data-f="' + f + '" style="--d:' + (o.d || 0) + 's">' +
       '<div class="pcard-fig"><a class="pcard-media' + (cut ? " has-cut" : "") + '" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"' + (cut ? ' style="--top:' + cut.top + '"' : "") + ">" + (cut ? '<span class="pcard-big" style="--len:' + word.length + '">' + esc(word) + "</span>" : "") + '<img class="cut" src="' + (cut ? cut.src : fin.img) + '" alt="" loading="lazy">' + "</a>" +
-      '<div class="pcard-tags">' + tags.join("") + "</div>" +
+      '<span class="pcard-kick">' + (p.was ? '<span class="sale">Sale</span>' : "") + esc(V8.kicker(p)) + "</span>" +
       V8.wishBtn(p, "pcard-fav") + "</div>" +
-      '<div class="pcard-body"><div class="pcard-top"><h3 class="pcard-name"><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></h3>" + '<span class="pcard-price">' + V8.priceHTML(p, p.finishes.length > 1 && V8.hasRange(p) ? null : f) + "</span></div>" +
-      '<p class="pcard-kind">' + esc(p.kind) + (p.finishes.length > 1 ? " · " + p.finishes.length + " finishes" : "") + "</p>" +
-      '<div class="pcard-foot">' + sw + '<button type="button" class="pcard-quick" data-quick="' + p.id + '">Quick view</button></div></div></article>';
+      '<div class="pcard-body"><h3 class="pcard-name"><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></h3>" +
+      '<div class="pcard-sub"><span class="pcard-fin">' + esc(fin.name) + '</span><span class="pcard-price">' + V8.priceHTML(p, p.finishes.length > 1 && V8.hasRange(p) ? null : f) + "</span></div>" +
+      sw + "</div></article>";
   };
   // swatch clicks inside any card swap the image and price
   document.addEventListener("click", function (e) {
@@ -119,6 +122,7 @@
     $(".cut", m).src = c ? c.src : p.finishes[f].img;
     if (c) m.style.setProperty("--top", c.top);
     $(".pcard-price", card).innerHTML = V8.priceHTML(p, f);
+    $(".pcard-fin", card).textContent = p.finishes[f].name;
   });
   document.addEventListener("keydown", function (e) {
     var b = e.target.closest && e.target.closest(".pcard .sw"); if (!b) return;
