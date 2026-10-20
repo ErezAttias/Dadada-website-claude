@@ -33,14 +33,14 @@
   ];
   // per-card size and line positions of the hover words, from the original V8 (--fs in px at a 314px card)
   var CERTFX = ["--fs:117.9;--t:38%;--bt:70%", "--fs:117.9;--t:35%;--bt:72%", "--fs:98.2;--t:42%;--bt:70%", "--fs:98.2;--t:34%;--bt:72%", "--fs:147.3;--t:40%;--bt:70%"];
-  var FAN = [["ugc-jolly", -2, 30, -9, .82], ["ugc-bliss", -1, 12, -5, .92], ["ugc-soho-nursery", 0, 0, 0, 1], ["ugc-lala", 1, 12, 5, .92], ["ugc-soho-build", 2, 30, 9, .82]];
+  // the fan: film, review, film, review, film; the arrows move two steps so a film stays in the middle
+  var SEQ = (function () { var v = ROOMS.filter(function (r) { return r[0] === "v"; }), q = ROOMS.filter(function (r) { return r[0] === "q"; }), out = []; v.forEach(function (x, i) { out.push(x, q[i % q.length]); }); return out; })();
   var STAGES = [["stage-1", "62% 50%", "Newborn", "A safe space for all their first moments.", "Crib · included"], ["stage-2", "60% 50%", "Toddler", "One side comes down. Independence goes up.", "Conversion kit · $120"], ["stage-3", "52% 50%", "Day bed", "The crib years end. Their bed stays.", "Same kit · nothing extra"]];
 
   var CATS = [["cribs", "Cribs", "room-soho-brownstone.jpg", "crib"], ["dressers", "Dressers", "s-soho5.jpg", "dresser"], ["kids", "Toddler &amp; kids", "stl-kids.jpg", "kids"], ["sets", "Nursery sets", "mom-dr-soho.jpg", null]];
 
   V8.pages.home = function () {
     var soho = P.soho, soho5 = P.soho5, setSub = soho.finishes[0].price + soho5.finishes[0].price, setTot = setSub * .85;
-    var quotes = [["soho", 1], ["soho", 0], ["bliss", 0]].map(function (q) { var p = P[q[0]]; var qq = (p.quotes || [])[q[1]] || p.quote; return qq ? { p: p, t: qq[0], who: qq[1] } : null; }).filter(Boolean);
     var faq = D.faqs[0].items.concat(D.faqs[1] ? D.faqs[1].items.slice(0, 1) : []);
     var html =
       // hero
@@ -88,16 +88,15 @@
       "</div></div></section>" +
       // 10,000 homes
       '<section class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><h2 class="disp d2 c-orange" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for dadada.</b></h2></div>' +
-        '<div class="fan" id="fan">' + FAN.map(function (f) { var r = ROOMS.find(function (x) { return x[1] === f[0]; }); return '<button type="button" class="fc" data-reel="' + f[0] + '" aria-label="Watch: ' + esc(r ? r[2] : "a dadada nursery") + '" style="--x:calc(' + f[1] + ' * clamp(120px, 15vw, 270px));--y:' + f[2] + "px;--r:" + f[3] + "deg;--s:" + f[4] + ";z-index:" + (10 - Math.abs(f[1])) + '"><video muted loop playsinline preload="none" poster="../img/' + f[0] + '.jpg" aria-hidden="true"><source data-src="../video/' + f[0] + '.webm" type="video/webm"><source data-src="../video/' + f[0] + '.mp4" type="video/mp4"></video><span class="fc-play" aria-hidden="true"></span></button>'; }).join("") + "</div>" +
-        rowHTML() +
-        '<div class="center mt-l" style="display:grid" id="fanCtl"><button type="button" class="btn btn-secondary sm" id="fanToggle" aria-pressed="false">Pause the films</button></div>' +
+        '<div class="fan" id="fan" role="region" aria-roledescription="carousel" aria-label="Films and reviews from dadada homes">' + SEQ.map(function (r, i) {
+          var p = P[r[3]];
+          if (r[0] === "q") return '<figure class="fc q' + (i % 4 === 1 ? " lime" : "") + '" data-i="' + i + '">' + V8.stars(r[1]) + "<blockquote>“" + esc(r[2]) + '”</blockquote><figcaption><b>' + esc(r[4]) + '</b><a href="' + V8.url(p) + '" tabindex="-1">' + esc(p.full) + "</a></figcaption></figure>";
+          return '<figure class="fc v" data-i="' + i + '"><video muted loop playsinline preload="none" poster="../img/' + r[1] + '.jpg" aria-label="' + esc(r[2]) + '"><source data-src="../video/' + r[1] + '.webm" type="video/webm"><source data-src="../video/' + r[1] + '.mp4" type="video/mp4"></video></figure>';
+        }).join("") + "</div>" +
+        '<div class="fan-nav"><button type="button" class="icon-btn" id="fanPrev" aria-label="Previous">' + svg.left + '</button><button type="button" class="icon-btn" id="fanNext" aria-label="Next">' + svg.right + "</button></div>" +
       "</section>" +
-      // reviews
-      '<section class="sec" aria-labelledby="rev-h"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange" id="rev-h">Parents <b>say it best.</b></h2><div class="revs-sum"><b>4.9</b><span>' + V8.stars(5) + '<br><span class="small muted">' + TOTAL_REVIEWS + " reviews across our cribs</span></span></div></div>" +
-        '<div class="revs">' + quotes.map(function (q, i) { return '<figure class="rev rv" style="--d:' + i * .08 + 's">' + V8.stars(5) + "<blockquote>" + esc(q.t) + '</blockquote><footer><b>' + esc(q.who) + '</b><a href="' + V8.url(q.p) + '">' + esc(q.p.full) + "</a></footer></figure>"; }).join("") + "</div>" +
-      "</div></section>" +
       // toddler stages
-      '<section class="sec bg-paper" id="toddler" aria-labelledby="tod-h"><div class="wrap tod">' +
+      '<section class="sec" id="toddler" aria-labelledby="tod-h"><div class="wrap tod">' +
         '<div class="tod-imgs rv" id="todImgs">' + STAGES.map(function (s, i) { return '<img class="' + (i ? "" : "on") + '" src="assets/' + s[0] + '.webp" alt="' + s[2] + ' stage" style="object-position:' + s[1] + '" loading="lazy">'; }).join("") + "</div>" +
         '<div><h2 class="disp d2 c-orange" id="tod-h">The toddler bed<br><b class="nowrap">you don’t buy.</b></h2><p class="lede mt-m">One crib, three stages. When they’re ready, a $120 kit turns it into a toddler bed, and later a day bed.</p>' +
         '<div class="stages" role="tablist" aria-label="Crib stages">' + STAGES.map(function (s, i) { return '<button type="button" class="stage" role="tab" aria-selected="' + !i + '" data-stage="' + i + '"><b>' + s[2] + "</b><em>" + s[4] + "</em><span>" + s[3] + "</span></button>"; }).join("") + "</div>" +
@@ -119,18 +118,6 @@
 
   function loadVideo(v) { if (v.dataset.loaded) return; $$("source", v).forEach(function (s) { s.src = s.dataset.src; }); v.load(); v.dataset.loaded = 1; }
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // the films unfold in place into a row of films, photos and reviews (from V4)
-  function rowHTML() {
-    var P = V8.P;
-    return '<div class="hrow" id="hrow" hidden><div class="wrap hrow-bar"><span class="small muted"><b>' + V8.stars(5) + ' 4.9</b> · ' + TOTAL_REVIEWS + ' verified reviews</span><div class="hrow-nav"><button type="button" class="icon-btn" data-rv="-1" aria-label="Previous" aria-controls="hrowTrack">' + V8.svg.left + '</button><button type="button" class="icon-btn" data-rv="1" aria-label="Next" aria-controls="hrowTrack">' + V8.svg.right + '</button><button type="button" class="btn btn-secondary sm" id="hrowFold">Fold the films</button></div></div>' +
-      '<div class="hrow-track" id="hrowTrack" tabindex="0" aria-label="Films and reviews from dadada homes">' + ROOMS.map(function (r, i) {
-        var p = P[r[3]];
-        if (r[0] === "q") return '<figure class="hrow-it q' + (i % 8 === 3 ? " lime" : "") + '">' + V8.stars(r[1]) + "<blockquote>“" + esc(r[2]) + '”</blockquote><figcaption><b>' + esc(r[4]) + '</b><a href="' + V8.url(p) + '">on the ' + esc(p.full) + "</a></figcaption></figure>";
-        var media = r[0] === "v" ? '<video muted loop playsinline preload="none" poster="../img/' + r[1] + '.jpg" aria-label="' + esc(r[2]) + '"><source data-src="../video/' + r[1] + '.webm" type="video/webm"><source data-src="../video/' + r[1] + '.mp4" type="video/mp4"></video>' : '<img src="../img/' + r[1] + '.jpg" alt="' + esc(r[2]) + '" loading="lazy">';
-        return '<figure class="hrow-it ' + r[0] + '" data-id="' + r[1] + '"><div class="ph">' + media + '</div><figcaption><span>' + esc(r[2]) + '</span><a href="' + V8.url(p) + '">Shop ' + esc(p.name) + ' <span aria-hidden="true">→</span></a></figcaption></figure>';
-      }).join("") + '</div><div class="wrap hrow-foot"><span class="hrow-prog"><i id="hrowBar"></i></span></div></div>';
-  }
 
   function homeAfter(root) {
     // hero film: load after first paint, show once it plays
@@ -193,44 +180,24 @@
     $("#addSet", root).addEventListener("click", function () { V8.add("soho", 0, 1, { silent: true }); V8.add("soho5", 0, 1); });
 
     // homes: fan opens and films play only while on screen
-    var fan = $("#fan", root), paused = reduce, ft = $("#fanToggle", root);
-    function playFan(on) { $$("video", fan).forEach(function (v) { if (on) { loadVideo(v); v.play().catch(function () {}); } else v.pause(); }); }
-    var fio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { fan.classList.add("in"); countUp(); if (!paused) playFan(true); } else playFan(false); }); }, { threshold: .25 });
-    fio.observe(fan);
-    ft.textContent = paused ? "Play the films" : "Pause the films"; ft.setAttribute("aria-pressed", paused);
-    ft.addEventListener("click", function () { paused = !paused; playFan(!paused); ft.textContent = paused ? "Play the films" : "Pause the films"; ft.setAttribute("aria-pressed", paused); });
+    var fan = $("#fan", root), cards = $$(".fc", fan), N = cards.length, center = 4, inView = false;
+    function layout() {
+      cards.forEach(function (c, i) {
+        var d = ((i - center) % N + N + N / 2) % N - N / 2; // -N/2 .. N/2
+        c.dataset.d = Math.max(-3, Math.min(3, d));
+        c.setAttribute("aria-hidden", Math.abs(d) > 2);
+        var v = $("video", c);
+        if (v) { if (inView && Math.abs(d) <= 2 && !reduce) { loadVideo(v); var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); } else v.pause(); }
+      });
+    }
+    function step(n) { center = (center + 2 * n + N) % N; layout(); }
+    $("#fanPrev", root).addEventListener("click", function () { step(-1); });
+    $("#fanNext", root).addEventListener("click", function () { step(1); });
+    var sx = null; fan.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true }); fan.addEventListener("touchend", function (e) { if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); sx = null; });
+    var fio = new IntersectionObserver(function (es) { es.forEach(function (e) { inView = e.isIntersecting; if (inView) { fan.classList.add("in"); countUp(); } layout(); }); }, { threshold: .25 });
+    fio.observe(fan); layout();
     function countUp() { var el = $("#homesN", root); if (!el || el.dataset.done || reduce) return; el.dataset.done = 1; var t0 = performance.now(); (function st(t) { var k = Math.min(1, (t - t0) / 1500), e = 1 - Math.pow(1 - k, 4); el.textContent = Math.round(10000 * e).toLocaleString("en-US"); if (k < 1) requestAnimationFrame(st); })(t0); }
     V8.onLeave(function () { fio.disconnect(); });
-    var row = $("#hrow", root), rtrack = $("#hrowTrack", root), bar = $("#hrowBar", root), ctl = $("#fanCtl", root);
-    // row films play while on screen; the slot may hold the fan's own film (moved in on unfold)
-    var rio = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = $("video", e.target); if (!v) return; if (e.isIntersecting && !row.hidden) { loadVideo(v); v.play().catch(function () {}); } else v.pause(); }); }, { threshold: .6 });
-    $$(".hrow-it.v .ph", rtrack).forEach(function (ph) { rio.observe(ph); });
-    function prog() { var m = rtrack.scrollWidth - rtrack.clientWidth; bar.style.transform = "scaleX(" + (m > 0 ? Math.max(.06, rtrack.scrollLeft / m) : 1) + ")"; }
-    rtrack.addEventListener("scroll", prog, { passive: true });
-    row.addEventListener("click", function (e) { var n = e.target.closest("[data-rv]"); if (n) rtrack.scrollBy({ left: +n.dataset.rv * rtrack.clientWidth * .6, behavior: reduce ? "auto" : "smooth" }); });
-    rtrack.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); rtrack.scrollBy({ left: (e.key === "ArrowRight" ? 1 : -1) * rtrack.clientWidth * .5, behavior: "smooth" }); } });
-    function unfold(id) {
-      // swap the fan for the row and centre the film that was clicked; the row has its own films
-      var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
-      playFan(false);
-      fan.hidden = true; ctl.hidden = true; row.hidden = false;
-      try { window.scrollBy(0, head.getBoundingClientRect().top - y0); } catch (e) {}
-      var it = $('[data-id="' + id + '"]', rtrack);
-      if (it) { var tr = rtrack.getBoundingClientRect(), ir = it.getBoundingClientRect(); rtrack.scrollLeft += ir.left - tr.left - (tr.width - ir.width) / 2; }
-      prog();
-      var v = it && $("video", it); if (v) { loadVideo(v); var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); }
-    }
-    function fold() {
-      var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
-      $$("video", rtrack).forEach(function (v) { v.pause(); });
-      row.hidden = true; fan.hidden = false; ctl.hidden = false;
-      try { window.scrollBy(0, head.getBoundingClientRect().top - y0); } catch (e) {}
-      fan.classList.remove("in"); void fan.offsetWidth; fan.classList.add("in");
-      if (!paused) playFan(true);
-      var first = $("[data-reel]", fan); if (first) first.focus({ preventScroll: true });
-    }
-    $$("[data-reel]", fan).forEach(function (b) { b.addEventListener("click", function () { unfold(b.dataset.reel); }); });
-    $("#hrowFold", root).addEventListener("click", fold);
 
     // toddler stages: click, hover or auto-advance
     var stages = $$(".stage", root), imgs = $$("#todImgs img", root), si = 0, sti;
