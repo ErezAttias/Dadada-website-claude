@@ -99,10 +99,10 @@
     }).join("") + "</div>" : "";
     var scene = o.scene !== false && (p.scene || p.mom) ? '<img class="scene" src="' + (p.mom || p.scene) + '" alt="" loading="lazy">' : "";
     return '<article class="pcard rv" data-id="' + p.id + '" data-f="' + f + '" style="--d:' + (o.d || 0) + 's">' +
-      '<a class="pcard-media" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"><span class="pcard-big">' + esc(V8.word(p)) + '</span><img class="cut" src="' + fin.img + '" alt="" loading="lazy">' + scene + "</a>" +
+      '<div class="pcard-fig"><a class="pcard-media" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"><img class="cut" src="' + fin.img + '" alt="" loading="lazy">' + scene + "</a>" +
       '<div class="pcard-tags">' + tags.join("") + "</div>" +
       V8.wishBtn(p, "pcard-fav") +
-      '<button type="button" class="btn btn-ink sm pcard-quick" data-quick="' + p.id + '">Quick view</button>' +
+      '<button type="button" class="btn btn-ink sm pcard-quick" data-quick="' + p.id + '">Quick view</button></div>' +
       '<div class="pcard-body"><div class="pcard-top"><h3 class="pcard-name"><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></h3>" + '<span class="pcard-price">' + V8.priceHTML(p, p.finishes.length > 1 && V8.hasRange(p) ? null : f) + "</span></div>" +
       '<p class="pcard-kind">' + esc(p.kind) + (p.finishes.length > 1 ? " · " + p.finishes.length + " finishes" : "") + "</p>" + sw + "</div></article>";
   };
