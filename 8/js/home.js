@@ -218,54 +218,26 @@
     // row films play while on screen; the slot may hold the fan's own film (moved in on unfold)
     var rio = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = $("video", e.target); if (!v) return; if (e.isIntersecting && !row.hidden) { loadVideo(v); v.play().catch(function () {}); } else v.pause(); }); }, { threshold: .6 });
     $$(".hrow-it.v .ph", track).forEach(function (ph) { rio.observe(ph); });
-    function swapFilms(intoRow) {
-      $$("[data-reel]", fan).forEach(function (b) {
-        var ph = $('[data-id="' + b.dataset.reel + '"] .ph', track); if (!ph) return;
-        var fv = intoRow ? $("video", b) : $("video", ph), rv = intoRow ? $("video", ph) : null;
-        if (intoRow) { b._own = rv; ph.replaceChild(fv, rv); b._film = fv; }
-        else if (b._film) { ph.replaceChild(b._own, b._film); b.insertBefore(b._film, b.firstChild); b._film = null; }
-      });
-    }
-    V8.onLeave(function () { rio.disconnect(); });
     function prog() { var m = track.scrollWidth - track.clientWidth; bar.style.transform = "scaleX(" + (m > 0 ? Math.max(.06, track.scrollLeft / m) : 1) + ")"; }
     track.addEventListener("scroll", prog, { passive: true });
     row.addEventListener("click", function (e) { var n = e.target.closest("[data-rv]"); if (n) track.scrollBy({ left: +n.dataset.rv * track.clientWidth * .6, behavior: reduce ? "auto" : "smooth" }); });
     track.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); track.scrollBy({ left: (e.key === "ArrowRight" ? 1 : -1) * track.clientWidth * .5, behavior: "smooth" }); } });
     function unfold(id) {
-      // remember where each film sits in the fan, swap the fan for the row, then fly each film to its slot.
-      // The row is fully visible without the animation; the animation only plays on top of it.
-      var from = {};
-      $$("[data-reel]", fan).forEach(function (b) { from[b.dataset.reel] = b.getBoundingClientRect(); });
+      // swap the fan for the row and centre the film that was clicked; the row has its own films
       var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
-      swapFilms(true);
+      playFan(false);
       fan.hidden = true; ctl.hidden = true; row.hidden = false;
-      try { window.scrollBy(0, head.getBoundingClientRect().top - y0); } catch (e) {} // keep the heading where it was
+      try { window.scrollBy(0, head.getBoundingClientRect().top - y0); } catch (e) {}
       var it = $('[data-id="' + id + '"]', track);
       if (it) { var tr = track.getBoundingClientRect(), ir = it.getBoundingClientRect(); track.scrollLeft += ir.left - tr.left - (tr.width - ir.width) / 2; }
       prog();
-      var v = it && $("video", it); if (v) { loadVideo(v); v.muted = true; var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); }
-      if (reduce || !Element.prototype.animate) return;
-      try {
-        var c = it ? it.getBoundingClientRect() : null;
-        $$(".hrow-it", track).forEach(function (el) {
-          var ph = $(".ph", el), f = from[el.dataset.id], r = (ph || el).getBoundingClientRect();
-          if (r.right < -200 || r.left > innerWidth + 200) return;
-          if (f && ph && r.width && r.height) {
-            ph.animate([{ transformOrigin: "0 0", transform: "translate(" + (f.left - r.left) + "px," + (f.top - r.top) + "px) scale(" + f.width / r.width + "," + f.height / r.height + ")" }, { transformOrigin: "0 0", transform: "none" }], { duration: 850, easing: "cubic-bezier(.2,.7,.2,1)" });
-            var cap = $("figcaption", el); if (cap) cap.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 500, fill: "backwards" });
-          } else {
-            var d = c ? Math.min(6, Math.abs(r.left - c.left) / 300) : 0;
-            el.animate([{ opacity: 0, transform: "translateY(28px) scale(.96)" }, { opacity: 1, transform: "none" }], { duration: 700, delay: 120 + d * 60, easing: "cubic-bezier(.2,.7,.2,1)", fill: "backwards" });
-          }
-        });
-      } catch (e) {}
+      var v = it && $("video", it); if (v) { loadVideo(v); var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); }
     }
     function fold() {
       var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
       $$("video", track).forEach(function (v) { v.pause(); });
-      swapFilms(false);
       row.hidden = true; fan.hidden = false; ctl.hidden = false;
-      window.scrollBy({ top: head.getBoundingClientRect().top - y0, behavior: "instant" });
+      try { window.scrollBy(0, head.getBoundingClientRect().top - y0); } catch (e) {}
       fan.classList.remove("in"); void fan.offsetWidth; fan.classList.add("in");
       if (!paused) playFan(true);
       var first = $("[data-reel]", fan); if (first) first.focus({ preventScroll: true });

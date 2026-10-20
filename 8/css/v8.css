@@ -422,7 +422,7 @@ main:focus { outline: none; }
 
 /* 7 · HOME ------------------------------------------------------------ */
 /* hero */
-.hero { position: relative; min-height: 100svh; display: grid; align-items: center; color: var(--white); overflow: hidden; isolation: isolate; }
+.hero { position: relative; min-height: max(560px, calc(90svh - var(--strip-h))); display: grid; align-items: center; color: var(--white); overflow: hidden; isolation: isolate; }
 .hero-media { position: absolute; inset: 0; z-index: -2; background: var(--ink); }
 .hero-media img, .hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-media video { opacity: 0; transition: opacity .8s; }
@@ -430,7 +430,7 @@ main:focus { outline: none; }
 .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 58% 46% at 50% 50%, rgba(8, 36, 65, .42), rgba(8, 36, 65, 0) 78%), linear-gradient(180deg, rgba(8, 36, 65, .35) 0%, rgba(8, 36, 65, 0) 24%, rgba(8, 36, 65, 0) 76%, rgba(8, 36, 65, .25) 100%); }
 /* headline in the middle of the frame; subtitle bottom-left, rating and button bottom-right (original V8 layout) */
 .hero { align-items: end; }
-.hero-in { padding-block: calc(var(--nav-h) + 40px) clamp(28px, 3vw, 48px); display: grid; }
+.hero-in { padding-block: calc(var(--nav-h) + 40px) clamp(32px, 3.4vw, 56px); display: grid; }
 .hero h1 { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: max-content; max-width: calc(100% - 2 * var(--gut)); margin: 0; text-align: center; color: var(--lime); font-size: clamp(40px, 5.2vw, 104px); line-height: 1.02; }
 .hero h1 .ln { display: block; white-space: nowrap; }
 .hero-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 32px; }
@@ -439,7 +439,7 @@ main:focus { outline: none; }
 .hero .rating { color: rgba(255, 255, 255, .9); }
 .hero .stars { color: var(--lime); }
 @media (max-width: 720px) {
-  .hero { min-height: 92svh; align-items: stretch; }
+  .hero { min-height: calc(90svh - var(--strip-h)); align-items: stretch; }
   /* phones: headline centred in the space above the foot, never under it */
   .hero-in { grid-template-rows: 1fr auto; }
   .hero h1 { position: static; transform: none; align-self: center; justify-self: center; width: auto; max-width: none; font-size: clamp(40px, 11vw, 56px); }
@@ -577,6 +577,12 @@ main:focus { outline: none; }
 .hrow-track:focus { outline: none; }
 .hrow-track:focus-visible { box-shadow: inset 0 0 0 2px var(--blue); }
 .hrow-it { flex: none; margin: 0; display: grid; gap: 12px; scroll-snap-align: center; }
+/* simple rise-in; the items are fully visible even where the animation doesn't run */
+.hrow:not([hidden]) .hrow-it { animation: hrowIn .7s cubic-bezier(.2, .7, .2, 1) backwards; }
+.hrow:not([hidden]) .hrow-it:nth-child(2n) { animation-delay: .08s; }
+.hrow:not([hidden]) .hrow-it:nth-child(3n) { animation-delay: .16s; }
+@keyframes hrowIn { from { opacity: 0; transform: translateY(24px); } }
+@media (prefers-reduced-motion: reduce) { .hrow-it { animation: none !important; } }
 .hrow-it .ph { position: relative; z-index: 1; border-radius: 18px; overflow: hidden; background: var(--white); box-shadow: 0 30px 60px -34px rgba(8, 36, 65, .45); }
 .hrow-it.v { width: min(clamp(210px, 19vw, 320px), 34vh); }
 .hrow-it.v .ph { aspect-ratio: 9 / 16; }
