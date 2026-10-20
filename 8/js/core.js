@@ -240,8 +240,16 @@
   $("#logo2").innerHTML = I.logo;
   $("#ftrWord").innerHTML = I.logo;
   $("#searchBtn").innerHTML = I.search; $(".t-acct").insertAdjacentHTML("afterbegin", I.account); $(".t-wish").insertAdjacentHTML("afterbegin", I.heart); $("#bagBtn").insertAdjacentHTML("afterbegin", I.bag);
-  $("#megaCribs").innerHTML = V8.list("crib").map(function (p) { return '<li><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></li>"; }).join("") + '<li><a href="#/cribs"><b>All cribs →</b></a></li>';
-  $("#megaDressers").innerHTML = V8.list("dresser").slice(0, 6).map(function (p) { return '<li><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></li>"; }).join("") + '<li><a href="#/dressers"><b>All dressers →</b></a></li>';
+  // Shop menu (V7 layout): big categories on the left, a room photo for the one in focus on the right
+  var MG = { cribs: ["mom-soho", "Shop all cribs"], dressers: ["mom-dr-soho", "Shop all dressers"], kids: ["mom-kids", "Shop toddler & kids"], sets: ["mom-dr-cp", "Shop all sets"] };
+  $$(".mg-cat").forEach(function (a) {
+    function focusCat() { $$(".mg-cat").forEach(function (x) { x.classList.toggle("on", x === a); }); var m = MG[a.dataset.c]; $("#mgImg").src = "../img/" + m[0] + ".jpg"; $("#mgImgA").href = a.getAttribute("href"); $("#mgAll").href = a.getAttribute("href"); $("#mgAll").innerHTML = m[1] + ' <span aria-hidden="true">→</span>'; }
+    a.addEventListener("mouseenter", focusCat); a.addEventListener("focus", focusCat);
+  });
+  var smItem = function (p) { return '<li><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></li>"; };
+  $("#smCribs").innerHTML = V8.list("crib").map(smItem).join("") + '<li><a class="all" href="#/cribs">Shop all cribs →</a></li>';
+  $("#smDressers").innerHTML = V8.list("dresser").map(smItem).join("") + '<li><a class="all" href="#/dressers">Shop all dressers →</a></li>';
+  $("#smKids").innerHTML = V8.list("kids").concat(V8.list("kit")).map(smItem).join("") + '<li><a class="all" href="#/kids">Shop toddler &amp; kids →</a></li>';
   var mega = $("#mega"), megaBtn = $("#megaBtn"), megaT;
   function openMega() { clearTimeout(megaT); mega.classList.add("open"); megaBtn.setAttribute("aria-expanded", "true"); $(".hdr").classList.add("mega-on"); }
   function closeMega() { mega.classList.remove("open"); megaBtn.setAttribute("aria-expanded", "false"); $(".hdr").classList.remove("mega-on"); }
