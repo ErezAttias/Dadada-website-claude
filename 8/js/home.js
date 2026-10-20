@@ -31,6 +31,8 @@
     ["v", "ugc-lala", "Unboxed and built together", "lala"],
     ["q", 5, "We live in a small apartment, and I love how we managed to fit such a cute setup into our bedroom.", "spirit", "Aziza B."]
   ];
+  // per-card size and line positions of the hover words, from the original V8 (--fs in px at a 314px card)
+  var CERTFX = ["--fs:117.9;--t:38%;--bt:70%", "--fs:117.9;--t:35%;--bt:72%", "--fs:98.2;--t:42%;--bt:70%", "--fs:98.2;--t:34%;--bt:72%", "--fs:147.3;--t:40%;--bt:70%"];
   var FAN = [["ugc-jolly", -2, 30, -9, .82], ["ugc-bliss", -1, 12, -5, .92], ["ugc-soho-nursery", 0, 0, 0, 1], ["ugc-lala", 1, 12, 5, .92], ["ugc-soho-build", 2, 30, 9, .82]];
   var STAGES = [["stage-1", "62% 50%", "Newborn", "A safe space for all their first moments.", "Crib · included"], ["stage-2", "60% 50%", "Toddler", "One side comes down. Independence goes up.", "Conversion kit · $120"], ["stage-3", "52% 50%", "Day bed", "The crib years end. Their bed stays.", "Same kit · nothing extra"]];
 
@@ -57,7 +59,8 @@
       '<section class="sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em> is not a <em>nursery</em>, and a nursery without <em>you</em> isn’t your child’s <span class="nowrap"><em>home</em>.' + V8.doodle("dd-heart-o") + '</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
       // best sellers
       '<section class="sec" id="best" aria-labelledby="best-h"><div class="wrap">' +
-        '<div class="sec-head"><h2 class="sr" id="best-h">Shop dadada</h2><div class="modes" role="tablist" aria-label="Browse by"><button type="button" role="tab" class="disp d2" aria-selected="true" aria-controls="bestPanel" data-mode="best">Our <b>best sellers.</b></button><button type="button" role="tab" class="disp d2" aria-selected="false" aria-controls="catPanel" data-mode="cats" tabindex="-1">Shop by <b>category.</b></button></div>' +
+        '<div class="modes" role="tablist" aria-label="Browse by"><button type="button" role="tab" aria-selected="true" aria-controls="bestPanel" data-mode="best" data-h="Our <b>best sellers.</b>">Best sellers</button><button type="button" role="tab" aria-selected="false" aria-controls="catPanel" data-mode="cats" data-h="Shop by <b>category.</b>" tabindex="-1">Shop by category</button></div>' +
+        '<div class="sec-head"><h2 class="disp d2 c-orange" id="best-h" aria-live="polite">Our <b>best sellers.</b></h2>' +
         '<div class="row" style="--s:18px" id="bestCtl"><div class="seg" role="tablist" aria-label="Best sellers by category" id="bestTabs"><button type="button" role="tab" aria-selected="true" data-tab="cribs">Cribs</button><button type="button" role="tab" aria-selected="false" data-tab="dressers">Dressers</button><button type="button" role="tab" aria-selected="false" data-tab="kids">Kids</button></div></div></div>' +
         '<div id="bestPanel" role="tabpanel"><div class="pgrid" id="bestGrid">' + tabCards("cribs") + "</div></div>" +
         '<div id="catPanel" role="tabpanel" hidden><div class="pgrid">' + CATS.map(function (c) { var ps = c[3] ? V8.list(c[3]) : null; return '<a class="ccard" href="#/' + c[0] + '"><span class="ccard-im"><img src="../img/' + c[2] + '" alt="" loading="lazy"></span><span class="ccard-body"><span class="ccard-kick">' + (ps ? ps.length + (ps.length === 1 ? " piece" : " pieces") : "Crib + dresser") + '</span><b class="ccard-name">' + c[1] + '</b><span class="ccard-sub">' + (ps ? "From " + money(Math.min.apply(null, ps.map(V8.minPrice))) : "15% off both") + ' <span aria-hidden="true">→</span></span></span></a>'; }).join("") + "</div></div>" +
@@ -70,8 +73,8 @@
       '<section class="stl" id="stl" aria-roledescription="carousel" aria-labelledby="stl-h">' +
         '<div class="stl-head"><h2 class="disp d3" id="stl-h">Shop <b>the look.</b></h2><p>Pick a dot to see the piece</p></div>' +
         '<div class="stl-track" id="stlTrack">' + D.looks.map(function (l, i) {
-          return '<div class="stl-room" role="group" aria-roledescription="slide" aria-label="' + (i + 1) + " of " + D.looks.length + ": " + esc(l.name) + '"' + (i ? ' aria-hidden="true"' : "") + '><img src="' + l.img + '" alt="' + esc(l.alt) + '" loading="' + (i ? "lazy" : "eager") + '">' +
-            l.items.map(function (it, j) { var p = P[it.id]; return p ? '<button type="button" class="hot" style="left:' + it.x + "%;top:" + it.y + '%" data-look="' + i + '" data-item="' + j + '" aria-label="' + esc(p.full) + '" aria-expanded="false"' + (i ? ' tabindex="-1"' : "") + "></button>" : ""; }).join("") + "</div>";
+          return '<div class="stl-room" role="group" aria-roledescription="slide" aria-label="' + (i + 1) + " of " + D.looks.length + ": " + esc(l.name) + '"' + (i ? ' aria-hidden="true"' : "") + '><img src="' + l.img + '" alt="' + esc(l.alt) + '" loading="' + (i ? "lazy" : "eager") + '"><div class="hots">' +
+            l.items.map(function (it, j) { var p = P[it.id]; return p ? '<button type="button" class="hot" style="left:' + it.x + "%;top:" + it.y + '%" data-look="' + i + '" data-item="' + j + '" aria-label="' + esc(p.full) + '" aria-expanded="false"' + (i ? ' tabindex="-1"' : "") + "></button>" : ""; }).join("") + "</div></div>";
         }).join("") + "</div>" +
         '<div class="hot-card" id="hotCard" hidden></div>' +
         '<div class="stl-ui"><span class="stl-cap" aria-live="polite"><span class="n" id="stlNum">01 / 0' + D.looks.length + '</span><span id="stlName">' + esc(D.looks[0].name) + '</span></span><div class="stl-arrows"><button type="button" class="round" id="stlPrev" aria-label="Previous room">' + svg.left + '</button><button type="button" class="round" id="stlNext" aria-label="Next room">' + svg.right + "</button></div></div>" +
@@ -79,7 +82,7 @@
       // certifications
       '<section class="sec" id="safe" aria-labelledby="safe-h"><div class="wrap">' +
         '<div class="sec-head"><div><h2 class="disp d2 c-orange" id="safe-h">Made safe,<br><b>made to last.</b></h2></div><div class="stack" style="--s:14px;max-width:44ch"><p class="lede">Every dadada crib is built by hand from solid beech, then tested by the people whose job is to be picky.</p><a class="link" href="#/safety">How we test <span class="ar" aria-hidden="true">→</span></a></div></div>' +
-        '<ul class="certs-row" role="list">' + CERTS.map(function (c, i) { return '<li class="cert rv" style="--d:' + i * .07 + 's"><div class="cert-arch"><img src="assets/' + c[0] + '.webp" alt="" style="object-position:' + c[1] + '" loading="lazy"><span class="cert-word">' + c[2] + '</span></div><span class="cert-mark"><img src="assets/' + c[3] + '.png" alt=""></span><h3 class="label">' + c[4] + '</h3><p class="body small">' + c[5] + "</p></li>"; }).join("") + "</ul>" +
+        '<ul class="certs-row" role="list">' + CERTS.map(function (c, i) { return '<li class="cert rv" style="--d:' + i * .07 + 's;' + CERTFX[i] + '"><div class="cert-arch"><img class="cert-pic" src="assets/' + c[0] + '.webp" alt="" style="object-position:' + c[1] + '" loading="lazy"><span class="cert-big" aria-hidden="true"><span class="w1">' + c[2].split(" ")[0] + '</span><img class="cert-cut" src="assets/' + (c[0] === "solid-bg" ? "cut-solid" : "cut-" + c[0]) + '.webp" alt="" style="object-position:' + c[1] + '" loading="lazy"><span class="w2">' + c[2].split(" ").slice(1).join(" ") + '</span></span></div><span class="cert-mark"><img src="assets/' + c[3] + '.png" alt=""></span><h3 class="label">' + c[4] + '</h3><p class="body small">' + c[5] + "</p></li>"; }).join("") + "</ul>" +
         '<p class="scroll-hint">Swipe for more ' + svg.right.replace("<svg", '<svg width="16" height="16"') + "</p>" +
       "</div></section>" +
       // nursery set offer
@@ -90,7 +93,7 @@
         '<div class="row" style="--s:14px"><button type="button" class="btn btn-lime" id="addSet">Add the Soho set</button><a class="btn btn-light" href="#/sets">See all sets</a></div></div>' +
       "</div></div></section>" +
       // 10,000 homes
-      '<section class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><span class="label c-orange">Real nurseries</span><h2 class="disp d2" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for dadada.</b></h2><p class="lede">Filmed by the parents who built them. Tag <b>@dadadababyusa</b> to share yours.</p></div>' +
+      '<section class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><h2 class="disp d2 c-orange" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for dadada.</b></h2></div>' +
         '<div class="fan" id="fan">' + FAN.map(function (f) { var r = ROOMS.find(function (x) { return x[1] === f[0]; }); return '<button type="button" class="fc" data-reel="' + f[0] + '" aria-label="Watch: ' + esc(r ? r[2] : "a dadada nursery") + '" style="--x:calc(' + f[1] + ' * clamp(120px, 15vw, 270px));--y:' + f[2] + "px;--r:" + f[3] + "deg;--s:" + f[4] + ";z-index:" + (10 - Math.abs(f[1])) + '"><video muted loop playsinline preload="none" poster="../img/' + f[0] + '.jpg" aria-hidden="true"><source data-src="../video/' + f[0] + '.webm" type="video/webm"><source data-src="../video/' + f[0] + '.mp4" type="video/mp4"></video><span class="fc-play" aria-hidden="true"></span></button>'; }).join("") + "</div>" +
         rowHTML() +
         '<div class="center mt-l" style="display:grid" id="fanCtl"><button type="button" class="btn btn-secondary sm" id="fanToggle" aria-pressed="false">Pause the films</button></div>' +
@@ -103,14 +106,14 @@
       '<section class="sec bg-paper" id="toddler" aria-labelledby="tod-h"><div class="wrap tod">' +
         '<div class="tod-imgs rv" id="todImgs">' + STAGES.map(function (s, i) { return '<img class="' + (i ? "" : "on") + '" src="assets/' + s[0] + '.webp" alt="' + s[2] + ' stage" style="object-position:' + s[1] + '" loading="lazy">'; }).join("") + "</div>" +
         '<div><h2 class="disp d2 c-orange" id="tod-h">The toddler bed<br><b class="nowrap">you don’t buy.</b></h2><p class="lede mt-m">One crib, three stages. When they’re ready, a $120 kit turns it into a toddler bed, and later a day bed.</p>' +
-        '<div class="stages" role="tablist" aria-label="Crib stages">' + STAGES.map(function (s, i) { return '<button type="button" class="stage" role="tab" aria-selected="' + !i + '" data-stage="' + i + '"><b>' + s[2] + "</b><em>" + s[4] + "</em><span>" + s[3] + "</span><i></i></button>"; }).join("") + "</div>" +
-        '<div class="row mt-m" style="--s:18px"><a class="btn btn-primary" href="#/cribs">Shop convertible cribs</a><a class="link" href="#/p/kit">The conversion kit</a></div></div>' +
+        '<div class="stages" role="tablist" aria-label="Crib stages">' + STAGES.map(function (s, i) { return '<button type="button" class="stage" role="tab" aria-selected="' + !i + '" data-stage="' + i + '"><b>' + s[2] + "</b><em>" + s[4] + "</em><span>" + s[3] + "</span></button>"; }).join("") + "</div>" +
+        '<div class="row mt-m" style="--s:18px"><a class="btn btn-primary" href="#/cribs">Shop convertible cribs</a></div></div>' +
       "</div></section>" +
       // journal
       '<section class="sec" aria-labelledby="jr-h"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange" id="jr-h">Read up. <b>Rest easy.</b></h2><a class="link" href="#/journal">All stories</a></div><div class="jgrid scroll">' +
-        D.journal.slice(0, 3).map(function (j, i) { return V8.jcard(j, i); }).join("") + "</div></div></section>" +
-      // faq
-      '<section class="sec bg-paper" aria-labelledby="fq-h"><div class="wrap faqblock"><div class="stack" style="--s:18px"><h2 class="disp d2 c-orange" id="fq-h">Little questions.<br><b>Straight answers.</b></h2><p class="lede">Mattresses, conversions, delivery. The things parents ask us most.</p><a class="link" href="#/support/faq">All questions</a></div>' +
+        D.journal.slice(0, 3).map(function (j, i) { return V8.jcard(j, i); }).join("") + "</div></div>" +
+      // faq, in the same white section as the journal
+      '<div class="wrap faqblock"><div class="stack" style="--s:18px"><h2 class="disp d2 c-orange" id="fq-h">Little questions.<br><b class="nowrap">Straight answers.</b></h2><p class="lede">Mattresses, conversions, delivery. The things parents ask us most.</p></div>' +
         '<div class="acc">' + faq.map(function (x) { return "<details><summary>" + esc(x.q) + '</summary><div class="acc-body">' + esc(x.a) + "</div></details>"; }).join("") + "</div></div></section>" +
       // quiz band
       '<section class="bg-orange quizband" aria-labelledby="qz-h">' + V8.doodle("dd-sun", "dd-sun") + V8.doodle("dd-star", "dd-star") +
@@ -163,6 +166,7 @@
     function mode(b) {
       modes.forEach(function (t) { var on = t === b; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; $("#" + t.getAttribute("aria-controls"), root).hidden = !on; });
       bestCtl.hidden = b.dataset.mode !== "best";
+      $("#best-h", root).innerHTML = b.dataset.h;
       V8.reveal($("#" + b.getAttribute("aria-controls"), root));
     }
     modes.forEach(function (b, i) { b.addEventListener("click", function () { mode(b); }); b.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); var n = modes[1 - i]; n.focus(); mode(n); } }); });
@@ -184,7 +188,7 @@
       if (openHot === h) return closeHot(); closeHot(); openHot = h; h.setAttribute("aria-expanded", "true");
       var it = D.looks[+h.dataset.look].items[+h.dataset.item], p = P[it.id], f = 0;
       if (it.finish) p.finishes.forEach(function (x, i) { if (x.k === it.finish) f = i; });
-      hc.innerHTML = '<span class="im"><img src="' + p.finishes[f].img + '" alt=""></span><span><b>' + esc(p.full) + "</b><span>" + esc(p.finishes[f].name) + " · " + money(p.finishes[f].price) + '</span><span class="row"><button type="button" class="btn btn-primary sm" data-add="' + p.id + '" data-f="' + f + '">Add to bag</button><a class="link small" href="' + V8.url(p) + '">Details</a></span></span>';
+      hc.innerHTML = '<span class="im"><img src="' + p.finishes[f].img + '" alt=""></span><span><b>' + esc(p.full) + "</b><span>" + esc(p.finishes[f].name) + " · " + money(p.finishes[f].price) + '</span><span class="row"><button type="button" class="btn btn-primary sm" data-add="' + p.id + '" data-f="' + f + '">Add to bag</button><a class="link small" href="' + V8.url(p) + '">Details</a></span></span>' + V8.wishBtn(p, "hot-wish");
       hc.hidden = false;
       var sr = stl.getBoundingClientRect(), hr = h.getBoundingClientRect(), w = hc.offsetWidth, cx = hr.left + hr.width / 2 - sr.left;
       hc.style.left = Math.max(16, Math.min(sr.width - w - 16, cx - w / 2)) + "px";

@@ -75,7 +75,7 @@
     var i = S.wish.indexOf(id), on = i < 0;
     if (on) S.wish.push(id); else S.wish.splice(i, 1);
     save(); syncBadges();
-    $$('[data-wish="' + id + '"]').forEach(function (b) { b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", (on ? "Remove " : "Save ") + P[id].full + (on ? " from" : " to") + " wishlist"); b.innerHTML = on ? svg.heartOn : svg.heart; });
+    $$('[data-wish="' + id + '"]').forEach(function (b) { b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", (on ? "Remove " : "Save ") + P[id].full + (on ? " from" : " to") + " wishlist"); b.classList.remove("pop"); void b.offsetWidth; if (on) b.classList.add("pop"); });
     V8.toast(on ? P[id].full + " saved to your wishlist" : "Removed from your wishlist");
     V8.emit("wish");
   };
@@ -84,7 +84,9 @@
   V8.emit = function (ev) { (listeners[ev] || []).forEach(function (fn) { try { fn(); } catch (e) { console.error(e); } }); };
 
   /* ---------- shared components ---------- */
-  V8.wishBtn = function (p, cls) { var on = V8.isWished(p.id); return '<button type="button" class="icon-btn ' + (cls || "") + '" data-wish="' + p.id + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove " : "Save ") + esc(p.full) + (on ? " from" : " to") + ' wishlist">' + (on ? svg.heartOn : svg.heart) + "</button>"; };
+  // the hand-drawn heart from the brand icons; saved state turns it orange
+  V8.heart = (window.DDI && DDI.heart) || svg.heart;
+  V8.wishBtn = function (p, cls) { var on = V8.isWished(p.id); return '<button type="button" class="icon-btn ' + (cls || "") + '" data-wish="' + p.id + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove " : "Save ") + esc(p.full) + (on ? " from" : " to") + ' wishlist">' + V8.heart + "</button>"; };
   V8.priceHTML = function (p, f) {
     var fin = f == null ? null : p.finishes[f];
     if (fin) return '<span class="price">' + money(fin.price) + (fin.was ? "<s>" + money(fin.was) + "</s>" : "") + "</span>";
