@@ -4,7 +4,7 @@
   var V8 = window.V8, D = window.DD, P = V8.P, $ = V8.$, $$ = V8.$$, esc = V8.esc, money = V8.money, svg = V8.svg;
 
   var TOTAL_REVIEWS = V8.list("crib").reduce(function (a, p) { return a + (p.reviews || 0); }, 0);
-  var TABS = { cribs: ["soho", "bliss", "lala", "spirit"], dressers: ["soho5", "merry", "bliss6", "cp"], kids: ["muse", "shelf", "tower", "fun"] };
+  var BEST = ["soho", "bliss", "soho5", "bliss6"]; // two cribs, two dressers
   var LOGOS = [["brand-1", "Babylist"], ["brand-2", "Target"], ["brand-3", "Amazon"], ["brand-4", "Wayfair"], ["brand-5", "Albee Baby"], ["brand-6", "Modern Nursery"], ["brand-7", "Macklem's"]];
   var CERTS = [
     ["certs-bg", "55% 45%", "Clean air", "cert-gg", "GREENGUARD Gold", "Tested for more than 10,000 chemicals and VOCs, so the nursery air stays clean."],
@@ -37,7 +37,6 @@
   var STAGES = [["stage-1", "62% 50%", "Newborn", "A safe space for all their first moments.", "Crib · included"], ["stage-2", "60% 50%", "Toddler", "One side comes down. Independence goes up.", "Conversion kit · $120"], ["stage-3", "52% 50%", "Day bed", "The crib years end. Their bed stays.", "Same kit · nothing extra"]];
 
   var CATS = [["cribs", "Cribs", "room-soho-brownstone.jpg", "crib"], ["dressers", "Dressers", "s-soho5.jpg", "dresser"], ["kids", "Toddler &amp; kids", "stl-kids.jpg", "kids"], ["sets", "Nursery sets", "mom-dr-soho.jpg", null]];
-  function tabCards(key) { return TABS[key].map(function (id, i) { return V8.card(P[id], { d: i * .06 }); }).join(""); }
 
   V8.pages.home = function () {
     var soho = P.soho, soho5 = P.soho5, setSub = soho.finishes[0].price + soho5.finishes[0].price, setTot = setSub * .85;
@@ -56,13 +55,12 @@
       // retailers
       '<section class="logos" aria-label="Also sold at"><div class="logos-row">' + [0, 1].map(function (k) { return LOGOS.map(function (l) { return '<img src="assets/' + l[0] + '.png" alt="' + (k ? "" : l[1]) + '"' + (k ? ' aria-hidden="true"' : "") + ' loading="lazy">'; }).join(""); }).join("") + "</div></section>" +
       // manifesto
-      '<section class="sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em> is not a <em>nursery</em>, and a nursery without <em>you</em> isn’t your child’s <span class="nowrap"><em>home</em>.' + V8.doodle("dd-heart-o") + '</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
+      '<section class="sec mani-sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em> is not a <em>nursery</em>, and a nursery without <em>you</em> isn’t your child’s <span class="nowrap"><em>home</em>.' + V8.doodle("dd-heart-o") + '</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
       // best sellers
       '<section class="sec" id="best" aria-labelledby="best-h"><div class="wrap">' +
-        '<div class="modes" role="tablist" aria-label="Browse by"><button type="button" role="tab" aria-selected="true" aria-controls="bestPanel" data-mode="best" data-h="Our <b>best sellers.</b>">Best sellers</button><button type="button" role="tab" aria-selected="false" aria-controls="catPanel" data-mode="cats" data-h="Shop by <b>category.</b>" tabindex="-1">Shop by category</button></div>' +
         '<div class="sec-head"><h2 class="disp d2 c-orange" id="best-h" aria-live="polite">Our <b>best sellers.</b></h2>' +
-        '<div class="row" style="--s:18px" id="bestCtl"><div class="seg" role="tablist" aria-label="Best sellers by category" id="bestTabs"><button type="button" role="tab" aria-selected="true" data-tab="cribs">Cribs</button><button type="button" role="tab" aria-selected="false" data-tab="dressers">Dressers</button><button type="button" role="tab" aria-selected="false" data-tab="kids">Kids</button></div></div></div>' +
-        '<div id="bestPanel" role="tabpanel"><div class="pgrid" id="bestGrid">' + tabCards("cribs") + "</div></div>" +
+        '<div class="seg modes" role="tablist" aria-label="Browse by"><button type="button" role="tab" aria-selected="true" aria-controls="bestPanel" data-mode="best" data-h="Our <b>best sellers.</b>">Best sellers</button><button type="button" role="tab" aria-selected="false" aria-controls="catPanel" data-mode="cats" data-h="Shop by <b>category.</b>" tabindex="-1">Categories</button></div></div>' +
+        '<div id="bestPanel" role="tabpanel"><div class="pgrid" id="bestGrid">' + BEST.map(function (id, i) { return V8.card(P[id], { d: i * .06 }); }).join("") + "</div></div>" +
         '<div id="catPanel" role="tabpanel" hidden><div class="pgrid">' + CATS.map(function (c) { var ps = c[3] ? V8.list(c[3]) : null; return '<a class="ccard" href="#/' + c[0] + '"><span class="ccard-im"><img src="../img/' + c[2] + '" alt="" loading="lazy"></span><span class="ccard-body"><span class="ccard-kick">' + (ps ? ps.length + (ps.length === 1 ? " piece" : " pieces") : "Crib + dresser") + '</span><b class="ccard-name">' + c[1] + '</b><span class="ccard-sub">' + (ps ? "From " + money(Math.min.apply(null, ps.map(V8.minPrice))) : "15% off both") + ' <span aria-hidden="true">→</span></span></span></a>'; }).join("") + "</div></div>" +
       "</div></section>" +
       // promises
@@ -155,17 +153,10 @@
     addEventListener("scroll", lightWords, { passive: true }); lightWords();
     V8.onLeave(function () { removeEventListener("scroll", lightWords); });
 
-    // best sellers tabs
-    var tabs = $("#bestTabs", root), grid = $("#bestGrid", root);
-    var tabBtns = $$("[role=tab]", tabs);
-    function pick(b) { tabBtns.forEach(function (t) { var on = t === b; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; }); grid.innerHTML = tabCards(b.dataset.tab); V8.reveal(grid); }
-    tabBtns.forEach(function (b, i) { b.tabIndex = i ? -1 : 0; b.addEventListener("click", function () { pick(b); }); b.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); var n = tabBtns[(i + (e.key === "ArrowRight" ? 1 : tabBtns.length - 1)) % tabBtns.length]; n.focus(); pick(n); } }); });
-
     // the section switches between best sellers and categories
-    var modes = $$(".modes [role=tab]", root), bestCtl = $("#bestCtl", root);
+    var modes = $$(".modes [role=tab]", root);
     function mode(b) {
       modes.forEach(function (t) { var on = t === b; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; $("#" + t.getAttribute("aria-controls"), root).hidden = !on; });
-      bestCtl.hidden = b.dataset.mode !== "best";
       $("#best-h", root).innerHTML = b.dataset.h;
       V8.reveal($("#" + b.getAttribute("aria-controls"), root));
     }
@@ -214,28 +205,28 @@
     ft.addEventListener("click", function () { paused = !paused; playFan(!paused); ft.textContent = paused ? "Play the films" : "Pause the films"; ft.setAttribute("aria-pressed", paused); });
     function countUp() { var el = $("#homesN", root); if (!el || el.dataset.done || reduce) return; el.dataset.done = 1; var t0 = performance.now(); (function st(t) { var k = Math.min(1, (t - t0) / 1500), e = 1 - Math.pow(1 - k, 4); el.textContent = Math.round(10000 * e).toLocaleString("en-US"); if (k < 1) requestAnimationFrame(st); })(t0); }
     V8.onLeave(function () { fio.disconnect(); });
-    var row = $("#hrow", root), track = $("#hrowTrack", root), bar = $("#hrowBar", root), ctl = $("#fanCtl", root);
+    var row = $("#hrow", root), rtrack = $("#hrowTrack", root), bar = $("#hrowBar", root), ctl = $("#fanCtl", root);
     // row films play while on screen; the slot may hold the fan's own film (moved in on unfold)
     var rio = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = $("video", e.target); if (!v) return; if (e.isIntersecting && !row.hidden) { loadVideo(v); v.play().catch(function () {}); } else v.pause(); }); }, { threshold: .6 });
-    $$(".hrow-it.v .ph", track).forEach(function (ph) { rio.observe(ph); });
-    function prog() { var m = track.scrollWidth - track.clientWidth; bar.style.transform = "scaleX(" + (m > 0 ? Math.max(.06, track.scrollLeft / m) : 1) + ")"; }
-    track.addEventListener("scroll", prog, { passive: true });
-    row.addEventListener("click", function (e) { var n = e.target.closest("[data-rv]"); if (n) track.scrollBy({ left: +n.dataset.rv * track.clientWidth * .6, behavior: reduce ? "auto" : "smooth" }); });
-    track.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); track.scrollBy({ left: (e.key === "ArrowRight" ? 1 : -1) * track.clientWidth * .5, behavior: "smooth" }); } });
+    $$(".hrow-it.v .ph", rtrack).forEach(function (ph) { rio.observe(ph); });
+    function prog() { var m = rtrack.scrollWidth - rtrack.clientWidth; bar.style.transform = "scaleX(" + (m > 0 ? Math.max(.06, rtrack.scrollLeft / m) : 1) + ")"; }
+    rtrack.addEventListener("scroll", prog, { passive: true });
+    row.addEventListener("click", function (e) { var n = e.target.closest("[data-rv]"); if (n) rtrack.scrollBy({ left: +n.dataset.rv * rtrack.clientWidth * .6, behavior: reduce ? "auto" : "smooth" }); });
+    rtrack.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); rtrack.scrollBy({ left: (e.key === "ArrowRight" ? 1 : -1) * rtrack.clientWidth * .5, behavior: "smooth" }); } });
     function unfold(id) {
       // swap the fan for the row and centre the film that was clicked; the row has its own films
       var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
       playFan(false);
       fan.hidden = true; ctl.hidden = true; row.hidden = false;
       try { window.scrollBy(0, head.getBoundingClientRect().top - y0); } catch (e) {}
-      var it = $('[data-id="' + id + '"]', track);
-      if (it) { var tr = track.getBoundingClientRect(), ir = it.getBoundingClientRect(); track.scrollLeft += ir.left - tr.left - (tr.width - ir.width) / 2; }
+      var it = $('[data-id="' + id + '"]', rtrack);
+      if (it) { var tr = rtrack.getBoundingClientRect(), ir = it.getBoundingClientRect(); rtrack.scrollLeft += ir.left - tr.left - (tr.width - ir.width) / 2; }
       prog();
       var v = it && $("video", it); if (v) { loadVideo(v); var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); }
     }
     function fold() {
       var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
-      $$("video", track).forEach(function (v) { v.pause(); });
+      $$("video", rtrack).forEach(function (v) { v.pause(); });
       row.hidden = true; fan.hidden = false; ctl.hidden = false;
       try { window.scrollBy(0, head.getBoundingClientRect().top - y0); } catch (e) {}
       fan.classList.remove("in"); void fan.offsetWidth; fan.classList.add("in");
