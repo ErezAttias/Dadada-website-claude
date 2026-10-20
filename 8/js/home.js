@@ -55,7 +55,7 @@
       // retailers
       '<section class="logos" aria-label="Also sold at"><div class="logos-row">' + [0, 1].map(function (k) { return LOGOS.map(function (l) { return '<img src="assets/' + l[0] + '.png" alt="' + (k ? "" : l[1]) + '"' + (k ? ' aria-hidden="true"' : "") + ' loading="lazy">'; }).join(""); }).join("") + "</div></section>" +
       // manifesto
-      '<section class="sec mani-sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em> is not a <em>nursery</em>, and a nursery without <em>you</em> isn’t your child’s <span class="nowrap"><em>home</em>.' + V8.doodle("dd-heart-o") + '</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
+      '<section class="sec mani-sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em><br>is not a <em>nursery</em>,<br>and a nursery without<br><em>you</em> isn’t your child’s<br><span class="nowrap"><em>home</em>.' + V8.doodle("dd-heart-o") + '</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
       // best sellers
       '<section class="sec" id="best" aria-labelledby="best-h"><div class="wrap">' +
         '<div class="sec-head"><h2 class="disp d2 c-orange" id="best-h" aria-live="polite">Our <b>best sellers.</b></h2>' +
@@ -63,13 +63,9 @@
         '<div id="bestPanel" role="tabpanel"><div class="pgrid" id="bestGrid">' + BEST.map(function (id, i) { return V8.card(P[id], { d: i * .06 }); }).join("") + "</div></div>" +
         '<div id="catPanel" role="tabpanel" hidden><div class="pgrid">' + CATS.map(function (c) { var ps = c[3] ? V8.list(c[3]) : null; return '<a class="ccard" href="#/' + c[0] + '"><span class="ccard-im"><img src="../img/' + c[2] + '" alt="" loading="lazy"></span><span class="ccard-body"><span class="ccard-kick">' + (ps ? ps.length + (ps.length === 1 ? " piece" : " pieces") : "Crib + dresser") + '</span><b class="ccard-name">' + c[1] + '</b><span class="ccard-sub">' + (ps ? "From " + money(Math.min.apply(null, ps.map(V8.minPrice))) : "15% off both") + ' <span aria-hidden="true">→</span></span></span></a>'; }).join("") + "</div></div>" +
       "</div></section>" +
-      // promises
-      '<section class="sec tight promise-sec" aria-label="Our promises"><div class="wrap"><ul class="promise" role="list">' +
-        [[svg.truck, "Free shipping", "To the contiguous 48 states"], [svg.box, "Ships in 1 business day", "From our U.S. warehouse"], [svg.back, "14-day returns", "From delivery, in new condition"], [svg.shield, "2-year crib warranty", "Built to be handed down"]].map(function (x, i) { return '<li class="rv" style="--d:' + i * .06 + 's"><span class="pi">' + x[0] + "</span><span><b>" + x[1] + "</b><span>" + x[2] + "</span></span></li>"; }).join("") +
-      "</ul></div></section>" +
       // shop the look
       '<section class="stl" id="stl" aria-roledescription="carousel" aria-labelledby="stl-h">' +
-        '<div class="stl-head"><h2 class="disp d3" id="stl-h">Shop <b>the look.</b></h2><p>Pick a dot to see the piece</p></div>' +
+        '<div class="stl-head"><h2 class="sr" id="stl-h">Shop the look</h2><p>Pick a dot to see the piece</p></div>' +
         '<div class="stl-track" id="stlTrack">' + D.looks.map(function (l, i) {
           return '<div class="stl-room" role="group" aria-roledescription="slide" aria-label="' + (i + 1) + " of " + D.looks.length + ": " + esc(l.name) + '"' + (i ? ' aria-hidden="true"' : "") + '><img src="' + l.img + '" alt="' + esc(l.alt) + '" loading="' + (i ? "lazy" : "eager") + '"><div class="hots">' +
             l.items.map(function (it, j) { var p = P[it.id]; return p ? '<button type="button" class="hot" style="left:' + it.x + "%;top:" + it.y + '%" data-look="' + i + '" data-item="' + j + '" aria-label="' + esc(p.full) + '" aria-expanded="false"' + (i ? ' tabindex="-1"' : "") + "></button>" : ""; }).join("") + "</div></div>";
@@ -79,14 +75,14 @@
       "</section>" +
       // certifications
       '<section class="sec" id="safe" aria-labelledby="safe-h"><div class="wrap">' +
-        '<div class="sec-head"><div><h2 class="disp d2 c-orange" id="safe-h">Made safe,<br><b>made to last.</b></h2></div><div class="stack" style="--s:14px;max-width:44ch"><p class="lede">Every dadada crib is built by hand from solid beech, then tested by the people whose job is to be picky.</p><a class="link" href="#/safety">How we test <span class="ar" aria-hidden="true">→</span></a></div></div>' +
+        '<div class="sec-head"><div><h2 class="disp d2 c-orange" id="safe-h">Made safe,<br><b>made to last.</b></h2></div><div class="stack" style="--s:14px;max-width:44ch"><p class="lede">Every dadada crib is built by hand from solid beech, then tested by the people whose job is to be picky.</p></div></div>' +
         '<ul class="certs-row" role="list">' + CERTS.map(function (c, i) { return '<li class="cert rv" style="--d:' + i * .07 + 's;' + CERTFX[i] + '"><div class="cert-arch"><img class="cert-pic" src="assets/' + c[0] + '.webp" alt="" style="object-position:' + c[1] + '" loading="lazy"><span class="cert-big" aria-hidden="true"><span class="w1">' + c[2].split(" ")[0] + '</span><img class="cert-cut" src="assets/' + (c[0] === "solid-bg" ? "cut-solid" : "cut-" + c[0]) + '.webp" alt="" style="object-position:' + c[1] + '" loading="lazy"><span class="w2">' + c[2].split(" ").slice(1).join(" ") + '</span></span></div><span class="cert-mark"><img src="assets/' + c[3] + '.png" alt=""></span><h3 class="label">' + c[4] + '</h3><p class="body small">' + c[5] + "</p></li>"; }).join("") + "</ul>" +
         '<p class="scroll-hint">Swipe for more ' + svg.right.replace("<svg", '<svg width="16" height="16"') + "</p>" +
       "</div></section>" +
       // nursery set offer
       '<section class="sec joined" aria-labelledby="set-h"><div class="wrap"><div class="setband rv">' +
         '<div class="setband-img"><img src="../img/mom-dr-soho.jpg" alt="An expecting mother folding tiny clothes into a Soho dresser beside a Soho crib" loading="lazy"></div>' +
-        '<div class="setband-copy"><span class="label" style="color:var(--lime)">Nursery sets</span><h2 class="disp d2" id="set-h">Crib + dresser.<br><b>15% off both.</b></h2><p class="lede">Pair any crib with any dresser and the saving comes off both pieces at checkout. Matching woods, one delivery.</p>' +
+        '<div class="setband-copy"><h2 class="disp d2" id="set-h" style="color:var(--lime)">Crib + dresser.<br><b>15% off both.</b></h2><p class="lede">Pair any crib with any dresser and the saving comes off both pieces at checkout. Matching woods, one delivery.</p>' +
         '<ul role="list"><li><span>Soho crib, Natural</span><span>' + money(soho.finishes[0].price) + "</span></li><li><span>Soho 5-drawer dresser</span><span>" + money(soho5.finishes[0].price) + '</span></li><li class="tot"><span>The Soho set</span><span><s>' + money(setSub) + "</s>" + money(setTot, true) + "</span></li></ul>" +
         '<div class="row" style="--s:14px"><button type="button" class="btn btn-lime" id="addSet">Add the Soho set</button><a class="btn btn-light" href="#/sets">See all sets</a></div></div>' +
       "</div></div></section>" +
@@ -149,7 +145,7 @@
     var mh = $("#mani", root);
     (function split(node) { [].slice.call(node.childNodes).forEach(function (n) { if (n.nodeType === 3) { var frag = document.createDocumentFragment(); n.textContent.split(/(\s+)/).forEach(function (part) { if (!part) return; if (/^\s+$/.test(part)) frag.appendChild(document.createTextNode(part)); else { var sp = document.createElement("span"); sp.className = "wd"; sp.textContent = part; frag.appendChild(sp); } }); n.parentNode.replaceChild(frag, n); } else if (n.nodeType === 1 && n.tagName !== "svg") split(n); }); })(mh);
     var words = $$(".wd", mh);
-    function lightWords() { var r = mh.getBoundingClientRect(), vh = innerHeight; var prog = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.25))); var lit = Math.ceil(prog * words.length); words.forEach(function (w, i) { w.classList.toggle("lit", i < lit); }); }
+    function lightWords() { var r = mh.getBoundingClientRect(), vh = innerHeight; var prog = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.25))); var lit = Math.ceil(prog * words.length); words.forEach(function (w, i) { w.classList.toggle("lit", i < lit); }); mh.classList.toggle("done", lit >= words.length); }
     addEventListener("scroll", lightWords, { passive: true }); lightWords();
     V8.onLeave(function () { removeEventListener("scroll", lightWords); });
 
