@@ -87,7 +87,7 @@
         '<div class="row" style="--s:14px"><button type="button" class="btn btn-lime" id="addSet">Add the Soho set</button><a class="btn btn-light" href="#/sets">See all sets</a></div></div>' +
       "</div></div></section>" +
       // 10,000 homes
-      '<section class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><h2 class="disp d2 c-orange" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for dadada.</b></h2></div>' +
+      '<section class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><h2 class="disp d2 c-orange" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for Dadada.</b></h2></div>' +
         '<div class="fan" id="fan" role="region" aria-roledescription="carousel" aria-label="Films and reviews from dadada homes">' + SEQ.map(function (r, i) {
           var p = P[r[3]];
           if (r[0] === "q") return '<figure class="fc q' + (i % 4 === 1 ? " lime" : "") + '" data-i="' + i + '">' + V8.stars(r[1]) + "<blockquote>“" + esc(r[2]) + '”</blockquote><figcaption><b>' + esc(r[4]) + '</b><a href="' + V8.url(p) + '" tabindex="-1">' + esc(p.full) + "</a></figcaption></figure>";
