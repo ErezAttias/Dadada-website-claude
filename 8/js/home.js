@@ -13,6 +13,24 @@
     ["toddler", "50% 40%", "Safety tested", "cert-astm", "CPSC and ASTM", "Meets U.S. mandatory crib standards, and exceeds CPSC, ASTM and Health Canada."],
     ["room-4", "30% 50%", "Best crib", "cert-babylist", "Babylist 2023", "The Soho crib was named Best Modern Crib by Babylist."]
   ];
+  // the V4 "happy homes" reel: films, photos and written reviews side by side
+  // [kind, media or stars, caption or quote, product id, by]
+  var ROOMS = [
+    ["v", "ugc-bliss", "Her nursery reveal", "bliss"],
+    ["q", 5, "Assembly was quick and straightforward, and the crib feels incredibly sturdy and well-made.", "soho", "Holly K."],
+    ["p", "ugc-soho-photo", "Almond milk + walnut", "soho"],
+    ["q", 5, "This is my second nursery using dadada Baby… The Jolly crib is even more beautiful in person.", "jolly", "Leah V. D."],
+    ["v", "ugc-soho-build", "Build day, dog supervising", "soho"],
+    ["q", 5, "I have this crib in walnut and absolutely love it! … I recommend to friends and will be repurchasing for next baby!", "bliss", "Jade L."],
+    ["p", "ugc-bliss6-photo", "Changing station, sorted", "bliss6"],
+    ["q", 5, "Even more beautiful in person than it looks online… the assembly instructions were clear and easy to follow.", "lalabig", "Chelsea"],
+    ["v", "ugc-jolly", "A jungle nursery", "jolly"],
+    ["q", 5, "I love that the crib grows with her as she gets older. The quality is great and it was super easy to put together.", "soho", "Megan"],
+    ["v", "ugc-soho-nursery", "Leopard walls, calm crib", "soho"],
+    ["q", 5, "We LOVE LOVE LOVE our LaLa crib. Absolutely beautiful, such high quality.", "lala", "Pamela L."],
+    ["v", "ugc-lala", "Unboxed and built together", "lala"],
+    ["q", 5, "We live in a small apartment, and I love how we managed to fit such a cute setup into our bedroom.", "spirit", "Aziza B."]
+  ];
   var FAN = [["ugc-jolly", -2, 30, -9, .82], ["ugc-bliss", -1, 12, -5, .92], ["ugc-soho-nursery", 0, 0, 0, 1], ["ugc-lala", 1, 12, 5, .92], ["ugc-soho-build", 2, 30, 9, .82]];
   var STAGES = [["stage-1", "62% 50%", "Newborn", "A safe space for all their first moments.", "Crib · included"], ["stage-2", "60% 50%", "Toddler", "One side comes down. Independence goes up.", "Conversion kit · $120"], ["stage-3", "52% 50%", "Day bed", "The crib years end. Their bed stays.", "Same kit · nothing extra"]];
 
@@ -72,7 +90,7 @@
       "</div></div></section>" +
       // 10,000 homes
       '<section class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><span class="label c-orange">Real nurseries</span><h2 class="disp d2" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for dadada.</b></h2><p class="lede">Filmed by the parents who built them. Tag <b>@dadadababyusa</b> to share yours.</p></div>' +
-        '<div class="fan" id="fan">' + FAN.map(function (f) { return '<div class="fc" style="--x:calc(' + f[1] + ' * clamp(120px, 15vw, 270px));--y:' + f[2] + "px;--r:" + f[3] + "deg;--s:" + f[4] + ";z-index:" + (10 - Math.abs(f[1])) + '"><video muted loop playsinline preload="none" poster="../img/' + f[0] + '.jpg" aria-hidden="true"><source data-src="../video/' + f[0] + '.webm" type="video/webm"><source data-src="../video/' + f[0] + '.mp4" type="video/mp4"></video></div>'; }).join("") + "</div>" +
+        '<div class="fan" id="fan">' + FAN.map(function (f) { var r = ROOMS.find(function (x) { return x[1] === f[0]; }); return '<button type="button" class="fc" data-reel="' + f[0] + '" aria-label="Watch: ' + esc(r ? r[2] : "a dadada nursery") + '" style="--x:calc(' + f[1] + ' * clamp(120px, 15vw, 270px));--y:' + f[2] + "px;--r:" + f[3] + "deg;--s:" + f[4] + ";z-index:" + (10 - Math.abs(f[1])) + '"><video muted loop playsinline preload="none" poster="../img/' + f[0] + '.jpg" aria-hidden="true"><source data-src="../video/' + f[0] + '.webm" type="video/webm"><source data-src="../video/' + f[0] + '.mp4" type="video/mp4"></video><span class="fc-play" aria-hidden="true"></span></button>'; }).join("") + "</div>" +
         '<div class="center mt-l" style="display:grid"><button type="button" class="btn btn-secondary sm" id="fanToggle" aria-pressed="false">Pause the films</button></div>' +
       "</section>" +
       // reviews
@@ -102,6 +120,48 @@
 
   function loadVideo(v) { if (v.dataset.loaded) return; $$("source", v).forEach(function (s) { s.src = s.dataset.src; }); v.load(); v.dataset.loaded = 1; }
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var reel;
+  function buildReel() {
+    var P = V8.P;
+    reel = document.createElement("div");
+    reel.className = "reel"; reel.id = "reel";
+    reel.setAttribute("role", "dialog"); reel.setAttribute("aria-modal", "true"); reel.setAttribute("aria-labelledby", "reelH");
+    reel.innerHTML = '<div class="reel-head wrap"><div><h2 class="disp d3" id="reelH">+10,000 <b>happy moms.</b></h2><p class="small"><b>' + V8.stars(5) + ' 4.9</b> from ' + TOTAL_REVIEWS + ' verified reviews. Real nurseries, filmed by the parents who set them up.</p></div>' +
+      '<div class="reel-nav"><button type="button" class="icon-btn" data-rv="-1" aria-label="Previous">' + V8.svg.left + '</button><button type="button" class="icon-btn" data-rv="1" aria-label="Next">' + V8.svg.right + '</button><button type="button" class="icon-btn" data-rclose aria-label="Close">' + V8.svg.x + "</button></div></div>" +
+      '<div class="reel-track" id="reelTrack">' + ROOMS.map(function (r, i) {
+        var p = P[r[3]], shop = '<a href="' + V8.url(p) + '">Shop ' + esc(p.name) + ' <span aria-hidden="true">→</span></a>';
+        if (r[0] === "q") return '<figure class="reel-it q' + (i % 8 === 3 ? " lime" : "") + '">' + V8.stars(r[1]) + "<blockquote>“" + esc(r[2]) + '”</blockquote><figcaption><b>' + esc(r[4]) + "</b>" + '<a href="' + V8.url(p) + '">on the ' + esc(p.full) + "</a></figcaption></figure>";
+        var media = r[0] === "v" ? '<video muted loop playsinline preload="none" poster="../img/' + r[1] + '.jpg" aria-label="' + esc(r[2]) + '"><source data-src="../video/' + r[1] + '.webm" type="video/webm"><source data-src="../video/' + r[1] + '.mp4" type="video/mp4"></video>' : '<img src="../img/' + r[1] + '.jpg" alt="' + esc(r[2]) + '" loading="lazy">';
+        return '<figure class="reel-it ' + r[0] + '" data-id="' + r[1] + '"><div class="ph">' + media + '</div><figcaption><span>' + esc(r[2]) + "</span>" + shop + "</figcaption></figure>";
+      }).join("") + "</div>" +
+      '<div class="reel-foot wrap"><span class="reel-prog"><i id="reelBar"></i></span></div>';
+    document.body.appendChild(reel);
+    var track = $("#reelTrack", reel), bar = $("#reelBar", reel), vids = $$("video", track);
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; if (e.isIntersecting && reel.classList.contains("open")) { loadVideo(v); v.play().catch(function () {}); } else v.pause(); }); }, { root: track, threshold: .6 });
+    vids.forEach(function (v) { io.observe(v); });
+    function prog() { var m = track.scrollWidth - track.clientWidth; bar.style.transform = "scaleX(" + (m > 0 ? Math.max(.06, track.scrollLeft / m) : 1) + ")"; }
+    track.addEventListener("scroll", prog, { passive: true });
+    reel.addEventListener("click", function (e) {
+      if (e.target.closest("[data-rclose]")) return V8.closeLayer();
+      var n = e.target.closest("[data-rv]"); if (n) track.scrollBy({ left: +n.dataset.rv * track.clientWidth * .7, behavior: reduce ? "auto" : "smooth" });
+      if (e.target.closest("a")) V8.closeLayer(true);
+    });
+    track.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); track.scrollBy({ left: (e.key === "ArrowRight" ? 1 : -1) * track.clientWidth * .5, behavior: "smooth" }); } });
+    track.tabIndex = 0;
+    reel.onclose = function () { vids.forEach(function (v) { v.pause(); }); };
+    reel._prog = prog;
+  }
+  function openReel(id) {
+    if (!reel) buildReel();
+    var track = $("#reelTrack", reel), it = $('[data-id="' + id + '"]', track);
+    V8.openLayer(reel, "[data-rclose]");
+    requestAnimationFrame(function () {
+      if (it) track.scrollLeft = it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2;
+      reel._prog();
+      var v = it && $("video", it); if (v) { loadVideo(v); v.play().catch(function () {}); }
+    });
+  }
 
   function homeAfter(root) {
     // hero film: load after first paint, show once it plays
@@ -170,6 +230,7 @@
     ft.addEventListener("click", function () { paused = !paused; playFan(!paused); ft.textContent = paused ? "Play the films" : "Pause the films"; ft.setAttribute("aria-pressed", paused); });
     function countUp() { var el = $("#homesN", root); if (!el || el.dataset.done || reduce) return; el.dataset.done = 1; var t0 = performance.now(); (function st(t) { var k = Math.min(1, (t - t0) / 1500), e = 1 - Math.pow(1 - k, 4); el.textContent = Math.round(10000 * e).toLocaleString("en-US"); if (k < 1) requestAnimationFrame(st); })(t0); }
     V8.onLeave(function () { fio.disconnect(); });
+    $$("[data-reel]", fan).forEach(function (b) { b.addEventListener("click", function () { openReel(b.dataset.reel); }); });
 
     // toddler stages: click, hover or auto-advance
     var stages = $$(".stage", root), imgs = $$("#todImgs img", root), si = 0, sti;

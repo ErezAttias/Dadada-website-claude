@@ -17,9 +17,11 @@
   V8.all = function () { return Object.keys(P).map(function (k) { return P[k]; }); };
   V8.minPrice = function (p) { return Math.min.apply(null, p.finishes.map(function (f) { return f.price; })); };
   V8.hasRange = function (p) { var a = p.finishes.map(function (f) { return f.price; }); return Math.min.apply(null, a) !== Math.max.apply(null, a); };
+  // card cutout: transparent product + where its top edge sits, so the word can peek out above it
+  V8.cut = function (img) { var n = img.split("/").pop().replace(/\.\w+$/, ""), t = window.DDCUT && DDCUT[n]; return t == null ? null : { src: "assets/cut/" + n + ".webp", top: t }; };
   V8.url = function (p) { return "#/p/" + p.id; };
   V8.word = function (p) { // the big hover word on product cards
-    var w = { soho: "3-in-1", bliss: "4-in-1", lala: "Soft lines", spirit: "8-in-1", jolly: "Rounded", merry: "Wavy", bliss6: "Six drawers", lalabig: "Big storage", soho5: "Mid-century", austin5: "Clean lines", cp: "Open shelves", austin3: "Compact", lalalittle: "Little", muse: "First bed", shelf: "Story time", tower: "Helper", fun: "Up to 12", kit: "Grows up" };
+    var w = { soho: "Retro", lala: "Calm", bliss: "Cozy", spirit: "Grow", jolly: "Curvy", merry: "Wavy", bliss6: "Soft", lalabig: "Roomy", soho5: "Mod", austin5: "Solid", cp: "Cubby", austin3: "Wide", lalalittle: "Petite", muse: "Play", shelf: "Story", tower: "Chef", fun: "Dream", kit: "Next" };
     return w[p.id] || p.name;
   };
   V8.icon = function (name) { return I[name] || ""; };
@@ -97,9 +99,9 @@
     var sw = p.finishes.length > 1 ? '<div class="swatches" role="radiogroup" aria-label="' + esc(p.full) + ' finish">' + p.finishes.map(function (x, i) {
       return '<button type="button" class="sw" role="radio" aria-checked="' + (i === f) + '" tabindex="' + (i === f ? 0 : -1) + '" aria-label="' + esc(x.name) + '" title="' + esc(x.name) + '" data-f="' + i + '" style="background:' + x.sw + '"></button>';
     }).join("") + "</div>" : "";
-    var scene = o.scene !== false && (p.scene || p.mom) ? '<img class="scene" src="' + (p.mom || p.scene) + '" alt="" loading="lazy">' : "";
+    var cut = V8.cut(fin.img), word = V8.word(p);
     return '<article class="pcard rv" data-id="' + p.id + '" data-f="' + f + '" style="--d:' + (o.d || 0) + 's">' +
-      '<div class="pcard-fig"><a class="pcard-media" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"><img class="cut" src="' + fin.img + '" alt="" loading="lazy">' + scene + "</a>" +
+      '<div class="pcard-fig"><a class="pcard-media' + (cut ? " has-cut" : "") + '" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"' + (cut ? ' style="--top:' + cut.top + '"' : "") + ">" + (cut ? '<span class="pcard-big" style="--len:' + word.length + '">' + esc(word) + "</span>" : "") + '<img class="cut" src="' + (cut ? cut.src : fin.img) + '" alt="" loading="lazy">' + "</a>" +
       '<div class="pcard-tags">' + tags.join("") + "</div>" +
       V8.wishBtn(p, "pcard-fav") +
       '<button type="button" class="btn btn-ink sm pcard-quick" data-quick="' + p.id + '">Quick view</button></div>' +
@@ -113,7 +115,9 @@
     var card = b.closest(".pcard"), p = P[card.dataset.id], f = +b.dataset.f;
     card.dataset.f = f;
     $$(".sw", card).forEach(function (x) { var on = x === b; x.setAttribute("aria-checked", on); x.tabIndex = on ? 0 : -1; });
-    $(".pcard-media .cut", card).src = p.finishes[f].img;
+    var c = V8.cut(p.finishes[f].img), m = $(".pcard-media", card);
+    $(".cut", m).src = c ? c.src : p.finishes[f].img;
+    if (c) m.style.setProperty("--top", c.top);
     $(".pcard-price", card).innerHTML = V8.priceHTML(p, f);
   });
   document.addEventListener("keydown", function (e) {
@@ -147,11 +151,12 @@
   function closeLayer(silent) {
     if (!openEl) return;
     openEl.classList.remove("open"); scrim.classList.remove("on"); document.body.style.overflow = "";
+    if (openEl.onclose) openEl.onclose();
     if (openEl.id === "sheet") $("#menuBtn").setAttribute("aria-expanded", "false");
     openEl = null;
     if (!silent && lastFocus && lastFocus.focus) lastFocus.focus();
   }
-  V8.closeLayer = closeLayer;
+  V8.closeLayer = closeLayer; V8.openLayer = openLayer;
   scrim.addEventListener("click", function () { closeLayer(); });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") { if (openEl) { e.preventDefault(); closeLayer(); } else if (mega.classList.contains("open")) { closeMega(); $("#megaBtn").focus(); } }
