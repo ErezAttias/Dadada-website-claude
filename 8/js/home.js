@@ -32,7 +32,7 @@
     ["q", 5, "We live in a small apartment, and I love how we managed to fit such a cute setup into our bedroom.", "spirit", "Aziza B."]
   ];
   // per-card size and line positions of the hover words, from the original V8 (--fs in px at a 314px card)
-  var CERTFX = ["--fs:117.9;--t:38%;--bt:70%", "--fs:117.9;--t:35%;--bt:72%", "--fs:98.2;--t:42%;--bt:70%", "--fs:98.2;--t:34%;--bt:72%", "--fs:147.3;--t:40%;--bt:70%"];
+  var CERTFX = ["--t:38%;--bt:70%", "--t:35%;--bt:72%", "--t:42%;--bt:70%", "--t:34%;--bt:72%", "--t:40%;--bt:70%"]; // line positions of the hover words; one size for all
   // the fan: film, review, film, review, film; the arrows move two steps so a film stays in the middle
   var SEQ = (function () { var v = ROOMS.filter(function (r) { return r[0] === "v"; }), q = ROOMS.filter(function (r) { return r[0] === "q"; }), out = []; v.forEach(function (x, i) { out.push(x, q[i % q.length]); }); return out; })();
   var STAGES = [["stage-1", "62% 50%", "Newborn", "A safe space for all their first moments.", "Crib · included"], ["stage-2", "60% 50%", "Toddler", "One side comes down. Independence goes up.", "Conversion kit · $120"], ["stage-3", "52% 50%", "Day bed", "The crib years end. Their bed stays.", "Same kit · nothing extra"]];

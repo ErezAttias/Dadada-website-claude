@@ -437,7 +437,9 @@ main:focus { outline: none; }
   .hero { min-height: calc(100svh - var(--strip-h)); align-items: stretch; }
   /* phones: headline centred in the space above the foot, never under it */
   .hero-in { grid-template-rows: 1fr auto; }
-  .hero h1 { position: static; transform: none; align-self: center; justify-self: start; width: auto; max-width: none; text-align: left; font-size: clamp(40px, 11vw, 56px); }
+  .hero h1 { position: static; transform: none; align-self: end; justify-self: start; width: auto; max-width: none; text-align: left; font-size: clamp(40px, 11vw, 56px); margin-bottom: clamp(24px, 4svh, 40px); }
+  /* deeper shade behind the headline and the copy at the bottom */
+  .hero::after { background: linear-gradient(180deg, rgba(8, 36, 65, .35) 0%, rgba(8, 36, 65, 0) 18%, rgba(8, 36, 65, .25) 38%, rgba(8, 36, 65, .62) 62%, rgba(8, 36, 65, .78) 100%); }
   .hero h1 .ln { white-space: normal; }
   .hero-foot { display: grid; gap: 16px; }
   .hero-foot .lede br { display: none; }
@@ -532,7 +534,7 @@ main:focus { outline: none; }
 .cert-arch { overflow: hidden; }
 .cert-pic { transition: transform 1.6s cubic-bezier(.16, 1, .3, 1), filter .6s ease; }
 .cert-big { position: absolute; inset: 0; pointer-events: none; }
-.cert-big > span { position: absolute; left: -10%; right: -10%; text-align: center; white-space: nowrap; font-weight: 800; font-size: calc(var(--fs) * .3185cqi); line-height: .8; letter-spacing: -0.05em; color: var(--blue); opacity: 0; transform: scale(.9); transition: opacity .45s ease, transform .9s cubic-bezier(.16, 1, .3, 1); }
+.cert-big > span { position: absolute; left: -10%; right: -10%; text-align: center; white-space: nowrap; font-weight: 800; font-size: calc(var(--fs, 98.2) * .3185cqi); line-height: .8; letter-spacing: -0.05em; color: var(--blue); opacity: 0; transform: scale(.9); transition: opacity .45s ease, transform .9s cubic-bezier(.16, 1, .3, 1); }
 .cert-big .w1 { top: var(--t); translate: 0 -60%; z-index: 1; }
 .cert-big .w2 { top: var(--bt); translate: 0 -40%; z-index: 3; }
 .cert-cut { z-index: 2; opacity: 0; transition: opacity .35s ease, transform 1.6s cubic-bezier(.16, 1, .3, 1); }
