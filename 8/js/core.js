@@ -103,10 +103,10 @@
     return '<article class="pcard rv" data-id="' + p.id + '" data-f="' + f + '" style="--d:' + (o.d || 0) + 's">' +
       '<div class="pcard-fig"><a class="pcard-media' + (cut ? " has-cut" : "") + '" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"' + (cut ? ' style="--top:' + cut.top + '"' : "") + ">" + (cut ? '<span class="pcard-big" style="--len:' + word.length + '">' + esc(word) + "</span>" : "") + '<img class="cut" src="' + (cut ? cut.src : fin.img) + '" alt="" loading="lazy">' + "</a>" +
       '<div class="pcard-tags">' + tags.join("") + "</div>" +
-      V8.wishBtn(p, "pcard-fav") +
-      '<button type="button" class="btn btn-ink sm pcard-quick" data-quick="' + p.id + '">Quick view</button></div>' +
+      V8.wishBtn(p, "pcard-fav") + "</div>" +
       '<div class="pcard-body"><div class="pcard-top"><h3 class="pcard-name"><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></h3>" + '<span class="pcard-price">' + V8.priceHTML(p, p.finishes.length > 1 && V8.hasRange(p) ? null : f) + "</span></div>" +
-      '<p class="pcard-kind">' + esc(p.kind) + (p.finishes.length > 1 ? " · " + p.finishes.length + " finishes" : "") + "</p>" + sw + "</div></article>";
+      '<p class="pcard-kind">' + esc(p.kind) + (p.finishes.length > 1 ? " · " + p.finishes.length + " finishes" : "") + "</p>" +
+      '<div class="pcard-foot">' + sw + '<button type="button" class="pcard-quick" data-quick="' + p.id + '">Quick view</button></div></div></article>';
   };
   // swatch clicks inside any card swap the image and price
   document.addEventListener("click", function (e) {
@@ -151,12 +151,11 @@
   function closeLayer(silent) {
     if (!openEl) return;
     openEl.classList.remove("open"); scrim.classList.remove("on"); document.body.style.overflow = "";
-    if (openEl.onclose) openEl.onclose();
     if (openEl.id === "sheet") $("#menuBtn").setAttribute("aria-expanded", "false");
     openEl = null;
     if (!silent && lastFocus && lastFocus.focus) lastFocus.focus();
   }
-  V8.closeLayer = closeLayer; V8.openLayer = openLayer;
+  V8.closeLayer = closeLayer;
   scrim.addEventListener("click", function () { closeLayer(); });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") { if (openEl) { e.preventDefault(); closeLayer(); } else if (mega.classList.contains("open")) { closeMega(); $("#megaBtn").focus(); } }

@@ -91,7 +91,8 @@
       // 10,000 homes
       '<section class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><span class="label c-orange">Real nurseries</span><h2 class="disp d2" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for dadada.</b></h2><p class="lede">Filmed by the parents who built them. Tag <b>@dadadababyusa</b> to share yours.</p></div>' +
         '<div class="fan" id="fan">' + FAN.map(function (f) { var r = ROOMS.find(function (x) { return x[1] === f[0]; }); return '<button type="button" class="fc" data-reel="' + f[0] + '" aria-label="Watch: ' + esc(r ? r[2] : "a dadada nursery") + '" style="--x:calc(' + f[1] + ' * clamp(120px, 15vw, 270px));--y:' + f[2] + "px;--r:" + f[3] + "deg;--s:" + f[4] + ";z-index:" + (10 - Math.abs(f[1])) + '"><video muted loop playsinline preload="none" poster="../img/' + f[0] + '.jpg" aria-hidden="true"><source data-src="../video/' + f[0] + '.webm" type="video/webm"><source data-src="../video/' + f[0] + '.mp4" type="video/mp4"></video><span class="fc-play" aria-hidden="true"></span></button>'; }).join("") + "</div>" +
-        '<div class="center mt-l" style="display:grid"><button type="button" class="btn btn-secondary sm" id="fanToggle" aria-pressed="false">Pause the films</button></div>' +
+        rowHTML() +
+        '<div class="center mt-l" style="display:grid" id="fanCtl"><button type="button" class="btn btn-secondary sm" id="fanToggle" aria-pressed="false">Pause the films</button></div>' +
       "</section>" +
       // reviews
       '<section class="sec" aria-labelledby="rev-h"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange" id="rev-h">Parents <b>say it best.</b></h2><div class="revs-sum"><b>4.9</b><span>' + V8.stars(5) + '<br><span class="small muted">' + TOTAL_REVIEWS + " reviews across our cribs</span></span></div></div>" +
@@ -121,46 +122,16 @@
   function loadVideo(v) { if (v.dataset.loaded) return; $$("source", v).forEach(function (s) { s.src = s.dataset.src; }); v.load(); v.dataset.loaded = 1; }
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  var reel;
-  function buildReel() {
+  // the films unfold in place into a row of films, photos and reviews (from V4)
+  function rowHTML() {
     var P = V8.P;
-    reel = document.createElement("div");
-    reel.className = "reel"; reel.id = "reel";
-    reel.setAttribute("role", "dialog"); reel.setAttribute("aria-modal", "true"); reel.setAttribute("aria-labelledby", "reelH");
-    reel.innerHTML = '<div class="reel-head wrap"><div><h2 class="disp d3" id="reelH">+10,000 <b>happy moms.</b></h2><p class="small"><b>' + V8.stars(5) + ' 4.9</b> from ' + TOTAL_REVIEWS + ' verified reviews. Real nurseries, filmed by the parents who set them up.</p></div>' +
-      '<div class="reel-nav"><button type="button" class="icon-btn" data-rv="-1" aria-label="Previous">' + V8.svg.left + '</button><button type="button" class="icon-btn" data-rv="1" aria-label="Next">' + V8.svg.right + '</button><button type="button" class="icon-btn" data-rclose aria-label="Close">' + V8.svg.x + "</button></div></div>" +
-      '<div class="reel-track" id="reelTrack">' + ROOMS.map(function (r, i) {
-        var p = P[r[3]], shop = '<a href="' + V8.url(p) + '">Shop ' + esc(p.name) + ' <span aria-hidden="true">→</span></a>';
-        if (r[0] === "q") return '<figure class="reel-it q' + (i % 8 === 3 ? " lime" : "") + '">' + V8.stars(r[1]) + "<blockquote>“" + esc(r[2]) + '”</blockquote><figcaption><b>' + esc(r[4]) + "</b>" + '<a href="' + V8.url(p) + '">on the ' + esc(p.full) + "</a></figcaption></figure>";
+    return '<div class="hrow" id="hrow" hidden><div class="wrap hrow-bar"><span class="small muted"><b>' + V8.stars(5) + ' 4.9</b> · ' + TOTAL_REVIEWS + ' verified reviews</span><div class="hrow-nav"><button type="button" class="icon-btn" data-rv="-1" aria-label="Previous" aria-controls="hrowTrack">' + V8.svg.left + '</button><button type="button" class="icon-btn" data-rv="1" aria-label="Next" aria-controls="hrowTrack">' + V8.svg.right + '</button><button type="button" class="btn btn-secondary sm" id="hrowFold">Fold the films</button></div></div>' +
+      '<div class="hrow-track" id="hrowTrack" tabindex="0" aria-label="Films and reviews from dadada homes">' + ROOMS.map(function (r, i) {
+        var p = P[r[3]];
+        if (r[0] === "q") return '<figure class="hrow-it q' + (i % 8 === 3 ? " lime" : "") + '">' + V8.stars(r[1]) + "<blockquote>“" + esc(r[2]) + '”</blockquote><figcaption><b>' + esc(r[4]) + '</b><a href="' + V8.url(p) + '">on the ' + esc(p.full) + "</a></figcaption></figure>";
         var media = r[0] === "v" ? '<video muted loop playsinline preload="none" poster="../img/' + r[1] + '.jpg" aria-label="' + esc(r[2]) + '"><source data-src="../video/' + r[1] + '.webm" type="video/webm"><source data-src="../video/' + r[1] + '.mp4" type="video/mp4"></video>' : '<img src="../img/' + r[1] + '.jpg" alt="' + esc(r[2]) + '" loading="lazy">';
-        return '<figure class="reel-it ' + r[0] + '" data-id="' + r[1] + '"><div class="ph">' + media + '</div><figcaption><span>' + esc(r[2]) + "</span>" + shop + "</figcaption></figure>";
-      }).join("") + "</div>" +
-      '<div class="reel-foot wrap"><span class="reel-prog"><i id="reelBar"></i></span></div>';
-    document.body.appendChild(reel);
-    var track = $("#reelTrack", reel), bar = $("#reelBar", reel), vids = $$("video", track);
-    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = e.target; if (e.isIntersecting && reel.classList.contains("open")) { loadVideo(v); v.play().catch(function () {}); } else v.pause(); }); }, { root: track, threshold: .6 });
-    vids.forEach(function (v) { io.observe(v); });
-    function prog() { var m = track.scrollWidth - track.clientWidth; bar.style.transform = "scaleX(" + (m > 0 ? Math.max(.06, track.scrollLeft / m) : 1) + ")"; }
-    track.addEventListener("scroll", prog, { passive: true });
-    reel.addEventListener("click", function (e) {
-      if (e.target.closest("[data-rclose]")) return V8.closeLayer();
-      var n = e.target.closest("[data-rv]"); if (n) track.scrollBy({ left: +n.dataset.rv * track.clientWidth * .7, behavior: reduce ? "auto" : "smooth" });
-      if (e.target.closest("a")) V8.closeLayer(true);
-    });
-    track.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); track.scrollBy({ left: (e.key === "ArrowRight" ? 1 : -1) * track.clientWidth * .5, behavior: "smooth" }); } });
-    track.tabIndex = 0;
-    reel.onclose = function () { vids.forEach(function (v) { v.pause(); }); };
-    reel._prog = prog;
-  }
-  function openReel(id) {
-    if (!reel) buildReel();
-    var track = $("#reelTrack", reel), it = $('[data-id="' + id + '"]', track);
-    V8.openLayer(reel, "[data-rclose]");
-    requestAnimationFrame(function () {
-      if (it) track.scrollLeft = it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2;
-      reel._prog();
-      var v = it && $("video", it); if (v) { loadVideo(v); v.play().catch(function () {}); }
-    });
+        return '<figure class="hrow-it ' + r[0] + '" data-id="' + r[1] + '"><div class="ph">' + media + '</div><figcaption><span>' + esc(r[2]) + '</span><a href="' + V8.url(p) + '">Shop ' + esc(p.name) + ' <span aria-hidden="true">→</span></a></figcaption></figure>';
+      }).join("") + '</div><div class="wrap hrow-foot"><span class="hrow-prog"><i id="hrowBar"></i></span></div></div>';
   }
 
   function homeAfter(root) {
@@ -222,15 +193,75 @@
     $("#addSet", root).addEventListener("click", function () { V8.add("soho", 0, 1, { silent: true }); V8.add("soho5", 0, 1); });
 
     // homes: fan opens and films play only while on screen
-    var fan = $("#fan", root), fanVids = $$("video", fan), paused = reduce, ft = $("#fanToggle", root);
-    function playFan(on) { fanVids.forEach(function (v) { if (on) { loadVideo(v); v.play().catch(function () {}); } else v.pause(); }); }
+    var fan = $("#fan", root), paused = reduce, ft = $("#fanToggle", root);
+    function playFan(on) { $$("video", fan).forEach(function (v) { if (on) { loadVideo(v); v.play().catch(function () {}); } else v.pause(); }); }
     var fio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { fan.classList.add("in"); countUp(); if (!paused) playFan(true); } else playFan(false); }); }, { threshold: .25 });
     fio.observe(fan);
     ft.textContent = paused ? "Play the films" : "Pause the films"; ft.setAttribute("aria-pressed", paused);
     ft.addEventListener("click", function () { paused = !paused; playFan(!paused); ft.textContent = paused ? "Play the films" : "Pause the films"; ft.setAttribute("aria-pressed", paused); });
     function countUp() { var el = $("#homesN", root); if (!el || el.dataset.done || reduce) return; el.dataset.done = 1; var t0 = performance.now(); (function st(t) { var k = Math.min(1, (t - t0) / 1500), e = 1 - Math.pow(1 - k, 4); el.textContent = Math.round(10000 * e).toLocaleString("en-US"); if (k < 1) requestAnimationFrame(st); })(t0); }
     V8.onLeave(function () { fio.disconnect(); });
-    $$("[data-reel]", fan).forEach(function (b) { b.addEventListener("click", function () { openReel(b.dataset.reel); }); });
+    var row = $("#hrow", root), track = $("#hrowTrack", root), bar = $("#hrowBar", root), ctl = $("#fanCtl", root);
+    // row films play while on screen; the slot may hold the fan's own film (moved in on unfold)
+    var rio = new IntersectionObserver(function (es) { es.forEach(function (e) { var v = $("video", e.target); if (!v) return; if (e.isIntersecting && !row.hidden) { loadVideo(v); v.play().catch(function () {}); } else v.pause(); }); }, { threshold: .6 });
+    $$(".hrow-it.v .ph", track).forEach(function (ph) { rio.observe(ph); });
+    function swapFilms(intoRow) {
+      $$("[data-reel]", fan).forEach(function (b) {
+        var ph = $('[data-id="' + b.dataset.reel + '"] .ph', track); if (!ph) return;
+        var fv = intoRow ? $("video", b) : $("video", ph), rv = intoRow ? $("video", ph) : null;
+        if (intoRow) { b._own = rv; ph.replaceChild(fv, rv); b._film = fv; }
+        else if (b._film) { ph.replaceChild(b._own, b._film); b.insertBefore(b._film, b.firstChild); b._film = null; }
+      });
+    }
+    V8.onLeave(function () { rio.disconnect(); });
+    function prog() { var m = track.scrollWidth - track.clientWidth; bar.style.transform = "scaleX(" + (m > 0 ? Math.max(.06, track.scrollLeft / m) : 1) + ")"; }
+    track.addEventListener("scroll", prog, { passive: true });
+    row.addEventListener("click", function (e) { var n = e.target.closest("[data-rv]"); if (n) track.scrollBy({ left: +n.dataset.rv * track.clientWidth * .6, behavior: reduce ? "auto" : "smooth" }); });
+    track.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); track.scrollBy({ left: (e.key === "ArrowRight" ? 1 : -1) * track.clientWidth * .5, behavior: "smooth" }); } });
+    function unfold(id) {
+      // remember where each film sits in the fan, swap the fan for the row, then fly each film to its slot
+      var from = {};
+      $$("[data-reel]", fan).forEach(function (b) { from[b.dataset.reel] = b.getBoundingClientRect(); });
+      var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
+      swapFilms(true);
+      fan.hidden = true; ctl.hidden = true; row.hidden = false;
+      window.scrollBy({ top: head.getBoundingClientRect().top - y0, behavior: "instant" }); // keep the heading where it was
+      var it = $('[data-id="' + id + '"]', track);
+      track.scrollLeft = it ? it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2 : 0;
+      prog();
+      var c = it ? it.getBoundingClientRect() : null;
+      $$(".hrow-it", track).forEach(function (el) {
+        var ph = $(".ph", el), f = from[el.dataset.id], r = (ph || el).getBoundingClientRect();
+        if (reduce) return;
+        if (f && ph) {
+          ph.style.transition = "none"; ph.style.transformOrigin = "0 0";
+          ph.style.transform = "translate(" + (f.left - r.left) + "px," + (f.top - r.top) + "px) scale(" + f.width / r.width + "," + f.height / r.height + ")";
+          el.classList.add("flying");
+        } else {
+          var d = c ? Math.min(6, Math.abs(r.left - c.left) / 300) : 0;
+          el.style.setProperty("--d", (0.12 + d * 0.06) + "s"); el.classList.add("enter");
+        }
+      });
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        $$(".hrow-it", track).forEach(function (el) { var ph = $(".ph", el); if (el.classList.contains("flying")) { ph.style.transition = ""; ph.style.transform = ""; } el.classList.remove("enter"); el.classList.add("shown"); });
+        setTimeout(function () { $$(".hrow-it", track).forEach(function (el) { el.classList.remove("flying"); }); }, 900);
+      }); });
+      var v = it && $("video", it); if (v) { loadVideo(v); v.muted = true; v.play().catch(function () {}); }
+      setTimeout(function () { track.focus({ preventScroll: true }); }, 50);
+    }
+    function fold() {
+      var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
+      $$("video", track).forEach(function (v) { v.pause(); });
+      swapFilms(false);
+      row.hidden = true; fan.hidden = false; ctl.hidden = false;
+      window.scrollBy({ top: head.getBoundingClientRect().top - y0, behavior: "instant" });
+      $$(".hrow-it", track).forEach(function (el) { el.classList.remove("shown"); });
+      fan.classList.remove("in"); void fan.offsetWidth; fan.classList.add("in");
+      if (!paused) playFan(true);
+      var first = $("[data-reel]", fan); if (first) first.focus({ preventScroll: true });
+    }
+    $$("[data-reel]", fan).forEach(function (b) { b.addEventListener("click", function () { unfold(b.dataset.reel); }); });
+    $("#hrowFold", root).addEventListener("click", fold);
 
     // toddler stages: click, hover or auto-advance
     var stages = $$(".stage", root), imgs = $$("#todImgs img", root), si = 0, sti;
