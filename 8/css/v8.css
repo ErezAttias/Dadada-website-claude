@@ -437,7 +437,7 @@ main:focus { outline: none; }
   .hero { min-height: calc(100svh - var(--strip-h)); align-items: stretch; }
   /* phones: headline centred in the space above the foot, never under it */
   .hero-in { grid-template-rows: 1fr auto; }
-  .hero h1 { position: static; transform: none; align-self: center; justify-self: center; width: auto; max-width: none; font-size: clamp(40px, 11vw, 56px); }
+  .hero h1 { position: static; transform: none; align-self: center; justify-self: start; width: auto; max-width: none; text-align: left; font-size: clamp(40px, 11vw, 56px); }
   .hero h1 .ln { white-space: normal; }
   .hero-foot { display: grid; gap: 16px; }
   .hero-foot .lede br { display: none; }
