@@ -45,11 +45,10 @@
       // hero
       '<section class="hero" aria-label="Introduction">' +
         '<div class="hero-media"><img src="../img/mom-first.jpg" alt="" fetchpriority="high"><video id="heroVid" muted loop playsinline preload="none" poster="../img/mom-first.jpg" aria-label="A dadada film: expectant mothers at home with their cribs"><source data-src="../video/mom.webm" type="video/webm"><source data-src="../video/mom.mp4" type="video/mp4"></video></div>' +
-        '<button type="button" class="vid-btn" id="vidBtn" aria-label="Pause the film" hidden>' + svg.pause + "</button>" +
         '<div class="wrap hero-in">' +
           '<h1 class="disp d1"><span class="ln">Bring your <b>personality.</b></span><span class="ln">We’ll bring <b>the crib.</b></span></h1>' +
-          '<div class="hero-foot"><p class="lede">Solid beech cribs, made in Italy in family workshops. Designed to look as good as the home around them.</p>' +
-          '<div class="hero-cta"><span class="rating">' + V8.stars(5) + "4.9 · " + TOTAL_REVIEWS + ' reviews</span><a class="btn btn-lime lg" href="#/cribs">Shop cribs <span class="ar" aria-hidden="true">→</span></a><a class="btn btn-light lg" href="#/quiz">Find your fit</a></div></div>' +
+          '<p class="lede">Solid beech cribs, made in Italy in family workshops.<br>Designed to look as good as the home around them.</p>' +
+          '<a class="btn btn-lime lg" href="#/cribs">Shop cribs <span class="ar" aria-hidden="true">→</span></a>' +
         "</div>" +
       "</section>" +
       // retailers
@@ -59,12 +58,12 @@
       // best sellers
       '<section class="sec" id="best" aria-labelledby="best-h"><div class="wrap">' +
         '<div class="sec-head"><h2 class="sr" id="best-h">Shop dadada</h2><div class="modes" role="tablist" aria-label="Browse by"><button type="button" role="tab" class="disp d2" aria-selected="true" aria-controls="bestPanel" data-mode="best">Our <b>best sellers.</b></button><button type="button" role="tab" class="disp d2" aria-selected="false" aria-controls="catPanel" data-mode="cats" tabindex="-1">Shop by <b>category.</b></button></div>' +
-        '<div class="row" style="--s:18px" id="bestCtl"><div class="seg" role="tablist" aria-label="Best sellers by category" id="bestTabs"><button type="button" role="tab" aria-selected="true" data-tab="cribs">Cribs</button><button type="button" role="tab" aria-selected="false" data-tab="dressers">Dressers</button><button type="button" role="tab" aria-selected="false" data-tab="kids">Kids</button></div><a class="link" id="bestAll" href="#/cribs">Shop all cribs</a></div></div>' +
+        '<div class="row" style="--s:18px" id="bestCtl"><div class="seg" role="tablist" aria-label="Best sellers by category" id="bestTabs"><button type="button" role="tab" aria-selected="true" data-tab="cribs">Cribs</button><button type="button" role="tab" aria-selected="false" data-tab="dressers">Dressers</button><button type="button" role="tab" aria-selected="false" data-tab="kids">Kids</button></div></div></div>' +
         '<div id="bestPanel" role="tabpanel"><div class="pgrid" id="bestGrid">' + tabCards("cribs") + "</div></div>" +
         '<div id="catPanel" role="tabpanel" hidden><div class="pgrid">' + CATS.map(function (c) { var ps = c[3] ? V8.list(c[3]) : null; return '<a class="ccard" href="#/' + c[0] + '"><span class="ccard-im"><img src="../img/' + c[2] + '" alt="" loading="lazy"></span><span class="ccard-body"><span class="ccard-kick">' + (ps ? ps.length + (ps.length === 1 ? " piece" : " pieces") : "Crib + dresser") + '</span><b class="ccard-name">' + c[1] + '</b><span class="ccard-sub">' + (ps ? "From " + money(Math.min.apply(null, ps.map(V8.minPrice))) : "15% off both") + ' <span aria-hidden="true">→</span></span></span></a>'; }).join("") + "</div></div>" +
       "</div></section>" +
       // promises
-      '<section class="sec tight" aria-label="Our promises"><div class="wrap"><ul class="promise" role="list">' +
+      '<section class="sec tight promise-sec" aria-label="Our promises"><div class="wrap"><ul class="promise" role="list">' +
         [[svg.truck, "Free shipping", "To the contiguous 48 states"], [svg.box, "Ships in 1 business day", "From our U.S. warehouse"], [svg.back, "14-day returns", "From delivery, in new condition"], [svg.shield, "2-year crib warranty", "Built to be handed down"]].map(function (x, i) { return '<li class="rv" style="--d:' + i * .06 + 's"><span class="pi">' + x[0] + "</span><span><b>" + x[1] + "</b><span>" + x[2] + "</span></span></li>"; }).join("") +
       "</ul></div></section>" +
       // shop the look
@@ -138,13 +137,12 @@
 
   function homeAfter(root) {
     // hero film: load after first paint, show once it plays
-    var vid = $("#heroVid", root), vb = $("#vidBtn", root);
+    var vid = $("#heroVid", root);
     if (!reduce && !(navigator.connection && navigator.connection.saveData)) {
       var startHero = function () { loadVideo(vid); vid.play().catch(function () {}); };
       if ("requestIdleCallback" in window) requestIdleCallback(startHero, { timeout: 1500 }); else setTimeout(startHero, 600);
     }
-    vid.addEventListener("playing", function () { vid.classList.add("on"); vb.hidden = false; });
-    vb.addEventListener("click", function () { if (vid.paused) { vid.play(); vb.innerHTML = svg.pause; vb.setAttribute("aria-label", "Pause the film"); } else { vid.pause(); vb.innerHTML = svg.play; vb.setAttribute("aria-label", "Play the film"); } });
+    vid.addEventListener("playing", function () { vid.classList.add("on"); });
 
     // manifesto: words light up as it scrolls through
     var mh = $("#mani", root);
@@ -155,9 +153,9 @@
     V8.onLeave(function () { removeEventListener("scroll", lightWords); });
 
     // best sellers tabs
-    var tabs = $("#bestTabs", root), grid = $("#bestGrid", root), all = $("#bestAll", root);
+    var tabs = $("#bestTabs", root), grid = $("#bestGrid", root);
     var tabBtns = $$("[role=tab]", tabs);
-    function pick(b) { tabBtns.forEach(function (t) { var on = t === b; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; }); grid.innerHTML = tabCards(b.dataset.tab); V8.reveal(grid); all.href = "#/" + b.dataset.tab; all.textContent = "Shop all " + (b.dataset.tab === "kids" ? "toddler & kids" : b.dataset.tab); }
+    function pick(b) { tabBtns.forEach(function (t) { var on = t === b; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1; }); grid.innerHTML = tabCards(b.dataset.tab); V8.reveal(grid); }
     tabBtns.forEach(function (b, i) { b.tabIndex = i ? -1 : 0; b.addEventListener("click", function () { pick(b); }); b.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); var n = tabBtns[(i + (e.key === "ArrowRight" ? 1 : tabBtns.length - 1)) % tabBtns.length]; n.focus(); pick(n); } }); });
 
     // the section switches between best sellers and categories
@@ -230,35 +228,33 @@
     row.addEventListener("click", function (e) { var n = e.target.closest("[data-rv]"); if (n) track.scrollBy({ left: +n.dataset.rv * track.clientWidth * .6, behavior: reduce ? "auto" : "smooth" }); });
     track.addEventListener("keydown", function (e) { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); track.scrollBy({ left: (e.key === "ArrowRight" ? 1 : -1) * track.clientWidth * .5, behavior: "smooth" }); } });
     function unfold(id) {
-      // remember where each film sits in the fan, swap the fan for the row, then fly each film to its slot
+      // remember where each film sits in the fan, swap the fan for the row, then fly each film to its slot.
+      // The row is fully visible without the animation; the animation only plays on top of it.
       var from = {};
       $$("[data-reel]", fan).forEach(function (b) { from[b.dataset.reel] = b.getBoundingClientRect(); });
       var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
       swapFilms(true);
       fan.hidden = true; ctl.hidden = true; row.hidden = false;
-      window.scrollBy({ top: head.getBoundingClientRect().top - y0, behavior: "instant" }); // keep the heading where it was
+      try { window.scrollBy(0, head.getBoundingClientRect().top - y0); } catch (e) {} // keep the heading where it was
       var it = $('[data-id="' + id + '"]', track);
-      track.scrollLeft = it ? it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2 : 0;
+      if (it) { var tr = track.getBoundingClientRect(), ir = it.getBoundingClientRect(); track.scrollLeft += ir.left - tr.left - (tr.width - ir.width) / 2; }
       prog();
-      var c = it ? it.getBoundingClientRect() : null;
-      $$(".hrow-it", track).forEach(function (el) {
-        var ph = $(".ph", el), f = from[el.dataset.id], r = (ph || el).getBoundingClientRect();
-        if (reduce) return;
-        if (f && ph) {
-          ph.style.transition = "none"; ph.style.transformOrigin = "0 0";
-          ph.style.transform = "translate(" + (f.left - r.left) + "px," + (f.top - r.top) + "px) scale(" + f.width / r.width + "," + f.height / r.height + ")";
-          el.classList.add("flying");
-        } else {
-          var d = c ? Math.min(6, Math.abs(r.left - c.left) / 300) : 0;
-          el.style.setProperty("--d", (0.12 + d * 0.06) + "s"); el.classList.add("enter");
-        }
-      });
-      requestAnimationFrame(function () { requestAnimationFrame(function () {
-        $$(".hrow-it", track).forEach(function (el) { var ph = $(".ph", el); if (el.classList.contains("flying")) { ph.style.transition = ""; ph.style.transform = ""; } el.classList.remove("enter"); el.classList.add("shown"); });
-        setTimeout(function () { $$(".hrow-it", track).forEach(function (el) { el.classList.remove("flying"); }); }, 900);
-      }); });
-      var v = it && $("video", it); if (v) { loadVideo(v); v.muted = true; v.play().catch(function () {}); }
-      setTimeout(function () { track.focus({ preventScroll: true }); }, 50);
+      var v = it && $("video", it); if (v) { loadVideo(v); v.muted = true; var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); }
+      if (reduce || !Element.prototype.animate) return;
+      try {
+        var c = it ? it.getBoundingClientRect() : null;
+        $$(".hrow-it", track).forEach(function (el) {
+          var ph = $(".ph", el), f = from[el.dataset.id], r = (ph || el).getBoundingClientRect();
+          if (r.right < -200 || r.left > innerWidth + 200) return;
+          if (f && ph && r.width && r.height) {
+            ph.animate([{ transformOrigin: "0 0", transform: "translate(" + (f.left - r.left) + "px," + (f.top - r.top) + "px) scale(" + f.width / r.width + "," + f.height / r.height + ")" }, { transformOrigin: "0 0", transform: "none" }], { duration: 850, easing: "cubic-bezier(.2,.7,.2,1)" });
+            var cap = $("figcaption", el); if (cap) cap.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 500, fill: "backwards" });
+          } else {
+            var d = c ? Math.min(6, Math.abs(r.left - c.left) / 300) : 0;
+            el.animate([{ opacity: 0, transform: "translateY(28px) scale(.96)" }, { opacity: 1, transform: "none" }], { duration: 700, delay: 120 + d * 60, easing: "cubic-bezier(.2,.7,.2,1)", fill: "backwards" });
+          }
+        });
+      } catch (e) {}
     }
     function fold() {
       var head = $(".homes-head", root), y0 = head.getBoundingClientRect().top;
@@ -266,7 +262,6 @@
       swapFilms(false);
       row.hidden = true; fan.hidden = false; ctl.hidden = false;
       window.scrollBy({ top: head.getBoundingClientRect().top - y0, behavior: "instant" });
-      $$(".hrow-it", track).forEach(function (el) { el.classList.remove("shown"); });
       fan.classList.remove("in"); void fan.offsetWidth; fan.classList.add("in");
       if (!paused) playFan(true);
       var first = $("[data-reel]", fan); if (first) first.focus({ preventScroll: true });
