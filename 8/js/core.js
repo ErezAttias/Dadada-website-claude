@@ -249,7 +249,7 @@
   var smItem = function (p) { return '<li><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></li>"; };
   $("#smCribs").innerHTML = V8.list("crib").map(smItem).join("") + '<li><a class="all" href="#/cribs">Shop all cribs →</a></li>';
   $("#smDressers").innerHTML = V8.list("dresser").map(smItem).join("") + '<li><a class="all" href="#/dressers">Shop all dressers →</a></li>';
-  $("#smKids").innerHTML = V8.list("kids").concat(V8.list("kit")).map(smItem).join("") + '<li><a class="all" href="#/kids">Shop toddler &amp; kids →</a></li>';
+  $("#smKids").innerHTML = V8.list("kids").concat([P.kit]).map(smItem).join("") + '<li><a class="all" href="#/kids">Shop toddler &amp; kids →</a></li>';
   var mega = $("#mega"), megaBtn = $("#megaBtn"), megaT;
   function openMega() { clearTimeout(megaT); mega.classList.add("open"); megaBtn.setAttribute("aria-expanded", "true"); $(".hdr").classList.add("mega-on"); }
   function closeMega() { mega.classList.remove("open"); megaBtn.setAttribute("aria-expanded", "false"); $(".hdr").classList.remove("mega-on"); }

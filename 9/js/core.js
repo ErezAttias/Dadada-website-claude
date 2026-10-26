@@ -242,22 +242,25 @@
   $("#searchBtn").innerHTML = I.search; $(".t-acct").insertAdjacentHTML("afterbegin", I.account); $(".t-wish").insertAdjacentHTML("afterbegin", I.heart); $("#bagBtn").insertAdjacentHTML("afterbegin", I.bag);
   // Shop menu (V7 layout): big categories on the left, a room photo for the one in focus on the right
   var MG = { cribs: ["mom-soho", "Shop all cribs"], dressers: ["mom-dr-soho", "Shop all dressers"], kids: ["mom-kids", "Shop toddler & kids"], sets: ["mom-dr-cp", "Shop all sets"] };
-  // every option of the category in focus is listed next to it
+  // every model of the category in focus, as pictures, next to the category names
+  var mgPic = function (p) { var f = p.finishes[0], room = /^media\/ks-/.test(f.img); return '<img' + (room ? ' class="ph"' : "") + ' src="' + f.img + '" alt="" loading="lazy">'; };
+  var mgTile = function (href, pic, name, sub, price) { return '<li><a class="mg-tile" href="' + href + '"><span class="mg-pic">' + pic + "</span><b>" + esc(name) + "</b><small>" + esc(sub) + (price ? " · " + price : "") + "</small></a></li>"; };
   var MGL = {
-    cribs: V8.list("crib").map(function (p) { return [V8.url(p), p.full, p.kind.split(" ")[0], V8.minPrice(p)]; }).concat([["#/compare", "Compare cribs", "", 0]]),
-    dressers: V8.list("dresser").map(function (p) { return [V8.url(p), p.full, p.kind.replace(" dresser", ""), V8.minPrice(p)]; }),
-    kids: V8.list("kids").concat(V8.list("kit")).map(function (p) { return [V8.url(p), p.full, p.kind, V8.minPrice(p)]; }),
-    sets: Object.keys(D.sets).map(function (c) { var cr = P[c], dr = P[D.sets[c]]; return ["#/sets", cr.name + " set", "Crib + " + dr.kind.replace(" dresser", " dresser").toLowerCase(), Math.round((V8.minPrice(cr) + V8.minPrice(dr)) * .85)]; })
+    cribs: V8.list("crib").map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind.split(" ")[0], "from " + money(V8.minPrice(p))); }),
+    dressers: V8.list("dresser").map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind.replace(" dresser", ""), "from " + money(V8.minPrice(p))); }),
+    kids: V8.list("kids").concat([P.kit]).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind, money(V8.minPrice(p))); }),
+    sets: Object.keys(D.sets).map(function (c) { var cr = P[c], dr = P[D.sets[c]]; return mgTile("#/sets", '<span class="mg-pair">' + mgPic(cr) + mgPic(dr) + "</span>", cr.name + " set", cr.name + " crib + " + dr.name + " dresser", "from " + money(Math.round((V8.minPrice(cr) + V8.minPrice(dr)) * .85))); })
   };
-  $("#mgLists").innerHTML = Object.keys(MGL).map(function (k) { return '<ul class="mg-list" data-c="' + k + '"' + (k === "cribs" ? "" : " hidden") + ">" + MGL[k].map(function (r) { return '<li><a href="' + r[0] + '"><span><b>' + esc(r[1]) + "</b>" + (r[2] ? "<small>" + esc(r[2]) + "</small>" : "") + "</span>" + (r[3] ? '<span class="pr">' + (k === "sets" ? "from " : "") + money(r[3]) + "</span>" : "") + "</a></li>"; }).join("") + "</ul>"; }).join("");
+  var MG = { cribs: "Shop all cribs", dressers: "Shop all dressers", kids: "Shop toddler & kids", sets: "Shop all sets" };
+  $("#mgLists").innerHTML = Object.keys(MGL).map(function (k) { return '<ul class="mg-grid" data-c="' + k + '" data-n="' + MGL[k].length + '"' + (k === "cribs" ? "" : " hidden") + ">" + MGL[k].join("") + "</ul>"; }).join("");
   $$(".mg-cat").forEach(function (a) {
-    function focusCat() { $$(".mg-cat").forEach(function (x) { x.classList.toggle("on", x === a); }); $$(".mg-list").forEach(function (l) { l.hidden = l.dataset.c !== a.dataset.c; }); var m = MG[a.dataset.c]; $("#mgImg").src = "media/" + m[0] + ".webp"; $("#mgImgA").href = a.getAttribute("href"); $("#mgAll").href = a.getAttribute("href"); $("#mgAll").innerHTML = m[1] + ' <span aria-hidden="true">→</span>'; }
+    function focusCat() { $$(".mg-cat").forEach(function (x) { x.classList.toggle("on", x === a); }); $$(".mg-grid").forEach(function (l) { l.hidden = l.dataset.c !== a.dataset.c; }); $("#mgAll").href = a.getAttribute("href"); $("#mgAll").innerHTML = MG[a.dataset.c] + ' <span aria-hidden="true">→</span>'; }
     a.addEventListener("mouseenter", focusCat); a.addEventListener("focus", focusCat);
   });
   var smItem = function (p) { return '<li><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></li>"; };
   $("#smCribs").innerHTML = V8.list("crib").map(smItem).join("") + '<li><a class="all" href="#/cribs">Shop all cribs →</a></li>';
   $("#smDressers").innerHTML = V8.list("dresser").map(smItem).join("") + '<li><a class="all" href="#/dressers">Shop all dressers →</a></li>';
-  $("#smKids").innerHTML = V8.list("kids").concat(V8.list("kit")).map(smItem).join("") + '<li><a class="all" href="#/kids">Shop toddler &amp; kids →</a></li>';
+  $("#smKids").innerHTML = V8.list("kids").concat([P.kit]).map(smItem).join("") + '<li><a class="all" href="#/kids">Shop toddler &amp; kids →</a></li>';
   var mega = $("#mega"), megaBtn = $("#megaBtn"), megaT;
   function wakeImgs(el) { $$("img[data-src]", el).forEach(function (i) { i.src = i.dataset.src; i.removeAttribute("data-src"); }); }
   function openMega() { wakeImgs(mega); clearTimeout(megaT); mega.classList.add("open"); megaBtn.setAttribute("aria-expanded", "true"); $(".hdr").classList.add("mega-on"); }
