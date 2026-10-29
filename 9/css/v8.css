@@ -654,12 +654,12 @@ main:focus { outline: none; }
 .pair-stage.swap .pair-cut { opacity: 0; translate: 0 12px; }
 .pair-badge { position: absolute; right: 5%; top: 6%; z-index: 2; width: clamp(84px, 13cqi, 124px); aspect-ratio: 1; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-content: center; text-align: center; rotate: 12deg; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.1; }
 .pair-badge b { font-size: 2.2em; font-style: italic; font-weight: 800; letter-spacing: -0.04em; }
-.pair-panel { display: flex; flex-direction: column; gap: 18px; align-self: center; }
+.pair-panel { display: flex; flex-direction: column; gap: 18px; align-self: stretch; } /* heading meets the stage top, price and buttons its bottom */
 .pair-panel h2 { font-size: clamp(34px, 3.3vw, 54px); }
 .pair-step { display: grid; gap: 10px; justify-items: start; }
 .pair-step .seg { flex-wrap: wrap; border-radius: 28px; }
 .pair-step .seg button { padding: 0 16px; }
-.pair-tot { display: grid; justify-items: start; gap: 6px; margin-top: 6px; }
+.pair-tot { display: grid; justify-items: start; gap: 6px; margin-top: auto; }
 .pair-tot p { font-size: 14px; color: var(--ink-2); }
 .pair-price { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
 .pair-price b { font-size: clamp(34px, 3.4vw, 52px); font-weight: 800; font-style: italic; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
