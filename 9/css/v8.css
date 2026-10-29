@@ -909,6 +909,15 @@ main:focus { outline: none; }
 .rv-list a:hover span:first-child { color: var(--orange); }
 .rv-bar { height: 6px; background: var(--paper); overflow: hidden; }
 .rv-bar i { display: block; height: 100%; background: var(--orange); }
+/* product page reviews: one review per slide */
+.rev-slider { display: grid; gap: clamp(20px, 2.4vw, 32px); }
+.rev-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.rev-track::-webkit-scrollbar { display: none; }
+.rev-slide { flex: 0 0 100%; scroll-snap-align: start; margin: 0; display: grid; justify-items: center; gap: clamp(16px, 2vw, 26px); text-align: center; padding: clamp(28px, 4vw, 64px) clamp(8px, 6vw, 120px); background: var(--white); }
+.rev-slide blockquote { margin: 0; max-width: 30ch; font-size: clamp(24px, 2.8vw, 42px); font-weight: 600; font-style: italic; letter-spacing: -0.025em; line-height: 1.2; color: var(--ink); }
+.rev-slide footer { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.rev-nav { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.rev-count { min-width: 56px; text-align: center; font-weight: 700; font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
 .revs-wall { columns: 3 300px; column-gap: var(--gap); }
 .revs-wall .rev { break-inside: avoid; margin: 0 0 var(--gap); background: var(--white); padding: clamp(22px, 2.4vw, 34px); display: grid; gap: 14px; }
 .revs-wall .rev blockquote { margin: 0; font-size: clamp(17px, 1.4vw, 21px); font-weight: 500; letter-spacing: -0.01em; line-height: 1.4; }
