@@ -57,7 +57,7 @@
       // retailers
       '<section data-mod="logos" class="logos" aria-label="Also sold at"><div class="logos-row">' + [0, 1].map(function (k) { return LOGOS.map(function (l) { return '<img src="assets/' + l[0] + '.png" alt="' + (k ? "" : l[1]) + '"' + (k ? ' aria-hidden="true"' : "") + ' loading="lazy">'; }).join(""); }).join("") + "</div></section>" +
       // manifesto
-      '<section data-mod="mani" class="sec mani-sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em><br>is not a <em>nursery</em>,<br>and a nursery without<br><em>you</em> isn’t your child’s<br><span class="nowrap"><em>home</em>.</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
+      '<section data-mod="mani" class="sec mani-sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em> <br>is not a <em>nursery</em>, <br>and a nursery without <br><em>you</em> isn’t your child’s <br><span class="nowrap"><em>home</em>.</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
       // best sellers
       '<section data-mod="best" class="sec" id="best" aria-labelledby="best-h"><div class="wrap">' +
         '<div class="sec-head"><h2 class="disp d2 c-orange" id="best-h" aria-live="polite">Our <b>best sellers.</b></h2>' +

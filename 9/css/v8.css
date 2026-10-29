@@ -505,7 +505,8 @@ main:focus { outline: none; }
 
 /* promise strip */
 .promise { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
-.sec.mani-sec { padding-top: calc(var(--sec) * .35); } /* V9: follows the best sellers */
+.sec.mani-sec { padding-top: calc(var(--sec) * .35); padding-bottom: 0; } /* V9: follows the best sellers; the homes band starts right below */
+@media (max-width: 899px) { .sec.mani-sec { padding-bottom: 40px; } }
 #best { padding-top: calc(var(--sec) * .55); padding-bottom: calc(var(--sec) * .35); }
 .sec.promise-sec { padding-top: 0; }
 .promise li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: center; }
