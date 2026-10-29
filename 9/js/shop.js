@@ -26,7 +26,7 @@
     var html = head({ crumbs: [["Home", "#/"], [c.t]], h1: c.h1, lede: c.lede }) +
       '<section class="wrap" aria-label="' + esc(c.t) + '"><div class="coll-bar"><div class="filters" role="group" aria-label="Filter">' + (c.filters ? c.filters.map(function (f, i) { return '<button type="button" class="filter" aria-pressed="' + !i + '" data-v="' + f[0] + '">' + f[1] + "</button>"; }).join("") : '<span class="coll-count">' + items.length + " pieces</span>") + "</div>" +
       '<div class="sort"><label for="sort">Sort</label><select id="sort"><option value="feat">Featured</option><option value="lo">Price, low to high</option><option value="hi">Price, high to low</option></select></div></div>' +
-      '<div class="pgrid" id="collGrid"></div><p class="coll-count mt-m" id="collCount" aria-live="polite"></p></section>' +
+      '<div class="pgrid' + (key === "finishing" ? " tiles" : "") + '" id="collGrid"></div><p class="coll-count mt-m" id="collCount" aria-live="polite"></p></section>' +
       (key === "dressers" ? '<div class="wrap mt-m"><a class="link" href="#/compare-dressers">Compare all eight dressers</a></div>' + trays() : "") +
       (key === "cribs" ? '<section class="sec"><div class="wrap">' + setsStrip() + "</div></section>" : "") +
       (key !== "sale" ? quizBand() : "");
