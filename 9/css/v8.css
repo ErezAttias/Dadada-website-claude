@@ -73,8 +73,6 @@ main:focus { outline: none; }
 .sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: 12px; top: -60px; z-index: 300; background: var(--ink); color: var(--white); padding: 10px 16px; border-radius: 999px; font-weight: 700; }
 .skip:focus { top: 12px; }
-@keyframes ddspin { to { rotate: 360deg; } }
-@media (prefers-reduced-motion: reduce) { .quizband .dd-sun { animation: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
 
 /* 3 · LAYOUT ---------------------------------------------------------- */
@@ -647,11 +645,9 @@ main:focus { outline: none; }
 
 /* quiz band */
 .quizband { position: relative; text-align: center; display: grid; gap: 20px; justify-items: center; padding-block: clamp(72px, 9vw, 150px); overflow: hidden; }
-.quizband .dd-sun { animation: ddspin 22s linear infinite; position: absolute; color: var(--lime); width: clamp(90px, 10vw, 170px); height: auto; left: max(4%, calc(var(--gut) * .6)); top: 18%; }
-.quizband .dd-star { position: absolute; color: var(--lime); width: clamp(60px, 6vw, 110px); height: auto; right: max(5%, var(--gut)); bottom: 16%; }
 .quizband h2 { position: relative; }
 .quizband p { position: relative; color: rgba(255, 255, 255, .92); font-size: var(--fs-lede); }
-@media (max-width: 720px) { .quizband { padding-top: 40px; } .quizband .dd-sun { position: static; width: 72px; margin-bottom: -6px; } .quizband .dd-star { top: 22px; right: 18px; bottom: auto; width: 34px; transform: rotate(14deg); } .quizband h2 { padding-inline: 8px; } }
+@media (max-width: 720px) { .quizband h2 { padding-inline: 8px; } }
 
 /* journal cards */
 .jgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }

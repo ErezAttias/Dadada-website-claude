@@ -114,7 +114,7 @@
       '<section data-mod="feed" class="sec feed-sec" aria-labelledby="feed-h"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange" id="feed-h">Scroll <b>their nurseries.</b></h2><a class="link" href="https://instagram.com/dadadababyusa" target="_blank" rel="noopener">@dadadababyusa</a></div>' +
         '<div class="feed" id="feed"></div><div class="feed-end" id="feedEnd"><button class="btn btn-secondary" type="button" id="feedMore">Load more</button><span class="sr" id="feedMsg" aria-live="polite"></span></div></div></section>' +
       // quiz band
-      '<section data-mod="quiz" class="bg-orange quizband" aria-labelledby="qz-h">' + V8.doodle("dd-sun", "dd-sun") + V8.doodle("dd-star", "dd-star") +
+      '<section data-mod="quiz" class="bg-orange quizband" aria-labelledby="qz-h">' +
         '<h2 class="disp d2" id="qz-h">Not sure <b>which crib?</b></h2><p>Four quick questions about your space and style.</p><a class="btn btn-lime lg" href="#/quiz">Take the 60-second quiz</a></section>';
     return { home: true, html: html, after: homeAfter };
   };

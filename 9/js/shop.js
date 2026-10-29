@@ -7,7 +7,7 @@
   V8.crumbs = crumbs;
   function head(o) { return '<header class="wrap page-head">' + crumbs(o.crumbs) + '<h1 class="disp d2">' + o.h1 + "</h1>" + (o.lede ? '<p class="lede">' + o.lede + "</p>" : "") + (o.extra || "") + "</header>"; }
   V8.pageHead = head;
-  function quizBand() { return '<section class="bg-orange quizband" aria-labelledby="qb-h">' + V8.doodle("dd-sun", "dd-sun") + '<h2 class="disp d2" id="qb-h">Still <b>deciding?</b></h2><p>Four questions and we’ll pick one, with a reason.</p><div class="row" style="--s:12px;justify-content:center"><a class="btn btn-lime lg" href="#/quiz">Take the quiz</a><a class="btn btn-light lg" href="#/compare">Compare cribs</a></div></section>'; }
+  function quizBand() { return '<section class="bg-orange quizband" aria-labelledby="qb-h">' + '<h2 class="disp d2" id="qb-h">Still <b>deciding?</b></h2><p>Four questions and we’ll pick one, with a reason.</p><div class="row" style="--s:12px;justify-content:center"><a class="btn btn-lime lg" href="#/quiz">Take the quiz</a><a class="btn btn-light lg" href="#/compare">Compare cribs</a></div></section>'; }
   V8.quizBand = quizBand;
 
   /* ---------- collections ---------- */
@@ -252,6 +252,6 @@
   });
   V8.route("thanks", function () {
     var o = null; try { o = JSON.parse(sessionStorage.getItem("dd8-order")); } catch (e) {}
-    return { title: "Thank you", html: '<section class="nf"><div class="wrap stack center">' + V8.doodle("dd-heart") + '<span class="label muted">' + (o ? "Order " + esc(o.no) : "Order received") + '</span><h1 class="disp d1 c-orange">Thank you' + (o && o.name ? ", <b>" + esc(o.name) + ".</b>" : "<b>.</b>") + '</h1><p class="lede" style="margin-inline:auto">' + (o ? "A confirmation is on its way to <b>" + esc(o.email) + "</b>. Your order ships within one business day, and we’ll email tracking as soon as it leaves." : "Your order is in.") + '</p><div class="row" style="justify-content:center"><a class="btn btn-primary" href="#/support/register">Register your crib</a><a class="btn btn-secondary" href="#/journal">Read the journal</a></div></div></section>' };
+    return { title: "Thank you", html: '<section class="nf"><div class="wrap stack center">' + '<span class="label muted">' + (o ? "Order " + esc(o.no) : "Order received") + '</span><h1 class="disp d1 c-orange">Thank you' + (o && o.name ? ", <b>" + esc(o.name) + ".</b>" : "<b>.</b>") + '</h1><p class="lede" style="margin-inline:auto">' + (o ? "A confirmation is on its way to <b>" + esc(o.email) + "</b>. Your order ships within one business day, and we’ll email tracking as soon as it leaves." : "Your order is in.") + '</p><div class="row" style="justify-content:center"><a class="btn btn-primary" href="#/support/register">Register your crib</a><a class="btn btn-secondary" href="#/journal">Read the journal</a></div></div></section>' };
   });
 })();
