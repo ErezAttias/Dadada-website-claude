@@ -90,7 +90,6 @@
           '<div class="pair-panel">' +
             '<h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2>' +
             '<div class="pair-step"><div class="seg" role="radiogroup" aria-label="Choose a crib">' + D.order.cribs.filter(function (id) { return P[D.sets[id]]; }).map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-c="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
-            '<div class="pair-step"><div class="swatches" role="radiogroup" aria-label="Crib finish" id="pairSw"></div></div>' +
             '<div class="pair-tot"><p id="pairList"></p><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p>' +
               '<div class="pair-cta"><button type="button" class="btn btn-primary" id="addSet">Add the set</button><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div></div>' +
           "</div>" +
@@ -207,7 +206,7 @@
     V8.onLeave(function () { clearInterval(timer); document.removeEventListener("click", docClose); document.removeEventListener("keydown", escHot); });
 
     // set offer
-    // build your pair: pick a crib and its finish; the matching dresser, the big name and the set price follow
+    // build your pair: pick a crib; the matching dresser, the big name and the set price follow
     var pc = "soho", pf = 0, pstage = $("#pairStage", root);
     function pairDraw(swap) {
       var cr = P[pc], dr = P[D.sets[pc]], sub = cr.finishes[pf].price + dr.finishes[0].price, cut = function (src) { return "assets/cut/" + src.split("/").pop(); };
@@ -219,12 +218,10 @@
       }
       if (swap && !reduce) { pstage.classList.add("swap"); setTimeout(fill, 220); } else fill();
       $$(".pair-step .seg button", root).forEach(function (b) { b.setAttribute("aria-checked", b.dataset.c === pc); });
-      $("#pairSw", root).innerHTML = cr.finishes.map(function (x, i) { return '<button type="button" class="sw" role="radio" aria-checked="' + (i === pf) + '" aria-label="' + esc(x.name) + '" title="' + esc(x.name) + '" data-f="' + i + '" style="background:' + x.sw + '"></button>'; }).join("");
       $("#pairList", root).textContent = cr.full + " " + money(cr.finishes[pf].price) + " + " + dr.full + " " + money(dr.finishes[0].price);
       $("#pairWas", root).textContent = money(sub); $("#pairNow", root).textContent = money(sub * .85, true);
     }
-    $$(".pair-step .seg button", root).forEach(function (b) { b.addEventListener("click", function () { if (b.dataset.c === pc) return; pc = b.dataset.c; pf = 0; pairDraw(true); }); });
-    $("#pairSw", root).addEventListener("click", function (e) { var b = e.target.closest(".sw"); if (!b || +b.dataset.f === pf) return; pf = +b.dataset.f; pairDraw(true); });
+    $$(".pair-step .seg button", root).forEach(function (b) { b.addEventListener("click", function () { if (b.dataset.c === pc) return; pc = b.dataset.c; pairDraw(true); }); });
     pairDraw();
     $("#addSet", root).addEventListener("click", function () { V8.add(pc, pf, 1, { silent: true }); V8.add(D.sets[pc], 0, 1); });
 
