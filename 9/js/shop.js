@@ -17,6 +17,8 @@
     dressers: { t: "Dressers", h1: "Bring the tiny socks. <b>We’ll bring the drawers.</b>", lede: "Eight dressers, every one 34 inches tall. Add a tray and it becomes your changing table.", items: function () { return V8.list("dresser"); },
       filters: [["all", "All"], ["6", "Six drawers"], ["5", "Five drawers"], ["3", "Three drawers"]], test: function (p, v) { return String(p.drawers) === v; } },
     kids: { t: "Toddler & kids", h1: "They grow up. <b>Your taste stays.</b>", lede: "Beds, shelves and a tower for the years after the crib, in the same clean lines as the nursery.", items: function () { return V8.list("kids").concat([P.kit]); } },
+    finishing: { t: "Finishing touches", h1: "The last layer. <b>Finishing touches.</b>", lede: "Mattresses, sheets, bedding, wallpaper and the small pieces that finish a dadada nursery.", items: function () { return V8.list("touch"); },
+      filters: [["all", "All"]].concat(D.touchGroups), test: function (p, v) { return p.group === v; } },
     sale: { t: "Sale", h1: "On sale, <b>for now.</b>", lede: "The same solid wood and finishes, for less. Sale items are final sale.", items: function () { return V8.all().filter(function (p) { return p.was; }); } }
   };
   function collection(key) {
@@ -58,7 +60,7 @@
       }).join("") + "</ul></section>" + quizBand(),
       after: function (root) { $$("[data-set]", root).forEach(function (b) { b.addEventListener("click", function () { V8.add(b.dataset.set, 0, 1, { silent: true }); V8.add(D.sets[b.dataset.set], 0, 1); }); }); } };
   });
-  ["cribs", "dressers", "kids", "sale"].forEach(function (k) { V8.route(k, function () { return collection(k); }); });
+  ["cribs", "dressers", "kids", "finishing", "sale"].forEach(function (k) { V8.route(k, function () { return collection(k); }); });
   V8.route("dressers/sets", function () { return { redirect: "#/sets" }; });
 
   /* ---------- product page ---------- */
@@ -70,14 +72,14 @@
   }
   function product(id) {
     var p = P[id]; if (!p) return V8.pages.notFound();
-    var isCrib = p.type === "crib", coll = { crib: ["Cribs", "#/cribs"], dresser: ["Dressers", "#/dressers"], kids: ["Toddler & kids", "#/kids"], kit: ["Toddler & kids", "#/kids"] }[p.type];
+    var isCrib = p.type === "crib", coll = { crib: ["Cribs", "#/cribs"], dresser: ["Dressers", "#/dressers"], kids: ["Toddler & kids", "#/kids"], kit: ["Toddler & kids", "#/kids"], touch: ["Finishing touches", "#/finishing"] }[p.type], isTouch = p.type === "touch";
     var set = isCrib && P[p.set], pairs = isCrib ? (p.pairs || []) : [];
-    var gallery = p.finishes.map(function (f, i) { return { img: f.img, cut: true, f: i, alt: p.full + ", " + f.name }; }).filter(function (g, i, a) { return a.findIndex(function (x) { return x.img === g.img; }) === i; })
+    var gallery = p.finishes.map(function (f, i) { return { img: f.img, cut: !isTouch, f: i, alt: p.full + ", " + f.name }; }).filter(function (g, i, a) { return a.findIndex(function (x) { return x.img === g.img; }) === i; })
       .concat((p.gallery || []).map(function (g) { return { img: g.img, alt: g.alt, cap: g.cap }; })).concat(p.scene ? [{ img: p.scene, alt: p.full + " in a room" }] : []).concat(p.mom ? [{ img: p.mom, alt: p.full + " in a nursery" }] : []);
     // films: the product film first, then a parent's film where there is one
     var FILMS = { soho: ["v-soho", "ugc-soho-nursery"], lala: ["v-lala", "ugc-lala"], spirit: ["v-spirit"], jolly: ["v-jolly", "ugc-jolly"], bliss: ["ugc-bliss"] }[p.id] || [];
     FILMS.slice().reverse().forEach(function (v) { gallery.splice(1, 0, { video: v, img: "media/" + v + ".webp", alt: p.full + (v.indexOf("ugc") === 0 ? ", filmed by a parent" : ", film") }); });
-    var related = (isCrib ? V8.list("crib") : p.type === "dresser" ? V8.list("dresser") : V8.list("kids")).filter(function (x) { return x.id !== p.id; }).slice(0, 4);
+    var related = (isCrib ? V8.list("crib") : p.type === "dresser" ? V8.list("dresser") : isTouch ? V8.list("touch") : V8.list("kids")).filter(function (x) { return x.id !== p.id; }).slice(0, 4);
     var reviews = (p.quotes || []).slice(0, 3);
     var html = '<div class="wrap" style="padding-top:clamp(20px,2.4vw,36px)">' + crumbs([["Home", "#/"], coll, [p.full]]) + "</div>" +
       '<section class="wrap pdp" style="padding-block:clamp(20px,2.4vw,36px) var(--sec)" aria-labelledby="pd-h">' +
@@ -89,13 +91,13 @@
           '<h1 class="disp d2" id="pd-h">' + esc(p.full) + "</h1>" +
           '<p class="lede" style="margin-top:-8px">' + esc(p.tag || p.line || p.kind) + "</p>" +
           '<div class="buy-meta"><span id="pdPrice">' + V8.priceHTML(p, 0) + "</span>" + (p.rating ? '<a class="rating" href="#reviews">' + V8.stars(p.rating) + p.rating + " · " + p.reviews + " reviews</a>" : "") + "</div>" +
-          (p.finishes.length > 1 ? '<div class="stack" style="--s:10px"><span class="label muted" id="finLbl">Finish · ' + esc(p.finishes[0].name) + '</span><div class="fin-pills" role="group" aria-labelledby="finLbl">' + p.finishes.map(function (f, i) { return '<button type="button" class="fin-pill" aria-pressed="' + !i + '" data-pf="' + i + '"><i style="background:' + f.sw + '"></i>' + esc(f.name) + (V8.hasRange(p) ? " · " + money(f.price) : "") + "</button>"; }).join("") + "</div></div>" : "") +
+          (p.finishes.length > 1 ? '<div class="stack" style="--s:10px"><span class="label muted" id="finLbl">' + esc(p.opt || "Finish") + " · " + esc(p.finishes[0].name) + '</span><div class="fin-pills" role="group" aria-labelledby="finLbl">' + p.finishes.map(function (f, i) { return '<button type="button" class="fin-pill" aria-pressed="' + !i + '" data-pf="' + i + '"><i style="background:' + f.sw + '"></i>' + esc(f.name) + (V8.hasRange(p) ? " · " + money(f.price) : "") + "</button>"; }).join("") + "</div></div>" : "") +
           (isCrib ? '<label class="addon"><input type="checkbox" id="addKit"><span><b>Add the toddler conversion kit</b><br><span class="small muted">Turns it into a toddler bed, then a daybed</span></span><span class="price">+' + money(p.kit || 120) + "</span></label>" : "") +
           '<div class="buy-row"><div class="qty lg" role="group" aria-label="Quantity"><button type="button" data-pq="-1" aria-label="Decrease">−</button><span id="pdQty">1</span><button type="button" data-pq="1" aria-label="Increase">+</button></div><button type="button" class="btn btn-primary lg" id="pdAdd">Add to bag</button>' + V8.wishBtn(p) + "</div>" +
           (set ? '<a class="addon" href="' + V8.url(set) + '" style="background:var(--paper);border-color:transparent"><img src="' + set.finishes[0].img + '" alt="" style="width:56px;height:56px;object-fit:contain;mix-blend-mode:multiply"><span><b>Make it a set · 15% off both</b><br><span class="small muted">With the ' + esc(set.full) + "</span></span><span class=\"price\">" + money(set.finishes[0].price) + "</span></a>" : "") +
-          '<ul class="buy-perks" role="list"><li>Free shipping to the contiguous 48 states</li><li>Ships in 1 business day</li><li>14-day returns · ' + (isCrib ? "2-year" : "1-year") + " warranty</li><li>Made in Italy · solid wood</li></ul>" +
+          (isTouch ? (p.priceNote ? '<p class="small muted">' + esc(p.priceNote) + "</p>" : "") + (p.fits ? '<p class="small">Fits the ' + p.fits.map(function (k) { return '<a class="link" href="' + V8.url(P[k]) + '">' + esc(P[k].full) + "</a>"; }).join(", ") + "</p>" : "") : '<ul class="buy-perks" role="list"><li>Free shipping to the contiguous 48 states</li><li>Ships in 1 business day</li><li>14-day returns · ' + (isCrib ? "2-year" : "1-year") + " warranty</li><li>Made in Italy · solid wood</li></ul>") +
           '<div class="acc">' + (p.why && p.why.length ? '<details open><summary>Why parents pick it</summary><div class="acc-body"><ul>' + p.why.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("") + "</ul></div></details>" : p.feats && p.feats.length ? '<details open><summary>Details</summary><div class="acc-body"><ul>' + p.feats.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("") + "</ul></div></details>" : "") +
-          '<details><summary>Shipping &amp; returns</summary><div class="acc-body">Free delivery to the contiguous 48 states, shipped within one business day. Return within 14 days of delivery, unused and in the original packaging; a 20% restocking fee applies. <a class="link" href="#/support/returns">Full policy</a></div></details>' +
+          (isTouch ? "" : '<details><summary>Shipping &amp; returns</summary><div class="acc-body">Free delivery to the contiguous 48 states, shipped within one business day. Return within 14 days of delivery, unused and in the original packaging; a 20% restocking fee applies. <a class="link" href="#/support/returns">Full policy</a></div></details>') +
           (isCrib ? '<details><summary>Safety</summary><div class="acc-body">' + esc(D.safe) + "</div></details>" : "") + "</div>" +
         "</div>" +
       "</section>" +
@@ -119,7 +121,7 @@
       function setF(i) {
         st.f = i; var f = p.finishes[i];
         $$("[data-pf]", root).forEach(function (b) { b.setAttribute("aria-pressed", +b.dataset.pf === i); });
-        var lbl = $("#finLbl", root); if (lbl) lbl.textContent = "Finish · " + f.name;
+        var lbl = $("#finLbl", root); if (lbl) lbl.textContent = (p.opt || "Finish") + " · " + f.name;
         $("#pdPrice", root).innerHTML = V8.priceHTML(p, i);
         var gi = gallery.findIndex(function (g) { return g.f === i; }); showG(gi > -1 ? gi : 0);
         $("#sbMeta", root).textContent = f.name + " · " + money(f.price);

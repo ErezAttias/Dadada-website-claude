@@ -13,7 +13,7 @@
     return "$" + v.toLocaleString("en-US", { minimumFractionDigits: whole && !cents ? 0 : 2, maximumFractionDigits: 2 });
   };
   var P = V8.P = D.products;
-  V8.list = function (type) { return (D.order[type === "crib" ? "cribs" : type === "dresser" ? "dressers" : "kids"] || []).map(function (id) { return P[id]; }); };
+  V8.list = function (type) { return (D.order[type === "crib" ? "cribs" : type === "dresser" ? "dressers" : type === "touch" ? "touches" : "kids"] || []).map(function (id) { return P[id]; }); };
   V8.all = function () { return Object.keys(P).map(function (k) { return P[k]; }); };
   V8.minPrice = function (p) { return Math.min.apply(null, p.finishes.map(function (f) { return f.price; })); };
   V8.hasRange = function (p) { var a = p.finishes.map(function (f) { return f.price; }); return Math.min.apply(null, a) !== Math.max.apply(null, a); };
@@ -106,8 +106,8 @@
     }).join("") + "</div>" : "";
     var cut = V8.cut(fin.img), word = V8.word(p);
     return '<article class="pcard rv" data-id="' + p.id + '" data-f="' + f + '" style="--d:' + (o.d || 0) + 's">' +
-      '<div class="pcard-fig"><a class="pcard-media' + (cut ? " has-cut" : "") + '" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"' + (cut ? ' style="--top:' + cut.top + '"' : "") + ">" + (cut && !o.life ? '<span class="pcard-big" style="--len:' + word.length + '">' + esc(word) + "</span>" : "") + '<img class="cut" src="' + (cut ? cut.src : fin.img) + '" alt="" loading="lazy">' + (o.life ? '<img class="life" data-src="' + o.life + '" alt="">' : "") + "</a>" +
-      '<span class="pcard-kick">' + (p.was ? '<span class="sale">Sale</span>' : "") + esc(V8.kicker(p)) + "</span>" +
+      '<div class="pcard-fig"><a class="pcard-media' + (cut ? " has-cut" : "") + (p.type === "touch" ? " is-photo" : "") + '" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"' + (cut ? ' style="--top:' + cut.top + '"' : "") + ">" + (cut && !o.life ? '<span class="pcard-big" style="--len:' + word.length + '">' + esc(word) + "</span>" : "") + '<img class="cut" src="' + (cut ? cut.src : fin.img) + '" alt="" loading="lazy">' + (o.life ? '<img class="life" data-src="' + o.life + '" alt="">' : "") + "</a>" +
+      (p.type === "touch" ? "" : '<span class="pcard-kick">' + (p.was ? '<span class="sale">Sale</span>' : "") + esc(V8.kicker(p)) + "</span>") +
       V8.wishBtn(p, "pcard-fav") + "</div>" +
       '<div class="pcard-body"><h3 class="pcard-name"><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></h3>" +
       '<div class="pcard-sub"><span class="pcard-fin">' + esc(fin.name) + '</span><span class="pcard-price">' + V8.priceHTML(p, p.finishes.length > 1 && V8.hasRange(p) ? null : f) + "</span></div>" +
@@ -243,15 +243,16 @@
   // Shop menu (V7 layout): big categories on the left, a room photo for the one in focus on the right
   var MG = { cribs: ["mom-soho", "Shop all cribs"], dressers: ["mom-dr-soho", "Shop all dressers"], kids: ["mom-kids", "Shop toddler & kids"], sets: ["mom-dr-cp", "Shop all sets"] };
   // every model of the category in focus, as pictures, next to the category names
-  var mgPic = function (p) { var f = p.finishes[0], room = /^media\/ks-/.test(f.img); return '<img' + (room ? ' class="ph"' : "") + ' src="' + f.img + '" alt="" loading="lazy">'; };
+  var mgPic = function (p) { var f = p.finishes[0], room = /^media\/(ks-|t\/)/.test(f.img); return '<img' + (room ? ' class="ph"' : "") + ' src="' + f.img + '" alt="" loading="lazy">'; };
   var mgTile = function (href, pic, name, sub, price) { return '<li><a class="mg-tile" href="' + href + '"><span class="mg-pic">' + pic + "</span><b>" + esc(name) + "</b><small>" + esc(sub) + (price ? " · " + price : "") + "</small></a></li>"; };
   var MGL = {
     cribs: V8.list("crib").map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind.split(" ")[0], "from " + money(V8.minPrice(p))); }),
     dressers: V8.list("dresser").map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind.replace(" dresser", ""), "from " + money(V8.minPrice(p))); }),
     kids: V8.list("kids").concat([P.kit]).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind, money(V8.minPrice(p))); }),
+    touches: V8.list("touch").filter(function (p) { return ["newton", "moonlight", "moses", "sheet-muslin", "sheet-knit", "bedding", "wallpaper", "baskets"].indexOf(p.id) > -1; }).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.finishes.length > 1 ? p.finishes.length + " " + (p.opt || "option").toLowerCase() + "s" : p.kind, "from " + money(V8.minPrice(p))); }),
     sets: Object.keys(D.sets).map(function (c) { var cr = P[c], dr = P[D.sets[c]]; return mgTile("#/sets", '<span class="mg-pair">' + mgPic(cr) + mgPic(dr) + "</span>", cr.name + " set", cr.name + " crib + " + dr.name + " dresser", "from " + money(Math.round((V8.minPrice(cr) + V8.minPrice(dr)) * .85))); })
   };
-  var MG = { cribs: "Shop all cribs", dressers: "Shop all dressers", kids: "Shop toddler & kids", sets: "Shop all sets" };
+  var MG = { cribs: "Shop all cribs", dressers: "Shop all dressers", kids: "Shop toddler & kids", sets: "Shop all sets", touches: "Shop all finishing touches" };
   $("#mgLists").innerHTML = Object.keys(MGL).map(function (k) { return '<ul class="mg-grid" data-c="' + k + '" data-n="' + MGL[k].length + '"' + (k === "cribs" ? "" : " hidden") + ">" + MGL[k].join("") + "</ul>"; }).join("");
   $$(".mg-cat").forEach(function (a) {
     function focusCat() { $$(".mg-cat").forEach(function (x) { x.classList.toggle("on", x === a); }); $$(".mg-grid").forEach(function (l) { l.hidden = l.dataset.c !== a.dataset.c; }); $("#mgAll").href = a.getAttribute("href"); $("#mgAll").innerHTML = MG[a.dataset.c] + ' <span aria-hidden="true">→</span>'; }
@@ -261,6 +262,7 @@
   $("#smCribs").innerHTML = V8.list("crib").map(smItem).join("") + '<li><a class="all" href="#/cribs">Shop all cribs →</a></li>';
   $("#smDressers").innerHTML = V8.list("dresser").map(smItem).join("") + '<li><a class="all" href="#/dressers">Shop all dressers →</a></li>';
   $("#smKids").innerHTML = V8.list("kids").concat([P.kit]).map(smItem).join("") + '<li><a class="all" href="#/kids">Shop toddler &amp; kids →</a></li>';
+  $("#smTouches").innerHTML = V8.list("touch").map(smItem).join("") + '<li><a class="all" href="#/finishing">Shop all finishing touches →</a></li>';
   var mega = $("#mega"), megaBtn = $("#megaBtn"), megaT;
   function wakeImgs(el) { $$("img[data-src]", el).forEach(function (i) { i.src = i.dataset.src; i.removeAttribute("data-src"); }); }
   function openMega() { wakeImgs(mega); clearTimeout(megaT); mega.classList.add("open"); megaBtn.setAttribute("aria-expanded", "true"); $(".hdr").classList.add("mega-on"); }
