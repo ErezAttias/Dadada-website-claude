@@ -88,7 +88,7 @@
           "</div>" +
           '<div class="gal-thumbs" role="group" aria-label="Images">' + gallery.slice(0, 10).map(function (g, i) { return '<button type="button" aria-pressed="' + !i + '" data-g="' + i + '" aria-label="' + esc(g.alt) + '"' + (g.video ? ' class="is-vid"' : "") + '><img class="' + (g.cut ? "cut" : "") + '" src="' + g.img + '" alt="" loading="lazy"></button>'; }).join("") + "</div></div>" +
         '<div class="buy" id="buy">' +
-          (p.awards ? '<p class="buy-eyebrow">' + p.awards.map(esc).join(" · ") + "</p>" : p.was ? '<div class="row"><span class="chip orange">Sale</span></div>' : "") +
+          (p.was ? '<div class="row"><span class="chip orange">Sale</span></div>' : "") +
           '<h1 class="disp d2" id="pd-h">' + esc(p.full) + "</h1>" +
           '<p class="lede" style="margin-top:-8px">' + esc(p.tag || p.line || p.kind) + "</p>" +
           '<div class="buy-meta"><span id="pdPrice">' + V8.priceHTML(p, 0) + "</span>" + (p.rating ? '<a class="rating" href="#reviews">' + V8.stars(p.rating) + p.rating + " · " + p.reviews + " reviews</a>" : "") + "</div>" +

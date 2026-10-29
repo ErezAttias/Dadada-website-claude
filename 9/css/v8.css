@@ -750,8 +750,7 @@ main:focus { outline: none; }
 .buy .price { font-size: 26px; }
 .buy-row { display: flex; gap: 10px; align-items: center; }
 .buy-row .btn { flex: 1; min-width: 0; }
-/* calmer buy box: quiet eyebrow, swatch circles, one-line extras */
-.buy-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); margin-bottom: -6px; }
+/* calmer buy box: swatch circles, one-line extras */
 .fin-sws { display: flex; flex-wrap: wrap; gap: 12px; }
 .fin-sw { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px transparent; transition: box-shadow var(--t); }
 .fin-sw i { width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(8, 36, 65, .18); }
