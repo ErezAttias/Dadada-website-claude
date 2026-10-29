@@ -89,7 +89,6 @@
             '<span class="pair-badge" aria-hidden="true"><b>15%</b>off both</span></div>' +
           '<div class="pair-panel">' +
             '<h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2>' +
-            '<p class="pair-lede">Every crib has a dresser made to stand beside it: the same solid wood, the same lines.</p>' +
             '<div class="pair-step"><div class="seg" role="radiogroup" aria-label="Choose a crib">' + D.order.cribs.filter(function (id) { return P[D.sets[id]]; }).map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-c="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
             '<div class="pair-step"><div class="swatches" role="radiogroup" aria-label="Crib finish" id="pairSw"></div></div>' +
             '<div class="pair-tot"><p id="pairList"></p><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p>' +
