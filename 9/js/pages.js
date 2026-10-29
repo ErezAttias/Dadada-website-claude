@@ -104,7 +104,9 @@
     return { title: j.title, html: html, after: function (root) {
       if (j.body) return wire(root);
       // migrated stories keep their text in j/<id>.json and load it on arrival
-      fetch("j/" + encodeURIComponent(j.id) + ".json").then(function (r) { if (!r.ok) throw r; return r.json(); }).then(function (d) {
+      // (a bundled build groups them: j.b names the j/b<n>.json chunk that holds this one)
+      fetch("j/" + (j.b != null ? "b" + j.b : encodeURIComponent(j.id)) + ".json").then(function (r) { if (!r.ok) throw r; return r.json(); }).then(function (d) {
+        if (j.b != null) d = d[j.id];
         var body = $("#artBody", root), t = $("#artToc", root); if (!body || !body.isConnected) return;
         body.innerHTML = d.body; if (t) t.outerHTML = tocHTML((d.toc || []).map(function (x) { return { id: x[0], t: x[1] }; }));
         wire(root);
