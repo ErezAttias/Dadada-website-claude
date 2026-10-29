@@ -655,7 +655,7 @@ main:focus { outline: none; }
 .pair-badge { position: absolute; right: 5%; top: 6%; z-index: 2; width: clamp(84px, 13cqi, 124px); aspect-ratio: 1; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-content: center; text-align: center; rotate: 12deg; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.1; }
 .pair-badge b { font-size: 2.2em; font-style: italic; font-weight: 800; letter-spacing: -0.04em; }
 .pair-panel { display: flex; flex-direction: column; gap: 18px; align-self: center; }
-.pair-panel h2 { margin-top: -6px; font-size: clamp(34px, 3.3vw, 54px); }
+.pair-panel h2 { font-size: clamp(34px, 3.3vw, 54px); }
 .pair-lede { color: var(--ink-2); font-size: 16px; max-width: 38ch; }
 .pair-step { display: grid; gap: 10px; justify-items: start; }
 .pair-k { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
@@ -669,7 +669,7 @@ main:focus { outline: none; }
 .pair-price s { font-size: 18px; color: var(--ink-3); }
 .pair-tot .pair-save { color: var(--orange); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
 .pair-tot .link { margin-top: 10px; }
-@media (max-width: 899px) { .pair { grid-template-columns: minmax(0, 1fr); } .pair-panel { display: contents; } .pair-panel > .label, .pair-panel h2, .pair-lede { order: -1; } .pair-stage { order: 0; min-height: 0; aspect-ratio: 1 / .85; } .pair-word { top: 30%; font-size: min(26cqi, calc(110cqi / var(--len, 4))); } .pair-badge { width: 64px; font-size: 9px; top: 4%; right: 3%; } .pair-step .seg { flex-wrap: nowrap; } .pair-step .seg button { padding: 0 12px; } .pair-step, .pair-tot { order: 1; } }
+@media (max-width: 899px) { .pair { grid-template-columns: minmax(0, 1fr); } .pair-panel { display: contents; } .pair-panel h2, .pair-lede { order: -1; } .pair-stage { order: 0; min-height: 0; aspect-ratio: 1 / .85; } .pair-word { top: 30%; font-size: min(26cqi, calc(110cqi / var(--len, 4))); } .pair-badge { width: 64px; font-size: 9px; top: 4%; right: 3%; } .pair-step .seg { flex-wrap: nowrap; } .pair-step .seg button { padding: 0 12px; } .pair-step, .pair-tot { order: 1; } }
 
 /* quiz band */
 .quizband { position: relative; text-align: center; display: grid; gap: 20px; justify-items: center; padding-block: clamp(72px, 9vw, 150px); overflow: hidden; }

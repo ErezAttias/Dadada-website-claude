@@ -88,7 +88,6 @@
             '<a class="pair-cut crib" id="pairCrib"><img alt=""></a><a class="pair-cut dresser" id="pairDr"><img alt=""></a>' +
             '<span class="pair-badge" aria-hidden="true"><b>15%</b>off both</span></div>' +
           '<div class="pair-panel">' +
-            '<span class="label c-orange">Build your pair</span>' +
             '<h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2>' +
             '<p class="pair-lede">Every crib has a dresser made to stand beside it: the same solid wood, the same lines.</p>' +
             '<div class="pair-step"><span class="pair-k">1 · Crib</span><div class="seg" role="radiogroup" aria-label="Choose a crib">' + D.order.cribs.filter(function (id) { return P[D.sets[id]]; }).map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-c="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
