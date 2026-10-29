@@ -82,7 +82,7 @@
         '<p class="scroll-hint">Swipe for more ' + svg.right.replace("<svg", '<svg width="16" height="16"') + "</p>" +
       "</div></section>" +
       // nursery set offer
-      '<section data-mod="set" class="sec bg-paper" aria-labelledby="set-h"><div class="wrap">' +
+      '<section data-mod="set" class="sec" aria-labelledby="set-h"><div class="wrap">' +
         '<div class="pair rv" id="pair">' +
           '<div class="pair-stage" id="pairStage"><span class="pair-word" id="pairWord" aria-hidden="true"></span>' +
             '<a class="pair-cut crib" id="pairCrib"><img alt=""><span class="pair-cap"></span></a><span class="pair-plus" aria-hidden="true">+</span><a class="pair-cut dresser" id="pairDr"><img alt=""><span class="pair-cap"></span></a>' +
