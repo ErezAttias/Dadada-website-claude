@@ -82,12 +82,15 @@
         '<p class="scroll-hint">Swipe for more ' + svg.right.replace("<svg", '<svg width="16" height="16"') + "</p>" +
       "</div></section>" +
       // nursery set offer
-      '<section data-mod="set" class="sec joined" aria-labelledby="set-h"><div class="wrap"><div class="setband rv">' +
-        '<div class="setband-img"><img src="media/mom-dr-soho.webp" alt="An expecting mother folding tiny clothes into a Soho dresser beside a Soho crib" loading="lazy"></div>' +
-        '<div class="setband-copy"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2><p class="lede">Every crib has a dresser made to stand beside it: the same solid wood, the same finishes, the same lines. Pair them and the saving comes off both pieces at checkout.</p>' +
-        '<ul role="list"><li><span>Soho crib, Natural</span><span>' + money(soho.finishes[0].price) + "</span></li><li><span>Soho 5-drawer dresser</span><span>" + money(soho5.finishes[0].price) + '</span></li><li class="tot"><span>The Soho set</span><span><s>' + money(setSub) + "</s>" + money(setTot, true) + "</span></li></ul>" +
-        '<div class="row" style="--s:14px"><button type="button" class="btn btn-primary" id="addSet">Add the Soho set</button><a class="btn btn-secondary" href="#/sets">See all sets</a></div></div>' +
-      "</div></div></section>" +
+      '<section data-mod="set" class="sec" aria-labelledby="set-h"><div class="wrap">' +
+        '<div class="sec-head"><div><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2></div><div class="stack" style="--s:14px;max-width:44ch"><p class="lede">Every crib has a dresser made to stand beside it: the same solid wood, the same finishes, the same lines.</p><a class="link" href="#/sets" style="align-self:flex-start;justify-self:start">See all sets <span aria-hidden="true">→</span></a></div></div>' +
+        '<div class="pair rv">' +
+          '<div class="pair-photo"><img src="media/mom-dr-soho.webp" alt="An expecting mother folding tiny clothes into a Soho dresser beside a Soho crib" loading="lazy"></div>' +
+          '<div class="pair-side"><div class="pair-items">' +
+            [[soho, "Soho crib, Natural", "media/p-soho-natural.webp"], [soho5, "Soho 5-drawer dresser", "media/d-soho5.webp"]].map(function (x) { return '<a class="pair-item" href="' + V8.url(x[0]) + '"><span class="pair-im"><img src="' + x[2] + '" alt="" loading="lazy"></span><span class="pair-name">' + x[1] + '</span><span class="pair-price">' + money(x[0].finishes[0].price) + "</span></a>"; }).join('<span class="pair-plus" aria-hidden="true">+</span>') +
+          '</div><div class="pair-tot"><div><span class="pair-label">The Soho set</span><span class="pair-sum"><s>' + money(setSub) + "</s>" + money(setTot, true) + '</span></div><button type="button" class="btn btn-primary" id="addSet">Add the Soho set</button></div></div>' +
+        "</div>" +
+      "</div></section>" +
       // 10,000 homes
       '<section data-mod="homes" class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><h2 class="disp d2 c-orange" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for Dadada.</b></h2></div>' +
         '<div class="fan" id="fan" role="region" aria-roledescription="carousel" aria-label="Films and reviews from dadada homes">' + SEQ.map(function (r, i) {
