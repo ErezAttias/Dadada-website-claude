@@ -214,12 +214,8 @@ main:focus { outline: none; }
 .ccard-im img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
 .ccard:hover .ccard-im img { transform: scale(1.04); }
 .ccard-body { display: grid; gap: 8px; padding: clamp(14px, 1.4vw, 22px) clamp(14px, 1.6vw, 28px) clamp(18px, 1.6vw, 26px); }
-.ccard-kick { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
 .ccard-name { font-size: clamp(20px, 1.8vw, 30px); font-weight: 800; font-style: italic; letter-spacing: -0.03em; line-height: 1.05; }
 .ccard:hover .ccard-name { color: var(--orange); }
-.ccard-sub { font-size: 13px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
-.ccard-sub span { display: inline-block; transition: transform .3s var(--ease); }
-.ccard:hover .ccard-sub span { transform: translateX(4px); }
 /* the orange word sits behind the cutout and rises out over its top edge on hover */
 .pcard-media.has-cut { container-type: inline-size; }
 .pcard-media.has-cut img.cut { inset: 0; width: 100%; height: 100%; mix-blend-mode: normal; z-index: 1; }
