@@ -85,7 +85,6 @@
       '<section data-mod="set" class="sec" aria-labelledby="set-h"><div class="wrap">' +
         '<div class="pair-head"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2><p class="lede">Every crib has a dresser made to stand beside it: the same solid wood, the same finishes, the same lines.</p><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div>' +
         '<div class="pair rv">' +
-          '<div class="pair-photo"><img src="media/mom-dr-soho.webp" alt="An expecting mother folding tiny clothes into a Soho dresser beside a Soho crib" loading="lazy"></div>' +
           '<div class="pair-side"><div class="pair-items">' +
             [[soho, "Soho crib, Natural", "media/p-soho-natural.webp"], [soho5, "Soho 5-drawer dresser", "media/d-soho5.webp"]].map(function (x) { return '<a class="pair-item" href="' + V8.url(x[0]) + '"><span class="pair-im"><img src="' + x[2] + '" alt="" loading="lazy"></span><span class="pair-name">' + x[1] + '</span><span class="pair-price">' + money(x[0].finishes[0].price) + "</span></a>"; }).join('<span class="pair-plus" aria-hidden="true">+</span>') +
           '</div><div class="pair-tot"><div><span class="pair-label">The Soho set</span><span class="pair-sum"><s>' + money(setSub) + "</s>" + money(setTot, true) + '</span></div><button type="button" class="btn btn-primary" id="addSet">Add the Soho set</button></div></div>' +
