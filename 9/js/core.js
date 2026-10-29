@@ -255,7 +255,7 @@
     touches: pick(["newton", "sheet-muslin", "wallpaper", "baskets"]).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.finishes.length > 1 ? p.finishes.length + " " + (p.opt || "option").toLowerCase() + "s" : p.kind, "from " + money(V8.minPrice(p))); })
   };
   var MOOD = { cribs: ["media/mom-soho.webp", "#/cribs", "All cribs"], dressers: ["media/mom-dr-soho.webp", "#/dressers", "All dressers"], kids: ["media/mom-kids.webp", "#/kids", "All toddler & kids"], sets: ["media/mom-dr-cp.webp", "#/sets", "All nursery sets"], touches: ["media/t/wallpaper-g1.webp", "#/finishing", "All finishing touches"] };
-  Object.keys(MGL).forEach(function (k) { var m = MOOD[k]; MGL[k].unshift('<li class="mg-mood"><a href="' + m[1] + '"><img src="' + m[0] + '" alt="" loading="lazy"><span>' + esc(m[2]) + ' <span aria-hidden="true">→</span></span></a></li>'); });
+  Object.keys(MGL).forEach(function (k) { var m = MOOD[k]; MGL[k].push('<li class="mg-mood"><a href="' + m[1] + '"><img src="' + m[0] + '" alt="" loading="lazy"><span>' + esc(m[2]) + ' <span aria-hidden="true">→</span></span></a></li>'); });
   $("#mgLists").innerHTML = Object.keys(MGL).map(function (k) { return '<ul class="mg-grid" data-c="' + k + '" data-n="' + MGL[k].length + '"' + (k === "cribs" ? "" : " hidden") + ">" + MGL[k].join("") + "</ul>"; }).join("");
   $$(".mg-cat").forEach(function (a) {
     function focusCat() { $$(".mg-cat").forEach(function (x) { x.classList.toggle("on", x === a); }); $$(".mg-grid").forEach(function (l) { l.hidden = l.dataset.c !== a.dataset.c; }); $("#mgAll").href = a.getAttribute("href"); $("#mgAll").innerHTML = MG[a.dataset.c] + ' <span aria-hidden="true">→</span>'; }

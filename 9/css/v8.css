@@ -901,3 +901,6 @@ main:focus { outline: none; }
 .fq-h { font-size: var(--fs-d3); font-style: italic; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
 .fq-h b { font-weight: 800; }
 .fq-h b { white-space: nowrap; }
+/* products first, the mood photo sits at the side */
+.mg-grid, .mg-grid[data-n="8"] { grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, .8fr); }
+.mg-mood { grid-column: 3; grid-row: 1 / span 2; }
