@@ -85,10 +85,10 @@
       '<section data-mod="set" class="sec" aria-labelledby="set-h"><div class="wrap">' +
         '<div class="pair-head"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2><p class="lede">Every crib has a dresser made to stand beside it: the same solid wood, the same finishes, the same lines.</p><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div>' +
         '<div class="pair rv">' +
-          '<div class="pair-side"><div class="pair-items">' +
-            [[soho, "Soho crib, Natural", "media/p-soho-natural.webp"], [soho5, "Soho 5-drawer dresser", "media/d-soho5.webp"]].map(function (x) { return '<a class="pair-item" href="' + V8.url(x[0]) + '"><span class="pair-im"><img src="' + x[2] + '" alt="" loading="lazy"></span><span class="pair-name">' + x[1] + '</span><span class="pair-price">' + money(x[0].finishes[0].price) + "</span></a>"; }).join('<span class="pair-plus" aria-hidden="true">+</span>') +
-          '</div><div class="pair-tot"><div><span class="pair-label">The Soho set</span><span class="pair-sum"><s>' + money(setSub) + "</s>" + money(setTot, true) + '</span></div><button type="button" class="btn btn-primary" id="addSet">Add the Soho set</button></div></div>' +
-        "</div>" +
+          '<div class="pair-stage"><span class="pair-big" aria-hidden="true">' + money(setTot, true) + '</span>' +
+            '<a class="pair-cut crib" href="' + V8.url(soho) + '"><img src="assets/cut/p-soho-natural.webp" alt="Soho crib, Natural"></a>' +
+            '<a class="pair-cut dresser" href="' + V8.url(soho5) + '"><img src="assets/cut/d-soho5.webp" alt="Soho 5-drawer dresser"></a></div>' +
+          '<div class="pair-tot"><p>Soho crib ' + money(soho.finishes[0].price) + ' + Soho 5-drawer dresser ' + money(soho5.finishes[0].price) + '<br><s>' + money(setSub) + "</s> <b>" + money(setTot, true) + ' for the set</b></p><button type="button" class="btn btn-primary" id="addSet">Add the Soho set</button></div>' +
       "</div></section>" +
       // 10,000 homes
       '<section data-mod="homes" class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><h2 class="disp d2 c-orange" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for Dadada.</b></h2></div>' +
