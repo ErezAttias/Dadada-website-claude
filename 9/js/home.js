@@ -84,9 +84,9 @@
       // nursery set offer
       '<section data-mod="set" class="sec joined" aria-labelledby="set-h"><div class="wrap"><div class="setband rv">' +
         '<div class="setband-img"><img src="media/mom-dr-soho.webp" alt="An expecting mother folding tiny clothes into a Soho dresser beside a Soho crib" loading="lazy"></div>' +
-        '<div class="setband-copy"><h2 class="disp d2" id="set-h" style="color:var(--lime)">The matching pair.<br><b>15% off both.</b></h2><p class="lede">Every crib has a dresser made to stand beside it: the same solid wood, the same finishes, the same lines. Pair them and the saving comes off both pieces at checkout.</p>' +
+        '<div class="setband-copy"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2><p class="lede">Every crib has a dresser made to stand beside it: the same solid wood, the same finishes, the same lines. Pair them and the saving comes off both pieces at checkout.</p>' +
         '<ul role="list"><li><span>Soho crib, Natural</span><span>' + money(soho.finishes[0].price) + "</span></li><li><span>Soho 5-drawer dresser</span><span>" + money(soho5.finishes[0].price) + '</span></li><li class="tot"><span>The Soho set</span><span><s>' + money(setSub) + "</s>" + money(setTot, true) + "</span></li></ul>" +
-        '<div class="row" style="--s:14px"><button type="button" class="btn btn-lime" id="addSet">Add the Soho set</button><a class="btn btn-light" href="#/sets">See all sets</a></div></div>' +
+        '<div class="row" style="--s:14px"><button type="button" class="btn btn-primary" id="addSet">Add the Soho set</button><a class="btn btn-secondary" href="#/sets">See all sets</a></div></div>' +
       "</div></div></section>" +
       // 10,000 homes
       '<section data-mod="homes" class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><h2 class="disp d2 c-orange" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for Dadada.</b></h2></div>' +
