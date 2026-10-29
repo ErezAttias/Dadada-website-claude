@@ -91,7 +91,7 @@
             '<div class="pair-head"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2>' +
             '<div class="pair-step"><div class="seg" role="radiogroup" aria-label="Choose a crib">' + D.order.cribs.filter(function (id) { return P[D.sets[id]]; }).map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-c="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
             '</div><div class="pair-side">' +
-            '<div class="pair-tot"><span class="pair-k">The set, 15% off</span><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p>' +
+            '<div class="pair-tot"><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p>' +
               '<div class="pair-cta"><button type="button" class="btn btn-primary" id="addSet">Add the set</button><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div></div></div>' +
           "</div>" +
         "</div>" +
