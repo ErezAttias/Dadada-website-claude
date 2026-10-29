@@ -326,6 +326,7 @@ main:focus { outline: none; }
 .mg-cats { list-style: none; padding: 0; margin: 0; }
 .mg-cat { display: block; padding: 4px 0 6px; font-style: italic; font-weight: 800; font-size: clamp(34px, 3.3vw, 56px); line-height: 1; letter-spacing: -0.045em; text-transform: uppercase; color: var(--ink); transition: color .3s, transform .45s var(--ease); }
 .mg-cats:hover .mg-cat, .mg-cats:focus-within .mg-cat { color: rgba(8, 36, 65, .28); }
+.mg-contact { margin-top: clamp(24px, 2.6vw, 40px); }
 .mg-cats .mg-cat.on, .mg-cats .mg-cat:hover { color: var(--orange); transform: translateX(14px); }
 .mg-cats:not(:hover):not(:focus-within) .mg-cat.on { color: var(--ink); transform: none; }
 .mg-quick { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 26px; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
