@@ -881,3 +881,9 @@ main:focus { outline: none; }
 .revs-wall .rev footer { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
 .revs-wall .rev footer a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 899px) { .rv-top { grid-template-columns: minmax(0, 1fr); } }
+/* journal: all stories, migrated articles */
+.prose img { max-width: 100%; height: auto; display: block; }
+.j-more { display: flex; justify-content: center; margin-top: clamp(32px, 4vw, 56px); }
+.j-more [hidden], .j-more button[hidden] { display: none; }
+@media (max-width: 899px) { .jgrid.all { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 14px; } .jgrid.all .jcard h3 { font-size: 15px; } .jgrid.all .jcard .meta { font-size: 12px; flex-wrap: wrap; gap: 6px; } }
+@media (max-width: 899px) { .jfilters { flex-wrap: nowrap; overflow-x: auto; width: calc(100% + var(--gut) * 2); margin-inline: calc(var(--gut) * -1); padding-inline: var(--gut); scrollbar-width: none; } .jfilters::-webkit-scrollbar { display: none; } .jfilters .filter { flex: none; } }

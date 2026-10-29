@@ -73,10 +73,23 @@
 
   /* ---------- journal ---------- */
   V8.route("journal", function () {
-    var f = D.journal[0];
+    var f = D.journal[0], rest = D.journal.slice(1), cats = [];
+    rest.forEach(function (j) { if (cats.indexOf(j.cat) < 0) cats.push(j.cat); });
     return { title: "Journal", html: head({ crumbs: [["Home", "#/"], ["Journal"]], h1: "The dadada <b>Daily.</b>", lede: "Buying guides, safety explainers, sleep advice and the stories behind our designs." }) +
       '<section class="wrap" style="padding-bottom:var(--sec)"><article class="split rv" style="margin-bottom:clamp(40px,5vw,80px);position:relative"><div class="im" style="aspect-ratio:4/3"><img src="' + f.hero + '" alt="' + esc(f.alt) + '" style="object-position:' + f.pos + '"></div><div class="stack" style="--s:16px"><div class="row"><span class="chip lime">' + esc(f.cat) + '</span><span class="small muted">' + f.read + " min read · " + esc(f.date) + '</span></div><h2 class="disp d2 c-orange"><a href="#/journal/' + f.id + '">' + esc(f.title) + '</a></h2><p class="lede">' + esc(f.ex) + '</p><a class="link" href="#/journal/' + f.id + '">Read the guide <span class="ar" aria-hidden="true">→</span></a></div></article>' +
-      '<div class="jgrid">' + D.journal.slice(1).map(function (j, i) { return V8.jcard(j, i); }).join("") + "</div></section>" };
+      '<div class="coll-bar"><div class="filters jfilters" role="group" aria-label="Filter stories">' + [["all", "All stories"]].concat(cats.map(function (c) { return [c, c]; })).map(function (c, i) { return '<button type="button" class="filter" aria-pressed="' + !i + '" data-v="' + esc(c[0]) + '">' + esc(c[1]) + "</button>"; }).join("") + '</div><span class="coll-count" id="jCount"></span></div>' +
+      '<div class="jgrid all" id="jGrid"></div><div class="j-more"><button type="button" class="btn line" id="jMore">Load more stories</button></div></section>', after: function (root) {
+      var grid = $("#jGrid", root), more = $("#jMore", root), count = $("#jCount", root), fv = "all", shown = 12;
+      function draw() {
+        var list = rest.filter(function (j) { return fv === "all" || j.cat === fv; });
+        grid.innerHTML = list.slice(0, shown).map(function (j, i) { return V8.jcard(j, i % 12); }).join("");
+        count.textContent = list.length + " stories"; more.hidden = shown >= list.length;
+        V8.reveal && V8.reveal(grid);
+      }
+      $$(".filter", root).forEach(function (b) { b.addEventListener("click", function () { fv = b.dataset.v; shown = 12; $$(".filter", root).forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); draw(); }); });
+      more.addEventListener("click", function () { shown += 12; draw(); });
+      draw();
+    } };
   });
   V8.route("journal/:id", function (id) {
     var j = D.journal.find(function (x) { return x.id === id; }); if (!j) return V8.pages.notFound();
@@ -84,17 +97,27 @@
     if (!shop.length) shop = [{ p: P.soho, f: 0 }, { p: P.bliss, f: 0 }];
     var toc = (j.toc || []).map(function (t) { return Array.isArray(t) ? { id: t[0], t: t[1] } : t; });
     var html = '<div class="art-prog" id="artProg"></div><header class="wrap art-hero">' + crumbs([["Home", "#/"], ["Journal", "#/journal"], [j.cat]]) + '<div class="row"><span class="chip lime">' + esc(j.cat) + '</span><span class="small muted">' + j.read + " min read · " + esc(j.date) + '</span></div><h1 class="disp d2">' + esc(j.title) + (j.sub ? ' <b class="nowrap">' + esc(j.sub) + "</b>" : "") + '</h1><div class="im"><img src="' + j.hero + '" alt="' + esc(j.alt) + '" style="object-position:' + j.pos + '"></div></header>' +
-      '<div class="wrap art">' + (toc.length ? '<nav class="toc" aria-label="On this page"><span class="label muted">On this page</span>' + toc.map(function (t) { return '<a href="#' + esc(t.id) + '" data-toc="' + esc(t.id) + '">' + esc(t.t) + "</a>"; }).join("") + "</nav>" : "<div></div>") +
-      '<article class="prose" id="artBody">' + j.body + "</article>" +
+      '<div class="wrap art">' + (j.body ? tocHTML(toc) : '<div id="artToc"></div>') +
+      '<article class="prose" id="artBody">' + (j.body || '<p class="muted">Loading the story…</p>') + "</article>" +
       '<aside class="art-shop" aria-label="Shop this story"><span class="label muted">Shop the story</span>' + shop.map(function (s) { return '<a class="line-item" style="grid-template-columns:72px 1fr;border:0;padding:0" href="' + V8.url(s.p) + '"><span class="li-img" style="width:72px;height:72px"><img src="' + s.p.finishes[s.f].img + '" alt=""></span><span><b class="li-name">' + esc(s.p.full) + '</b><span class="li-meta" style="display:block">' + esc(s.p.finishes[s.f].name) + " · " + money(s.p.finishes[s.f].price) + "</span></span></a>"; }).join("") + "</aside></div>" +
-      '<section class="sec bg-paper"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange">Keep <b>reading.</b></h2><a class="link" href="#/journal">All stories</a></div><div class="jgrid">' + D.journal.filter(function (x) { return x.id !== j.id; }).slice(0, 3).map(function (x, i) { return V8.jcard(x, i); }).join("") + "</div></div></section>";
+      '<section class="sec bg-paper"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange">Keep <b>reading.</b></h2><a class="link" href="#/journal">All stories</a></div><div class="jgrid">' + D.journal.filter(function (x) { return x.id !== j.id && x.cat === j.cat; }).concat(D.journal.filter(function (x) { return x.id !== j.id && x.cat !== j.cat; })).slice(0, 3).map(function (x, i) { return V8.jcard(x, i); }).join("") + "</div></div></section>";
     return { title: j.title, html: html, after: function (root) {
+      if (j.body) return wire(root);
+      // migrated stories keep their text in j/<id>.json and load it on arrival
+      fetch("j/" + encodeURIComponent(j.id) + ".json").then(function (r) { if (!r.ok) throw r; return r.json(); }).then(function (d) {
+        var body = $("#artBody", root), t = $("#artToc", root); if (!body || !body.isConnected) return;
+        body.innerHTML = d.body; if (t) t.outerHTML = tocHTML((d.toc || []).map(function (x) { return { id: x[0], t: x[1] }; }));
+        wire(root);
+      }).catch(function () { var body = $("#artBody", root); if (body) body.innerHTML = '<p>This story could not load. <a href="https://dadadababy.com/blogs/' + (j.cat === "News" ? "news" : "dadada-daily") + "/" + esc(j.id) + '" target="_blank" rel="noopener">Read it on dadadababy.com</a>.</p>'; });
+    } };
+    function tocHTML(toc) { return toc.length ? '<nav class="toc" aria-label="On this page"><span class="label muted">On this page</span>' + toc.map(function (t) { return '<a href="#' + esc(t.id) + '" data-toc="' + esc(t.id) + '">' + esc(t.t) + "</a>"; }).join("") + "</nav>" : "<div></div>"; }
+    function wire(root) {
       // in-article anchor links must not trigger the router
       $$('a[href^="#"]:not([href^="#/"])', root).forEach(function (a) { a.addEventListener("click", function (e) { var t = document.getElementById(a.getAttribute("href").slice(1)); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: "smooth" }); } }); });
       var body = $("#artBody", root), prog = $("#artProg", root), links = $$("[data-toc]", root);
       function onS() { var r = body.getBoundingClientRect(), k = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight))); prog.style.transform = "scaleX(" + k + ")"; var curId = null; links.forEach(function (a) { var h = document.getElementById(a.dataset.toc); if (h && h.getBoundingClientRect().top < innerHeight * .3) curId = a.dataset.toc; }); links.forEach(function (a) { a.classList.toggle("on", a.dataset.toc === curId); }); }
       addEventListener("scroll", onS, { passive: true }); onS(); V8.onLeave(function () { removeEventListener("scroll", onS); });
-    } };
+    }
   });
 
   /* ---------- stockists ---------- */
