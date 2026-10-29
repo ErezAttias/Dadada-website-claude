@@ -311,10 +311,10 @@ main:focus { outline: none; }
 .hdr.hide { transform: translateY(-100%); }
 
 /* mega menu */
-.mega { position: absolute; top: 100%; left: 0; right: 0; background: var(--white); color: var(--ink); border-top: 1px solid var(--line); box-shadow: 0 30px 60px -30px rgba(8, 36, 65, .35); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .25s, transform .3s var(--ease), visibility .25s; }
+.mega { position: absolute; top: 100%; left: 0; right: 0; background: var(--white); color: var(--ink); box-shadow: 0 30px 60px -30px rgba(8, 36, 65, .35); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .25s, transform .3s var(--ease), visibility .25s; }
 .mega.open { opacity: 1; visibility: visible; transform: none; }
 .mega-in { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.5fr); gap: clamp(32px, 4.5vw, 80px); padding-block: clamp(32px, 3.4vw, 52px); }
-.mg-r { display: grid; gap: 20px; align-content: start; border-left: 1px solid var(--line); padding-left: clamp(24px, 3vw, 52px); }
+.mg-r { display: grid; gap: 20px; align-content: start; }
 .mg-r .link { justify-self: start; }
 .mg-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; }
 .mg-grid[data-n="8"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -330,7 +330,6 @@ main:focus { outline: none; }
 .mg-tile:hover b { color: var(--orange); }
 .mg-tile small { font-size: 12.5px; font-weight: 500; color: var(--ink-2); }
 .mg-cats { list-style: none; padding: 0; margin: 0; }
-.mg-cats li { border-bottom: 1px solid var(--line); }
 .mg-cat { display: block; padding: 4px 0 6px; font-style: italic; font-weight: 800; font-size: clamp(34px, 3.3vw, 56px); line-height: 1; letter-spacing: -0.045em; text-transform: uppercase; color: var(--ink); transition: color .3s, transform .45s var(--ease); }
 .mg-cats:hover .mg-cat, .mg-cats:focus-within .mg-cat { color: rgba(8, 36, 65, .28); }
 .mg-cats .mg-cat.on, .mg-cats .mg-cat:hover { color: var(--orange); transform: translateX(14px); }
