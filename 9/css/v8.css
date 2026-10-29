@@ -896,3 +896,8 @@ main:focus { outline: none; }
 .mg-mood a > span { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; color: #fff; font-weight: 700; font-size: 15px; background: linear-gradient(transparent, rgba(8, 36, 65, .7)); }
 .mg-tile b, .mg-tile small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #mgAll { display: none; }
+/* journal + faq read as one block: no divider, a quieter faq heading, tighter gap */
+.faqblock { margin-top: clamp(48px, 5vw, 80px); padding-top: 0; border-top: 0; align-items: start; }
+.fq-h { font-size: var(--fs-d3); font-style: italic; font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
+.fq-h b { font-weight: 800; }
+.fq-h b { white-space: nowrap; }
