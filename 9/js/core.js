@@ -104,9 +104,8 @@
     var sw = p.finishes.length > 1 ? '<div class="swatches" role="radiogroup" aria-label="' + esc(p.full) + ' finish">' + p.finishes.map(function (x, i) {
       return '<button type="button" class="sw" role="radio" aria-checked="' + (i === f) + '" tabindex="' + (i === f ? 0 : -1) + '" aria-label="' + esc(x.name) + '" title="' + esc(x.name) + '" data-f="' + i + '" style="background:' + x.sw + '"></button>';
     }).join("") + "</div>" : "";
-    var cut = V8.cut(fin.img), word = V8.word(p);
     return '<article class="pcard rv" data-id="' + p.id + '" data-f="' + f + '" style="--d:' + (o.d || 0) + 's">' +
-      '<div class="pcard-fig"><a class="pcard-media' + (cut ? " has-cut" : "") + (!cut && /^(touch|bundle|gift)$/.test(p.type) ? " is-photo" : "") + '" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"' + (cut ? ' style="--top:' + cut.top + '"' : "") + ">" + (cut && !o.life ? '<span class="pcard-big" style="--len:' + word.length + '">' + esc(word) + "</span>" : "") + '<img class="cut" src="' + (cut ? cut.src : fin.img) + '" alt="" loading="lazy">' + (o.life ? '<img class="life" data-src="' + o.life + '" alt="">' : "") + "</a>" +
+      '<div class="pcard-fig"><a class="pcard-media' + (/^(touch|bundle|gift)$/.test(p.type) ? " is-photo" : "") + '" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"><img class="cut" src="' + fin.img + '" alt="" loading="lazy">' + (o.life ? '<img class="life" data-src="' + o.life + '" alt="">' : "") + "</a>" +
       (/^(touch|bundle|gift)$/.test(p.type) ? "" : '<span class="pcard-kick">' + (p.was ? '<span class="sale">Sale</span>' : "") + esc(V8.kicker(p)) + "</span>") +
       V8.wishBtn(p, "pcard-fav") + "</div>" +
       '<div class="pcard-body"><h3 class="pcard-name"><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></h3>" +
@@ -120,9 +119,7 @@
     var card = b.closest(".pcard"), p = P[card.dataset.id], f = +b.dataset.f;
     card.dataset.f = f;
     $$(".sw", card).forEach(function (x) { var on = x === b; x.setAttribute("aria-checked", on); x.tabIndex = on ? 0 : -1; });
-    var c = V8.cut(p.finishes[f].img), m = $(".pcard-media", card);
-    $(".cut", m).src = c ? c.src : p.finishes[f].img;
-    if (c) m.style.setProperty("--top", c.top);
+    $(".cut", card).src = p.finishes[f].img;
     $(".pcard-price", card).innerHTML = V8.priceHTML(p, f);
     $(".pcard-fin", card).textContent = p.finishes[f].name;
   });
