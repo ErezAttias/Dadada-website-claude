@@ -17,7 +17,7 @@
     dressers: { t: "Dressers", h1: "Bring the tiny socks.<br><b>We’ll bring the drawers.</b>", lede: "Eight dressers, every one 34 inches tall. Add a tray and it becomes your changing table.", items: function () { return V8.list("dresser"); },
       filters: [["all", "All"], ["6", "Six drawers"], ["5", "Five drawers"], ["3", "Three drawers"]], test: function (p, v) { return String(p.drawers) === v; } },
     kids: { t: "Toddler & kids", h1: "They grow up.<br><b>Your taste stays.</b>", lede: "Beds, shelves and a tower for the years after the crib, in the same clean lines as the nursery.", items: function () { return V8.list("kids").concat(V8.list("kit")); } },
-    finishing: { t: "Finishing touches", h1: "The last layer. <b>Finishing touches.</b>", lede: "Mattresses, sheets, bedding, wallpaper and the small pieces that finish a dadada nursery.", items: function () { return V8.list("touch"); },
+    finishing: { t: "Finishing touches", h1: "The last layer.<br><b>Finishing touches.</b>", lede: "Mattresses, sheets, bedding, wallpaper and the small pieces that finish a dadada nursery.", items: function () { return V8.list("touch"); },
       filters: [["all", "All"]].concat(D.touchGroups), test: function (p, v) { return p.group === v; } },
     sale: { t: "Sale", h1: "On sale, <b>for now.</b>", lede: "The same solid wood and finishes, for less. Sale items are final sale.", items: function () { return V8.all().filter(function (p) { return p.was; }); } }
   };
