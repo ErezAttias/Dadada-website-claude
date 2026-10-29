@@ -83,7 +83,7 @@
       "</div></section>" +
       // nursery set offer
       '<section data-mod="set" class="sec" aria-labelledby="set-h"><div class="wrap">' +
-        '<div class="sec-head"><div><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2></div><div class="stack" style="--s:14px;max-width:44ch"><p class="lede">Every crib has a dresser made to stand beside it: the same solid wood, the same finishes, the same lines.</p><a class="link" href="#/sets" style="align-self:flex-start;justify-self:start">See all sets <span aria-hidden="true">→</span></a></div></div>' +
+        '<div class="pair-head"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2><p class="lede">Every crib has a dresser made to stand beside it: the same solid wood, the same finishes, the same lines.</p><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div>' +
         '<div class="pair rv">' +
           '<div class="pair-photo"><img src="media/mom-dr-soho.webp" alt="An expecting mother folding tiny clothes into a Soho dresser beside a Soho crib" loading="lazy"></div>' +
           '<div class="pair-side"><div class="pair-items">' +
