@@ -750,10 +750,23 @@ main:focus { outline: none; }
 .buy .price { font-size: 26px; }
 .buy-row { display: flex; gap: 10px; align-items: center; }
 .buy-row .btn { flex: 1; min-width: 0; }
-@media (max-width: 400px) { .buy-row { flex-wrap: wrap; } .buy-row .btn { flex-basis: 100%; order: -1; } }
-.buy-perks { display: grid; gap: 8px; font-size: 14px; }
-.buy-perks li { display: flex; gap: 10px; align-items: center; }
-.buy-perks li::before { content: ""; width: 18px; height: 18px; border-radius: 50%; flex: none; background: var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23082441' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l4 4 10-10'/%3E%3C/svg%3E") center / 11px no-repeat; }
+/* calmer buy box: quiet eyebrow, swatch circles, one-line extras */
+.buy-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); margin-bottom: -6px; }
+.fin-sws { display: flex; flex-wrap: wrap; gap: 12px; }
+.fin-sw { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; box-shadow: inset 0 0 0 1.5px transparent; transition: box-shadow var(--t); }
+.fin-sw i { width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(8, 36, 65, .18); }
+.fin-sw:hover { box-shadow: inset 0 0 0 1.5px var(--line-2); }
+.fin-sw[aria-pressed="true"] { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.buy-kit { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 600; cursor: pointer; }
+.buy-kit input { width: 20px; height: 20px; accent-color: var(--ink); }
+.buy-kit .muted { margin-inline-start: auto; font-weight: 500; }
+.buy-set { font-size: 14px; color: var(--ink-2); }
+.buy-set b { color: var(--orange); }
+.buy-set:hover { color: var(--ink); }
+ul.buy-perks { display: grid; gap: 8px; font-size: 14px; }
+ul.buy-perks li { display: flex; gap: 10px; align-items: center; }
+ul.buy-perks li::before { content: ""; width: 18px; height: 18px; border-radius: 50%; flex: none; background: var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23082441' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l4 4 10-10'/%3E%3C/svg%3E") center / 11px no-repeat; }
+p.buy-perks { font-size: 13px; color: var(--ink-2); }
 .addon { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--line-2); border-radius: var(--r); font-size: 14px; }
 .addon input { width: 20px; height: 20px; accent-color: var(--blue); }
 .addon .price { margin-inline-start: auto; }
