@@ -89,7 +89,7 @@
             '<span class="pair-badge" aria-hidden="true"><b>15%</b>off both</span></div>' +
           '<div class="pair-panel">' +
             '<div class="pair-head"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2>' +
-            '<div class="pair-step"><div class="seg" role="radiogroup" aria-label="Choose a crib">' + D.order.cribs.filter(function (id) { return P[D.sets[id]]; }).map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-c="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
+            '<div class="pair-step"><div class="pair-tabs" role="radiogroup" aria-label="Choose a crib">' + D.order.cribs.filter(function (id) { return P[D.sets[id]]; }).map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-c="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
             '</div><div class="pair-side">' +
             '<div class="pair-tot"><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p>' +
               '<div class="pair-cta"><button type="button" class="btn btn-primary" id="addSet">Add the set</button><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div></div></div>' +
@@ -218,10 +218,10 @@
         pstage.classList.remove("swap");
       }
       if (swap && !reduce) { pstage.classList.add("swap"); setTimeout(fill, 220); } else fill();
-      $$(".pair-step .seg button", root).forEach(function (b) { b.setAttribute("aria-checked", b.dataset.c === pc); });
+      $$(".pair-tabs button", root).forEach(function (b) { b.setAttribute("aria-checked", b.dataset.c === pc); });
       $("#pairWas", root).textContent = money(sub); $("#pairNow", root).textContent = money(sub * .85, true);
     }
-    $$(".pair-step .seg button", root).forEach(function (b) { b.addEventListener("click", function () { if (b.dataset.c === pc) return; pc = b.dataset.c; pairDraw(true); }); });
+    $$(".pair-tabs button", root).forEach(function (b) { b.addEventListener("click", function () { if (b.dataset.c === pc) return; pc = b.dataset.c; pairDraw(true); }); });
     pairDraw();
     $("#addSet", root).addEventListener("click", function () { V8.add(pc, pf, 1, { silent: true }); V8.add(D.sets[pc], 0, 1); });
 
