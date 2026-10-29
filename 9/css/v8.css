@@ -658,16 +658,13 @@ main:focus { outline: none; }
 .pair-panel h2 { font-size: clamp(34px, 3.3vw, 54px); }
 .pair-lede { color: var(--ink-2); font-size: 16px; max-width: 38ch; }
 .pair-step { display: grid; gap: 10px; justify-items: start; }
-.pair-k { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
-.pair-k b { color: var(--ink); letter-spacing: .04em; margin-inline-start: 6px; }
 .pair-step .seg { flex-wrap: wrap; border-radius: 28px; }
 .pair-step .seg button { padding: 0 16px; }
 .pair-tot { display: grid; justify-items: start; gap: 6px; margin-top: 6px; }
 .pair-tot p { font-size: 14px; color: var(--ink-2); }
-.pair-price { display: flex; align-items: baseline; gap: 12px; }
+.pair-price { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
 .pair-price b { font-size: clamp(34px, 3.4vw, 52px); font-weight: 800; font-style: italic; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
 .pair-price s { font-size: 18px; color: var(--ink-3); }
-.pair-tot .pair-save { color: var(--orange); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
 .pair-tot .link { margin-top: 10px; }
 @media (max-width: 899px) { .pair { grid-template-columns: minmax(0, 1fr); } .pair-panel { display: contents; } .pair-panel h2, .pair-lede { order: -1; } .pair-stage { order: 0; min-height: 0; aspect-ratio: 1 / .85; } .pair-word { top: 30%; font-size: min(26cqi, calc(110cqi / var(--len, 4))); } .pair-badge { width: 64px; font-size: 9px; top: 4%; right: 3%; } .pair-step .seg { flex-wrap: nowrap; } .pair-step .seg button { padding: 0 12px; } .pair-step, .pair-tot { order: 1; } }
 
