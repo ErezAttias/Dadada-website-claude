@@ -110,9 +110,9 @@
       // faq, in the same white section as the journal
       '<div class="wrap faqblock"><div class="stack" style="--s:10px"><h3 class="fq-h" id="fq-h">Good questions, <b>honest answers.</b></h3><p class="muted">Mattresses, conversions, delivery:<br>what parents ask us before they buy.</p></div>' +
         '<div class="acc">' + faq.map(function (x) { return "<details><summary>" + esc(x.q) + '</summary><div class="acc-body">' + esc(x.a) + "</div></details>"; }).join("") + "</div></div></section>" +
-      // social-style film feed: more films appear as you reach the end
+      // social-style film feed: two rows, a Load more button adds two more
       '<section data-mod="feed" class="sec feed-sec" aria-labelledby="feed-h"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange" id="feed-h">Scroll <b>their nurseries.</b></h2><a class="link" href="https://instagram.com/dadadababyusa" target="_blank" rel="noopener">@dadadababyusa</a></div>' +
-        '<div class="feed" id="feed"></div><div class="feed-end" id="feedEnd"><span class="feed-spin" aria-hidden="true"></span><span class="sr" id="feedMsg" aria-live="polite"></span></div></div></section>' +
+        '<div class="feed" id="feed"></div><div class="feed-end" id="feedEnd"><button class="btn btn-secondary" type="button" id="feedMore">Load more</button><span class="sr" id="feedMsg" aria-live="polite"></span></div></div></section>' +
       // quiz band
       '<section data-mod="quiz" class="bg-orange quizband" aria-labelledby="qz-h">' + V8.doodle("dd-sun", "dd-sun") + V8.doodle("dd-star", "dd-star") +
         '<h2 class="disp d2" id="qz-h">Not sure <b>which crib?</b></h2><p>Four quick questions about your space and style.</p><a class="btn btn-lime lg" href="#/quiz">Take the 60-second quiz</a></section>';
@@ -221,7 +221,7 @@
     function countUp() { var el = $("#homesN", root); if (!el || el.dataset.done || reduce) return; el.dataset.done = 1; var t0 = performance.now(); (function st(t) { var k = Math.min(1, (t - t0) / 1500), e = 1 - Math.pow(1 - k, 4); el.textContent = Math.round(10000 * e).toLocaleString("en-US"); if (k < 1) requestAnimationFrame(st); })(t0); }
     V8.onLeave(function () { fio.disconnect(); });
 
-    // film feed: each film loads near the screen, plays while mostly visible, and a new batch arrives at the end
+    // film feed: each film loads near the screen and plays while mostly visible; two rows at a time
     var FEED = ROOMS.filter(function (r) { return r[0] === "v"; }).map(function (r) { return [r[1], r[2], r[3]]; })
       .concat([["v-soho", "The Soho, up close", "soho"], ["v-lala", "LaLa in natural", "lala"], ["v-spirit", "Spirit, crib to bed", "spirit"], ["v-jolly", "Jolly's curves", "jolly"]]);
     var feed = $("#feed", root), fEnd = $("#feedEnd", root), shown = 0, MAXF = 24;
@@ -235,13 +235,14 @@
       feed.insertAdjacentHTML("beforeend", html);
       $$(".ft:not([data-o])", feed).forEach(function (t) { t.dataset.o = 1; fplay.observe(t); });
       $("#feedMsg", root).textContent = shown + " films";
-      if (shown >= MAXF) { fEnd.innerHTML = '<a class="btn btn-primary" href="https://instagram.com/dadadababyusa" target="_blank" rel="noopener">See more on Instagram</a>'; fmore.disconnect(); }
+      if (shown >= MAXF) fEnd.innerHTML = '<a class="btn btn-primary" href="https://instagram.com/dadadababyusa" target="_blank" rel="noopener">See more on Instagram</a>';
     }
-    var fmore = new IntersectionObserver(function (es) { if (es[0].isIntersecting) more(4); }, { rootMargin: "300px 0px" });
+    function rows() { return matchMedia("(max-width: 899px)").matches ? 4 : 8; }
+    $("#feedMore", root).addEventListener("click", function () { more(rows()); });
     // nothing loads until the visitor nears the feed
-    var fstart = new IntersectionObserver(function (es) { if (!es[0].isIntersecting) return; fstart.disconnect(); more(matchMedia("(max-width: 720px)").matches ? 4 : 8); fmore.observe(fEnd); }, { rootMargin: "800px 0px" });
+    var fstart = new IntersectionObserver(function (es) { if (!es[0].isIntersecting) return; fstart.disconnect(); more(rows()); }, { rootMargin: "800px 0px" });
     fstart.observe(feed.parentNode);
-    V8.onLeave(function () { fplay.disconnect(); fmore.disconnect(); fstart.disconnect(); });
+    V8.onLeave(function () { fplay.disconnect(); fstart.disconnect(); });
 
     // toddler stages: click, hover or auto-advance
     var stages = $$(".stage", root), imgs = $$("#todImgs img", root), si = 0, sti;
