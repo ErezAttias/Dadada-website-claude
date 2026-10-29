@@ -646,7 +646,8 @@ main:focus { outline: none; }
 .pair-head { grid-area: head; display: grid; gap: clamp(18px, 2vw, 28px); justify-items: start; }
 .pair-head h2 { font-size: clamp(34px, 3.6vw, 60px); }
 .pair-side { grid-area: side; justify-self: end; align-self: end; display: grid; gap: 14px; justify-items: end; text-align: right; }
-.pair-stage { grid-area: stage; position: relative; width: 100%; max-width: 1100px; justify-self: center; aspect-ratio: 16 / 7.2; overflow: hidden; container-type: inline-size; background: radial-gradient(ellipse 54% 22% at 50% 78%, var(--paper) 72%, rgba(244, 243, 240, 0) 100%); } /* a soft paper floor under the pieces; the cut-outs keep a paper-coloured contact strip */
+.pair-stage { grid-area: stage; position: relative; width: 100%; max-width: 1100px; justify-self: center; aspect-ratio: 16 / 7.2; overflow: hidden; container-type: inline-size; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax); } /* the text above stays on white; the stage is a full-width paper band to the section's end */
+.sec[data-mod="set"] { padding-bottom: 0; }
 .pair-word { position: absolute; left: 0; right: 0; top: 34%; translate: 0 -50%; text-align: center; white-space: nowrap; font-weight: 800; font-style: italic; font-size: min(30cqi, calc(140cqi / var(--len, 4))); line-height: .8; letter-spacing: -0.05em; text-transform: uppercase; color: var(--blue); }
 .pair-cut { position: absolute; bottom: 9%; width: 36%; aspect-ratio: 880 / 968; z-index: 1; }
 .pair-cut.crib { left: 8%; }
