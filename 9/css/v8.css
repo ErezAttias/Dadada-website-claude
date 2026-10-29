@@ -904,3 +904,6 @@ main:focus { outline: none; }
 /* products first, the mood photo sits at the side */
 .mg-grid, .mg-grid[data-n="8"] { grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, .8fr); }
 .mg-mood { grid-column: 3; grid-row: 1 / span 2; }
+/* quick links: a tidy two-column list */
+.mg-quick { display: grid; grid-template-columns: repeat(2, max-content); gap: 12px clamp(32px, 4vw, 64px); }
+.mg-quick a { display: inline-flex; gap: 8px; }
