@@ -93,7 +93,7 @@
             '<div class="pair-step"><div class="seg" role="radiogroup" aria-label="Choose a crib">' + D.order.cribs.filter(function (id) { return P[D.sets[id]]; }).map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-c="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
             '<div class="pair-step"><div class="swatches" role="radiogroup" aria-label="Crib finish" id="pairSw"></div></div>' +
             '<div class="pair-tot"><p id="pairList"></p><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p>' +
-              '<button type="button" class="btn btn-primary block" id="addSet">Add the set</button><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div>' +
+              '<div class="pair-cta"><button type="button" class="btn btn-primary" id="addSet">Add the set</button><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div></div>' +
           "</div>" +
         "</div>" +
       "</div></section>" +

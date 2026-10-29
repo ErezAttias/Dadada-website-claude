@@ -665,7 +665,7 @@ main:focus { outline: none; }
 .pair-price { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
 .pair-price b { font-size: clamp(34px, 3.4vw, 52px); font-weight: 800; font-style: italic; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
 .pair-price s { font-size: 18px; color: var(--ink-3); }
-.pair-tot .link { margin-top: 10px; }
+.pair-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 @media (max-width: 899px) { .pair { grid-template-columns: minmax(0, 1fr); } .pair-panel { display: contents; } .pair-panel h2, .pair-lede { order: -1; } .pair-stage { order: 0; min-height: 0; aspect-ratio: 1 / .85; } .pair-word { top: 30%; font-size: min(26cqi, calc(110cqi / var(--len, 4))); } .pair-badge { width: 64px; font-size: 9px; top: 4%; right: 3%; } .pair-step .seg { flex-wrap: nowrap; } .pair-step .seg button { padding: 0 12px; } .pair-step, .pair-tot { order: 1; } }
 
 /* quiz band */
