@@ -50,8 +50,8 @@
         '<div class="hero-media"><img src="media/mom-first.webp" alt="" fetchpriority="high"><video id="heroVid" muted loop playsinline preload="none" poster="media/mom-first.webp" aria-label="A dadada film: expectant mothers at home with their cribs"><source data-src="media/v/hero-m.webm" data-src-wide="media/v/hero.webm" type="video/webm"><source data-src="media/v/hero-m.mp4" data-src-wide="media/v/hero.mp4" type="video/mp4"></video></div>' +
         '<div class="wrap hero-in">' +
           '<h1 class="disp d1"><span class="ln">Bring your <b>personality.</b></span><span class="ln">We’ll bring <b>the crib.</b></span></h1>' +
-          '<div class="hero-foot"><p class="lede">Italian made cribs, made from solid beechwood. <br>Designed to look as good as the home around them.</p>' +
-          '<div class="hero-cta"><span class="rating">' + V8.stars(5) + "4.9 · " + TOTAL_REVIEWS + ' reviews</span><a class="btn btn-lime lg" href="#/cribs">Shop cribs <span class="ar" aria-hidden="true">→</span></a></div></div>' +
+          '<div class="hero-foot"><div class="hero-cta"><p class="lede">Italian made cribs, made from solid beechwood. <br>Designed to look as good as the home around them.</p>' +
+          '<a class="btn btn-lime lg" href="#/cribs">Shop cribs <span class="ar" aria-hidden="true">→</span></a></div><span class="rating">' + V8.stars(5) + "4.9 · " + TOTAL_REVIEWS + ' reviews</span></div>' +
         "</div>" +
       "</section>" +
       // retailers

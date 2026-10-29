@@ -468,7 +468,7 @@ main:focus { outline: none; }
 .hero h1 .ln { display: block; white-space: nowrap; }
 .hero-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 32px; }
 .hero-foot .lede { margin: 0; max-width: none; color: rgba(255, 255, 255, .92); font-weight: 600; }
-.hero-cta { display: flex; align-items: center; gap: 14px 24px; }
+.hero-cta { display: flex; align-items: center; gap: 14px 32px; }
 .hero .rating { color: rgba(255, 255, 255, .9); }
 .hero .stars { color: var(--lime); }
 @media (max-width: 720px) {
