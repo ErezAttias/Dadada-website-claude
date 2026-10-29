@@ -85,7 +85,7 @@
     var html = '<div class="wrap" style="padding-top:clamp(20px,2.4vw,36px)">' + crumbs([["Home", "#/"], coll, [p.full]]) + "</div>" +
       '<section class="wrap pdp" style="padding-block:clamp(20px,2.4vw,36px) var(--sec)" aria-labelledby="pd-h">' +
         '<div class="gal"><div class="gal-main" id="galMain"><img id="galImg" src="' + gallery[0].img + '" alt="' + esc(gallery[0].alt) + '"><video id="galVid" class="gal-vid" muted loop playsinline preload="none" hidden></video>' +
-          (isCrib && p.hot ? p.hot.map(function (h, i) { return '<button type="button" class="gal-hot" style="left:' + h[0] + "%;top:" + h[1] + '%" data-hot="' + i + '" aria-label="' + esc(h[2]) + '" aria-expanded="false"></button>'; }).join("") + '<div class="gal-tip" id="galTip" hidden></div>' : "") + "</div>" +
+          "</div>" +
           '<div class="gal-thumbs" role="group" aria-label="Images">' + gallery.slice(0, 10).map(function (g, i) { return '<button type="button" aria-pressed="' + !i + '" data-g="' + i + '" aria-label="' + esc(g.alt) + '"' + (g.video ? ' class="is-vid"' : "") + '><img class="' + (g.cut ? "cut" : "") + '" src="' + g.img + '" alt="" loading="lazy"></button>'; }).join("") + "</div></div>" +
         '<div class="buy" id="buy">' +
           (p.awards ? '<div class="row" style="--s:6px">' + p.awards.map(function (a) { return '<span class="chip lime">' + esc(a) + "</span>"; }).join("") + "</div>" : p.was ? '<div class="row"><span class="chip orange">Sale</span></div>' : "") +
@@ -118,7 +118,7 @@
       function showG(i) { st.g = i; var g = gallery[i];
         img.hidden = !!g.video; vid.hidden = !g.video;
         if (g.video) { if (vid.dataset.v !== g.video) { vid.dataset.v = g.video; vid.poster = g.img; vid.innerHTML = '<source src="media/v/' + g.video + '.webm" type="video/webm"><source src="media/v/' + g.video + '.mp4" type="video/mp4">'; vid.load(); } var pp = vid.play(); if (pp && pp.catch) pp.catch(function () {}); vid.setAttribute("aria-label", g.alt); } else vid.pause();
-        img.src = g.img; img.alt = g.alt; img.classList.toggle("photo", !g.cut); thumbs.forEach(function (t, k) { t.setAttribute("aria-pressed", k === i); }); $$(".gal-hot", root).forEach(function (h) { h.hidden = !g.cut; }); var tip = $("#galTip", root); if (tip) tip.hidden = true; }
+        img.src = g.img; img.alt = g.alt; img.classList.toggle("photo", !g.cut); thumbs.forEach(function (t, k) { t.setAttribute("aria-pressed", k === i); }); }
       thumbs.forEach(function (t) { t.addEventListener("click", function () { showG(+t.dataset.g); }); });
       function setF(i) {
         st.f = i; var f = p.finishes[i];
@@ -135,14 +135,10 @@
       var kit = $("#addKit", root); if (kit) kit.addEventListener("change", updAdd);
       function add() { var k = $("#addKit", root); if (k && k.checked) { var kf = { natural: 0, white: 1, walnut: 2 }[p.finishes[st.f].k] || 0; V8.add(kitId, kitId === "kit" ? kf : 0, st.qty, { silent: true }); } V8.add(p.id, st.f, st.qty); }
       $("#pdAdd", root).addEventListener("click", add); $("#sbAdd", root).addEventListener("click", add);
-      // hotspots on the product cut-out
-      var tip = $("#galTip", root);
-      $$(".gal-hot", root).forEach(function (h) { h.addEventListener("click", function (e) { e.stopPropagation(); var on = h.getAttribute("aria-expanded") === "true"; $$(".gal-hot", root).forEach(function (x) { x.setAttribute("aria-expanded", "false"); }); if (on) { tip.hidden = true; return; } h.setAttribute("aria-expanded", "true"); var d = p.hot[+h.dataset.hot]; tip.innerHTML = "<b>" + esc(d[2]) + "</b>" + esc(d[3]); tip.hidden = false; tip.style.left = Math.min(Math.max(+d[0] - 20, 2), 48) + "%"; tip.style.top = (+d[1] > 55 ? "auto" : (+d[1] + 7) + "%"); tip.style.bottom = (+d[1] > 55 ? (100 - +d[1] + 7) + "%" : "auto"); }); });
-      document.addEventListener("click", closeTip); function closeTip(e) { if (tip && !e.target.closest(".gal-hot")) { tip.hidden = true; $$(".gal-hot", root).forEach(function (x) { x.setAttribute("aria-expanded", "false"); }); } }
       // sticky buy bar once the main button scrolls away (phones)
       var sb = $("#stickyBuy", root), sio = new IntersectionObserver(function (es) { var vis = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; sb.classList.toggle("on", vis); sb.setAttribute("aria-hidden", !vis); $("#sbAdd", root).tabIndex = vis ? 0 : -1; });
       sio.observe($("#pdAdd", root));
-      V8.onLeave(function () { sio.disconnect(); document.removeEventListener("click", closeTip); });
+      V8.onLeave(function () { sio.disconnect(); });
       updAdd();
     } };
   }

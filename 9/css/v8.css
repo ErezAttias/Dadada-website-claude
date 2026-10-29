@@ -744,10 +744,6 @@ main:focus { outline: none; }
 .gal-thumbs button.is-vid { position: relative; }
 .gal-thumbs button.is-vid::after { content: ""; position: absolute; inset: 0; margin: auto; width: 30px; height: 30px; border-radius: 50%; background: var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23082441'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") 56% 50% / 14px no-repeat; }
 .gal-thumbs img.cut { object-fit: contain; mix-blend-mode: multiply; padding: 6px; }
-.gal-hot { position: absolute; z-index: 2; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; display: grid; place-items: center; }
-.gal-hot::before { content: "+"; width: 26px; height: 26px; border-radius: 50%; background: var(--lime); display: grid; place-items: center; font-weight: 800; color: var(--ink); box-shadow: 0 4px 14px rgba(8, 36, 65, .25); }
-.gal-tip { position: absolute; z-index: 3; width: min(280px, 80%); background: var(--white); padding: 14px 16px; border-radius: 14px; box-shadow: 0 20px 40px -20px rgba(8, 36, 65, .45); font-size: 14px; color: var(--ink-2); }
-.gal-tip b { display: block; color: var(--ink); margin-bottom: 4px; }
 .buy { position: sticky; top: calc(var(--nav-h) + 24px); display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; min-width: 0; }
 .buy h1 { color: var(--orange); }
 .buy-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
