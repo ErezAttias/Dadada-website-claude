@@ -14,7 +14,7 @@
   var COLL = {
     cribs: { t: "Cribs", h1: "Cribs that <b>grow up.</b>", lede: "Five convertible cribs in solid European beech, made in Italy. Each one becomes a toddler bed, and some go much further.", items: function () { return V8.list("crib"); },
       filters: [["all", "All"], ["3-in-1", "3-in-1"], ["4-in-1", "4-in-1"], ["8-in-1", "8-in-1"]], test: function (p, v) { return p.kind.indexOf(v) === 0; } },
-    dressers: { t: "Dressers", h1: "Bring the tiny socks. <b>We’ll bring the drawers.</b>", lede: "Eight dressers, every one 34 inches tall. Add a tray and it becomes your changing table.", items: function () { return V8.list("dresser"); },
+    dressers: { t: "Dressers", h1: "Bring the tiny socks.<br><b>We’ll bring the drawers.</b>", lede: "Eight dressers, every one 34 inches tall. Add a tray and it becomes your changing table.", items: function () { return V8.list("dresser"); },
       filters: [["all", "All"], ["6", "Six drawers"], ["5", "Five drawers"], ["3", "Three drawers"]], test: function (p, v) { return String(p.drawers) === v; } },
     kids: { t: "Toddler & kids", h1: "They grow up. <b>Your taste stays.</b>", lede: "Beds, shelves and a tower for the years after the crib, in the same clean lines as the nursery.", items: function () { return V8.list("kids").concat(V8.list("kit")); } },
     finishing: { t: "Finishing touches", h1: "The last layer. <b>Finishing touches.</b>", lede: "Mattresses, sheets, bedding, wallpaper and the small pieces that finish a dadada nursery.", items: function () { return V8.list("touch"); },
