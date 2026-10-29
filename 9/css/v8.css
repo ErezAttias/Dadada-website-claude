@@ -640,22 +640,23 @@ main:focus { outline: none; }
 .setband-copy li.tot { font-weight: 800; font-size: 18px; }
 .setband-copy li s { color: rgba(255, 255, 255, .55); font-weight: 500; margin-inline-end: 10px; }
 @media (max-width: 899px) { .setband { grid-template-columns: minmax(0, 1fr); } .setband-img { min-height: 300px; } }
-/* build your pair: a configurator - the stage leads, the choices sit beside it */
-.pair { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr); gap: clamp(28px, 4vw, 72px); align-items: stretch; }
-.pair-stage { position: relative; min-height: clamp(460px, 44vw, 680px); background: var(--paper); overflow: hidden; container-type: inline-size; }
-.pair-word { position: absolute; left: 0; right: 0; top: 47%; translate: 0 -50%; text-align: center; white-space: nowrap; font-weight: 800; font-style: italic; font-size: min(30cqi, calc(118cqi / var(--len, 4))); line-height: .8; letter-spacing: -0.05em; text-transform: uppercase; color: var(--blue); }
-.pair-cut { position: absolute; bottom: 4%; width: 52%; aspect-ratio: 880 / 968; z-index: 1; }
-.pair-cut.crib { left: 0; }
-.pair-cut.dresser { right: 0; width: 46%; }
+/* build your pair: heading top left, choices and price top right, the stage centred below */
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "head side" "stage stage"; gap: clamp(20px, 2.4vw, 40px) clamp(28px, 4vw, 72px); align-items: start; }
+.pair-panel { display: contents; }
+.pair-panel h2 { grid-area: head; font-size: clamp(34px, 3.6vw, 60px); }
+.pair-side { grid-area: side; justify-self: end; display: grid; gap: 14px; justify-items: end; text-align: right; }
+.pair-stage { grid-area: stage; position: relative; width: 100%; max-width: 1100px; justify-self: center; aspect-ratio: 16 / 6.6; overflow: hidden; container-type: inline-size; }
+.pair-word { position: absolute; left: 0; right: 0; top: 38%; translate: 0 -50%; text-align: center; white-space: nowrap; font-weight: 800; font-style: italic; font-size: min(22cqi, calc(88cqi / var(--len, 4))); line-height: .8; letter-spacing: -0.05em; text-transform: uppercase; color: var(--blue); }
+.pair-cut { position: absolute; bottom: -4%; width: 38%; aspect-ratio: 880 / 968; z-index: 1; }
+.pair-cut.crib { left: 9%; }
+.pair-cut.dresser { right: 9%; width: 33%; }
 .pair-cut img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: bottom; transition: transform .7s var(--ease); transform-origin: 50% 90%; }
 .pair-cut:hover img { transform: scale(1.03); }
 .pair-word, .pair-cut { transition: opacity .22s ease, translate .45s var(--ease); }
 .pair-stage.swap .pair-word { opacity: 0; }
 .pair-stage.swap .pair-cut { opacity: 0; translate: 0 12px; }
-.pair-badge { position: absolute; right: 5%; top: 6%; z-index: 2; width: clamp(84px, 13cqi, 124px); aspect-ratio: 1; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-content: center; text-align: center; rotate: 12deg; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.1; }
+.pair-badge { position: absolute; right: 6%; top: 6%; z-index: 2; width: clamp(84px, 13cqi, 124px); aspect-ratio: 1; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-content: center; text-align: center; rotate: 12deg; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.1; }
 .pair-badge b { font-size: 2.2em; font-style: italic; font-weight: 800; letter-spacing: -0.04em; }
-.pair-panel { display: flex; flex-direction: column; gap: 18px; align-self: start; } /* heading meets the stage top */
-.pair-panel h2 { font-size: clamp(34px, 3.3vw, 54px); }
 .pair-step { display: grid; gap: 10px; justify-items: start; }
 .pair-step .seg { flex-wrap: wrap; border-radius: 28px; background: var(--white); }
 .pair-step .seg button[aria-checked="true"] { background: var(--ink); color: var(--white); box-shadow: none; }
@@ -666,7 +667,9 @@ main:focus { outline: none; }
 .pair-price b { font-size: clamp(34px, 3.4vw, 52px); font-weight: 800; font-style: italic; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
 .pair-price s { font-size: 18px; color: var(--ink-3); }
 .pair-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
-@media (max-width: 899px) { .pair { grid-template-columns: minmax(0, 1fr); } .pair-panel { display: contents; } .pair-panel h2 { order: -1; } .pair-stage { order: 0; min-height: 0; aspect-ratio: 1 / .85; } .pair-word { top: 30%; font-size: min(26cqi, calc(110cqi / var(--len, 4))); } .pair-badge { width: 64px; font-size: 9px; top: 4%; right: 3%; } .pair-step .seg { flex-wrap: nowrap; } .pair-step .seg button { padding: 0 12px; } .pair-step, .pair-tot { order: 1; } }
+.pair-side .pair-tot, .pair-side .pair-step { justify-items: end; margin-top: 0; }
+.pair-side .pair-price { justify-content: flex-end; }
+@media (max-width: 899px) { .pair { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "stage" "side"; } .pair-side { justify-self: stretch; justify-items: start; text-align: left; } .pair-side .pair-tot { justify-items: start; } .pair-side .pair-price { justify-content: flex-start; } .pair-stage { aspect-ratio: 1 / .85; } .pair-word { top: 30%; font-size: min(26cqi, calc(110cqi / var(--len, 4))); } .pair-badge { width: 64px; font-size: 9px; top: 4%; right: 3%; } .pair-cut { width: 50%; bottom: 4%; } .pair-cut.crib { left: 2%; } .pair-cut.dresser { right: 2%; width: 44%; } .pair-side .pair-step { justify-items: start; } .pair-step .seg { flex-wrap: nowrap; } .pair-step .seg button { padding: 0 12px; } }
 
 /* quiz band */
 .quizband { position: relative; text-align: center; display: grid; gap: 20px; justify-items: center; padding-block: clamp(72px, 9vw, 150px); overflow: hidden; }
