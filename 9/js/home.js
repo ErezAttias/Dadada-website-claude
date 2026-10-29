@@ -85,13 +85,13 @@
       '<section data-mod="set" class="sec bg-paper" aria-labelledby="set-h"><div class="wrap">' +
         '<div class="pair rv" id="pair">' +
           '<div class="pair-stage" id="pairStage"><span class="pair-word" id="pairWord" aria-hidden="true"></span>' +
-            '<a class="pair-cut crib" id="pairCrib"><img alt=""></a><a class="pair-cut dresser" id="pairDr"><img alt=""></a>' +
+            '<a class="pair-cut crib" id="pairCrib"><img alt=""><span class="pair-cap"></span></a><span class="pair-plus" aria-hidden="true">+</span><a class="pair-cut dresser" id="pairDr"><img alt=""><span class="pair-cap"></span></a>' +
             '<span class="pair-badge" aria-hidden="true"><b>15%</b>off both</span></div>' +
           '<div class="pair-panel">' +
             '<div class="pair-head"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2>' +
             '<div class="pair-step"><div class="seg" role="radiogroup" aria-label="Choose a crib">' + D.order.cribs.filter(function (id) { return P[D.sets[id]]; }).map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-c="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
             '</div><div class="pair-side">' +
-            '<div class="pair-tot"><p id="pairList"></p><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p>' +
+            '<div class="pair-tot"><span class="pair-k">The set, 15% off</span><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p>' +
               '<div class="pair-cta"><button type="button" class="btn btn-primary" id="addSet">Add the set</button><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div></div></div>' +
           "</div>" +
         "</div>" +
@@ -213,13 +213,12 @@
       var cr = P[pc], dr = P[D.sets[pc]], sub = cr.finishes[pf].price + dr.finishes[0].price, cut = function (src) { return "assets/cut/" + src.split("/").pop(); };
       function fill() {
         var w = $("#pairWord", root); w.textContent = cr.name; w.style.setProperty("--len", cr.name.length);
-        $("#pairCrib", root).href = V8.url(cr); $("#pairCrib img", root).src = cut(cr.finishes[pf].img); $("#pairCrib img", root).alt = cr.full + ", " + cr.finishes[pf].name;
-        $("#pairDr", root).href = V8.url(dr); $("#pairDr img", root).src = cut(dr.finishes[0].img); $("#pairDr img", root).alt = dr.full;
+        $("#pairCrib", root).href = V8.url(cr); $("#pairCrib img", root).src = cut(cr.finishes[pf].img); $("#pairCrib img", root).alt = cr.full + ", " + cr.finishes[pf].name; $("#pairCrib .pair-cap", root).innerHTML = esc(cr.full) + " <b>" + money(cr.finishes[pf].price) + "</b>";
+        $("#pairDr", root).href = V8.url(dr); $("#pairDr img", root).src = cut(dr.finishes[0].img); $("#pairDr img", root).alt = dr.full; $("#pairDr .pair-cap", root).innerHTML = esc(dr.full) + " <b>" + money(dr.finishes[0].price) + "</b>";
         pstage.classList.remove("swap");
       }
       if (swap && !reduce) { pstage.classList.add("swap"); setTimeout(fill, 220); } else fill();
       $$(".pair-step .seg button", root).forEach(function (b) { b.setAttribute("aria-checked", b.dataset.c === pc); });
-      $("#pairList", root).textContent = cr.full + " " + money(cr.finishes[pf].price) + " + " + dr.full + " " + money(dr.finishes[0].price);
       $("#pairWas", root).textContent = money(sub); $("#pairNow", root).textContent = money(sub * .85, true);
     }
     $$(".pair-step .seg button", root).forEach(function (b) { b.addEventListener("click", function () { if (b.dataset.c === pc) return; pc = b.dataset.c; pairDraw(true); }); });

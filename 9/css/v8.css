@@ -646,17 +646,24 @@ main:focus { outline: none; }
 .pair-head { grid-area: head; display: grid; gap: clamp(18px, 2vw, 28px); justify-items: start; }
 .pair-head h2 { font-size: clamp(34px, 3.6vw, 60px); }
 .pair-side { grid-area: side; justify-self: end; align-self: end; display: grid; gap: 14px; justify-items: end; text-align: right; }
-.pair-stage { grid-area: stage; position: relative; width: 100%; max-width: 1100px; justify-self: center; aspect-ratio: 16 / 6.6; overflow: hidden; container-type: inline-size; }
-.pair-word { position: absolute; left: 0; right: 0; top: 38%; translate: 0 -50%; text-align: center; white-space: nowrap; font-weight: 800; font-style: italic; font-size: min(22cqi, calc(88cqi / var(--len, 4))); line-height: .8; letter-spacing: -0.05em; text-transform: uppercase; color: var(--blue); }
-.pair-cut { position: absolute; bottom: -4%; width: 38%; aspect-ratio: 880 / 968; z-index: 1; }
-.pair-cut.crib { left: 9%; }
-.pair-cut.dresser { right: 9%; width: 33%; }
+.pair-stage { grid-area: stage; position: relative; width: 100%; max-width: 1100px; justify-self: center; aspect-ratio: 16 / 7.2; overflow: hidden; container-type: inline-size; }
+.pair-word { position: absolute; left: 0; right: 0; top: 34%; translate: 0 -50%; text-align: center; white-space: nowrap; font-weight: 800; font-style: italic; font-size: min(30cqi, calc(140cqi / var(--len, 4))); line-height: .8; letter-spacing: -0.05em; text-transform: uppercase; color: var(--blue); }
+.pair-cut { position: absolute; bottom: 9%; width: 36%; aspect-ratio: 880 / 968; z-index: 1; }
+.pair-cut.crib { left: 8%; }
+.pair-cut.dresser { right: 8%; width: 32%; }
 .pair-cut img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: bottom; transition: transform .7s var(--ease); transform-origin: 50% 90%; }
-.pair-cut:hover img { transform: scale(1.03); }
+.pair-cut:hover img { transform: translateY(-6px); }
+/* soft floor shadow so the pieces stand rather than float */
+.pair-cut::before { content: ""; position: absolute; left: 14%; right: 14%; bottom: 8%; height: 7%; border-radius: 50%; background: radial-gradient(closest-side, rgba(8, 36, 65, .22), transparent); filter: blur(4px); transition: transform .7s var(--ease), opacity .7s; }
+.pair-cut:hover::before { transform: scaleX(.9); opacity: .7; }
+.pair-cap { position: absolute; left: 0; right: 0; top: 100%; margin-top: -2%; text-align: center; font-size: 13px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+.pair-cap b { color: var(--ink); margin-inline-start: 6px; }
+.pair-plus { position: absolute; left: 50%; bottom: 26%; translate: -50% 0; z-index: 2; width: 44px; height: 44px; border-radius: 50%; background: var(--white); color: var(--ink); display: grid; place-items: center; font-size: 24px; font-weight: 600; line-height: 1; box-shadow: 0 8px 22px -10px rgba(8, 36, 65, .45); }
+.pair-k { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--orange); }
 .pair-word, .pair-cut { transition: opacity .22s ease, translate .45s var(--ease); }
-.pair-stage.swap .pair-word { opacity: 0; }
+.pair-stage.swap .pair-word { opacity: 0; translate: 0 -46%; }
 .pair-stage.swap .pair-cut { opacity: 0; translate: 0 12px; }
-.pair-badge { position: absolute; right: 6%; top: 6%; z-index: 2; width: clamp(84px, 13cqi, 124px); aspect-ratio: 1; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-content: center; text-align: center; rotate: 12deg; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.1; }
+.pair-badge { position: absolute; right: 6%; top: 4%; z-index: 2; width: clamp(84px, 13cqi, 124px); aspect-ratio: 1; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-content: center; text-align: center; rotate: 12deg; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1.1; }
 .pair-badge b { font-size: 2.2em; font-style: italic; font-weight: 800; letter-spacing: -0.04em; }
 .pair-step { display: grid; gap: 10px; justify-items: start; }
 .pair-step .seg { flex-wrap: wrap; border-radius: 28px; background: var(--white); }
@@ -670,7 +677,7 @@ main:focus { outline: none; }
 .pair-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 .pair-side .pair-tot { justify-items: end; margin-top: 0; }
 .pair-side .pair-price { justify-content: flex-end; }
-@media (max-width: 899px) { .pair { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "stage" "side"; } .pair-side { justify-self: stretch; justify-items: start; text-align: left; } .pair-side .pair-tot { justify-items: start; } .pair-side .pair-price { justify-content: flex-start; } .pair-stage { aspect-ratio: 1 / .85; } .pair-word { top: 30%; font-size: min(26cqi, calc(110cqi / var(--len, 4))); } .pair-badge { width: 64px; font-size: 9px; top: 4%; right: 3%; } .pair-cut { width: 50%; bottom: 4%; } .pair-cut.crib { left: 2%; } .pair-cut.dresser { right: 2%; width: 44%; } .pair-step .seg { flex-wrap: nowrap; } .pair-step .seg button { padding: 0 12px; } }
+@media (max-width: 899px) { .pair { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "stage" "side"; } .pair-side { justify-self: stretch; justify-items: start; text-align: left; } .pair-side .pair-tot { justify-items: start; } .pair-side .pair-price { justify-content: flex-start; } .pair-stage { aspect-ratio: 1 / .85; } .pair-word { top: 30%; font-size: min(26cqi, calc(110cqi / var(--len, 4))); } .pair-badge { width: 64px; font-size: 9px; top: 4%; right: 3%; } .pair-cut { width: 48%; bottom: 12%; } .pair-cap { font-size: 11px; white-space: normal; } .pair-cap b { display: block; margin: 0; } .pair-plus { width: 32px; height: 32px; font-size: 18px; bottom: 30%; } .pair-cut.crib { left: 2%; } .pair-cut.dresser { right: 2%; width: 44%; } .pair-step .seg { flex-wrap: nowrap; } .pair-step .seg button { padding: 0 12px; } }
 
 /* quiz band */
 .quizband { position: relative; text-align: center; display: grid; gap: 20px; justify-items: center; padding-block: clamp(72px, 9vw, 150px); overflow: hidden; }
