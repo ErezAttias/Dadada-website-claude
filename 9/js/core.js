@@ -245,14 +245,17 @@
   // every model of the category in focus, as pictures, next to the category names
   var mgPic = function (p) { var f = p.finishes[0], room = /^media\/(ks-|t\/)/.test(f.img); return '<img' + (room ? ' class="ph"' : "") + ' src="' + f.img + '" alt="" loading="lazy">'; };
   var mgTile = function (href, pic, name, sub, price) { return '<li><a class="mg-tile" href="' + href + '"><span class="mg-pic">' + pic + "</span><b>" + esc(name) + "</b><small>" + esc(sub) + (price ? " · " + price : "") + "</small></a></li>"; };
+  // every category: one mood photo + four products, so the menu keeps one shape and one height
+  var pick = function (ids) { return ids.map(function (id) { return P[id]; }).filter(Boolean); };
   var MGL = {
-    cribs: V8.list("crib").map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind.split(" ")[0], "from " + money(V8.minPrice(p))); }),
-    dressers: V8.list("dresser").map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind.replace(" dresser", ""), "from " + money(V8.minPrice(p))); }),
-    kids: V8.list("kids").concat(V8.list("kit")).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind, money(V8.minPrice(p))); }),
-    touches: V8.list("touch").filter(function (p) { return ["newton", "moonlight", "moses", "sheet-muslin", "sheet-knit", "bedding", "wallpaper", "baskets"].indexOf(p.id) > -1; }).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.finishes.length > 1 ? p.finishes.length + " " + (p.opt || "option").toLowerCase() + "s" : p.kind, "from " + money(V8.minPrice(p))); }),
-    sets: Object.keys(D.sets).map(function (c) { var cr = P[c], dr = P[D.sets[c]]; return mgTile("#/sets", '<span class="mg-pair">' + mgPic(cr) + mgPic(dr) + "</span>", cr.name + " set", cr.name + " crib + " + dr.name + " dresser", "from " + money(Math.round((V8.minPrice(cr) + V8.minPrice(dr)) * .85))); })
+    cribs: pick(["soho", "lala", "bliss", "spirit"]).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind.split(" ")[0], "from " + money(V8.minPrice(p))); }),
+    dressers: pick(["merry", "bliss6", "lalabig", "soho5"]).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind.replace(" dresser", ""), "from " + money(V8.minPrice(p))); }),
+    kids: pick(["muse", "shelf", "tower", "fun"]).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.kind, money(V8.minPrice(p))); }),
+    sets: ["soho", "lala", "bliss", "spirit"].map(function (c) { var cr = P[c], dr = P[D.sets[c]]; return mgTile("#/sets", '<span class="mg-pair">' + mgPic(cr) + mgPic(dr) + "</span>", cr.name + " set", "Crib + " + dr.name + " dresser", "from " + money(Math.round((V8.minPrice(cr) + V8.minPrice(dr)) * .85))); }),
+    touches: pick(["newton", "sheet-muslin", "wallpaper", "baskets"]).map(function (p) { return mgTile(V8.url(p), mgPic(p), p.name, p.finishes.length > 1 ? p.finishes.length + " " + (p.opt || "option").toLowerCase() + "s" : p.kind, "from " + money(V8.minPrice(p))); })
   };
-  var MG = { cribs: "Shop all cribs", dressers: "Shop all dressers", kids: "Shop toddler & kids", sets: "Shop all sets", touches: "Shop all finishing touches" };
+  var MOOD = { cribs: ["media/mom-soho.webp", "#/cribs", "All cribs"], dressers: ["media/mom-dr-soho.webp", "#/dressers", "All dressers"], kids: ["media/mom-kids.webp", "#/kids", "All toddler & kids"], sets: ["media/mom-dr-cp.webp", "#/sets", "All nursery sets"], touches: ["media/t/wallpaper-g1.webp", "#/finishing", "All finishing touches"] };
+  Object.keys(MGL).forEach(function (k) { var m = MOOD[k]; MGL[k].unshift('<li class="mg-mood"><a href="' + m[1] + '"><img src="' + m[0] + '" alt="" loading="lazy"><span>' + esc(m[2]) + ' <span aria-hidden="true">→</span></span></a></li>'); });
   $("#mgLists").innerHTML = Object.keys(MGL).map(function (k) { return '<ul class="mg-grid" data-c="' + k + '" data-n="' + MGL[k].length + '"' + (k === "cribs" ? "" : " hidden") + ">" + MGL[k].join("") + "</ul>"; }).join("");
   $$(".mg-cat").forEach(function (a) {
     function focusCat() { $$(".mg-cat").forEach(function (x) { x.classList.toggle("on", x === a); }); $$(".mg-grid").forEach(function (l) { l.hidden = l.dataset.c !== a.dataset.c; }); $("#mgAll").href = a.getAttribute("href"); $("#mgAll").innerHTML = MG[a.dataset.c] + ' <span aria-hidden="true">→</span>'; }
