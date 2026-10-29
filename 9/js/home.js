@@ -108,7 +108,7 @@
       '<section data-mod="journal" class="sec" aria-labelledby="jr-h"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange" id="jr-h">Read up. <b>Rest easy.</b></h2><a class="link" href="#/journal">All stories</a></div><div class="jgrid scroll">' +
         D.journal.slice(0, 3).map(function (j, i) { return V8.jcard(j, i); }).join("") + "</div></div>" +
       // faq, in the same white section as the journal
-      '<div class="wrap faqblock"><div class="stack" style="--s:10px"><h3 class="fq-h" id="fq-h">Good questions, <b>honest answers.</b></h3><p class="muted">Mattresses, conversions, delivery: what parents ask us before they buy.</p></div>' +
+      '<div class="wrap faqblock"><div class="stack" style="--s:10px"><h3 class="fq-h" id="fq-h">Good questions, <b>honest answers.</b></h3><p class="muted">Mattresses, conversions, delivery:<br>what parents ask us before they buy.</p></div>' +
         '<div class="acc">' + faq.map(function (x) { return "<details><summary>" + esc(x.q) + '</summary><div class="acc-body">' + esc(x.a) + "</div></details>"; }).join("") + "</div></div></section>" +
       // social-style film feed: more films appear as you reach the end
       '<section data-mod="feed" class="sec feed-sec" aria-labelledby="feed-h"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange" id="feed-h">Scroll <b>their nurseries.</b></h2><a class="link" href="https://instagram.com/dadadababyusa" target="_blank" rel="noopener">@dadadababyusa</a></div>' +
