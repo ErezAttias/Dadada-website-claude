@@ -668,7 +668,7 @@ main:focus { outline: none; }
 .pair-nav { display: flex; align-items: center; justify-content: center; gap: 18px; }
 .pair-nav .round { width: 42px; height: 42px; }
 .pair-count { min-width: 44px; text-align: center; font-size: 13px; font-weight: 700; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.pair-plus { position: absolute; left: 50%; top: clamp(130px, 17vw, 250px); translate: -50% -50%; z-index: 2; width: 52px; height: 52px; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-items: center; font-size: 28px; font-weight: 700; line-height: 1; }
+.pair-plus { position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 2; width: 52px; height: 52px; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-items: center; font-size: 28px; font-weight: 700; line-height: 1; }
 @media (min-width: 900px) { .sec[data-mod="set"] { padding-block: clamp(32px, 5vh, 64px); } .pair-car { aspect-ratio: auto; height: clamp(220px, calc(100svh - var(--nav-h) - 520px), 440px); } } /* heading and both slots fit one screen */
 @media (max-width: 899px) { .pair-tot { justify-items: start; } .pair-duo { grid-template-columns: minmax(0, 1fr); gap: 8px; } .pair-plus { position: relative; left: auto; top: auto; translate: none; justify-self: center; margin-block: -26px; width: 44px; height: 44px; font-size: 24px; } .pair-car { aspect-ratio: 16 / 11; } }
 
