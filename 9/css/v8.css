@@ -654,21 +654,23 @@ main:focus { outline: none; }
 .pair-price s { font-size: 18px; color: var(--ink-3); }
 .pair-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 .pair-duo { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(8px, 1vw, 16px); }
-.pair-slot { display: grid; grid-template-rows: auto auto auto 1fr; align-content: start; gap: 14px; padding: clamp(20px, 2.4vw, 36px); background: var(--paper); min-width: 0; }
+.pair-slot { display: grid; align-content: start; gap: 12px; padding: clamp(20px, 2.4vw, 36px); background: var(--paper); min-width: 0; }
 .pair-lbl { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
-.pair-img { position: relative; display: block; aspect-ratio: 16 / 9.5; overflow: hidden; }
-.pair-img img { position: absolute; inset: -14% 0; width: 100%; height: 128%; object-fit: contain; mix-blend-mode: multiply; transition: opacity .22s ease, transform .5s var(--ease); }
-.pair-img.swap img { opacity: 0; transform: translateY(10px); }
-.pair-img:hover img { transform: translateY(-4px); }
 .pair-info { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: clamp(17px, 1.3vw, 21px); }
 .pair-info span { font-weight: 500; color: var(--ink-2); }
-.pair-tabs { display: flex; flex-wrap: wrap; align-items: flex-start; align-content: flex-start; gap: 6px 18px; }
-.pair-tabs button { padding: 4px 0; font-size: 15px; font-weight: 700; color: var(--ink-3); border-bottom: 2px solid transparent; transition: color var(--t), border-color var(--t); }
-.pair-tabs button:hover { color: var(--ink); }
-.pair-tabs button[aria-checked="true"] { color: var(--ink); border-color: currentColor; }
+.pair-info a { font-weight: 700; color: var(--ink); }
+.pair-info a:hover { color: var(--orange); }
+/* model carousel: the front piece is large, its neighbours peek in smaller */
+.pair-car { position: relative; aspect-ratio: 16 / 9.5; overflow: hidden; touch-action: pan-y; }
+.pair-it { position: absolute; left: 50%; top: 50%; width: 62%; height: 100%; transform: translate(-50%, -50%) translateX(calc(var(--o) * 78%)) scale(var(--s)); transition: transform .55s var(--ease), opacity .4s; mix-blend-mode: multiply; }
+.pair-it img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.pair-it:not(.on):hover { opacity: .85 !important; }
+.pair-nav { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.pair-nav .round { width: 42px; height: 42px; }
+.pair-count { min-width: 44px; text-align: center; font-size: 13px; font-weight: 700; color: var(--ink-2); font-variant-numeric: tabular-nums; }
 .pair-plus { position: absolute; left: 50%; top: clamp(130px, 17vw, 250px); translate: -50% -50%; z-index: 2; width: 52px; height: 52px; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-items: center; font-size: 28px; font-weight: 700; line-height: 1; }
-@media (min-width: 900px) { .sec[data-mod="set"] { padding-block: clamp(32px, 5vh, 64px); } .pair-img { aspect-ratio: auto; height: clamp(220px, calc(100svh - var(--nav-h) - 520px), 460px); } } /* heading and both slots fit one screen */
-@media (max-width: 899px) { .pair-tot { justify-items: start; } .pair-duo { grid-template-columns: minmax(0, 1fr); gap: 8px; } .pair-plus { position: relative; left: auto; top: auto; translate: none; justify-self: center; margin-block: -26px; width: 44px; height: 44px; font-size: 24px; } .pair-img { aspect-ratio: 16 / 9; } }
+@media (min-width: 900px) { .sec[data-mod="set"] { padding-block: clamp(32px, 5vh, 64px); } .pair-car { aspect-ratio: auto; height: clamp(220px, calc(100svh - var(--nav-h) - 520px), 440px); } } /* heading and both slots fit one screen */
+@media (max-width: 899px) { .pair-tot { justify-items: start; } .pair-duo { grid-template-columns: minmax(0, 1fr); gap: 8px; } .pair-plus { position: relative; left: auto; top: auto; translate: none; justify-self: center; margin-block: -26px; width: 44px; height: 44px; font-size: 24px; } .pair-car { aspect-ratio: 16 / 11; } }
 
 /* quiz band */
 .quizband { position: relative; text-align: center; display: grid; gap: 20px; justify-items: center; padding-block: clamp(72px, 9vw, 150px); overflow: hidden; }

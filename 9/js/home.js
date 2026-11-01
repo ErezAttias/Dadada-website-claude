@@ -86,9 +86,9 @@
         '<div class="pair rv" id="pair">' +
           '<div class="pair-top"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2><div class="pair-tot"><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p><div class="pair-cta"><button type="button" class="btn btn-primary" id="addSet">Add the set</button><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div></div></div>' +
           '<div class="pair-duo">' +
-          '<div class="pair-slot"><span class="pair-lbl">Crib</span><a class="pair-img" id="pairCrib"><img alt=""></a><div class="pair-info"><b id="pairCribN"></b><span id="pairCribP"></span></div><div class="pair-tabs" role="radiogroup" aria-label="Choose a crib">' + D.order.cribs.map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-c="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
+          '<div class="pair-slot"><span class="pair-lbl">Crib</span><div class="pair-car" id="pairCrib" role="group" aria-roledescription="carousel" aria-label="Cribs">' + D.order.cribs.map(function (id) { return '<button type="button" class="pair-it" data-c="' + id + '" aria-label="' + esc(P[id].full) + '"><img src="' + P[id].finishes[0].img + '" alt="" loading="lazy"></button>'; }).join("") + "</div>" + '<div class="pair-nav" data-car="pairCrib"><button type="button" class="round pair-arr" data-dir="-1" aria-label="Previous crib">' + svg.left + '</button><span class="pair-count" id="pairCribC" aria-live="polite"></span><button type="button" class="round pair-arr" data-dir="1" aria-label="Next crib">' + svg.right + '</button></div><div class="pair-info"><a id="pairCribN"></a><span id="pairCribP"></span></div></div>' +
           '<span class="pair-plus" aria-hidden="true">+</span>' +
-          '<div class="pair-slot"><span class="pair-lbl">Dresser</span><a class="pair-img" id="pairDr"><img alt=""></a><div class="pair-info"><b id="pairDrN"></b><span id="pairDrP"></span></div><div class="pair-tabs" role="radiogroup" aria-label="Choose a dresser">' + D.order.dressers.map(function (id) { return '<button type="button" role="radio" aria-checked="false" data-d="' + id + '">' + esc(P[id].name) + "</button>"; }).join("") + "</div></div>" +
+          '<div class="pair-slot"><span class="pair-lbl">Dresser</span><div class="pair-car" id="pairDr" role="group" aria-roledescription="carousel" aria-label="Dressers">' + D.order.dressers.map(function (id) { return '<button type="button" class="pair-it" data-d="' + id + '" aria-label="' + esc(P[id].full) + '"><img src="' + P[id].finishes[0].img + '" alt="" loading="lazy"></button>'; }).join("") + "</div>" + '<div class="pair-nav" data-car="pairDr"><button type="button" class="round pair-arr" data-dir="-1" aria-label="Previous dresser">' + svg.left + '</button><span class="pair-count" id="pairDrC" aria-live="polite"></span><button type="button" class="round pair-arr" data-dir="1" aria-label="Next dresser">' + svg.right + '</button></div><div class="pair-info"><a id="pairDrN"></a><span id="pairDrP"></span></div></div>' +
           "</div>" +
         "</div>" +
       "</div></section>" +
@@ -203,25 +203,36 @@
     V8.onLeave(function () { clearInterval(timer); document.removeEventListener("click", docClose); document.removeEventListener("keydown", escHot); });
 
     // set offer
-    // build your pair: pick any crib and any dresser in place; the total follows
-    var pc = "soho", pd = D.sets.soho, pairEl = $("#pair", root);
-    function pairSlot(k, x, swap) {
-      var a = $("#pair" + k, root), cut = x.finishes[0].img;
-      function fill() { a.href = V8.url(x); $("img", a).src = cut; $("img", a).alt = x.full; $("#pair" + k + "N", root).textContent = x.full; $("#pair" + k + "P", root).textContent = money(x.finishes[0].price); a.classList.remove("swap"); }
-      if (swap && !reduce) { a.classList.add("swap"); setTimeout(fill, 200); } else fill();
+    // build your pair: a carousel per slot; the front piece is the choice, its neighbours peek in smaller
+    var pairEl = $("#pair", root), pick = { c: D.order.cribs.indexOf("soho"), d: D.order.dressers.indexOf(D.sets.soho) };
+    function pairSlot(k, key, list) {
+      var car = $("#pair" + k, root), its = $$(".pair-it", car), n = its.length, idx = pick[key], x = P[list[idx]];
+      its.forEach(function (el, i) {
+        var o = ((i - idx) % n + n) % n; if (o > n / 2) o -= n;
+        var a = Math.abs(o);
+        el.style.setProperty("--o", o); el.style.setProperty("--s", a === 0 ? 1 : a === 1 ? .52 : .4);
+        el.style.opacity = a === 0 ? 1 : a === 1 ? .55 : 0; el.style.zIndex = 3 - a;
+        el.classList.toggle("on", a === 0); el.tabIndex = a === 1 ? 0 : -1; el.setAttribute("aria-hidden", a > 1);
+      });
+      var nm = $("#pair" + k + "N", root); nm.href = V8.url(x); nm.textContent = x.full;
+      $("#pair" + k + "P", root).textContent = money(x.finishes[0].price);
+      $("#pair" + k + "C", root).textContent = idx + 1 + " / " + n;
     }
-    function pairDraw(which) {
-      var cr = P[pc], dr = P[pd], sub = cr.finishes[0].price + dr.finishes[0].price;
-      if (which !== "d") pairSlot("Crib", cr, which === "c");
-      if (which !== "c") pairSlot("Dr", dr, which === "d");
-      $$("[data-c]", pairEl).forEach(function (b) { b.setAttribute("aria-checked", b.dataset.c === pc); });
-      $$("[data-d]", pairEl).forEach(function (b) { b.setAttribute("aria-checked", b.dataset.d === pd); });
+    function pairDraw() {
+      var cr = P[D.order.cribs[pick.c]], dr = P[D.order.dressers[pick.d]], sub = cr.finishes[0].price + dr.finishes[0].price;
+      pairSlot("Crib", "c", D.order.cribs); pairSlot("Dr", "d", D.order.dressers);
       $("#pairWas", root).textContent = money(sub); $("#pairNow", root).textContent = money(sub * .85, true);
     }
-    $$("[data-c]", pairEl).forEach(function (b) { b.addEventListener("click", function () { if (b.dataset.c === pc) return; pc = b.dataset.c; pairDraw("c"); }); });
-    $$("[data-d]", pairEl).forEach(function (b) { b.addEventListener("click", function () { if (b.dataset.d === pd) return; pd = b.dataset.d; pairDraw("d"); }); });
+    [["Crib", "c", D.order.cribs], ["Dr", "d", D.order.dressers]].forEach(function (s) {
+      var car = $("#pair" + s[0], root), n = s[2].length, go = function (i) { pick[s[1]] = (i + n) % n; pairDraw(); };
+      $$(".pair-arr", $('[data-car="pair' + s[0] + '"]', root)).forEach(function (b) { b.addEventListener("click", function () { go(pick[s[1]] + +b.dataset.dir); }); });
+      $$(".pair-it", car).forEach(function (b, i) { b.addEventListener("click", function () { if (i === pick[s[1]]) location.hash = V8.url(P[s[2][i]]).slice(1); else go(i); }); });
+      var x0 = null;
+      car.addEventListener("pointerdown", function (e) { x0 = e.clientX; });
+      car.addEventListener("pointerup", function (e) { if (x0 == null) return; var dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) go(pick[s[1]] + (dx < 0 ? 1 : -1)); });
+    });
     pairDraw();
-    $("#addSet", root).addEventListener("click", function () { V8.add(pc, 0, 1, { silent: true }); V8.add(pd, 0, 1); });
+    $("#addSet", root).addEventListener("click", function () { V8.add(D.order.cribs[pick.c], 0, 1, { silent: true }); V8.add(D.order.dressers[pick.d], 0, 1); });
 
     // homes: fan opens and films play only while on screen
     var fan = $("#fan", root), cards = $$(".fc", fan), N = cards.length, center = 4, inView = false;
