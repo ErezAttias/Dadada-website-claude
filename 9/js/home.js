@@ -57,13 +57,13 @@
       // retailers
       '<section data-mod="logos" class="logos" aria-label="Also sold at"><div class="logos-row">' + [0, 1].map(function (k) { return LOGOS.map(function (l) { return '<img src="assets/' + l[0] + '.png" alt="' + (k ? "" : l[1]) + '"' + (k ? ' aria-hidden="true"' : "") + ' loading="lazy">'; }).join(""); }).join("") + "</div></section>" +
       // manifesto
-      '<section data-mod="mani" class="sec mani-sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em><br>is not a <em>nursery</em>,<br>and a nursery without<br><em>you</em> isn’t your child’s<br><span class="nowrap"><em>home</em>.</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
+      '<section data-mod="mani" class="sec mani-sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em> <br>is not a <em>nursery</em>, <br>and a nursery without <br><em>you</em> isn’t your child’s <br><span class="nowrap"><em>home</em>.</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
       // best sellers
       '<section data-mod="best" class="sec" id="best" aria-labelledby="best-h"><div class="wrap">' +
         '<div class="sec-head"><h2 class="disp d2 c-orange" id="best-h" aria-live="polite">Our <b>best sellers.</b></h2>' +
         '<div class="seg modes" role="tablist" aria-label="Browse by"><button type="button" role="tab" aria-selected="true" aria-controls="bestPanel" data-mode="best" data-h="Our <b>best sellers.</b>">Best sellers</button><button type="button" role="tab" aria-selected="false" aria-controls="catPanel" data-mode="cats" data-h="Shop by <b>category.</b>" tabindex="-1">Categories</button></div></div>' +
         '<div id="bestPanel" role="tabpanel"><div class="pgrid" id="bestGrid">' + BEST.map(function (id, i) { return V8.card(P[id], { d: i * .06, life: LIFE[id] }); }).join("") + "</div></div>" +
-        '<div id="catPanel" role="tabpanel" hidden><div class="pgrid">' + CATS.map(function (c) { var ps = c[3] ? V8.list(c[3]) : null; return '<a class="ccard" href="#/' + c[0] + '"><span class="ccard-im"><img src="media/' + c[2] + '" alt="" loading="lazy"></span><span class="ccard-body"><span class="ccard-kick">' + (ps ? ps.length + (ps.length === 1 ? " piece" : " pieces") : "Crib + dresser") + '</span><b class="ccard-name">' + c[1] + '</b><span class="ccard-sub">' + (ps ? "From " + money(Math.min.apply(null, ps.map(V8.minPrice))) : "15% off both") + ' <span aria-hidden="true">→</span></span></span></a>'; }).join("") + "</div></div>" +
+        '<div id="catPanel" role="tabpanel" hidden><div class="pgrid">' + CATS.map(function (c) { return '<a class="ccard" href="#/' + c[0] + '"><span class="ccard-im"><img src="media/' + c[2] + '" alt="" loading="lazy"></span><span class="ccard-body"><b class="ccard-name">' + c[1] + '</b></span></a>'; }).join("") + "</div></div>" +
       "</div></section>" +
       // shop the look
       '<section data-mod="look" class="stl" id="stl" aria-roledescription="carousel" aria-labelledby="stl-h">' +
@@ -82,12 +82,16 @@
         '<p class="scroll-hint">Swipe for more ' + svg.right.replace("<svg", '<svg width="16" height="16"') + "</p>" +
       "</div></section>" +
       // nursery set offer
-      '<section data-mod="set" class="sec joined" aria-labelledby="set-h"><div class="wrap"><div class="setband rv">' +
-        '<div class="setband-img"><img src="media/mom-dr-soho.webp" alt="An expecting mother folding tiny clothes into a Soho dresser beside a Soho crib" loading="lazy"></div>' +
-        '<div class="setband-copy"><h2 class="disp d2" id="set-h" style="color:var(--lime)">The matching pair.<br><b>15% off both.</b></h2><p class="lede">Every crib has a dresser made to stand beside it: the same solid wood, the same finishes, the same lines. Pair them and the saving comes off both pieces at checkout.</p>' +
-        '<ul role="list"><li><span>Soho crib, Natural</span><span>' + money(soho.finishes[0].price) + "</span></li><li><span>Soho 5-drawer dresser</span><span>" + money(soho5.finishes[0].price) + '</span></li><li class="tot"><span>The Soho set</span><span><s>' + money(setSub) + "</s>" + money(setTot, true) + "</span></li></ul>" +
-        '<div class="row" style="--s:14px"><button type="button" class="btn btn-lime" id="addSet">Add the Soho set</button><a class="btn btn-light" href="#/sets">See all sets</a></div></div>' +
-      "</div></div></section>" +
+      '<section data-mod="set" class="sec" aria-labelledby="set-h"><div class="wrap">' +
+        '<div class="pair rv" id="pair">' +
+          '<div class="pair-top"><h2 class="disp d2 c-orange" id="set-h">The matching pair.<br><b>15% off both.</b></h2><div class="pair-tot"><p class="pair-price"><b id="pairNow"></b><s id="pairWas"></s></p><div class="pair-cta"><button type="button" class="btn btn-primary" id="addSet">Add the set</button><a class="link" href="#/sets">See all sets <span aria-hidden="true">→</span></a></div></div></div>' +
+          '<div class="pair-duo">' +
+          '<div class="pair-slot"><span class="pair-lbl">Crib</span><div class="pair-car" id="pairCrib" role="group" aria-roledescription="carousel" aria-label="Cribs">' + D.order.cribs.map(function (id) { return '<button type="button" class="pair-it" data-c="' + id + '" aria-label="' + esc(P[id].full) + '"><img src="' + P[id].finishes[0].img + '" alt="" loading="lazy"></button>'; }).join("") + "</div>" + '<div class="pair-nav" data-car="pairCrib"><button type="button" class="round pair-arr" data-dir="-1" aria-label="Previous crib">' + svg.left + '</button><span class="pair-count" id="pairCribC" aria-live="polite"></span><button type="button" class="round pair-arr" data-dir="1" aria-label="Next crib">' + svg.right + '</button></div><div class="pair-info"><a id="pairCribN"></a><span id="pairCribP"></span></div></div>' +
+          '<span class="pair-plus" aria-hidden="true">+</span>' +
+          '<div class="pair-slot"><span class="pair-lbl">Dresser</span><div class="pair-car" id="pairDr" role="group" aria-roledescription="carousel" aria-label="Dressers">' + D.order.dressers.map(function (id) { return '<button type="button" class="pair-it" data-d="' + id + '" aria-label="' + esc(P[id].full) + '"><img src="' + P[id].finishes[0].img + '" alt="" loading="lazy"></button>'; }).join("") + "</div>" + '<div class="pair-nav" data-car="pairDr"><button type="button" class="round pair-arr" data-dir="-1" aria-label="Previous dresser">' + svg.left + '</button><span class="pair-count" id="pairDrC" aria-live="polite"></span><button type="button" class="round pair-arr" data-dir="1" aria-label="Next dresser">' + svg.right + '</button></div><div class="pair-info"><a id="pairDrN"></a><span id="pairDrP"></span></div></div>' +
+          "</div>" +
+        "</div>" +
+      "</div></section>" +
       // 10,000 homes
       '<section data-mod="homes" class="sec homes bg-paper" id="homes" aria-labelledby="homes-h"><div class="wrap homes-head"><h2 class="disp d2 c-orange" id="homes-h">+<span id="homesN">10,000</span> homes<br><b>made room for Dadada.</b></h2></div>' +
         '<div class="fan" id="fan" role="region" aria-roledescription="carousel" aria-label="Films and reviews from dadada homes">' + SEQ.map(function (r, i) {
@@ -108,13 +112,13 @@
       '<section data-mod="journal" class="sec" aria-labelledby="jr-h"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange" id="jr-h">Read up. <b>Rest easy.</b></h2><a class="link" href="#/journal">All stories</a></div><div class="jgrid scroll">' +
         D.journal.slice(0, 3).map(function (j, i) { return V8.jcard(j, i); }).join("") + "</div></div>" +
       // faq, in the same white section as the journal
-      '<div class="wrap faqblock"><div class="stack" style="--s:10px"><h3 class="fq-h" id="fq-h">Good questions, <b>honest answers.</b></h3><p class="muted">Mattresses, conversions, delivery: what parents ask us before they buy.</p></div>' +
+      '<div class="wrap faqblock"><div class="stack" style="--s:10px"><h3 class="fq-h" id="fq-h">Good questions, <b>honest answers.</b></h3><p class="muted">Mattresses, conversions, delivery:<br>what parents ask us before they buy.</p></div>' +
         '<div class="acc">' + faq.map(function (x) { return "<details><summary>" + esc(x.q) + '</summary><div class="acc-body">' + esc(x.a) + "</div></details>"; }).join("") + "</div></div></section>" +
-      // social-style film feed: more films appear as you reach the end
+      // social-style film feed: two rows, a Load more button adds two more
       '<section data-mod="feed" class="sec feed-sec" aria-labelledby="feed-h"><div class="wrap"><div class="sec-head"><h2 class="disp d2 c-orange" id="feed-h">Scroll <b>their nurseries.</b></h2><a class="link" href="https://instagram.com/dadadababyusa" target="_blank" rel="noopener">@dadadababyusa</a></div>' +
-        '<div class="feed" id="feed"></div><div class="feed-end" id="feedEnd"><span class="feed-spin" aria-hidden="true"></span><span class="sr" id="feedMsg" aria-live="polite"></span></div></div></section>' +
+        '<div class="feed" id="feed"></div><div class="feed-end" id="feedEnd"><button class="btn btn-secondary" type="button" id="feedMore">Load more</button><span class="sr" id="feedMsg" aria-live="polite"></span></div></div></section>' +
       // quiz band
-      '<section data-mod="quiz" class="bg-orange quizband" aria-labelledby="qz-h">' + V8.doodle("dd-sun", "dd-sun") + V8.doodle("dd-star", "dd-star") +
+      '<section data-mod="quiz" class="bg-orange quizband" aria-labelledby="qz-h">' +
         '<h2 class="disp d2" id="qz-h">Not sure <b>which crib?</b></h2><p>Four quick questions about your space and style.</p><a class="btn btn-lime lg" href="#/quiz">Take the 60-second quiz</a></section>';
     return { home: true, html: html, after: homeAfter };
   };
@@ -199,7 +203,36 @@
     V8.onLeave(function () { clearInterval(timer); document.removeEventListener("click", docClose); document.removeEventListener("keydown", escHot); });
 
     // set offer
-    $("#addSet", root).addEventListener("click", function () { V8.add("soho", 0, 1, { silent: true }); V8.add("soho5", 0, 1); });
+    // build your pair: a carousel per slot; the front piece is the choice, its neighbours peek in smaller
+    var pairEl = $("#pair", root), pick = { c: D.order.cribs.indexOf("soho"), d: D.order.dressers.indexOf(D.sets.soho) };
+    function pairSlot(k, key, list) {
+      var car = $("#pair" + k, root), its = $$(".pair-it", car), n = its.length, idx = pick[key], x = P[list[idx]];
+      its.forEach(function (el, i) {
+        var o = ((i - idx) % n + n) % n; if (o > n / 2) o -= n;
+        var a = Math.abs(o);
+        el.style.setProperty("--o", o); el.style.setProperty("--s", a === 0 ? 1 : a === 1 ? .52 : .4);
+        el.style.opacity = a === 0 ? 1 : a === 1 ? .55 : 0; el.style.zIndex = 3 - a;
+        el.classList.toggle("on", a === 0); el.tabIndex = a === 1 ? 0 : -1; el.setAttribute("aria-hidden", a > 1);
+      });
+      var nm = $("#pair" + k + "N", root); nm.href = V8.url(x); nm.textContent = x.full;
+      $("#pair" + k + "P", root).textContent = money(x.finishes[0].price);
+      $("#pair" + k + "C", root).textContent = idx + 1 + " / " + n;
+    }
+    function pairDraw() {
+      var cr = P[D.order.cribs[pick.c]], dr = P[D.order.dressers[pick.d]], sub = cr.finishes[0].price + dr.finishes[0].price;
+      pairSlot("Crib", "c", D.order.cribs); pairSlot("Dr", "d", D.order.dressers);
+      $("#pairWas", root).textContent = money(sub); $("#pairNow", root).textContent = money(sub * .85, true);
+    }
+    [["Crib", "c", D.order.cribs], ["Dr", "d", D.order.dressers]].forEach(function (s) {
+      var car = $("#pair" + s[0], root), n = s[2].length, go = function (i) { pick[s[1]] = (i + n) % n; pairDraw(); };
+      $$(".pair-arr", $('[data-car="pair' + s[0] + '"]', root)).forEach(function (b) { b.addEventListener("click", function () { go(pick[s[1]] + +b.dataset.dir); }); });
+      $$(".pair-it", car).forEach(function (b, i) { b.addEventListener("click", function () { if (i === pick[s[1]]) location.hash = V8.url(P[s[2][i]]).slice(1); else go(i); }); });
+      var x0 = null;
+      car.addEventListener("pointerdown", function (e) { x0 = e.clientX; });
+      car.addEventListener("pointerup", function (e) { if (x0 == null) return; var dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) go(pick[s[1]] + (dx < 0 ? 1 : -1)); });
+    });
+    pairDraw();
+    $("#addSet", root).addEventListener("click", function () { V8.add(D.order.cribs[pick.c], 0, 1, { silent: true }); V8.add(D.order.dressers[pick.d], 0, 1); });
 
     // homes: fan opens and films play only while on screen
     var fan = $("#fan", root), cards = $$(".fc", fan), N = cards.length, center = 4, inView = false;
@@ -221,7 +254,7 @@
     function countUp() { var el = $("#homesN", root); if (!el || el.dataset.done || reduce) return; el.dataset.done = 1; var t0 = performance.now(); (function st(t) { var k = Math.min(1, (t - t0) / 1500), e = 1 - Math.pow(1 - k, 4); el.textContent = Math.round(10000 * e).toLocaleString("en-US"); if (k < 1) requestAnimationFrame(st); })(t0); }
     V8.onLeave(function () { fio.disconnect(); });
 
-    // film feed: each film loads near the screen, plays while mostly visible, and a new batch arrives at the end
+    // film feed: each film loads near the screen and plays while mostly visible; two rows at a time
     var FEED = ROOMS.filter(function (r) { return r[0] === "v"; }).map(function (r) { return [r[1], r[2], r[3]]; })
       .concat([["v-soho", "The Soho, up close", "soho"], ["v-lala", "LaLa in natural", "lala"], ["v-spirit", "Spirit, crib to bed", "spirit"], ["v-jolly", "Jolly's curves", "jolly"]]);
     var feed = $("#feed", root), fEnd = $("#feedEnd", root), shown = 0, MAXF = 24;
@@ -235,13 +268,14 @@
       feed.insertAdjacentHTML("beforeend", html);
       $$(".ft:not([data-o])", feed).forEach(function (t) { t.dataset.o = 1; fplay.observe(t); });
       $("#feedMsg", root).textContent = shown + " films";
-      if (shown >= MAXF) { fEnd.innerHTML = '<a class="btn btn-primary" href="https://instagram.com/dadadababyusa" target="_blank" rel="noopener">See more on Instagram</a>'; fmore.disconnect(); }
+      if (shown >= MAXF) fEnd.innerHTML = '<a class="btn btn-primary" href="https://instagram.com/dadadababyusa" target="_blank" rel="noopener">See more on Instagram</a>';
     }
-    var fmore = new IntersectionObserver(function (es) { if (es[0].isIntersecting) more(4); }, { rootMargin: "300px 0px" });
+    function rows() { return matchMedia("(max-width: 899px)").matches ? 4 : 8; }
+    $("#feedMore", root).addEventListener("click", function () { more(rows()); });
     // nothing loads until the visitor nears the feed
-    var fstart = new IntersectionObserver(function (es) { if (!es[0].isIntersecting) return; fstart.disconnect(); more(matchMedia("(max-width: 720px)").matches ? 4 : 8); fmore.observe(fEnd); }, { rootMargin: "800px 0px" });
+    var fstart = new IntersectionObserver(function (es) { if (!es[0].isIntersecting) return; fstart.disconnect(); more(rows()); }, { rootMargin: "800px 0px" });
     fstart.observe(feed.parentNode);
-    V8.onLeave(function () { fplay.disconnect(); fmore.disconnect(); fstart.disconnect(); });
+    V8.onLeave(function () { fplay.disconnect(); fstart.disconnect(); });
 
     // toddler stages: click, hover or auto-advance
     var stages = $$(".stage", root), imgs = $$("#todImgs img", root), si = 0, sti;

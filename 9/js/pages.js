@@ -131,7 +131,7 @@
 
   /* ---------- wishlist ---------- */
   V8.route("wishlist", function () {
-    function draw() { var w = V8.store.wish.map(function (id) { return P[id]; }).filter(Boolean); return w.length ? '<div class="pgrid">' + w.map(function (p, i) { return V8.card(p, { d: i * .04 }); }).join("") + "</div>" : '<div class="empty">' + V8.doodle("dd-heart-o") + '<p class="h4" style="color:var(--ink)">Nothing saved yet.</p><p>Tap the heart on any piece to keep it here.</p><a class="btn btn-primary" href="#/cribs">Shop cribs</a></div>'; }
+    function draw() { var w = V8.store.wish.map(function (id) { return P[id]; }).filter(Boolean); return w.length ? '<div class="pgrid">' + w.map(function (p, i) { return V8.card(p, { d: i * .04 }); }).join("") + "</div>" : '<div class="empty">' + '<p class="h4" style="color:var(--ink)">Nothing saved yet.</p><p>Tap the heart on any piece to keep it here.</p><a class="btn btn-primary" href="#/cribs">Shop cribs</a></div>'; }
     return { title: "Wishlist", html: head({ crumbs: [["Home", "#/"], ["Wishlist"]], h1: "Your <b>wishlist.</b>", lede: "Saved on this device. Share it with whoever is doing the registry." }) + '<section class="wrap" style="padding-bottom:var(--sec)" id="wl">' + draw() + "</section>",
       after: function (root) { var fn = function () { var el = $("#wl", root); if (el && el.isConnected) { el.innerHTML = draw(); V8.reveal(el); } }; V8.on("wish", fn); } };
   });
@@ -160,6 +160,6 @@
 
   /* ---------- 404 ---------- */
   V8.pages.notFound = function () {
-    return { title: "Page not found", html: '<section class="nf"><div class="wrap stack center">' + V8.doodle("dd-star") + '<h1 class="disp d1 c-orange">This room is <b>still empty.</b></h1><p class="lede" style="margin-inline:auto">The page you’re looking for has moved or never existed. The cribs are right where we left them.</p><div class="row" style="justify-content:center"><a class="btn btn-primary" href="#/">Back home</a><a class="btn btn-secondary" href="#/cribs">Shop cribs</a></div></div></section>' };
+    return { title: "Page not found", html: '<section class="nf"><div class="wrap stack center">' + '<h1 class="disp d1 c-orange">This room is <b>still empty.</b></h1><p class="lede" style="margin-inline:auto">The page you’re looking for has moved or never existed. The cribs are right where we left them.</p><div class="row" style="justify-content:center"><a class="btn btn-primary" href="#/">Back home</a><a class="btn btn-secondary" href="#/cribs">Shop cribs</a></div></div></section>' };
   };
 })();

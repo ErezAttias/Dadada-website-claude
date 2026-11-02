@@ -175,7 +175,7 @@
   function renderBag(added) {
     var t = V8.totals(), body = $("#bagBody"), foot = $("#bagFoot");
     if (!S.cart.length) {
-      body.innerHTML = '<div class="empty">' + V8.doodle("dd-heart-o") + '<p class="h4" style="color:var(--ink)">Your bag is empty.</p><p>Start with the crib. Everything else follows.</p><a class="btn btn-primary" href="#/cribs">Shop cribs</a></div>';
+      body.innerHTML = '<div class="empty">' + '<p class="h4" style="color:var(--ink)">Your bag is empty.</p><p>Start with the crib. Everything else follows.</p><a class="btn btn-primary" href="#/cribs">Shop cribs</a></div>';
       foot.innerHTML = ""; return;
     }
     body.innerHTML = (added ? '<p class="small" style="color:var(--orange-ink);font-weight:700;margin-bottom:6px">✓ Added to your bag</p>' : "") +
