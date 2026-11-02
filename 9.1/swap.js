@@ -4,6 +4,7 @@
 (function () {
   "use strict";
   var map = {}, on = false, target = null, persist = true;
+  var SEND_TO = "erezattias@gmail.com"; // where the client sends the finished picks
 
   // ---------- storage ----------
   var dbp = new Promise(function (res) {
@@ -85,15 +86,17 @@
     ".sw-pop img{width:100%;height:150px;object-fit:contain;background:#f3f4f6;border-radius:8px}",
     ".sw-pop b{font-weight:700;word-break:break-all}.sw-pop small{color:#6b7280}",
     ".sw-pop .row{display:flex;gap:8px;flex-wrap:wrap}",
+    ".sw-pop .sw-btn{display:inline-block;border:1px solid #e5e7eb;border-radius:9px;padding:9px 12px;font:600 13px Inter,system-ui,sans-serif;background:#fff;color:#111827}.sw-pop .sw-btn.pri{background:#111827;border-color:#111827;color:#fff}.sw-pop .sw-btn:focus-visible{outline:2px solid #4f6bed;outline-offset:2px}",
     ".sw-pop button{appearance:none;border:1px solid #e5e7eb;border-radius:9px;padding:9px 12px;font:600 13px Inter,system-ui,sans-serif;cursor:pointer;background:#fff;color:#111827}",
     ".sw-pop button.pri{background:#111827;border-color:#111827;color:#fff}",
     ".sw-pop button:focus-visible{outline:2px solid #4f6bed;outline-offset:2px}",
+    ".sw-pop a{color:#4f6bed}.sw-pop .row a{text-decoration:none}",
     ".sw-pop .x{position:absolute;right:8px;top:8px;border:0;padding:4px 8px;font-size:16px}"
   ].join("");
   document.head.appendChild(css);
 
   var barEl = document.createElement("div"); barEl.className = "sw-bar"; barEl.setAttribute("role", "region"); barEl.setAttribute("aria-label", "Image swap");
-  barEl.innerHTML = '<button type="button" class="sw-tog" aria-pressed="false">Swap images</button><span class="sw-n"></span><button type="button" class="sw-exp">Export picks</button><button type="button" class="sw-rst">Reset all</button><span class="sw-help" hidden>Click any picture to replace it, or drag an image file onto it. It changes everywhere that picture is used. Menus and links keep working, so you can move between pages.</span>';
+  barEl.innerHTML = '<button type="button" class="sw-tog" aria-pressed="false">Swap images</button><span class="sw-n"></span><button type="button" class="sw-exp">Send my picks</button><button type="button" class="sw-rst">Reset all</button><span class="sw-help" hidden>Click any picture to replace it, or drag an image file onto it. It changes everywhere that picture is used. Menus and links keep working, so you can move between pages.</span>';
   var tog = barEl.querySelector(".sw-tog"), nEl = barEl.querySelector(".sw-n"), help = barEl.querySelector(".sw-help");
   var hi = document.createElement("div"); hi.className = "sw-hi"; hi.hidden = true; hi.innerHTML = "<span>Click to replace</span>";
   var pop = document.createElement("div"); pop.className = "sw-pop"; pop.hidden = true; pop.setAttribute("role", "dialog"); pop.setAttribute("aria-label", "Replace picture");
@@ -222,9 +225,32 @@
       files.push({ name: "picks/picks.csv", data: new TextEncoder().encode("﻿" + csv) });
       var a = document.createElement("a"), u = URL.createObjectURL(zip(files));
       a.href = u; a.download = "dadada-image-picks.zip"; document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
+      setTimeout(function () { URL.revokeObjectURL(u); }, 60000);
+      sendPanel(keys.length, u);
     });
   });
+
+  // after the download: tell the client exactly how to get the file to the studio
+  function sendPanel(n, zipUrl) {
+    target = null;
+    var subj = "dadada website: my image picks (" + n + ")";
+    var body = "Hi,\n\nAttached are my picks from version 9.1 (dadada-image-picks.zip, " + n + " image" + (n > 1 ? "s" : "") + "). The file picks.csv inside says which picture on the site each new image replaces.\n\nThanks!";
+    pop.innerHTML = '<button type="button" class="x" aria-label="Close">×</button>' +
+      '<div><b style="font-size:15px">Your picks are ready</b><br><small>' + n + " image" + (n > 1 ? "s" : "") + ' saved to your Downloads as <b>dadada-image-picks.zip</b>.</small></div>' +
+      '<div><small>Email that file to</small><br><b class="sw-to">' + esc(SEND_TO) + "</b></div>" +
+      '<div class="row"><a class="sw-btn pri sw-mail" href="mailto:' + SEND_TO + "?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body) + '">Write the email</a><button type="button" class="cp">Copy address</button></div>' +
+      '<small>Remember to attach the ZIP file. If it is too big for email, send it with <a href="https://wetransfer.com" target="_blank" rel="noopener">WeTransfer</a> to the same address.</small>' +
+      '<div class="row"><a class="sw-btn" href="' + zipUrl + '" download="dadada-image-picks.zip">Download the file again</a></div>';
+    pop.hidden = false;
+    pop.querySelector(".x").onclick = closePop;
+    pop.querySelector(".cp").onclick = function () {
+      var b = this, done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy address"; }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(SEND_TO).then(done, function () { selectTo(); });
+      else selectTo();
+    };
+    function selectTo() { var r = document.createRange(); r.selectNodeContents(pop.querySelector(".sw-to")); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+    pop.querySelector(".sw-mail").focus();
+  }
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
