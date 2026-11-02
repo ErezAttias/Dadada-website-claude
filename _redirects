@@ -1,0 +1,6 @@
+# Version 9.1 is version 9 plus the image-swap tool: it reuses version 9's files
+/9.1/css/*     /9/css/:splat     200
+/9.1/js/*      /9/js/:splat      200
+/9.1/media/*   /9/media/:splat   200
+/9.1/assets/*  /9/assets/:splat  200
+/9.1/j/*       /9/j/:splat       200
