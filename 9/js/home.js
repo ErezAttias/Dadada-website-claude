@@ -60,9 +60,9 @@
       '<section data-mod="mani" class="sec mani-sec"><div class="wrap mani"><div><h2 id="mani">A room without a <em>crib</em> <br>is not a <em>nursery</em>, <br>and a nursery without <br><em>you</em> isn’t your child’s <br><span class="nowrap"><em>home</em>.</span></h2></div><div class="mani-img rv"><img src="assets/nursery.webp" alt="A mother-to-be playing records on the floor of her nursery, a natural crib behind her" loading="lazy"></div></div></section>' +
       // best sellers
       '<section data-mod="best" class="sec" id="best" aria-labelledby="best-h"><div class="wrap">' +
-        '<div class="sec-head"><h2 class="disp d2 c-orange" id="best-h" aria-live="polite">Our <b>best sellers.</b></h2>' +
-        '<div class="seg modes" role="tablist" aria-label="Browse by"><button type="button" role="tab" aria-selected="true" aria-controls="bestPanel" data-mode="best" data-h="Our <b>best sellers.</b>">Best sellers</button><button type="button" role="tab" aria-selected="false" aria-controls="catPanel" data-mode="cats" data-h="Shop by <b>category.</b>" tabindex="-1">Categories</button></div></div>' +
-        '<div id="bestPanel" role="tabpanel"><div class="pgrid" id="bestGrid">' + BEST.map(function (id, i) { return V8.card(P[id], { d: i * .06, life: LIFE[id] }); }).join("") + "</div></div>" +
+        '<div class="sec-head"><h2 class="disp d2 c-orange" id="best-h" aria-live="polite">Shop <b>best sellers.</b></h2>' +
+        '<div class="seg modes" role="tablist" aria-label="Browse by"><button type="button" role="tab" aria-selected="true" aria-controls="bestPanel" data-mode="best" data-h="Shop <b>best sellers.</b>">Shop bestsellers</button><button type="button" role="tab" aria-selected="false" aria-controls="catPanel" data-mode="cats" data-h="Shop by <b>category.</b>" tabindex="-1">Categories</button></div></div>' +
+        '<div id="bestPanel" role="tabpanel"><div class="pgrid" id="bestGrid">' + BEST.map(function (id, i) { return V8.card(P[id], { d: i * .06 }); }).join("") + "</div></div>" +
         '<div id="catPanel" role="tabpanel" hidden><div class="pgrid">' + CATS.map(function (c) { return '<a class="ccard" href="#/' + c[0] + '"><span class="ccard-im"><img src="media/' + c[2] + '" alt="" loading="lazy"></span><span class="ccard-body"><b class="ccard-name">' + c[1] + '</b></span></a>'; }).join("") + "</div></div>" +
       "</div></section>" +
       // shop the look

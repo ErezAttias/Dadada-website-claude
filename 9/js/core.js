@@ -49,26 +49,49 @@
   V8.store = S;
   V8.cartCount = function () { return S.cart.reduce(function (a, c) { return a + c.qty; }, 0); };
   V8.lineFor = function (c) { var p = P[c.id]; if (!p) return null; var f = p.finishes[c.f] || p.finishes[0]; return { p: p, f: f, price: f.price, total: f.price * c.qty }; };
-  V8.totals = function () {
-    var lines = S.cart.map(V8.lineFor).filter(Boolean);
-    var sub = lines.reduce(function (a, l, i) { return a + l.price * S.cart[i].qty; }, 0);
-    // nursery set: each crib + dresser pair is 15% off both pieces
+  // Bundle & Save: pieces added from the bundle builder carry b:1 and are priced together
+  V8.TIERS = [[2, .10], [3, .15], [4, .20]];
+  V8.tierFor = function (n) { var r = 0; V8.TIERS.forEach(function (t) { if (n >= t[0]) r = t[1]; }); return r; };
+  function pairOff(lines) {
+    // each crib + dresser pair is 15% off both pieces
     var cribs = [], dressers = [];
-    S.cart.forEach(function (c) { var l = V8.lineFor(c); if (!l) return; for (var i = 0; i < c.qty; i++) (l.p.type === "crib" ? cribs : l.p.type === "dresser" ? dressers : []).push(l.price); });
+    lines.forEach(function (x) { for (var i = 0; i < x.c.qty; i++) (x.l.p.type === "crib" ? cribs : x.l.p.type === "dresser" ? dressers : []).push(x.l.price); });
     cribs.sort(function (a, b) { return b - a; }); dressers.sort(function (a, b) { return b - a; });
     var pairs = Math.min(cribs.length, dressers.length), base = 0;
     for (var k = 0; k < pairs; k++) base += cribs[k] + dressers[k];
-    var disc = Math.round(base * 0.15 * 100) / 100;
-    return { sub: sub, disc: disc, pairs: pairs, total: sub - disc, count: V8.cartCount() };
+    return { pairs: pairs, disc: Math.round(base * 0.15 * 100) / 100 };
+  }
+  V8.bundleQuote = function (items) {
+    // items: [{ price, type, qty }]; the better of the bundle tier and the crib + dresser saving
+    var n = 0, sub = 0; items.forEach(function (x) { n += x.qty || 1; sub += x.price * (x.qty || 1); });
+    var rate = V8.tierFor(n), tier = Math.round(sub * rate * 100) / 100;
+    var pr = pairOff(items.map(function (x) { return { c: { qty: x.qty || 1 }, l: { price: x.price, p: { type: x.type } } }; }));
+    return { n: n, sub: sub, rate: rate, disc: Math.max(tier, pr.disc), pairs: pr.pairs };
   };
+  V8.totals = function () {
+    var all = S.cart.map(function (c) { return { c: c, l: V8.lineFor(c) }; }).filter(function (x) { return x.l; });
+    var sub = all.reduce(function (a, x) { return a + x.l.price * x.c.qty; }, 0);
+    var bl = all.filter(function (x) { return x.c.b; }), rest = all.filter(function (x) { return !x.c.b; });
+    var pr = pairOff(rest), lines = [];
+    if (pr.disc) lines.push(["Nursery set · 15% off", pr.disc]);
+    var bq = bl.length ? V8.bundleQuote(bl.map(function (x) { return { price: x.l.price, type: x.l.p.type, qty: x.c.qty }; })) : null;
+    if (bq && bq.disc) lines.push(["Bundle & Save · " + bq.n + " pieces", bq.disc]);
+    var disc = Math.round(lines.reduce(function (a, d) { return a + d[1]; }, 0) * 100) / 100;
+    return { sub: sub, disc: disc, lines: lines, pairs: pr.pairs + (bq ? bq.pairs : 0), bundle: bq, total: sub - disc, count: V8.cartCount() };
+  };
+  V8.discRows = function (t) { return t.lines.map(function (d) { return '<div class="sum-row" style="color:var(--orange-ink);font-weight:700"><span>' + esc(d[0]) + "</span><span>−" + money(d[1]) + "</span></div>"; }).join(""); };
   V8.add = function (id, f, qty, opts) {
     f = f || 0; qty = qty || 1;
-    var ex = S.cart.find(function (c) { return c.id === id && c.f === f; });
-    if (ex) ex.qty = Math.min(9, ex.qty + qty); else S.cart.push({ id: id, f: f, qty: qty });
+    var b = opts && opts.bundle ? 1 : 0;
+    var ex = S.cart.find(function (c) { return c.id === id && c.f === f && (c.b || 0) === b; });
+    if (ex) ex.qty = Math.min(9, ex.qty + qty); else S.cart.push(b ? { id: id, f: f, qty: qty, b: 1 } : { id: id, f: f, qty: qty });
     save(); syncBadges(); renderBag();
     if (!(opts && opts.silent)) openBag(true);
   };
   V8.setQty = function (i, q) { if (q < 1) S.cart.splice(i, 1); else S.cart[i].qty = Math.min(9, q); save(); syncBadges(); renderBag(); V8.emit("cart"); };
+  V8.TASKRABBIT = "https://www.taskrabbit.com/partner/dadadababy";
+  V8.setAssembly = function (on) { S.asm = !!on; save(); renderBag(); V8.emit("cart"); };
+  V8.asmRow = function () { return S.asm ? '<div class="asm-row"><span>' + svg.box + '</span><div><b>Assembly by a Taskrabbit pro</b><small>From $65 · booked on Taskrabbit after you order</small></div><a class="link" href="' + V8.TASKRABBIT + '" target="_blank" rel="noopener">Book</a></div>' : ""; };
   V8.clearCart = function () { S.cart = []; save(); syncBadges(); renderBag(); };
   V8.isWished = function (id) { return S.wish.indexOf(id) > -1; };
   V8.toggleWish = function (id) {
@@ -98,21 +121,27 @@
     if (p.type === "dresser") return p.kind.replace(/-drawer dresser/, " drawers");
     return p.type === "kit" ? "Add-on" : p.kind;
   };
+  // the lifestyle picture a card turns into on hover: the new brand photos first, then the room shots we have
+  // the new brand photos all show Soho pieces, so only Soho uses them; the rest use their own room shots
+  var LIFE = { soho: "media/life/keys.webp", soho5: "media/life/friends.webp", bliss: "media/mom-bliss.webp", bliss6: "media/s-bliss6.webp" };
+  V8.lifeOf = function (p) { if (/^(touch|bundle|gift)$/.test(p.type)) return null; return LIFE[p.id] || p.mom || p.scene || (p.gallery && p.gallery[0] && p.gallery[0].img) || null; };
   V8.card = function (p, o) {
     o = o || {};
     var f = o.f || 0, fin = p.finishes[f];
     var sw = p.finishes.length > 1 ? '<div class="swatches" role="radiogroup" aria-label="' + esc(p.full) + ' finish">' + p.finishes.map(function (x, i) {
       return '<button type="button" class="sw" role="radio" aria-checked="' + (i === f) + '" tabindex="' + (i === f ? 0 : -1) + '" aria-label="' + esc(x.name) + '" title="' + esc(x.name) + '" data-f="' + i + '" style="background:' + x.sw + '"></button>';
     }).join("") + "</div>" : "";
-    var cut = V8.cut(fin.img), word = V8.word(p);
+    var cut = V8.cut(fin.img), life = o.life === false ? null : o.life || V8.lifeOf(p);
     return '<article class="pcard rv" data-id="' + p.id + '" data-f="' + f + '" style="--d:' + (o.d || 0) + 's">' +
-      '<div class="pcard-fig"><a class="pcard-media' + (cut ? " has-cut" : "") + (!cut && /^(touch|bundle|gift)$/.test(p.type) ? " is-photo" : "") + '" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"' + (cut ? ' style="--top:' + cut.top + '"' : "") + ">" + (cut && !o.life ? '<span class="pcard-big" style="--len:' + word.length + '">' + esc(word) + "</span>" : "") + '<img class="cut" src="' + (cut ? cut.src : fin.img) + '" alt="" loading="lazy">' + (o.life ? '<img class="life" data-src="' + o.life + '" alt="">' : "") + "</a>" +
+      '<div class="pcard-fig"><a class="pcard-media' + (cut ? " has-cut" : "") + (!cut && /^(touch|bundle|gift)$/.test(p.type) ? " is-photo" : "") + '" href="' + V8.url(p) + '" tabindex="-1" aria-hidden="true"' + (cut ? ' style="--top:' + cut.top + '"' : "") + ">" + '<img class="cut" src="' + (cut ? cut.src : fin.img) + '" alt="" loading="lazy">' + (life ? '<img class="life" data-src="' + life + '" alt="">' : "") + "</a>" +
       (/^(touch|bundle|gift)$/.test(p.type) ? "" : '<span class="pcard-kick">' + (p.was ? '<span class="sale">Sale</span>' : "") + esc(V8.kicker(p)) + "</span>") +
       V8.wishBtn(p, "pcard-fav") + "</div>" +
       '<div class="pcard-body"><h3 class="pcard-name"><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></h3>" +
       '<div class="pcard-sub"><span class="pcard-fin">' + esc(fin.name) + '</span><span class="pcard-price">' + V8.priceHTML(p, p.finishes.length > 1 && V8.hasRange(p) ? null : f) + "</span></div>" +
       sw + "</div></article>";
   };
+  // a card's lifestyle picture loads the first time a pointer comes near it
+  document.addEventListener("pointerover", function (e) { var c = e.target.closest && e.target.closest(".pcard"); if (!c) return; var l = c.querySelector("img.life[data-src]"); if (l) { l.src = l.dataset.src; l.removeAttribute("data-src"); } });
   // swatch clicks inside any card swap the image and price
   document.addEventListener("click", function (e) {
     var b = e.target.closest(".pcard .sw");
@@ -179,10 +208,10 @@
       foot.innerHTML = ""; return;
     }
     body.innerHTML = (added ? '<p class="small" style="color:var(--orange-ink);font-weight:700;margin-bottom:6px">✓ Added to your bag</p>' : "") +
-      S.cart.map(function (c, i) { var l = V8.lineFor(c); if (!l) return ""; return '<div class="line-item"><a class="li-img" href="' + V8.url(l.p) + '"><img src="' + l.f.img + '" alt=""></a><div><a class="li-name" href="' + V8.url(l.p) + '">' + esc(l.p.full) + '</a><div class="li-meta">' + esc(l.f.name) + '</div><div class="qty" role="group" aria-label="Quantity for ' + esc(l.p.full) + '"><button type="button" data-q="' + i + '" data-d="-1" aria-label="Decrease">−</button><span>' + c.qty + '</span><button type="button" data-q="' + i + '" data-d="1" aria-label="Increase">+</button></div> <button type="button" class="li-remove" data-rm="' + i + '">Remove</button></div><b class="price">' + money(l.price * c.qty) + "</b></div>"; }).join("") +
-      (t.pairs ? "" : setNudge());
+      S.cart.map(function (c, i) { var l = V8.lineFor(c); if (!l) return ""; return '<div class="line-item"><a class="li-img" href="' + V8.url(l.p) + '"><img src="' + l.f.img + '" alt=""></a><div><a class="li-name" href="' + V8.url(l.p) + '">' + esc(l.p.full) + '</a><div class="li-meta">' + esc(l.f.name) + (c.b ? ' · <span class="li-tag">Bundle</span>' : "") + '</div><div class="qty" role="group" aria-label="Quantity for ' + esc(l.p.full) + '"><button type="button" data-q="' + i + '" data-d="-1" aria-label="Decrease">−</button><span>' + c.qty + '</span><button type="button" data-q="' + i + '" data-d="1" aria-label="Increase">+</button></div> <button type="button" class="li-remove" data-rm="' + i + '">Remove</button></div><b class="price">' + money(l.price * c.qty) + "</b></div>"; }).join("") +
+      V8.asmRow() + (t.pairs ? "" : setNudge());
     foot.innerHTML = '<div class="sum-row"><span>Subtotal</span><span class="price">' + money(t.sub) + "</span></div>" +
-      (t.disc ? '<div class="sum-row" style="color:var(--orange-ink);font-weight:700"><span>Nursery set · 15% off</span><span>−' + money(t.disc) + "</span></div>" : "") +
+      V8.discRows(t) +
       '<div class="sum-row"><span>Shipping</span><span>Free</span></div>' +
       '<div class="sum-row total"><span>Total</span><span class="price">' + money(t.total) + "</span></div>" +
       '<a class="btn btn-primary block" href="#/checkout">Checkout</a><p class="small muted" style="text-align:center">Taxes added at checkout · 14-day returns</p>';
@@ -239,7 +268,7 @@
   $("#logo").innerHTML = I.logo + '<span class="sr">dadada</span>';
   $("#logo2").innerHTML = I.logo;
   $("#ftrWord").innerHTML = I.logo;
-  $("#searchBtn").innerHTML = I.search; $(".t-acct").insertAdjacentHTML("afterbegin", I.account); $(".t-wish").insertAdjacentHTML("afterbegin", I.heart); $("#bagBtn").insertAdjacentHTML("afterbegin", I.bag);
+  $("#searchBtn").innerHTML = I.search; $(".t-wish").insertAdjacentHTML("afterbegin", I.heart); $("#bagBtn").insertAdjacentHTML("afterbegin", I.bag);
   // Shop menu (V7 layout): big categories on the left, a room photo for the one in focus on the right
   var MG = { cribs: ["mom-soho", "Shop all cribs"], dressers: ["mom-dr-soho", "Shop all dressers"], kids: ["mom-kids", "Shop toddler & kids"], sets: ["mom-dr-cp", "Shop all sets"] };
   // every model of the category in focus, as pictures, next to the category names
@@ -256,9 +285,13 @@
   };
   var MOOD = { cribs: ["media/mom-soho.webp", "#/cribs", "All cribs"], dressers: ["media/mom-dr-soho.webp", "#/dressers", "All dressers"], kids: ["media/mom-kids.webp", "#/kids", "All toddler & kids"], sets: ["media/mom-dr-cp.webp", "#/sets", "All nursery sets"], touches: ["media/t/wallpaper-g1.webp", "#/finishing", "All finishing touches"] };
   Object.keys(MGL).forEach(function (k) { var m = MOOD[k]; MGL[k].push('<li class="mg-mood"><a href="' + m[1] + '"><img src="' + m[0] + '" alt="" loading="lazy"><span>' + esc(m[2]) + ' <span aria-hidden="true">→</span></span></a></li>'); });
-  $("#mgLists").innerHTML = Object.keys(MGL).map(function (k) { return '<ul class="mg-grid" data-c="' + k + '" data-n="' + MGL[k].length + '"' + (k === "cribs" ? "" : " hidden") + ">" + MGL[k].join("") + "</ul>"; }).join("");
+  // before a category is in focus, the menu opens on the new lifestyle pictures
+  var INTRO = [["media/life/laptop.webp", "#/cribs", "Cribs"], ["media/life/keys.webp", "#/dressers", "Dressers"], ["media/life/records.webp", "#/bundle", "Bundle & Save"]];
+  var introHTML = '<ul class="mg-intro" data-c="intro">' + INTRO.map(function (m) { return '<li><a href="' + m[1] + '"><img data-src="' + m[0] + '" alt="" loading="lazy"><span>' + esc(m[2]) + ' <span aria-hidden="true">→</span></span></a></li>'; }).join("") + "</ul>";
+  $("#mgLists").innerHTML = introHTML + Object.keys(MGL).map(function (k) { return '<ul class="mg-grid" data-c="' + k + '" data-n="' + MGL[k].length + '" hidden>' + MGL[k].join("") + "</ul>"; }).join("");
+  function mgIntro() { $$(".mg-cat").forEach(function (x) { x.classList.remove("on"); }); $$(".mg-grid").forEach(function (l) { l.hidden = true; }); $(".mg-intro").hidden = false; $("#mgAll").href = "#/bundle"; $("#mgAll").innerHTML = 'Build a bundle and save <span aria-hidden="true">→</span>'; }
   $$(".mg-cat").forEach(function (a) {
-    function focusCat() { $$(".mg-cat").forEach(function (x) { x.classList.toggle("on", x === a); }); $$(".mg-grid").forEach(function (l) { l.hidden = l.dataset.c !== a.dataset.c; }); $("#mgAll").href = a.getAttribute("href"); $("#mgAll").innerHTML = MG[a.dataset.c] + ' <span aria-hidden="true">→</span>'; }
+    function focusCat() { $$(".mg-cat").forEach(function (x) { x.classList.toggle("on", x === a); }); $$(".mg-grid").forEach(function (l) { l.hidden = l.dataset.c !== a.dataset.c; }); $(".mg-intro").hidden = true; $("#mgAll").href = a.getAttribute("href"); $("#mgAll").innerHTML = MG[a.dataset.c] + ' <span aria-hidden="true">→</span>'; }
     a.addEventListener("mouseenter", focusCat); a.addEventListener("focus", focusCat);
   });
   var smItem = function (p) { return '<li><a href="' + V8.url(p) + '">' + esc(p.full) + "</a></li>"; };
@@ -269,7 +302,7 @@
   var mega = $("#mega"), megaBtn = $("#megaBtn"), megaT;
   function wakeImgs(el) { $$("img[data-src]", el).forEach(function (i) { i.src = i.dataset.src; i.removeAttribute("data-src"); }); }
   function openMega() { wakeImgs(mega); clearTimeout(megaT); mega.classList.add("open"); megaBtn.setAttribute("aria-expanded", "true"); $(".hdr").classList.add("mega-on"); }
-  function closeMega() { mega.classList.remove("open"); megaBtn.setAttribute("aria-expanded", "false"); $(".hdr").classList.remove("mega-on"); }
+  function closeMega() { mgIntro(); mega.classList.remove("open"); megaBtn.setAttribute("aria-expanded", "false"); $(".hdr").classList.remove("mega-on"); }
   var megaHoverAt = 0;
   megaBtn.addEventListener("click", function () { if (mega.classList.contains("open") && Date.now() - megaHoverAt > 600) closeMega(); else openMega(); });
   [megaBtn, mega].forEach(function (el) { el.addEventListener("mouseenter", function () { if (matchMedia("(hover:hover)").matches) { if (!mega.classList.contains("open")) megaHoverAt = Date.now(); openMega(); } }); el.addEventListener("mouseleave", function () { megaT = setTimeout(closeMega, 180); }); });
